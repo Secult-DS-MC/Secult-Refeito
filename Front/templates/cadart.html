@@ -1,0 +1,25 @@
+<ion-view title="Cadart" id="page3">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button button-clear icon ion-android-refresh" onclick="atualizarPaginas()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <div id="cadart-button-bar2" class="button-bar"></div>
+        <div id="cadart-button-bar3" class="button-bar">
+            <a ui-sref="cadastrar()" id="cadart-button34"
+               style="display: block;"
+               class="button button-block button-positive button-small alt-estado">Cadastre-se</a>
+            <a ui-sref="login()" id="cadart-button35"
+               style="display: block;"
+               class="button button-block button-positive button-small alt-estado">Entrar</a>
+            <a ui-sref="usuario()" style="display: none;"
+               class="button button-block button-positive button-small alt-estado" id="meusDados">Meus Dados</a>
+            <a style=" display: none;"
+               class="button button-block button-positive button-small alt-estado"
+               onclick="sairUsuario()">Sair</a>
+        </div>
+
+        <ion-list id="listaCadart">
+        </ion-list>
+
+    </ion-content>
+</ion-view>

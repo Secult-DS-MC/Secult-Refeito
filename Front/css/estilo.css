@@ -1,0 +1,211 @@
+.header-noticia{
+    top: 25px;
+}
+.btn-roda-pe{
+
+
+
+}
+.linkSemDecoracao {
+    text-decoration: none;
+    color: white;
+}
+
+.desc-inf-page{
+    background-color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-indent: 10px;
+    text-align: justify;
+
+}
+
+.btn-preto {
+    position: relative;
+    background-color: #444;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-preto:after {
+    content: "";
+    background: #444444f2;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.1s
+}
+
+.btn-preto:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.hasSexo{
+    background-color: green;
+    color:white;
+}
+p.invalido {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
+.divSelect{
+    width: 100%;
+    display: inline-block;
+}
+.divSelect select{
+    width: 49%;
+    display: inline-block;
+}
+.barra-autenticar.button{
+    font-size: 17px;
+    color: #000;
+    font-weight: 900
+}
+.bar-subheader.subCabecalho {
+    top: 44px;
+    height: 35px;
+    padding: 0px;
+}
+
+.pCult p{
+    text-indent: 5px;
+    text-align: -webkit-left;
+    font-style: initial;
+    font-family: -webkit-body;
+    font-variant: proportional-width;
+}
+
+.none {
+    display: none;
+}
+
+.alt-estado{
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 7px !important;
+    margin: 10px 20px 10px 20px;
+}
+.title.title-left.header-item {
+    text-align: center;
+}
+body{
+    font-family: Roboto-Regular!important;
+}
+
+ion-view {
+    background: #fff;
+}
+
+.barra-autenticar{
+    background: #387ef5!important;
+    color: white!important;
+}
+
+.loading{
+    width: 80px;
+    height: 80px;
+
+    border: 2px solid #f3f3f3;
+    border-top:3px solid #f25a41;
+    border-radius: 100%;
+
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    margin: auto;
+
+    animation: spin 1s infinite linear;
+
+    z-index: 3;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }to{
+         transform: rotate(360deg);
+     }
+}
+
+.carregando{
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 4;
+    background-image: url(../img/loading.gif);
+    background-position: center;
+}
+.carregando-background {
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    background-color: #b5b5b5ba;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+.listaCadartUsuarios{
+    border-width: 0px 0px 1px 0px;
+}
+i.icon.ion-social-instagram.instaIcone{
+    color: #ffffff;
+    background-image: linear-gradient(to bottom,#ae16ff,#7900c8, #540255, #cb03c9, #ed25f2, #df0000 , #e2245a , #ff502b 85%);
+    border-radius: 30%;
+    border: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-top: none;
+    padding: 2px;
+}
+
+.semBorda{
+    border:none;
+}
+.semBorda a, .semBorda textarea {
+    background: transparent;
+}
+
+label.item.item-input.item-stacked-label{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+label.item.item-input.redeSocial {
+    border-width: 1px 0px 0px 0px;
+}
+label.item.item-input {
+    border-width: 1px 0px 1px 0px;
+}
+select#arteCdt {
+    border-width: 0px 0px 0px 1px;
+}
+select#sexoCdt {
+    border-width: 0px 0px 0px 0px;
+}
+

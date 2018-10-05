@@ -1,0 +1,34 @@
+<ion-view title="Administrador" id="page18">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"
+                onclick="pullToRefreshHome()"></button>
+    </ion-nav-buttons>
+
+    <ion-content padding="true" class="has-header refresh">
+        <form id="administrador-form" class="list">
+            <label class="item item-select">
+                <span class="input-label">Filtrar por:</span>
+                <select>
+                    <option value="">Selecione o Filtro</option>
+                    <option value="1">Esta Semana</option>
+                    <option value="2">Este Mês</option>
+                    <option value="3">Este Ano</option>
+                    <option value="4">Todos</option>
+                </select>
+            </label>
+        </form>
+
+        <div class="button-bar ">
+            <button class="button button-block button-dark button-small">Filtrar</button>
+            <button class="button button-block button-dark button-small tabs-icon-only ion-refresh"
+                    onclick="limparEListarEventoAdm()"></button>
+            <button class="button button-block button-dark button-small" ui-sref="cadastroEvento()">Adicionar</button>
+        </div>
+
+        <span id="inicioListaEventoHoje"></span>
+
+
+        <div class="spacer" style="width: 300px; height: 20.9896px;"></div>
+    </ion-content>
+
+</ion-view>

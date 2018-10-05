@@ -1,0 +1,42 @@
+<ion-view title="Administrador" id="page27">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"></button>
+    </ion-nav-buttons>
+
+    <ion-content padding="true" class="has-header refresh">
+        <ion-item>
+            <select style="width: 100%; height: 100%; border: none; font-size: medium;" id="servidor"
+                    onchange="localStorage.setItem('servidor', this.value); swal('Servidor Modificado')">
+                <option>Servidor<h1></h1></option>
+                <option value="http://salesdomain.com.br:8081">http://salesdomain.com.br:8081</option>
+                <option value="http://localhost:8080">http://localhost:8080</option>
+            </select>
+        </ion-item>
+        <hr>
+        <hr>
+        <hr>
+        <ul class='list'>
+            <li class="item item-thumbnail-left item-icon-right balanced\">
+                <img src='img/semFoto.png'>
+                <h2 id='titulo" + id + "' style="margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;">
+                    titulo </h2>
+                <i id='checked" + id + "' class="icon ion-eye inline">
+                    <a class='button button-light button-outline' href='#/page20'>
+                        <div style=\"font-weight:600;color:#0092FF;font-size:17px;">Editar</div>
+                    </a>
+                    <a class='button button-light button-outline'>
+                        <div style=\"font-weight:600;color:#FF0020;font-size:17px;">Excluir</div>
+                    </a></div>
+                </i>
+
+            </li>
+
+            <li class="item" style="padding: 0px">
+                <div class="button-bar">
+
+            </li>
+        </ul>
+
+    </ion-content>
+
+</ion-view>

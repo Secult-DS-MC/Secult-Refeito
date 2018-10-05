@@ -1,0 +1,25 @@
+<ion-view title="Eventos em povoados" hide-back-button="true" id="page17">
+    <ion-content padding="true" class="has-header">
+        <form id="eventosEmPovoados-form11" class="list">
+            <h1 style="color:#000000;text-align:center;" id="nomeLocalidade"></h1>
+
+            <div class="spacer" style="width: 300px; height: 33px;"></div>
+            <label class="item item-select">
+                <span class="input-label">Selecione a localidade:</span>
+                <select id="idLocalidade" onchange="preencherDadosLocalidade()">
+
+                </select>
+            </label>
+        </form>
+        <div class="show-list-numbers-and-dots">
+            <p style="color:#000000;font-size:15px;" id="descLocalidade"></p>
+        </div>
+        <div id="eventosEmPovoados-markdown11" class="show-list-numbers-and-dots">
+            <hr>
+        </div>
+        <h3 style="color:#000000;font-weight:600;text-align:center;">Eventos Marcados</h3>
+        <ion-list id="nomeEvento">
+
+        </ion-list>
+    </ion-content>
+</ion-view>

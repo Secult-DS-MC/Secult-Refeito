@@ -1,0 +1,90 @@
+<ion-view title="Usuario" id="page7">
+    <ion-content padding="true" class="has-header animated fadeInDown faster">
+        <div>
+            <img src="img/semfoto.jpeg"
+                 style="display: block; width: 150px; height: 100%; margin-left: auto; margin-right: auto;" id="tableBanner">
+        </div>
+        <div class="spacer" style="width: 300px; height: 5px;"></div>
+        <div class="button-bar">
+            <input type="file" id="bannerImg" style="display: none;" class="btnFotoCadartUp">
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                    class="button button-dark button-small button-block" id="btnFotoCadart" onclick="saveFotoLSUp()">Alterar Foto
+            </button>
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                    class="button button-dark button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha
+            </button>
+        </div>
+
+        <form class="list">
+
+
+            <div class="list card animated" style="display: none; " id="cardSenhaUp">
+                <label class="item item-input">
+                    <span class="input-label">Email Atual</span>
+                    <input type="text" id="emailAtualUp">
+                </label>
+
+                <label class="item item-input item-icon-right" >
+                    <span class="input-label">Senha Atual</span>
+                    <input type="password"  id="senhaAtualUp">
+                    <i class="icon ion-eye" style="display: none" onclick="toggleTypeInput('senhaAtualUp')"></i>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Nova Senha</span>
+                    <input type="password" id="senhaNovaUp" >
+                </label>
+
+                <p class="invalido" id="erroSenhaEmailUp" style="display: none">Senha ou email incorretos</p>
+                <button class="button button-dark button-block " onclick="autenticarUpSenha()">Alterar Senha</button>
+            </div>
+
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Descrição:</span><textarea id="descricaoUp" maxlength="500"></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Projetos Atuais:</span><textarea id="projetosUp" maxlength="500"></textarea>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Nome:</span>
+                <input type="text" id="nomeUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Nome Artístico:</span>
+                <input type="text" id="nomeArtisticoUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label ">Email:</span>
+                <input type="text" id="emailUp">
+            </label>
+            <div style="display: inline-block; margin: 0px; width: 100%">
+                <label class="item item-input" style="margin: 0px; width: 49.3%; display: inline-block;">
+                    <span class="input-label ">Telefone</span>
+                    <input type="text" id="telUp">
+                </label>
+                <label class="item item-input" style="margin: 0px; width: 49%; display: inline-block;">
+                    <span class="input-label" for="dtNascimentoUp">Sua Idade</span>
+                    <input type="number" id="dtNascimentoUp">
+                </label>
+            </div>
+            <div class="divSelect">
+                <select id="sexoUp" class="item">
+                    <option value="">Seu Sexo</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
+
+                <select id="arteUp" class="item">
+                    <option value="">Sua Arte?</option>
+                    <option value="1">Ator/Atriz</option>
+                    <option value="2">Músico</option>
+                    <option value="3">Pintor</option>
+                    <option value="4">Dançarino</option>
+                    <option value="5">Escritor</option>
+                </select>
+            </div>
+            <button class="button button-dark button-block" onclick="updateCadart()">Alterar</button>
+        </form>
+    </ion-content>
+</ion-view>
