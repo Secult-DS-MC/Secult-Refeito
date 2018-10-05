@@ -69,8 +69,6 @@ public class CadartResource {
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuario();
 
-        tratarImagem(usuarios);
-
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(usuarios).getAsJsonArray();
@@ -89,8 +87,6 @@ public class CadartResource {
 
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuarioByVisibilidade();
-
-        tratarImagem(usuarios);
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(usuarios).getAsJsonArray();
@@ -109,8 +105,6 @@ public class CadartResource {
 
         CadartDao cadartDao = new CadartDao();
         List<Cadart> cadarts = cadartDao.getByVisibilidadeDiferenteS();
-
-        tratarImagem(cadarts);
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(cadarts).getAsJsonArray();
@@ -122,18 +116,18 @@ public class CadartResource {
 
     }
 
-    public void tratarImagem(List<Cadart> usuarios) {
-        for (int i = 0; i < usuarios.size(); i++) {
-
-            if (usuarios.get(i).getFotoPerfil() != null) {
-
-                String foto = usuarios.get(i).getFotoPerfil().toString();
-
-                usuarios.get(i).setFotoPerfil(foto.getBytes());
-
-            }
-        }
-    }
+//    public void tratarImagem(List<Cadart> usuarios) {
+//        for (int i = 0; i < usuarios.size(); i++) {
+//
+//            if (usuarios.get(i).getFotoPerfil() != null) {
+//
+//                String foto = usuarios.get(i).getFotoPerfil().toString();
+//
+//                usuarios.get(i).setFotoPerfil(foto.getBytes());
+//
+//            }
+//        }
+//    }
 
     @GET
     @Path("/updateUsuario/{cpf}&{nome}&{idade}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{idArte}")
@@ -188,8 +182,6 @@ public class CadartResource {
         List<Cadart> cadarts = cadartDao.autenticar(cadart);
 
         Gson gson = new GsonBuilder().create();
-
-        tratarImagem(cadarts);
 
         JsonArray ArrayUsarios = gson.toJsonTree(cadarts).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
@@ -248,56 +240,56 @@ public class CadartResource {
         }
     }
 
-    @POST
-    @Path("/salvarFoto/{cpf}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarFoto(@FormDataParam("foto_perfil") InputStream uploadedInputStream,
-            @PathParam("cpf") Long cpf, @FormDataParam("foto_perfil") FormDataContentDisposition fileDetail) throws Exception {
-
-        CadartDao cadartDao = new CadartDao();
-        Cadart usuario = new Cadart();
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        int read = 0;
-        byte[] bytes = new byte[1024];
-
-        while ((read = uploadedInputStream.read(bytes)) != -1) {
-            buffer.write(bytes, 0, read);
-        }
-
-        byte[] byteArray = buffer.toByteArray();
-        buffer.flush();
-
-        usuario.setCpf(cpf);
-        usuario.setFotoPerfil(byteArray);
-        cadartDao.salvarFoto(usuario);
-
-        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-
-    @GET
-    @Path("/find/{cpf}")
-    @Produces({"image/png", "image/jpg"})
-    public Response find(@PathParam("cpf") Long cpf) throws ServletException, IOException {
-        try {
-
-            CadartDao cadartDao = new CadartDao();
-            Cadart cadart = new Cadart();
-            cadart.setCpf(cpf);
-            cadart = cadartDao.getById(cadart).get(0);
-            final byte[] foto = cadart.getFotoPerfil();
-
-            if (foto == null) {
-                return Response.ok("Imagem não encontrada").build();
-            } else {
-
-                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
-    }
+//    @POST
+//    @Path("/salvarFoto/{cpf}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.MULTIPART_FORM_DATA)
+//    public Response salvarFoto(@FormDataParam("foto_perfil") InputStream uploadedInputStream,
+//            @PathParam("cpf") Long cpf, @FormDataParam("foto_perfil") FormDataContentDisposition fileDetail) throws Exception {
+//
+//        CadartDao cadartDao = new CadartDao();
+//        Cadart usuario = new Cadart();
+//
+//        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+//        int read = 0;
+//        byte[] bytes = new byte[1024];
+//
+//        while ((read = uploadedInputStream.read(bytes)) != -1) {
+//            buffer.write(bytes, 0, read);
+//        }
+//
+//        byte[] byteArray = buffer.toByteArray();
+//        buffer.flush();
+//
+//        usuario.setCpf(cpf);
+//        usuario.setFotoPerfil(byteArray);
+//        cadartDao.salvarFoto(usuario);
+//
+//        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+//    }
+//
+//    @GET
+//    @Path("/find/{cpf}")
+//    @Produces({"image/png", "image/jpg"})
+//    public Response find(@PathParam("cpf") Long cpf) throws ServletException, IOException {
+//        try {
+//
+//            CadartDao cadartDao = new CadartDao();
+//            Cadart cadart = new Cadart();
+//            cadart.setCpf(cpf);
+//            cadart = cadartDao.getById(cadart).get(0);
+//            final byte[] foto = cadart.getFotoPerfil();
+//
+//            if (foto == null) {
+//                return Response.ok("Imagem não encontrada").build();
+//            } else {
+//
+//                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//        }
+//        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
+//    }
 }

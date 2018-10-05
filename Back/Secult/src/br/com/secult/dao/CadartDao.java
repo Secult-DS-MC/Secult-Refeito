@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.secult.dao;
 
 import br.com.secult.model.Cadart;
@@ -21,10 +16,6 @@ import java.util.List;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author David
- */
 public class CadartDao {
 
     private Connection connection;
@@ -77,7 +68,6 @@ public class CadartDao {
             cadart.setNome(rs.getString("nome"));
             cadart.setNomeArtistico(rs.getString("nome_artistico"));
             cadart.setSexo(rs.getString("sexo"));
-            cadart.setFotoPerfil(rs.getBytes("foto_perfil"));
             cadart.setDescricao(rs.getString("descricao"));
             cadart.setIdade(rs.getInt("idade"));
             cadart.setIdArte(rs.getInt("id_arte"));
@@ -152,7 +142,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, idade, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id) Where visibilidade = 's'";
+            String sql = "SELECT cpf, C.nome AS nomeUsu, nome_artistico, sexo, descricao, idade, senha, projeto_atual, telefone, email, A.nome AS nomeArte, visibilidade, id_arte, id_imagem, i.imagem AS foto FROM cadart AS C join arte AS A ON(C.id_arte = A.id) JOIN imagem AS i ON(C.id_imagem = i.id)";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -177,7 +167,7 @@ public class CadartDao {
             cadart.setNome(rs.getString("nomeUsu"));
             cadart.setNomeArtistico(rs.getString("nome_artistico"));
             cadart.setSexo(rs.getString("sexo"));
-            cadart.setFotoPerfil(rs.getBytes("foto_perfil"));
+            cadart.setFotoPerfil(rs.getBytes("foto"));
             cadart.setDescricao(rs.getString("descricao"));
             cadart.setIdade(rs.getInt("idade"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
@@ -187,6 +177,7 @@ public class CadartDao {
             cadart.setVisibilidade(rs.getString("visibilidade"));
             cadart.setNomeArte(rs.getString("nomeArte"));
             cadart.setIdArte(rs.getInt("id_arte"));
+            cadart.setIdImagem(rs.getByte("id_imagem"));
 
             objs.add(cadart);
         }
@@ -391,81 +382,82 @@ public class CadartDao {
         String senha = hexString.toString();
         return senha;
     }
+}
     //inserção de foto
 
-    public void salvarFoto(Cadart cadart) throws Exception {
-        PreparedStatement pstmt = null;
-        this.connection = new ConnectionFactory().getConnection();
-        String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
-        try {
-
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setObject(1, tratarImagem(cadart.getFotoPerfil()));
-            pstmt.setLong(2, cadart.getCpf());
-
-            pstmt.execute();
-
-        } catch (Exception e) {
-
-            throw e;
-        } finally {
-            try {
-                pstmt.close();
-            } catch (Exception e) {
-            }
-
-        }
-
-    }
-    //métodos pra diminuir arquivos de foto
-
-    public byte[] tratarImagem(byte[] img) throws Exception {
-        int nBase = 200;
-        int nProporcao = 0;
-
-        BufferedImage imgScale = bytesToImage(img);
-        int width = (int) imgScale.getWidth();
-        int height = (int) imgScale.getHeight();
-
-        if (width > 120  || height > 200) {
-            if (width > height) {
-                nProporcao = (int) ((120 * nBase) / width);
-                height = (int) ((height * nProporcao) / 120);
-                width = nBase;
-            } else {
-                nProporcao = (int) ((120 * nBase) / height);
-                width = (int) ((width * nProporcao) / 120);
-                height = nBase;
-            }
-        }
-
-        imgScale = createScaledImage(imgScale, width, height);
-        img = imageToBytes(imgScale);
-        return img;
-    }
-
-    public BufferedImage createScaledImage(BufferedImage image, int width, int heigth) {
-        int cachedWidth = width;
-        int cachedHeight = heigth;
-
-        BufferedImage scaledImage;
-        scaledImage = new BufferedImage(cachedWidth, cachedHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = scaledImage.createGraphics();
-        g.drawImage(image, 0, 0, cachedWidth, cachedHeight, null);
-        return scaledImage;
-    }
-
-    public BufferedImage bytesToImage(byte[] img) throws Exception {
-
-        ByteArrayInputStream bais = new ByteArrayInputStream(img);
-        BufferedImage bi = ImageIO.read(bais);
-
-        return bi;
-    }
-
-    public byte[] imageToBytes(BufferedImage bi) throws Exception {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(bi, "JPG", baos);
-        return baos.toByteArray();
-    }
-}
+//    public void salvarFoto(Cadart cadart) throws Exception {
+//        PreparedStatement pstmt = null;
+//        this.connection = new ConnectionFactory().getConnection();
+//        String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
+//        try {
+//
+//            pstmt = connection.prepareStatement(sql);
+//            pstmt.setObject(1, tratarImagem(cadart.getFotoPerfil()));
+//            pstmt.setLong(2, cadart.getCpf());
+//
+//            pstmt.execute();
+//
+//        } catch (Exception e) {
+//
+//            throw e;
+//        } finally {
+//            try {
+//                pstmt.close();
+//            } catch (Exception e) {
+//            }
+//
+//        }
+//
+//    }
+//    //métodos pra diminuir arquivos de foto
+//
+//    public byte[] tratarImagem(byte[] img) throws Exception {
+//        int nBase = 200;
+//        int nProporcao = 0;
+//
+//        BufferedImage imgScale = bytesToImage(img);
+//        int width = (int) imgScale.getWidth();
+//        int height = (int) imgScale.getHeight();
+//
+//        if (width > 120  || height > 200) {
+//            if (width > height) {
+//                nProporcao = (int) ((120 * nBase) / width);
+//                height = (int) ((height * nProporcao) / 120);
+//                width = nBase;
+//            } else {
+//                nProporcao = (int) ((120 * nBase) / height);
+//                width = (int) ((width * nProporcao) / 120);
+//                height = nBase;
+//            }
+//        }
+//
+//        imgScale = createScaledImage(imgScale, width, height);
+//        img = imageToBytes(imgScale);
+//        return img;
+//    }
+//
+//    public BufferedImage createScaledImage(BufferedImage image, int width, int heigth) {
+//        int cachedWidth = width;
+//        int cachedHeight = heigth;
+//
+//        BufferedImage scaledImage;
+//        scaledImage = new BufferedImage(cachedWidth, cachedHeight, BufferedImage.TYPE_INT_RGB);
+//        Graphics2D g = scaledImage.createGraphics();
+//        g.drawImage(image, 0, 0, cachedWidth, cachedHeight, null);
+//        return scaledImage;
+//    }
+//
+//    public BufferedImage bytesToImage(byte[] img) throws Exception {
+//
+//        ByteArrayInputStream bais = new ByteArrayInputStream(img);
+//        BufferedImage bi = ImageIO.read(bais);
+//
+//        return bi;
+//    }
+//
+//    public byte[] imageToBytes(BufferedImage bi) throws Exception {
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        ImageIO.write(bi, "JPG", baos);
+//        return baos.toByteArray();
+//    }
+//}

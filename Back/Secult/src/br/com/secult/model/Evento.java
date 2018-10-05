@@ -25,6 +25,24 @@ public class Evento {
     private String hora_evento;
     private String nomeEvento;
     private String localCidade;
+    private int idImagem;
+    private byte[] imagem;
+
+    public int getIdImagem() {
+        return idImagem;
+    }
+
+    public void setIdImagem(int idImagem) {
+        this.idImagem = idImagem;
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
 
     public String getLocalCidade() {
         return localCidade;

@@ -1,10 +1,6 @@
 package br.com.secult.dao;
 
 import br.com.secult.model.Evento;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -16,12 +12,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
-import javax.imageio.ImageIO;
 
-/**
- *
- * @author Muquifo
- */
 public class EventoDao {
 
     private Connection connection;
@@ -66,7 +57,7 @@ public class EventoDao {
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT * FROM evento order by data_evento desc ";
+        String sql = "SELECT E.id, titulo, descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, local_cidade, id_imagem, i.imagem AS foto FROM evento AS E JOIN imagem AS i ON(E.id_imagem = i.id) order by data_evento desc";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -97,8 +88,10 @@ public class EventoDao {
             even.setTipo_evento(rs.getString("tipo_evento"));
             even.setHora_evento(rs.getString("hora_evento"));
             even.setVisibilidade(rs.getString("visibilidade"));
-            even.setId_localidade(rs.getInt("id_povoado"));
+            even.setId_localidade(rs.getInt("id_localidade"));
             even.setLocalCidade(rs.getString("local_cidade"));
+            even.setIdImagem(rs.getByte("id_imagem"));
+            even.setImagem(rs.getBytes("foto"));
 
             objs.add(even);
 
@@ -172,7 +165,7 @@ public class EventoDao {
 
         ResultSet rs = null;
 
-        String sql = "SELECT e.id, titulo, e.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_povoado, tipo_evento, l.nome as \"nomeLocalidade\" FROM evento AS e JOIN localidade AS l ON(l.id = e.id_povoado) where visibilidade = 's' and tipo_evento = 'g'";
+        String sql = "SELECT E.id, titulo, E.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nomeLocalidade, id_imagem, i.imagem AS foto FROM evento AS E JOIN localidade AS l ON(l.id = E.id_localidade) JOIN imagem AS i ON(E.id_imagem = i.id) where visibilidade = 's' and tipo_evento = 'g' order by data_evento desc";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -203,8 +196,10 @@ public class EventoDao {
             even.setTipo_evento(rs.getString("tipo_evento"));
             even.setHora_evento(rs.getString("hora_evento"));
             even.setVisibilidade(rs.getString("visibilidade"));
-            even.setId_localidade(rs.getInt("id_povoado"));
+            even.setId_localidade(rs.getInt("id_localidade"));
             even.setNomeEvento(rs.getString("nomeLocalidade"));
+            even.setIdImagem(rs.getByte("id_imagem"));
+            even.setImagem(rs.getBytes("foto"));
 
             objs.add(even);
 

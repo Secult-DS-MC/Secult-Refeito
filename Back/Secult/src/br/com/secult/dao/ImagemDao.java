@@ -21,18 +21,64 @@ public class ImagemDao {
 
     Connection connection;
 
-    public boolean inserirImagem(Imagem imagem) throws Exception {
+    public boolean inserirImagemEvento(Imagem imagem) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-        String sql = "INSERT INTO imagem (imagem, id_evento, id_turismo, id_cadart) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO imagem (imagem, id_evento) VALUES(?,?)";
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setInt(2, imagem.getIdEvento());
-            stmt.setInt(3, imagem.getIdTurismo());
-            stmt.setInt(4, imagem.getIdCadart());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                stmt.close();
+                hasError = false;
+            } catch (Exception e) {
+            }
+        }
+        return hasError;
+    }
+    
+     public boolean inserirImagemCadart(Imagem imagem) throws Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = null;
+        boolean hasError = true;
+        String sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setObject(1, tratarImagem(imagem.getImagem()));
+            stmt.setInt(2, imagem.getIdCadart());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                stmt.close();
+                hasError = false;
+            } catch (Exception e) {
+            }
+        }
+        return hasError;
+    }
+     
+      public boolean inserirImagemTurismo(Imagem imagem) throws Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = null;
+        boolean hasError = true;
+        String sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setObject(1, tratarImagem(imagem.getImagem()));
+            stmt.setInt(2, imagem.getIdTurismo());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

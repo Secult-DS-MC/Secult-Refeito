@@ -23,18 +23,52 @@ import javax.ws.rs.core.Response;
 public class ImagemResource {
 
     @GET
-    @Path("/inserirImagem/{imagem}&{id_cadart}&{id_turismo}&{id_evento}")
+    @Path("/inserirImagemEvento/{imagem}&{id_evento}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEvento(@PathParam("imagem") Byte imagens, @PathParam("id_cadart") int id_cadart, @PathParam("id_turismo") int id_turismo ,@PathParam("id_evento") int id_evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+    public Response insertEvento(@PathParam("imagem") Byte imagens, @PathParam("id_evento") int id_evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         Imagem imagem = new Imagem();
         imagem.setImagem(imagens);
-        imagem.setIdCadart(id_cadart);
-        imagem.setIdTurismo(id_turismo);
         imagem.setIdEvento(id_evento);
 
         ImagemDao imagemDao = new ImagemDao();
         
-        if (imagemDao.inserirImagem(imagem)) {
+        if (imagemDao.inserirImagemEvento(imagem)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+
+    }
+    
+     @GET
+    @Path("/inserirImagemCadart/{imagem}&{id_cadart}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirImagemCadart(@PathParam("imagem") Byte imagens, @PathParam("id_cadart") int id_cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        Imagem imagem = new Imagem();
+        imagem.setImagem(imagens);
+        imagem.setIdCadart(id_cadart);
+
+        ImagemDao imagemDao = new ImagemDao();
+        
+        if (imagemDao.inserirImagemCadart(imagem)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+
+    }
+    
+     @GET
+    @Path("/inserirImagemTurismo/{imagem}&{id_turismo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirImagemTurismo(@PathParam("imagem") Byte imagens, @PathParam("id_turismo") int id_turismo) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        Imagem imagem = new Imagem();
+        imagem.setImagem(imagens);
+        imagem.setIdTurismo(id_turismo);
+
+        ImagemDao imagemDao = new ImagemDao();
+        
+        if (imagemDao.inserirImagemTurismo(imagem)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();

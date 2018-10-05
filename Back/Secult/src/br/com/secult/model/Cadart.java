@@ -23,6 +23,15 @@ public class Cadart {
     private String projetoAtual;
     private String senha;
     private int idArte;
+    private int idImagem;
+
+    public int getIdImagem() {
+        return idImagem;
+    }
+
+    public void setIdImagem(int idImagem) {
+        this.idImagem = idImagem;
+    }
     private String telefone;
     private String visibilidade;
     private String nomeArte;
