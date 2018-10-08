@@ -142,7 +142,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, C.nome AS nomeUsu, nome_artistico, sexo, descricao, idade, senha, projeto_atual, telefone, email, A.nome AS nomeArte, visibilidade, id_arte, id_imagem, i.imagem AS foto FROM cadart AS C join arte AS A ON(C.id_arte = A.id) JOIN imagem AS i ON(C.id_imagem = i.id)";
+            String sql = "SELECT cpf, C.nome AS nomeUsu, nome_artistico, sexo, descricao, idade, senha, projeto_atual, telefone, email, A.nome AS nomeArte, visibilidade, id_arte FROM cadart AS C join arte AS A ON(C.id_arte = A.id)";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -176,8 +176,6 @@ public class CadartDao {
             cadart.setSenha(rs.getString("senha"));
             cadart.setVisibilidade(rs.getString("visibilidade"));
             cadart.setNomeArte(rs.getString("nomeArte"));
-            cadart.setIdArte(rs.getInt("id_arte"));
-            cadart.setIdImagem(rs.getByte("id_imagem"));
 
             objs.add(cadart);
         }
