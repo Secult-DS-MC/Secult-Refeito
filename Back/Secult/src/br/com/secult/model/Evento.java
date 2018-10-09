@@ -28,6 +28,14 @@ public class Evento {
     private int idImagem;
     private byte[] imagem;
 
+    public int getIdLocalidade() {
+        return idLocalidade;
+    }
+
+    public void setIdLocalidade(int idLocalidade) {
+        this.idLocalidade = idLocalidade;
+    }
+    private int idLocalidade;
     public int getIdImagem() {
         return idImagem;
     }
@@ -59,8 +67,6 @@ public class Evento {
     public void setNomeEvento(String nomeEvento) {
         this.nomeEvento = nomeEvento;
     }
-   
-    private int id_localidade;
 
     public long getId() {
         return id;
@@ -117,15 +123,6 @@ public class Evento {
     public void setData_evento(String data_evento) {
         this.data_evento = data_evento;
     }
-    
-    public int getId_localidade() {
-        return id_localidade;
-    }
-
-    public void setId_localidade(int id_localidade) {
-        this.id_localidade = id_localidade;
-    }
-
     public String getHora_evento() {
         return hora_evento;
     }

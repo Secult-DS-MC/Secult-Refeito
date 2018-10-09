@@ -85,12 +85,12 @@ angular.module('app.routes', [])
                 controller: 'turismoCtrl'
             })
 
-            .state('tabsController.calendRio', {
+            .state('tabsController.calendario', {
                 url: '/page12',
                 views: {
                     'tab3': {
-                        templateUrl: 'templates/calendRio.html',
-                        controller: 'calendRioCtrl'
+                        templateUrl: 'templates/calendario.html',
+                        controller: 'calendarioCtrl'
                     }
                 }
             })

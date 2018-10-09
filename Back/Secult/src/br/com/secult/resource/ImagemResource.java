@@ -31,7 +31,7 @@ public class ImagemResource {
         imagem.setIdEvento(id_evento);
 
         ImagemDao imagemDao = new ImagemDao();
-        
+
         if (imagemDao.inserirImagemEvento(imagem)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
@@ -39,8 +39,8 @@ public class ImagemResource {
         }
 
     }
-    
-     @GET
+
+    @GET
     @Path("/inserirImagemCadart/{imagem}&{id_cadart}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response inserirImagemCadart(@PathParam("imagem") Byte imagens, @PathParam("id_cadart") int id_cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
@@ -49,7 +49,7 @@ public class ImagemResource {
         imagem.setIdCadart(id_cadart);
 
         ImagemDao imagemDao = new ImagemDao();
-        
+
         if (imagemDao.inserirImagemCadart(imagem)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
@@ -57,8 +57,8 @@ public class ImagemResource {
         }
 
     }
-    
-     @GET
+
+    @GET
     @Path("/inserirImagemTurismo/{imagem}&{id_turismo}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response inserirImagemTurismo(@PathParam("imagem") Byte imagens, @PathParam("id_turismo") int id_turismo) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
@@ -67,13 +67,91 @@ public class ImagemResource {
         imagem.setIdTurismo(id_turismo);
 
         ImagemDao imagemDao = new ImagemDao();
-        
+
         if (imagemDao.inserirImagemTurismo(imagem)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
 
+    }
+    
+     @GET
+    @Path("/buscarImagemEvento/{id_evento}")
+    @Produces({"image/png", "image/jpg"})
+    public Response buscarImagemEvento(@PathParam("id_evento") int idEvento) throws ServletException, IOException {
+        try {
+
+            ImagemDao imagemDao = new ImagemDao();
+
+            Imagem imagem = new Imagem();
+            imagem.setIdEvento(idEvento);
+            imagem = imagemDao.listarImagemEvento(imagem).get(0);
+            final byte[] foto = imagem.getImagem();
+
+            if (foto == null) {
+                return Response.ok("Imagem não encontrada").build();
+            } else {
+
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
+    }
+    
+    @GET
+    @Path("/buscarImagemCadart/{id_cadart}")
+    @Produces({"image/png", "image/jpg"})
+    public Response buscarImagemCadart(@PathParam("id_cadart") int idCadart) throws ServletException, IOException {
+        try {
+
+            ImagemDao imagemDao = new ImagemDao();
+
+            Imagem imagem = new Imagem();
+            imagem.setIdCadart(idCadart);
+            imagem = imagemDao.listarImagemCadart(imagem).get(0);
+            final byte[] foto = imagem.getImagem();
+
+            if (foto == null) {
+                return Response.ok("Imagem não encontrada").build();
+            } else {
+
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
+    }
+    
+    @GET
+    @Path("/buscarImagemTurismo/{id_turismo}")
+    @Produces({"image/png", "image/jpg"})
+    public Response find(@PathParam("id_turismo") int idTurismo) throws ServletException, IOException {
+        try {
+
+            ImagemDao imagemDao = new ImagemDao();
+
+            Imagem imagem = new Imagem();
+            imagem.setIdTurismo(idTurismo);
+            imagem = imagemDao.listarImagemTurismo(imagem).get(0);
+            final byte[] foto = imagem.getImagem();
+
+            if (foto == null) {
+                return Response.ok("Imagem não encontrada").build();
+            } else {
+
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
     }
 
     @GET
@@ -103,31 +181,5 @@ public class ImagemResource {
 
             }
         }
-    }
-    
-        @GET
-    @Path("/find/{id}")
-    @Produces({"image/png", "image/jpg"})
-    public Response find(@PathParam("id") int id) throws ServletException, IOException {
-        try {
-
-            ImagemDao imagemDao = new ImagemDao();
-
-            Imagem imagem = new Imagem();
-            imagem.setId(id);
-            imagem = imagemDao.listarImagem(imagem).get(0);
-            final byte[] foto = imagem.getImagem();
-
-            if (foto == null) {
-                return Response.ok("Imagem não encontrada").build();
-            } else {
-
-                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
     }
 }

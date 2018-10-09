@@ -70,7 +70,7 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('calendRioCtrl', ['$scope', '$stateParams',
+    .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])

@@ -22,7 +22,7 @@ public class EventoDao {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs;
         long id = 0;
-        String sql = "INSERT INTO public.evento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_povoado, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO public.evento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_localidade, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             Date date = Date.valueOf(evento.getData_evento());
             stmt = connection.prepareStatement(sql, (Statement.RETURN_GENERATED_KEYS));
@@ -33,7 +33,7 @@ public class EventoDao {
             stmt.setString(4, evento.getVisibilidade());
             stmt.setString(5, evento.getTipo_evento());
             stmt.setString(6, evento.getHora_evento());
-            stmt.setInt(7, evento.getId_localidade());
+            stmt.setInt(7, evento.getIdLocalidade());
             stmt.setString(8, evento.getLocalCidade());
 
             stmt.executeUpdate();
@@ -88,7 +88,7 @@ public class EventoDao {
             even.setTipo_evento(rs.getString("tipo_evento"));
             even.setHora_evento(rs.getString("hora_evento"));
             even.setVisibilidade(rs.getString("visibilidade"));
-            even.setId_localidade(rs.getInt("id_localidade"));
+            even.setIdLocalidade(rs.getInt("id_localidade"));
             even.setLocalCidade(rs.getString("local_cidade"));
             even.setIdImagem(rs.getByte("id_imagem"));
             even.setImagem(rs.getBytes("foto"));
@@ -128,7 +128,7 @@ public class EventoDao {
 
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
-        String sql = "UPDATE evento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_povoado=?, local_cidade=? WHERE id=?";
+        String sql = "UPDATE evento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_localidade=?, local_cidade=? WHERE id=?";
         try {
 
             //converte String para o tipo Date
@@ -140,7 +140,7 @@ public class EventoDao {
             stmt.setString(4, evento.getVisibilidade());
             stmt.setDate(5, date);
             stmt.setString(6, evento.getHora_evento());
-            stmt.setInt(7, evento.getId_localidade());
+            stmt.setInt(7, evento.getIdLocalidade());
             stmt.setString(8, evento.getLocalCidade());
             stmt.setLong(9, evento.getId());
 
@@ -196,7 +196,7 @@ public class EventoDao {
             even.setTipo_evento(rs.getString("tipo_evento"));
             even.setHora_evento(rs.getString("hora_evento"));
             even.setVisibilidade(rs.getString("visibilidade"));
-            even.setId_localidade(rs.getInt("id_localidade"));
+            even.setIdLocalidade(rs.getInt("id_localidade"));
             even.setNomeEvento(rs.getString("nomeLocalidade"));
             even.setIdImagem(rs.getByte("id_imagem"));
             even.setImagem(rs.getBytes("foto"));

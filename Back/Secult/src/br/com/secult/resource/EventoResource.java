@@ -25,9 +25,9 @@ import javax.ws.rs.core.Response;
 public class EventoResource {
 
     @GET
-    @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
+    @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_localidade}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_localidade") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Evento evento = new Evento();
         evento.setTitulo(titulo);
         evento.setDescricao(descricao);
@@ -35,7 +35,7 @@ public class EventoResource {
         evento.setVisibilidade(visibilidade);
         evento.setTipo_evento(tipo_evento);
         evento.setHora_evento(hora_evento);
-        evento.setId_localidade(id_povoado);
+        evento.setIdLocalidade(id_povoado);
         evento.setLocalCidade(localCidade);
 
         EventoDao eventoDao = new EventoDao();
@@ -156,7 +156,7 @@ public class EventoResource {
         evento.setVisibilidade(visibilidade);
         evento.setTipo_evento(tipo_evento);
         evento.setHora_evento(hora_evento);
-        evento.setId_localidade(id_povoado);
+        evento.setIdLocalidade(id_povoado);
         evento.setLocalCidade(localCidade);
 
         EventoDao eventoDao = new EventoDao();
