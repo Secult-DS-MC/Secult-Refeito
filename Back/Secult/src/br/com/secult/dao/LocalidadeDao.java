@@ -57,7 +57,7 @@ public class LocalidadeDao {
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN evento as e ON(l.id = e.id_povoado)";
+        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN evento as e ON(l.id = e.id_localidade)";
 
         try {
             stmt = con.prepareStatement(sql);

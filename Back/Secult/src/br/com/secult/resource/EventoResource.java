@@ -115,34 +115,6 @@ public class EventoResource {
 //        }
 //    }
 
-//    @POST
-//    @Path("/salvarFoto/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.MULTIPART_FORM_DATA)
-//    public Response salvarFoto(@FormDataParam("imagem") InputStream uploadedInputStream,
-//            @PathParam("id") Long id, @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
-//
-//        EventoDao usuarioDao = new EventoDao();
-//        Evento usuario = new Evento();
-//
-//        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//        int read = 0;
-//        byte[] bytes = new byte[1024];
-//
-//        while ((read = uploadedInputStream.read(bytes)) != -1) {
-//            buffer.write(bytes, 0, read);
-//        }
-//
-//        byte[] byteArray = buffer.toByteArray();
-//        buffer.flush();
-//
-//        usuario.setId(id);
-//        usuario.setImagem(byteArray);
-//        usuarioDao.salvarFoto(usuario);
-//
-//        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-//    }
-
     @GET
     @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -72,6 +72,7 @@ angular.module('app.controllers', [])
 
     .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            listarEventoNoticias();
 
         }])
 
@@ -130,6 +131,11 @@ angular.module('app.controllers', [])
 
         }])
     .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+
+    .controller('testesCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])

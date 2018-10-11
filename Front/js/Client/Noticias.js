@@ -22,8 +22,7 @@ carregando(1)
                 var idLocalidade = dados[i].id_localidade;
                 var nomeLocalidade = dados[i].nomeEvento;
 
-
-
+                calendario(dataEvento, titulo, imagem);
 
                     $("#listaEventoNoticas").append("  <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +

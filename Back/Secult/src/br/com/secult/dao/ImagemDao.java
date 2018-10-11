@@ -20,8 +20,34 @@ import javax.imageio.ImageIO;
 public class ImagemDao {
 
     Connection connection;
+    
+        public void salvarFoto(Imagem imagem) throws Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "INSERT INTO imagem(imagem, id_event) VALUES ();imagem=? WHERE id = ? and id_evento=?";
+        try {
 
-    public boolean inserirImagemEvento(Imagem imagem) throws Exception {
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setObject(1, tratarImagem(imagem.getImagem()));
+            pstmt.setInt(2, imagem.getId());
+            pstmt.setInt(3, imagem.getIdEvento());
+
+            pstmt.execute();
+
+        } catch (Exception e) {
+
+            throw e;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
+
+    public void inserirImagemEvento(Imagem imagem) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
@@ -42,7 +68,6 @@ public class ImagemDao {
             } catch (Exception e) {
             }
         }
-        return hasError;
     }
     
      public boolean inserirImagemCadart(Imagem imagem) throws Exception {
@@ -160,12 +185,12 @@ public class ImagemDao {
         List<Imagem> imagens = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "SELECT imagem, id_evento FROM imagem WHERE id=?";
+         String sql = "SELECT imagem FROM imagem WHERE id=? and id_evento=?";
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, imagem.getId());
-            rs = stmt.executeQuery();
+            stmt.setInt(2, imagem.getIdEvento());
 
             while (rs.next()) {
                 imagem.setId(rs.getInt("id"));

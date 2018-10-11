@@ -97,7 +97,7 @@ public class CadartResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-
+    
     @GET
     @Path("/getByVisibilidadeDiferenteS")
     @Produces(MediaType.APPLICATION_JSON)
@@ -268,28 +268,28 @@ public class CadartResource {
 //        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 //    }
 //
-//    @GET
-//    @Path("/find/{cpf}")
-//    @Produces({"image/png", "image/jpg"})
-//    public Response find(@PathParam("cpf") Long cpf) throws ServletException, IOException {
-//        try {
-//
-//            CadartDao cadartDao = new CadartDao();
-//            Cadart cadart = new Cadart();
-//            cadart.setCpf(cpf);
-//            cadart = cadartDao.getById(cadart).get(0);
-//            final byte[] foto = cadart.getFotoPerfil();
-//
-//            if (foto == null) {
-//                return Response.ok("Imagem não encontrada").build();
-//            } else {
-//
-//                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//
-//        }
-//        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
-//    }
+    @GET
+    @Path("/find/{cpf}")
+    @Produces({"image/png", "image/jpg"})
+    public Response find(@PathParam("cpf") Long cpf) throws ServletException, IOException {
+        try {
+
+            CadartDao cadartDao = new CadartDao();
+            Cadart cadart = new Cadart();
+            cadart.setCpf(cpf);
+            cadart = cadartDao.getById(cadart).get(0);
+            final byte[] foto = cadart.getFotoPerfil();
+
+            if (foto == null) {
+                return Response.ok("Imagem não encontrada").build();
+            } else {
+
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
+    }
 }

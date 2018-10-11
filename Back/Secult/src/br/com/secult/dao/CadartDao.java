@@ -167,7 +167,6 @@ public class CadartDao {
             cadart.setNome(rs.getString("nomeUsu"));
             cadart.setNomeArtistico(rs.getString("nome_artistico"));
             cadart.setSexo(rs.getString("sexo"));
-            cadart.setFotoPerfil(rs.getBytes("foto"));
             cadart.setDescricao(rs.getString("descricao"));
             cadart.setIdade(rs.getInt("idade"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
