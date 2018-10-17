@@ -20,51 +20,23 @@ import javax.imageio.ImageIO;
 public class ImagemDao {
 
     Connection connection;
-    
-        public void salvarFoto(Imagem imagem) throws Exception {
-        PreparedStatement pstmt = null;
-        this.connection = new ConnectionFactory().getConnection();
-        String sql = "INSERT INTO imagem(imagem, id_event) VALUES ();imagem=? WHERE id = ? and id_evento=?";
-        try {
-
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setObject(1, tratarImagem(imagem.getImagem()));
-            pstmt.setInt(2, imagem.getId());
-            pstmt.setInt(3, imagem.getIdEvento());
-
-            pstmt.execute();
-
-        } catch (Exception e) {
-
-            throw e;
-        } finally {
-            try {
-                pstmt.close();
-            } catch (Exception e) {
-            }
-
-        }
-
-    }
 
     public void inserirImagemEvento(Imagem imagem) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
-        boolean hasError = true;
-        String sql = "INSERT INTO imagem (imagem, id_evento) VALUES(?,?)";
+        String sql = "UPDATE imagem SET imagem=? WHERE id_evento=?";
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setInt(2, imagem.getIdEvento());
 
-            stmt.executeUpdate();
+            stmt.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 stmt.close();
-                hasError = false;
             } catch (Exception e) {
             }
         }
@@ -185,14 +157,15 @@ public class ImagemDao {
         List<Imagem> imagens = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-         String sql = "SELECT imagem FROM imagem WHERE id=? and id_evento=?";
+         String sql = "SELECT * FROM imagem WHERE id_evento=?";
         try {
             stmt = connection.prepareStatement(sql);
+            
+            stmt.setInt(1, imagem.getIdEvento());
 
-            stmt.setInt(1, imagem.getId());
-            stmt.setInt(2, imagem.getIdEvento());
-
-            while (rs.next()) {
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
                 imagem.setId(rs.getInt("id"));
                 imagem.setImagem(rs.getBytes("imagem"));
                 imagem.setIdEvento(rs.getInt("id_evento"));

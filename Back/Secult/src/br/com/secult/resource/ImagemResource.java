@@ -32,7 +32,8 @@ public class ImagemResource {
     @Path("/inserirImagemEvento/{id_evento}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarFoto(@FormDataParam("imagem") InputStream uploadedInputStream, @PathParam("id_evento") int idEvento, @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
+    public Response salvarFoto(@FormDataParam("imagem") InputStream uploadedInputStream, @PathParam("id_evento") int idEvento,
+            @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
 
         ImagemDao imagemDao = new ImagemDao();
         Imagem imagem = new Imagem();
@@ -55,24 +56,6 @@ public class ImagemResource {
         return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
     
-    @GET
-    @Path("/inserirImagemEvento/{imagem}&{id_evento}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEvento(@PathParam("imagem") Byte imagens, @PathParam("id_evento") int id_evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
-        Imagem imagem = new Imagem();
-        imagem.setImagem(imagens);
-        imagem.setIdEvento(id_evento);
-
-        ImagemDao imagemDao = new ImagemDao();
-
-        if (imagemDao.inserirImagemEvento(imagem)) {
-            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-        } else {
-            return Response.ok("{\"status\":\"erro\"}").build();
-        }
-
-    }
-
     @GET
     @Path("/inserirImagemCadart/{imagem}&{id_cadart}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -110,17 +93,16 @@ public class ImagemResource {
     }
     
      @GET
-    @Path("/buscarImagemEvento/{id}&{id_evento}")
+    @Path("/buscarImagemEvento/{id_evento}")
     @Produces({"image/png", "image/jpg"})
-    public Response buscarImagemEvento(@PathParam("id") int id, @PathParam("id_evento") int idEvento) throws ServletException, IOException {
+    public Response buscarImagemEvento(@PathParam("id_evento") int idEvento) throws ServletException, IOException {
         try {
 
             ImagemDao imagemDao = new ImagemDao();
 
             Imagem imagem = new Imagem();
             imagem.setIdEvento(idEvento);
-            imagem.setId(id);
-            imagem = imagemDao.listarImagemEvento(imagem).get(0);
+            imagem = imagemDao.listarImagemEvento(imagem).get(idEvento);
             final byte[] foto = imagem.getImagem();
 
             if (foto == null) {

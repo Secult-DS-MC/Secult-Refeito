@@ -1,5 +1,6 @@
 function inserirImagemEvento(id_evento) {
-    var json =  servidor + "/Secult/imagem/inserirImagemEvento/"+id_evento;
+
+    var json =  servidor + "/Secult/imagem/inserirImagemEvento/" + id_evento;
 
     var ImageURL = localStorage.getItem("imagemSalva");
 
@@ -64,5 +65,4 @@ function salvaImagemImput() {
         fReader.readAsDataURL(file);
 
     });
-
 }

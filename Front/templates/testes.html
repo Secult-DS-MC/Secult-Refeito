@@ -1,18 +1,40 @@
 <ion-view title="Cadastro de evento" id="page28">
     <ion-nav-buttons side="right" class="has-header">
-        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
+        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias"></button>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header has-footer">
         <label class="item item-input item-stacked-label" for="btnFotoCadart">
-            <img src="img/semImagem.png" id="imgThumbnail" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
-            <input type="file" id="imputImg" style="display: none" >
+            <img src="img/semImagem.png" id="imgThumbnail"
+                 style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
+            <input type="file" id="imputImg" style="display: none">
         </label>
-        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="btnFotoCadart" onclick="abrirImpFile('imputImg'), salvaImagemImput()">Alterar Foto</button>
 
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                class="button button-dark button-small button-block" id="btnFotoCadart"
+                onclick="abrirImpFile('imputImg'), salvaImagemImput()">Alterar Foto
+        </button>
+        <p>id evento</p>
+        <input type="number" id="idEvento">
         </form>
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                class="button button-dark button-small button-block"
+                onclick="inserirImagemEvento($('#idEvento').val())">Cadastrar
+        </button>
 
+        <ion-list id="listaFotos">
+
+        </ion-list>
 
     </ion-content>
 
+    <script>
+        function fotos() {
+            var json = servidor + "/Secult/imagem/buscarImagemEvento/" + 1;
+            var onSuccess = function (result) {
+                var foto = 
 
+            }
+            $("#listaFotos").append("<img src='" + urlImagem + "'>")
+        }
+    </script>
 </ion-view>
