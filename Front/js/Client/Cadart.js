@@ -331,12 +331,15 @@ function listarCadart() {
                 urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
 
+
                 $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
-                    "                <img src='" + urlImagem + "'>\n" +
+                    "                <img id='"+cpf+"' src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
                     "            </a>")
+                getFotoPerfilCadart(cpf, cpf)
             }
+
 
 
             ;
@@ -534,12 +537,7 @@ function carregarDadosUpdateCadart() {
 function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte, cpf, vindoDe) {
 
     setTimeout(function () {
-        var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
-        $("#fotoInfo").attr('src', urlImagem);
-        setTimeout(function () {
-            var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
-            $("#fotoInfo").attr('src', urlImagem);
-        })
+        getFotoPerfilCadart(cpf,"fotoInfo")
         $("#nomeInfo").text(nome);
         $("#idadeInfo").text(idade);
         $("#emailInfo").text(email);
