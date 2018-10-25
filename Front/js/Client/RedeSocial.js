@@ -1,16 +1,12 @@
 function cadastrarRedeSocial(id_usuario,idImputRedeSocial) {
     var nome = $("#"+idImputRedeSocial).parent().text().trim()
     var link = $("#"+idImputRedeSocial).val();
-    alert(link, nome)
     var json = servidor + "/Secult/redes/inserirRedes/" + nome + "&" + link + "&" + id_usuario;
     var onSuccess = function (result) {
         var status = result.status;
         if (status == "ok") {
-            alert('sim')
-        } else {
-           alert("erro ")
+
         }
-        ;
     };
     $.getJSON(json, onSuccess).fail(
     );

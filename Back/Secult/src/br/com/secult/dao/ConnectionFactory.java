@@ -21,12 +21,12 @@ public class ConnectionFactory {
         return null;
     }
 
-    public static void close(Connection con) {
-        try {
-            con.close();
-        } catch (Exception ex) {
-        }
-    }
+//    public static void close(Connection con) {
+//        try {
+//            con.close();
+//        } catch (Exception ex) {
+//        }
+//    }
 
     public Connection getConnection(String server, String nome_banco, String usuario, String senha) {
         try {

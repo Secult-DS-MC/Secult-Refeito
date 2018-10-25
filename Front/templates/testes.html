@@ -14,11 +14,13 @@
                 onclick="abrirImpFile('imputImg'), salvaImagemImput()">Alterar Foto
         </button>
         <p>id evento</p>
-        <input type="number" id="idEvento">
+        <input type="number" id="coluna" style="border: 1px solid black">
+        <input type="text" id="sigla" style="border: 1px solid black">
+
         </form>
         <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
                 class="button button-dark button-small button-block"
-                onclick="inserirImagemEvento($('#idEvento').val())">Cadastrar
+                onclick="inserirImagem(document.getElementById('coluna').value,document.getElementById('sigla').value.toUpperCase())">Cadastrar
         </button>
 
         <ion-list id="listaFotos">
@@ -27,14 +29,5 @@
 
     </ion-content>
 
-    <script>
-        function fotos() {
-            var json = servidor + "/Secult/imagem/buscarImagemEvento/" + 1;
-            var onSuccess = function (result) {
-                var foto = 
 
-            }
-            $("#listaFotos").append("<img src='" + urlImagem + "'>")
-        }
-    </script>
 </ion-view>

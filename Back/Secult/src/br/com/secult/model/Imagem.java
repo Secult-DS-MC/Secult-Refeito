@@ -7,9 +7,9 @@ package br.com.secult.model;
 public class Imagem {
     private int id;
     private byte[] imagem;
-    private int idCadart;
-    private int idEvento;
-    private int idTurismo;
+    private long idCadart;
+    private long idEvento;
+    private long idTurismo;
 
     public int getId() {
         return id;
@@ -27,27 +27,27 @@ public class Imagem {
         this.imagem = imagem;
     }
 
-    public int getIdCadart() {
+    public long getIdCadart() {
         return idCadart;
     }
 
-    public void setIdCadart(int idCadart) {
+    public void setIdCadart(long idCadart) {
         this.idCadart = idCadart;
     }
 
-    public int getIdEvento() {
+    public long getIdEvento() {
         return idEvento;
     }
 
-    public void setIdEvento(int idEvento) {
+    public void setIdEvento(long idEvento) {
         this.idEvento = idEvento;
     }
 
-    public int getIdTurismo() {
+    public long getIdTurismo() {
         return idTurismo;
     }
 
-    public void setIdTurismo(int idTurismo) {
+    public void setIdTurismo(long idTurismo) {
         this.idTurismo = idTurismo;
     }
 

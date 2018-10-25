@@ -165,7 +165,7 @@ public class EventoDao {
 
         ResultSet rs = null;
 
-        String sql = "SELECT E.id, titulo, E.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nomeLocalidade, id_imagem, i.imagem AS foto FROM evento AS E JOIN localidade AS l ON(l.id = E.id_localidade) JOIN imagem AS i ON(E.id_imagem = i.id) where visibilidade = 's' and tipo_evento = 'g' order by data_evento desc";
+        String sql = "SELECT E.id, titulo, E.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nomeLocalidade FROM evento AS E JOIN localidade AS l ON(l.id = E.id_localidade)  where visibilidade = 's' and tipo_evento = 'g' order by data_evento desc";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -198,8 +198,6 @@ public class EventoDao {
             even.setVisibilidade(rs.getString("visibilidade"));
             even.setIdLocalidade(rs.getInt("id_localidade"));
             even.setNomeEvento(rs.getString("nomeLocalidade"));
-            even.setIdImagem(rs.getByte("id_imagem"));
-            even.setImagem(rs.getBytes("foto"));
 
             objs.add(even);
 

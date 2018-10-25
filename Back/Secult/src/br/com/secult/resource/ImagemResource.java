@@ -36,11 +36,11 @@ import javax.ws.rs.core.Response;
 public class ImagemResource {
 
     @POST
-    @Path("/inserirImagemEvento/{id_evento}")
+    @Path("/inserirImagem/{id_coluna}&{sigla}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarFoto(@FormDataParam("imagem") InputStream uploadedInputStream, @PathParam("id_evento") int idEvento,
-            @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
+    public Response inserirImagem(@FormDataParam("imagem") InputStream uploadedInputStream,
+            @PathParam("id_coluna") long id_coluna,@PathParam("sigla") String sigla, @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
 
         ImagemDao imagemDao = new ImagemDao();
         Imagem imagem = new Imagem();
@@ -55,31 +55,18 @@ public class ImagemResource {
 
         byte[] byteArray = buffer.toByteArray();
         buffer.flush();
-
-        imagem.setIdEvento(idEvento);
+        
         imagem.setImagem(byteArray);
-        imagemDao.inserirImagemEvento(imagem);
 
-        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-
-    @GET
-    @Path("/inserirImagemTurismo/{imagem}&{id_turismo}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirImagemTurismo(@PathParam("imagem") Byte imagens, @PathParam("id_turismo") int id_turismo) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
-        Imagem imagem = new Imagem();
-        imagem.setImagem(imagens);
-        imagem.setIdTurismo(id_turismo);
-
-        ImagemDao imagemDao = new ImagemDao();
-
-        if (imagemDao.inserirImagemTurismo(imagem)) {
+         if (imagemDao.inserirImagem(imagem, id_coluna, sigla)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
 
     }
+    
+    
 
     @GET
     @Path("/deletarImagem/{id}")
@@ -117,7 +104,7 @@ public class ImagemResource {
         ImagemDao imagemDao = new ImagemDao();
         List<Imagem> imagens = new ArrayList<Imagem>();
 
-        imagens = imagemDao.listarImagemIDEvento(id_coluna, sigla);
+        imagens = imagemDao.listarImagem(id_coluna, sigla);
 
         Gson gson = new GsonBuilder().create();
 

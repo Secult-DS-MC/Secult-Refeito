@@ -31,7 +31,7 @@ public class ImagemDao {
             stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
-            stmt.setInt(2, imagem.getIdEvento());
+            stmt.setLong(2, imagem.getIdEvento());
 
             stmt.execute();
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class ImagemDao {
             stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
-            stmt.setInt(2, imagem.getIdCadart());
+            stmt.setLong(2, imagem.getIdCadart());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -68,16 +68,27 @@ public class ImagemDao {
         return hasError;
     }
 
-    public boolean inserirImagemTurismo(Imagem imagem) throws Exception {
+    public boolean inserirImagem(Imagem imagem, long id_coluna, String sigla) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-        String sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
+        String sql = null;
+         switch (sigla) {
+            case "E":
+                sql = "INSERT INTO imagem (imagem, id_evento) VALUES(?,?)";
+                break;
+            case "C":
+                sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
+                break;
+            case "T":
+                sql ="INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
+                break;
+        }
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
-            stmt.setInt(2, imagem.getIdTurismo());
+            stmt.setLong(2, id_coluna);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -90,100 +101,6 @@ public class ImagemDao {
             }
         }
         return hasError;
-    }
-
-    public List<Imagem> listarImagemTurismo(Imagem imagem) throws Exception {
-        this.connection = new ConnectionFactory().getConnection();
-        List<Imagem> imagens = new ArrayList<>();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String sql = "SELECT imagem, id_turismo FROM imagem WHERE id=?";
-        try {
-            stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, imagem.getId());
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                imagem.setId(rs.getInt("id"));
-                imagem.setImagem(rs.getBytes("imagem"));
-                imagem.setIdTurismo(rs.getInt("id_turismo"));
-
-                imagens.add(imagem);
-            }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (Exception e) {
-            }
-        }
-        return imagens;
-    }
-
-    public List<Imagem> listarImagemCadart(Imagem imagem) throws Exception {
-        this.connection = new ConnectionFactory().getConnection();
-        List<Imagem> imagens = new ArrayList<>();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String sql = "SELECT imagem, id_cadart FROM imagem WHERE id=?";
-        try {
-            stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, imagem.getId());
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                imagem.setId(rs.getInt("id"));
-                imagem.setImagem(rs.getBytes("imagem"));
-                imagem.setIdCadart(rs.getInt("id_cadart"));
-
-                imagens.add(imagem);
-            }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (Exception e) {
-            }
-        }
-        return imagens;
-    }
-
-    public List<Imagem> listarImagemEvento(Imagem imagem) throws Exception {
-        this.connection = new ConnectionFactory().getConnection();
-        List<Imagem> imagens = new ArrayList<>();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String sql = "SELECT * FROM imagem WHERE id_evento=?";
-        try {
-            stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, imagem.getIdEvento());
-
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                imagem.setId(rs.getInt("id"));
-                imagem.setImagem(rs.getBytes("imagem"));
-                imagem.setIdEvento(rs.getInt("id_evento"));
-
-                imagens.add(imagem);
-            }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (Exception e) {
-            }
-        }
-        return imagens;
     }
 
     public boolean alterarImagem(Imagem imagem) throws Exception {
@@ -285,7 +202,7 @@ public class ImagemDao {
         return baos.toByteArray();
     }
 
-    public List<Imagem> listarImagemIDEvento(int id_coluna, String sigla) throws Exception {
+    public List<Imagem> listarImagem(int id_coluna, String sigla) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         List<Imagem> imagens = new ArrayList<>();
         PreparedStatement stmt = null;
@@ -322,6 +239,7 @@ public class ImagemDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -349,6 +267,7 @@ public class ImagemDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 pstmt.close();
             } catch (Exception e) {

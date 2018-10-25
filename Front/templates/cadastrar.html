@@ -11,6 +11,17 @@
             </button>
         </div>
 
+        <label class="item item-input item-stacked-label" for="btnFotoCadart">
+            <img src="img/semImagem.png" id="imgThumbnail"
+                 style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
+            <input type="file" id="imputImg" style="display: none">
+        </label>
+
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                class="button button-dark button-small button-block" id="btnFotoCadart"
+                onclick="abrirImpFile('imputImg'), salvaImagemImput()">Alterar Foto
+        </button>
+
 
         <form id="cadastrar-form9" class="list">
             <label class="item item-input item-stacked-label">

@@ -152,6 +152,7 @@ public class CadartDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {

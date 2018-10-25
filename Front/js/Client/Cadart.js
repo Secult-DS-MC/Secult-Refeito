@@ -1,42 +1,4 @@
-function inserirFoto(cpf) {
-    var json = servidor + "/Secult/cadart/salvarFoto/" + cpf;
 
-    var ImageURL = localStorage.getItem("fotoCadastro");
-
-    var block = ImageURL.split(";");
-
-    var contentType = block[0].split(":")[1];
-
-    var realData = block[1].split(",")[1];
-
-    var blob = b64toBlob(realData, contentType);
-
-    var formDataToUpload = new FormData();
-
-    formDataToUpload.append("id", cpf);
-    formDataToUpload.append("foto_perfil", blob);
-
-    $.ajax({
-        url: json,
-        data: formDataToUpload,
-        type: "POST",
-        contentType: false,
-        processData: false,
-        cache: false,
-        dataType: "json",
-
-        error: function (err) {
-            console.log(err);
-
-        },
-
-        complete: function () {
-            window.location = "#/page1/page2";
-            location.reload();
-        },
-    })
-
-}
 
 function saveFotoLS() {
 
@@ -57,7 +19,7 @@ function saveFotoLS() {
         fReader.onload = function () {
             img.onload = function () {
 
-                localStorage.setItem("fotoCadastro", toBase64String(img));
+                localStorage.setItem("imagemSalva", toBase64String(img));
 
             };
             img.src = fReader.result;
@@ -325,19 +287,16 @@ function listarCadart() {
                 var projetoAtual = dados[i].projetoAtual;
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
-                var foto = dados[i].fotoPerfil;
                 var vindoDe = "";
 
-                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
 
-
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
-                    "                <img id='"+cpf+"' src='" + urlImagem + "'>\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
+                    "                <img id='"+cpf+"' src='../../img/pixelBranco.png'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
                     "            </a>")
-                getFotoPerfilCadart(cpf, cpf)
+                getPrimeiraImagem(cpf, cpf)
             }
 
 
@@ -534,10 +493,10 @@ function carregarDadosUpdateCadart() {
 }
 
 
-function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte, cpf, vindoDe) {
+function carregarInfoCadart( nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte, cpf, vindoDe) {
 
     setTimeout(function () {
-        getFotoPerfilCadart(cpf,"fotoInfo")
+        getPrimeiraImagem(cpf,"fotoInfo")
         $("#nomeInfo").text(nome);
         $("#idadeInfo").text(idade);
         $("#emailInfo").text(email);

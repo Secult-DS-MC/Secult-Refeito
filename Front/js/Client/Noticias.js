@@ -22,7 +22,7 @@ carregando(1)
                 var idLocalidade = dados[i].id_localidade;
                 var nomeLocalidade = dados[i].nomeEvento;
 
-                calendario(dataEvento, titulo, imagem);
+
 
                     $("#listaEventoNoticas").append("  <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
@@ -31,7 +31,7 @@ carregando(1)
                         "                <i class=\"icon ion-android-share-alt\" style='display: none'></i>\n" +
                         "            </ul>\n" +
                         "            <div class=\" item item-image \">\n" +
-                        "                <img src='"+imagem+"'n" +
+                        "                <img id='"+id+"' src=''n" +
                         "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
                         "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\"></i>"+nomeLocalidade+"<span class=\"item-note\"> "+dataEvento+" </span> </div>\n" +
                         "</div>\n" +
@@ -44,11 +44,7 @@ carregando(1)
                         "            </div>\n" +
                         "        </div>");
 
-                if (visibilidade != "" & titulo != "" & dataEvento != "" & descricao != "" & horaEvento != "" & tipo != "" & idLocalidade != "" & dataCadastro != "") {
-                    $("#alert" + id).hide();
-                } else {
-                    $("#checked" + id).hide();
-                }
+                getPrimeiraImagem(id, id)
             }
         }
         carregando(2)
