@@ -16,7 +16,8 @@ angular.module('app.controllers', [])
 
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarCadart();
+            $("#listaCadart").empty();
+            listarCadart1()
             usuarioAtivo();
         }])
 
@@ -76,9 +77,9 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('acontecendoHojeCtrl', ['$scope', '$stateParams',
+    .controller('eventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventoHoje();
+            listarEventoEvento();
 
         }])
 
@@ -90,7 +91,7 @@ angular.module('app.controllers', [])
 
     .controller('administradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEvento();
+            listarEventoAdm();
         }])
 
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',

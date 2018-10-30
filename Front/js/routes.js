@@ -95,12 +95,12 @@ angular.module('app.routes', [])
                 }
             })
 
-            .state('tabsController.acontecendoHoje', {
+            .state('tabsController.evento', {
                 url: '/page13',
                 views: {
                     'tab4': {
-                        templateUrl: 'templates/acontecendoHoje.html',
-                        controller: 'acontecendoHojeCtrl'
+                        templateUrl: 'templates/evento.html',
+                        controller: 'eventoCtrl'
                     }
                 }
             })

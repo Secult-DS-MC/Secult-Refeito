@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import javax.imageio.ImageIO;
 
 public class CadartDao {
 
@@ -142,7 +141,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, C.nome AS nomeUsu, nome_artistico, sexo, descricao, idade, senha, projeto_atual, telefone, email, A.nome AS nomeArte, visibilidade, id_arte FROM cadart AS C join arte AS A ON(C.id_arte = A.id)";
+            String sql = "SELECT cpf, C.nome AS nomeUsu, nome_artistico, sexo, descricao, idade, senha, projeto_atual, telefone, email, A.nome AS nomeArte, visibilidade, id_arte FROM cadart AS C join arte AS A ON(C.id_arte = A.id) where visibilidade = 's'";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();

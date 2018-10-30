@@ -10,46 +10,45 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  *
  * @author Computador
  */
-public class EventoDao {
+public class NoticiaDao {
 
     private Connection connection;
 
-    public List<Acontecimento> listarEvento() throws SQLException, Exception {
+    public List<Acontecimento> listarNoticia() throws SQLException, Exception {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
+
         ResultSet rs = null;
-  
-        String sql = "SELECT e.id,titulo,e.descricao,data_evento, local_cidade,hora_evento ,id_localidade, l.nome as nomeLocalidade FROM evento as e join localidade as l on (l.id= e.id)where visibilidade = 's' and tipo_evento = 'p'";
+
+        String sql = "SELECT E.id, titulo, E.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nomeLocalidade FROM evento AS E JOIN localidade AS l ON(l.id = E.id_localidade)  where visibilidade = 's' and tipo_evento = 'g' order by data_evento desc";
         try {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
 
-            List<Acontecimento> objs = new Vector();
+            List<Acontecimento> objs = new ArrayList<Acontecimento>();
             while (rs.next()) {
                 Acontecimento even = new Acontecimento();
                 even.setId(rs.getLong("id"));
                 even.setTitulo(rs.getString("titulo"));
                 even.setDescricao(rs.getString("descricao"));
                 even.setData_evento(rs.getString("data_evento"));
+                even.setData_cadastro(rs.getDate("data_cadastro"));
+                even.setTipo_evento(rs.getString("tipo_evento"));
                 even.setHora_evento(rs.getString("hora_evento"));
+                even.setVisibilidade(rs.getString("visibilidade"));
                 even.setIdLocalidade(rs.getInt("id_localidade"));
-                even.setLocalCidade(rs.getString("local_cidade"));
-                even.setNomeLocalidade(rs.getString("nomeLocalidade"));
-
+                even.setNomeEvento(rs.getString("nomeLocalidade"));
                 objs.add(even);
-
             }
             return objs;
-
         } catch (Exception e) {
             throw e;
         } finally {

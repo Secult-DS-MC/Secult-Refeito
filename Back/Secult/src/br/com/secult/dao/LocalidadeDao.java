@@ -1,6 +1,6 @@
 package br.com.secult.dao;
 
-import br.com.secult.model.Evento;
+import br.com.secult.model.Acontecimento;
 import br.com.secult.model.Localidade;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

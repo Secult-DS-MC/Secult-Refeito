@@ -100,7 +100,7 @@ public class ImagemResource {
     @GET
     @Path("/listarImagens/{id_coluna}&{sigla}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response buscarImagem(@PathParam("id_coluna") int id_coluna, @PathParam("sigla") String sigla) throws ServletException, IOException, Exception {
+    public Response buscarImagem(@PathParam("id_coluna") long id_coluna, @PathParam("sigla") String sigla) throws ServletException, IOException, Exception {
         ImagemDao imagemDao = new ImagemDao();
         List<Imagem> imagens = new ArrayList<Imagem>();
 
@@ -141,5 +141,31 @@ public class ImagemResource {
         }
         return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
     }
+    
+    @GET
+    @Path("/findEvento/{id}")
+    @Produces({"image/png", "image/jpg"})
+    public Response findEventoImagem(@PathParam("id") int id) throws ServletException, IOException {
+        try {
+
+            ImagemDao imagemDao = new ImagemDao();
+            Imagem imagem = new Imagem();
+            imagem.setId(id);
+            imagem = imagemDao.getByIdEvento(id).get(0);
+            final byte[] foto = imagem.getImagem();
+
+            if (foto == null) {
+                return Response.ok("Imagem não encontrada").build();
+            } else {
+
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity("Não foi possível concluir consulta.").build();
+    }
+    
 
 }

@@ -202,7 +202,7 @@ public class ImagemDao {
         return baos.toByteArray();
     }
 
-    public List<Imagem> listarImagem(int id_coluna, String sigla) throws Exception {
+    public List<Imagem> listarImagem(long id_coluna, String sigla) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         List<Imagem> imagens = new ArrayList<>();
         PreparedStatement stmt = null;
@@ -223,16 +223,16 @@ public class ImagemDao {
         try {
             stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1, id_coluna);
+            stmt.setLong(1, id_coluna);
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Imagem imagem = new Imagem();
                 imagem.setId(rs.getInt("id"));
-                imagem.setIdTurismo(rs.getInt("id_turismo"));
-                imagem.setIdEvento(rs.getInt("id_evento"));
-                imagem.setIdCadart(rs.getInt("id_cadart"));
+                imagem.setIdTurismo(rs.getLong("id_turismo"));
+                imagem.setIdEvento(rs.getLong("id_evento"));
+                imagem.setIdCadart(rs.getLong("id_cadart"));
                 imagens.add(imagem);
             }
         } catch (Exception e) {
@@ -248,10 +248,38 @@ public class ImagemDao {
         return imagens;
     }
 
-    public List<Imagem> getById(int id) throws SQLException, Exception {
+    public List<Imagem> getById(long id) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "select * from imagem where  id = ?";
+        ResultSet rs = null;
+
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setObject(1, id);
+            rs = pstmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                connection.close();
+                rs.close();
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
+    public List<Imagem> getByIdEvento(long id) throws SQLException, Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "select * from imagem where  id_evento = ?";
         ResultSet rs = null;
 
         try {
@@ -282,9 +310,9 @@ public class ImagemDao {
         while (rs.next()) {
             Imagem imagem = new Imagem();
             imagem.setId(rs.getInt("id"));
-            imagem.setIdEvento(rs.getInt("id_evento"));
-            imagem.setIdCadart(rs.getInt("id_cadart"));
-            imagem.setIdTurismo(rs.getInt("id_turismo"));
+            imagem.setIdEvento(rs.getLong("id_evento"));
+            imagem.setIdCadart(rs.getLong("id_cadart"));
+            imagem.setIdTurismo(rs.getLong("id_turismo"));
             imagem.setImagem(rs.getBytes("imagem"));
 
             objs.add(imagem);

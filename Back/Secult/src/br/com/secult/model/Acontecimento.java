@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  *
  * @author Muquifo
  */
-public class Evento {
+public class Acontecimento {
 
     private long id;
     private String titulo;
@@ -24,8 +24,9 @@ public class Evento {
     private String data_evento;
     private String hora_evento;
     private String nomeEvento;
+    private String nomeLocalidade;
     private String localCidade;
-    private int idImagem;
+    private int id_imagem;
     private byte[] imagem;
 
     public int getIdLocalidade() {
@@ -36,12 +37,12 @@ public class Evento {
         this.idLocalidade = idLocalidade;
     }
     private int idLocalidade;
-    public int getIdImagem() {
-        return idImagem;
+    public int getId_Imagem() {
+        return id_imagem;
     }
 
-    public void setIdImagem(int idImagem) {
-        this.idImagem = idImagem;
+    public void setId_Imagem(int id_imagem) {
+        this.id_imagem = id_imagem;
     }
 
     public byte[] getImagem() {
@@ -66,6 +67,14 @@ public class Evento {
 
     public void setNomeEvento(String nomeEvento) {
         this.nomeEvento = nomeEvento;
+    }
+    
+     public String getNomeLocalidade() {
+        return nomeLocalidade;
+    }
+
+    public void setNomeLocalidade(String nomeLocalidade) {
+        this.nomeLocalidade = nomeLocalidade;
     }
 
     public long getId() {

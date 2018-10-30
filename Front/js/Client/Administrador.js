@@ -61,7 +61,7 @@ function cadastroEvento() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function listarEvento() {
+function listarEventoAdm() {
     carregando(1)
     var json = servidor + "/Secult/evento/listarEvento";
 
@@ -340,7 +340,7 @@ function listarCadartAdm() {
                 var vindoDe = "desAutenticar";
 
                 console.log(tel)
-                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+                var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
                 $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
@@ -381,12 +381,13 @@ function cadartAutenticarVisibilidadeS() {
                 var vindoDe = "adm"
 
 
-                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
-                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img src='" + urlImagem + "'>\n" +
+
+                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "            </a>")
+                getPrimeiraImagem(cpf, cpf)
             }
             ;
 
@@ -421,12 +422,13 @@ function cadartAutenticarVisibilidadeN() {
                 var vindoDe = "desAutenticar"
 
 
-                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
-                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img src='" + urlImagem + "'>\n" +
+
+                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\""+ nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "            </a>")
+                getPrimeiraImagem(cpf, cpf)
             }
             ;
 
