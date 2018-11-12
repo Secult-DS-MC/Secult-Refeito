@@ -264,50 +264,7 @@ function isCpf(strCPF) {
 }
 
 
-// function listarCadart() {
-//     $("#listaCadart").empty();
-//     var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
-//     var onSuccess = function (result) {
-//         $("#listaCadart").empty();
-//         dados = result.usuario;
-//         if (dados[0]) {
-//             for (var i in dados) {
-//
-//                 var nome = dados[i].nome;
-//                 var arte = dados[i].nomeArte;
-//                 var cpf = dados[i].cpf;
-//                 var tel = dados[i].telefone;
-//                 var idArte = dados[i].idArte;
-//                 var sexo = dados[i].sexo;
-//                 var idade = dados[i].idade;
-//                 var nomeArtistico = dados[i].nomeArtistico;
-//                 var descricao = dados[i].descricao;
-//                 var projetoAtual = dados[i].projetoAtual;
-//                 var nomeArte = dados[i].nomeArte;
-//                 var email = dados[i].email;
-//                 var vindoDe = "";
-//
-//
-//
-//                 $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
-//                     "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
-//                     "                <h2>" + nomeArtistico + "</h2>\n" +
-//                     "                <p>" + arte + "</p>\n" +
-//                     "            </a>")
-//                 getPrimeiraImagem(cpf, cpf)
-//             }
-//
-//
-//
-//             ;
-//         }
-//
-//     }
-//
-//     $.getJSON(json, onSuccess).fail();
-// }
-
-function listarCadart1() {
+function listarCadart() {
     $("#listaCadart").empty();
     var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
     $.getJSON(json, function (result) {
@@ -329,7 +286,7 @@ function listarCadart1() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var vindoDe = "";
-                var urlImagem = servidor+"/Secult/imagem/find/"+0+cpf;
+                var urlImagem = servidor+"/Secult/imagem/findETC/"+cpf+"&C";
                 console.log(urlImagem)
 
                 $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +

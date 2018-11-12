@@ -10,9 +10,8 @@ function listarEventoEvento() {
         if (dados[0]) {
 
             for (var i in dados) {
-
                 var id = dados[i].id;
-                var imagem = servidor + "/Secult/imagem/findEvento/"+id;
+                var imagem = servidor + "/Secult/imagem/findETC/"+id+"&E"
 
                 var titulo = dados[i].titulo;
                 var descricao = dados[i].descricao;
@@ -22,7 +21,7 @@ function listarEventoEvento() {
                 var localCidade = dados[i].localCidade;
 
 
-                $("#listaEventoEvento").append("<a href='#/page21'  class='linkSemDecoracao' onclick='preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'><li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
+                $("#listaEventoEvento").append("<a ui-sref=\"teste()\"  class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'><li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
                     "        <img src='" + imagem + "'>\n" +
                     "        <h2 class='positive' style='font-weight: bolder' >" + titulo + "\n" +
                     "          <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 47) + "...</p>\n" +
@@ -50,6 +49,13 @@ function listarEventoEvento() {
 
     );
 }
+
+function abrirPage(el) {
+    console.log(el)
+    $(el).attr("ui-sref","autenticarCadart()")
+
+}
+
 function preencherEventoInfo(d,img,t) {
 
     $("#titloNoticia").empty();

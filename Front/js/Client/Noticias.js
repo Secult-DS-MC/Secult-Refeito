@@ -18,8 +18,8 @@ function listarEventoNoticias() {
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
-                var nomeLocalidade = dados[i].localCidade;
-                var urlImagem = servidor + "/Secult/imagem/findEvento/" + id;
+                var nomeEvento = dados[i].nomeEvento;
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + id+"&E";
                 console.log(urlImagem)
 
                 $("#listaEventoNoticas").append("  <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px'>\n" +
@@ -29,9 +29,8 @@ function listarEventoNoticias() {
                     "                <i class=\"icon ion-android-share-alt\" style='display: none'></i>\n" +
                     "            </ul>\n" +
                     "            <div class=\" item item-image \">\n" +
-                    "                <img id='" + id + "' src=''n" +
-                    "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                    "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\"></i>" + nomeLocalidade + "<span class=\"item-note\"> " + dataEvento + " </span> </div>\n" +
+                    "                <img id='" + id + "' src='"+urlImagem+"' onError='this.onerror=null;this.src=\""+urlImagem+"\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
+                    "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dataEvento + " </span> </div>\n" +
                     "</div>\n" +
                     "            <div id='" + id + "' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
                     "                <p style=\"margin-top:0px;color:#000000;\" >" + descricao.substring(0, 130) + "...<span style='color: #787878;' onclick='lerMais(\"" + id + '","' + descricao + "\")'> mais</span></p>\n" +

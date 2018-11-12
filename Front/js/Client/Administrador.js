@@ -63,11 +63,11 @@ function cadastroEvento() {
 
 function listarEventoAdm() {
     carregando(1)
-    var json = servidor + "/Secult/evento/listarEvento";
+    var json = servidor + "/Secult/Acontecimento/listarEvento";
 
     var onSuccess = function (result) {
 
-        dados = result.eventos;
+        var dados = result.eventos;
 
         if (dados[0]) {
 
@@ -78,8 +78,7 @@ function listarEventoAdm() {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento
-                var imagem = servidor + "/Secult/evento/find/" + id;
-                var dataCadastro = dados[i].data_cadastro;
+                var imagem = servidor + "/Secult/imagem/findEvento/" + id;
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
@@ -88,7 +87,7 @@ function listarEventoAdm() {
 
                 $("#inicioListaEventoHoje").append("<ul class='list' id='" + id + "'>\n" +
                     "            <li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
-                    "            <img src='" + imagem + "'> \n" +
+                    "            <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'> \n" +
                     "                    <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
                     "                    <i id='checked" + id + "' class=\"icon ion-eye inline\"></i>\n" +
                     "            </li>\n" +
@@ -103,7 +102,6 @@ function listarEventoAdm() {
                     "                </div>\n" +
                     "            </li>\n" +
                     "        </ul>");
-
                 if (visibilidade == "s") {
                     $("#visivel" + id).css('color', 'green');
 
@@ -380,14 +378,13 @@ function cadartAutenticarVisibilidadeS() {
                 var email = dados[i].email;
                 var vindoDe = "adm"
 
-
+                var imagem = servidor
 
 
                 $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
+                    "                <img id='"+cpf+"' src='img/pixelBranco.png' onError='this.onerror=null;this.src='\"+imagem+\"'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "            </a>")
-                getPrimeiraImagem(cpf, cpf)
             }
             ;
 

@@ -57,7 +57,7 @@ public class AcontecimentoDao {
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT E.id, titulo, descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, local_cidade, id_imagem, i.imagem AS foto FROM evento AS E JOIN imagem AS i ON(E.id_imagem = i.id) order by data_evento desc";
+        String sql = "SELECT e.id,titulo,e.descricao,data_evento, local_cidade,hora_evento,tipo_evento,data_cadastro,visibilidade  ,id_localidade, l.nome as nomeLocalidade FROM evento as e join localidade as l on (l.id= e.id)";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -90,7 +90,6 @@ public class AcontecimentoDao {
             even.setVisibilidade(rs.getString("visibilidade"));
             even.setIdLocalidade(rs.getInt("id_localidade"));
             even.setLocalCidade(rs.getString("local_cidade"));
-            even.setImagem(rs.getBytes("foto"));
 
             objs.add(even);
 
@@ -157,11 +156,6 @@ public class AcontecimentoDao {
         return hasError;
 
     }
-
-   
-   
-
-   
 
     public boolean deletarEvento(Acontecimento evento) throws Exception {
         this.connection = new ConnectionFactory().getConnection();

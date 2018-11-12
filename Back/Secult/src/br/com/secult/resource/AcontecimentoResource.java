@@ -5,6 +5,7 @@
  */
 package br.com.secult.resource;
 
+import br.com.secult.dao.AcontecimentoDao;
 import javax.ws.rs.Path;
 import br.com.secult.dao.EventoDao;
 import br.com.secult.model.Acontecimento;
@@ -58,8 +59,8 @@ public class AcontecimentoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarEvento() throws SQLException, Exception {
 
-        EventoDao eventoDao = new EventoDao();
-        List<Acontecimento> even = eventoDao.listarEvento();
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> even = acontecimentoDao.listaAcontecimento();
 
         Gson gson = new GsonBuilder().create();
 

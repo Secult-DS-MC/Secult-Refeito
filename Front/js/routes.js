@@ -164,6 +164,11 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/testes.html',
                 controller: 'testesCtrl'
             })
+            .state('teste', {
+                url: '/page29',
+                templateUrl: 'templates/teste.html',
+                controller: 'testeCtrl'
+            })
             .state('autenticadosCadart', {
                 url: '/page24',
                 templateUrl: 'templates/autenticadosCadart.html',

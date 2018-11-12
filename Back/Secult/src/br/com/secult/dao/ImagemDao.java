@@ -73,7 +73,7 @@ public class ImagemDao {
         PreparedStatement stmt = null;
         boolean hasError = true;
         String sql = null;
-         switch (sigla) {
+        switch (sigla) {
             case "E":
                 sql = "INSERT INTO imagem (imagem, id_evento) VALUES(?,?)";
                 break;
@@ -81,7 +81,7 @@ public class ImagemDao {
                 sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
                 break;
             case "T":
-                sql ="INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
+                sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
                 break;
         }
         try {
@@ -276,6 +276,7 @@ public class ImagemDao {
         }
 
     }
+
     public List<Imagem> getByIdEvento(long id) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
@@ -303,6 +304,51 @@ public class ImagemDao {
 
         }
 
+    }
+
+    public Imagem getByIdAcontecimento(long id, String sigla) throws SQLException, Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "";
+        ResultSet rs = null;
+        List<Imagem> objs = new Vector<>();
+        switch (sigla) {
+            case "E":
+                sql = "select * from imagem where  id_evento = ?";
+                break;
+            case "C":
+                sql = "select * from imagem where  id_cadart = ?";
+                break;
+            case "T":
+                sql = "select * from imagem where  id_turismo = ?";
+                break;
+        }
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setObject(1, id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Imagem imagem = new Imagem();
+                imagem.setImagem(rs.getBytes("imagem"));
+                 return imagem;
+            }
+           
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                connection.close();
+                rs.close();
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return  null;
     }
 
     private List<Imagem> resultSetToObjectTransfer(ResultSet rs) throws Exception {

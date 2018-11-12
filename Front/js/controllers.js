@@ -17,7 +17,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $("#listaCadart").empty();
-            listarCadart1()
+            listarCadart()
             usuarioAtivo();
         }])
 
@@ -137,6 +137,10 @@ angular.module('app.controllers', [])
         }])
 
     .controller('testesCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+    .controller('testeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])
