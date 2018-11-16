@@ -23,7 +23,6 @@ angular.module('app.controllers', [])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            textAreaUp();
             botaoFotoFakeCadart(1);
             usuarioLogado();
         }])
@@ -35,8 +34,6 @@ angular.module('app.controllers', [])
             verificarTel();
             verificarCpf();
             saveFotoLS();
-            textArea("descricaoCdt");
-            textArea("projetosCdt");
             botaoFotoFakeCadart(2);
 
         }])
@@ -73,7 +70,7 @@ angular.module('app.controllers', [])
 
     .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventoNoticias();
+            listarEventosCalendario();
 
         }])
 
@@ -97,7 +94,6 @@ angular.module('app.controllers', [])
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             saveFotoEventoLSCdt()
-            textArea("descricaoAdm");
             selectLocalidadeCadastro();
             mostrarInputCadastroEvento();
         }])

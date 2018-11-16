@@ -59,49 +59,49 @@ public class AcontecimentoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarEvento() throws SQLException, Exception {
 
-        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
-        List<Acontecimento> even = acontecimentoDao.listaAcontecimento();
+        EventoDao eventoDao = new EventoDao();
+        List<Acontecimento> evento = eventoDao.listarEvento();
 
         Gson gson = new GsonBuilder().create();
 
-        JsonArray ArrayUsuarios = gson.toJsonTree(even).getAsJsonArray();
+        JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.add("eventos", ArrayUsuarios);
+        jsonObject.add("acontecimentos", ArrayUsuarios);
 
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 
     @GET
-    @Path("/getEventoById/{id}")
+    @Path("/getAcontecimentoById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEventoById(@PathParam("id") long id) throws SQLException, Exception {
         Acontecimento evento = new Acontecimento();
         evento.setId(id);
 
-        AcontecimentoDao eventoDao = new AcontecimentoDao();
-        List<Acontecimento> even = eventoDao.getEventoById(evento);
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.getAcontecimentoById(evento);
 
         Gson gson = new GsonBuilder().create();
 
-        JsonArray ArrayUsuarios = gson.toJsonTree(even).getAsJsonArray();
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.add("eventos", ArrayUsuarios);
+        jsonObject.add("acontecimentos", ArrayUsuarios);
 
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 
     @GET
-    @Path("/deletarEvento/{id}")
+    @Path("/deletarAcontecimento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletarEvento(@PathParam("id") long id) throws SQLException, Exception {
-        Acontecimento evento = new Acontecimento();
-        evento.setId(id);
+        Acontecimento acontecimentos = new Acontecimento();
+        acontecimentos.setId(id);
 
         AcontecimentoDao eventoDao = new AcontecimentoDao();
 
-        if (eventoDao.deletarEvento(evento)) {
+        if (eventoDao.deletarAcontecimento(acontecimentos)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
@@ -122,24 +122,24 @@ public class AcontecimentoResource {
 //    }
 
     @GET
-    @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
+    @Path("/updateAcontecimento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
-        Acontecimento evento = new Acontecimento();
+        Acontecimento acontecimento = new Acontecimento();
 
-        evento.setId(id);
-        evento.setTitulo(titulo);
-        evento.setDescricao(descricao);
-        evento.setData_evento(data_evento);
-        evento.setVisibilidade(visibilidade);
-        evento.setTipo_evento(tipo_evento);
-        evento.setHora_evento(hora_evento);
-        evento.setIdLocalidade(id_povoado);
-        evento.setLocalCidade(localCidade);
+        acontecimento.setId(id);
+        acontecimento.setTitulo(titulo);
+        acontecimento.setDescricao(descricao);
+        acontecimento.setData_evento(data_evento);
+        acontecimento.setVisibilidade(visibilidade);
+        acontecimento.setTipo_evento(tipo_evento);
+        acontecimento.setHora_evento(hora_evento);
+        acontecimento.setIdLocalidade(id_povoado);
+        acontecimento.setLocalCidade(localCidade);
 
-        AcontecimentoDao eventoDao = new AcontecimentoDao();
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
 
-        if (eventoDao.updateEvento(evento)) {
+        if (acontecimentoDao.updateAcontecimento(acontecimento)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
@@ -148,20 +148,20 @@ public class AcontecimentoResource {
 
     
 
-    @GET
-    @Path("/listarEventoPequeno")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response listarEventoP() throws SQLException, Exception {
-        Acontecimento even = new Acontecimento();
-        AcontecimentoDao eventoDao = new AcontecimentoDao();
-        List<Acontecimento> evento = eventoDao.listarEventoPequeno(even);
-
-        Gson gson = new GsonBuilder().create();
-        JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.add("eventos", ArrayUsuarios);
-
-        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-
-    }
+//    @GET
+//    @Path("/listarEventoPequeno")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response listarEventoP() throws SQLException, Exception {
+//        Acontecimento even = new Acontecimento();
+//        AcontecimentoDao eventoDao = new AcontecimentoDao();
+//        List<Acontecimento> evento = eventoDao.listarEventoPequeno(even);
+//
+//        Gson gson = new GsonBuilder().create();
+//        JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.add("eventos", ArrayUsuarios);
+//
+//        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+//
+//    }
 }

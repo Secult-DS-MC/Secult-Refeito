@@ -27,7 +27,7 @@ public class NoticiaDao {
 
         ResultSet rs = null;
 
-        String sql = "SELECT E.id, titulo, E.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nomeLocalidade FROM evento AS E JOIN localidade AS l ON(l.id = E.id_localidade)  where visibilidade = 's' and tipo_evento = 'g' order by data_evento desc";
+        String sql = "SELECT A.id, titulo, A.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nome_localidade FROM acontecimento AS A JOIN localidade AS l ON(l.id = A.id_localidade) where visibilidade = 's' and tipo_evento = 'N' order by data_evento asc";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -45,7 +45,7 @@ public class NoticiaDao {
                 even.setHora_evento(rs.getString("hora_evento"));
                 even.setVisibilidade(rs.getString("visibilidade"));
                 even.setIdLocalidade(rs.getInt("id_localidade"));
-                even.setNomeEvento(rs.getString("nomeLocalidade"));
+                even.setNomeEvento(rs.getString("nome_localidade"));
                 objs.add(even);
             }
             return objs;

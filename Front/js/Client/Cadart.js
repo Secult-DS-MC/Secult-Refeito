@@ -1,3 +1,4 @@
+servidor = localStorage.getItem("servidor");
 
 function saveFotoLS() {
 
@@ -64,45 +65,45 @@ function saveFotoLSUp() {
 }
 
 
-function textAreaCadastro() {
-    $("#descricaoCdt").focusin(function () {
-        $(this).attr('rows', '11')
-    })
-    $("#descricaoCdt").focusout(function () {
-        $(this).removeAttr('rows')
-    })
-    $("#projetosCdt").focusin(function () {
-        $(this).attr('rows', '11')
-    })
-    $("#projetosCdt").focusout(function () {
-        $(this).removeAttr('rows')
-    })
-}
+// function textAreaCadastro() {
+//     $("#descricaoCdt").focusin(function () {
+//         $(this).attr('rows', '11')
+//     })
+//     $("#descricaoCdt").focusout(function () {
+//         $(this).removeAttr('rows')
+//     })
+//     $("#projetosCdt").focusin(function () {
+//         $(this).attr('rows', '11')
+//     })
+//     $("#projetosCdt").focusout(function () {
+//         $(this).removeAttr('rows')
+//     })
+// }
 
-function textAreaUp() {
-    $("#descricaoUp").focusin(function () {
-        $(this).attr('rows', '11')
-    })
-    $("#descricaoUp").focusout(function () {
-        $(this).removeAttr('rows')
-    })
-    $("#projetosUp").focusin(function () {
-        $(this).attr('rows', '11')
-    })
-    $("#projetosUp").focusout(function () {
-        $(this).removeAttr('rows')
-    })
+// function textAreaUp() {
+//     $("#descricaoUp").focusin(function () {
+//         $(this).attr('rows', '11')
+//     })
+//     $("#descricaoUp").focusout(function () {
+//         $(this).removeAttr('rows')
+//     })
+//     $("#projetosUp").focusin(function () {
+//         $(this).attr('rows', '11')
+//     })
+//     $("#projetosUp").focusout(function () {
+//         $(this).removeAttr('rows')
+//     })
+//
+// }
 
-}
-
-function textArea(id) {
-    $("#" + id).focusin(function () {
-        $(this).attr('rows', '11')
-    })
-    $("#" + id).focusout(function () {
-        $(this).removeAttr('rows')
-    })
-}
+// function textArea(id) {
+//     $("#" + id).focusin(function () {
+//         $(this).attr('rows', '11')
+//     })
+//     $("#" + id).focusout(function () {
+//         $(this).removeAttr('rows')
+//     })
+// }
 
 
 function mascarasCadart() {
@@ -527,7 +528,6 @@ function carregarInfoCadart(nome, idade, email, tel, descricao, projetoAtual, se
     }, 100)
 }
 
-
 function botaoFotoFakeCadart(el) {
     if (el == 1) {
         $(".btnFotoCadartCdt").click(function () {
@@ -594,7 +594,6 @@ function updateCadart() {
             });
         }
     }
-
 
     $.getJSON(json, onSucess).fail()
 
@@ -711,4 +710,167 @@ function toggleTypeInput(el) {
     } else {
         $("#" + el + "").attr('type', "text")
     }
+}
+
+function listarCadartAdm() {
+    var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
+    var onSuccess = function (result) {
+        $("#listaCadart").empty();
+        dados = result.usuario;
+        if (dados[0]) {
+            for (var i in dados) {
+
+                var nome = dados[i].nome;
+                var arte = dados[i].nomeArte;
+                var cpf = dados[i].cpf;
+                var tel = dados[i].telefone;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var projetoAtual = dados[i].projetoAtual;
+                var nomeArte = dados[i].nomeArte;
+                var email = dados[i].email;
+                var vindoDe = "desAutenticar";
+
+                console.log(tel)
+                var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+
+                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img src='" + urlImagem + "'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "                <p>" + arte + "</p>\n" +
+                    "            </a>")
+            }
+
+
+            ;
+        }
+
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+//Lista usuarios Que n estão validados
+
+function cadartAutenticarVisibilidadeS() {
+    $("#listaCadartAutentiar").empty();
+    var json = servidor + "/Secult/cadart/getByVisibilidadeDiferenteS";
+    var onSuccess = function (result) {
+
+        dados = result.usuario;
+        if (dados[0]) {
+            for (var i in dados) {
+                var nome = dados[i].nome;
+                var arte = dados[i].id;
+                var cpf = dados[i].cpf;
+                var tel = dados[i].telefone;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var projetoAtual = dados[i].projetoAtual;
+                var nomeArte = dados[i].nomeArte;
+                var email = dados[i].email;
+                var vindoDe = "adm"
+
+                var imagem = servidor
+
+
+                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img id='"+cpf+"' src='img/pixelBranco.png' onError='this.onerror=null;this.src='\"+imagem+\"'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "            </a>")
+            }
+            ;
+
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+//Lista usuarios Que estão validados
+
+function cadartAutenticarVisibilidadeN() {
+    $("#listaCadartAdm").empty();
+
+    var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
+    var onSuccess = function (result) {
+
+        dados = result.usuario;
+        if (dados[0]) {
+            for (var i in dados) {
+                var nome = dados[i].nome;
+                var arte = dados[i].nomeArte;
+                var cpf = dados[i].cpf;
+                var tel = dados[i].telefone;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var projetoAtual = dados[i].projetoAtual;
+                var nomeArte = dados[i].nomeArte;
+                var email = dados[i].email;
+                var foto = dados[i].fotoPerfil;
+                var vindoDe = "desAutenticar"
+
+                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\""+ nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "            </a>")
+                getPrimeiraImagem(cpf, cpf)
+            }
+            ;
+
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+function autenticarVisibilidadeS(cpf) {
+    var json = servidor + "/Secult/cadart/updateVisibilidadeS/" + cpf;
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
+            swal({
+                title: "Usuário autenticado com sucesso!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                window.location.href = "#/page24";
+                cadartAutenticarVisibilidadeN();
+            }, 500)
+        } else {
+            swal({
+                title: "Ocorreu um erro!",
+                icon: "erro",
+                button: false,
+            });
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+function autenticarVisibilidadeN(cpf) {
+    var json = servidor + "/Secult/cadart/updateVisibilidadeN/" + cpf;
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
+            swal({
+                title: "Usuário agora não será mais listado!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                window.location.href = "#/page23";
+                cadartAutenticarVisibilidadeS();
+            }, 500)
+        } else {
+            swal({
+                title: "Ocorreu um erro!",
+                icon: "erro",
+                button: false,
+            });
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
 }

@@ -209,3 +209,9 @@ select#sexoCdt {
     border-width: 0px 0px 0px 0px;
 }
 
+.alinharEstrelinha div{
+    color: red;
+    display: inline-block;
+    float: right;
+}
+

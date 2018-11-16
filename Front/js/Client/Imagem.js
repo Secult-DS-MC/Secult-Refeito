@@ -69,8 +69,6 @@ function salvaImagemImput() {
     });
 }
 
-
-
 function getPrimeiraImagem(cpf, id_input) {
     var id = null;
     var json = servidor + "/Secult/imagem/listarImagens/" + cpf + "&C";
@@ -92,7 +90,6 @@ function getFotoPerfilCadart1() {
         $("#imgThumbnail").attr('src', imagem)
     }
     $.getJSON(json, onSuccess).fail();
-
 }
 
 function testee(id) {

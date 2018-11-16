@@ -1,9 +1,5 @@
 var servidor = localStorage.getItem("servidor");
 
-
-
-
-
 function toBase64String(img) {
 
     var c = document.createElement('canvas');
@@ -42,7 +38,6 @@ function toBase64String(img) {
 
 
 }
-
 
 function b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';

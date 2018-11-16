@@ -8,41 +8,63 @@ function expandir(classe, mes) {
     }
 }
 
-function calendario(dataEvento, titulo, imagem) {
+function listarEventosCalendario() {
 
-    var mes = dataEvento.slice(5, 7);
-    var dia = dataEvento.slice(8, 10);
+    carregando(1)
 
-    if (mes == 01) {
+    var json = servidor + "/Secult/calendario/listarCalendario";
+    var onSuccess = function (result) {
+        dados = result.calendario;
 
-        $(".janeiroEvent").empty().append("<ion-item style=\"padding: 0px!important;\">\n" +
-            "                <a style=\"border-style: none!important;\" href='#' class=\"item item-avatar item-icon-right animated fadeIn\">\n" +
-            "                    <img src='"+imagem+"'>\n" +
-            "                    <h2 style=\"display: inline-block\">"+titulo+"</h2>\n" +
-            "                    <span class=\"item-note\">Dia " +dia+ "</span>\n" +
-            "                </a>\n" +
-            "            </ion-item>");
-    } else if (mes == 02) {
-        $(".fevEvent").empty().append();
-    } else if (mes == 03) {
-        $(".marEvent").empty().append();
-    } else if (mes == 04) {
-        $(".abrEvent").empty().append();
-    } else if (mes == 05) {
-        $(".maiEvent").empty().append();
-    } else if (mes == 06) {
-        $(".junEvent").empty().append();
-    } else if (mes == 07) {
-        $(".julEvent").empty().append();
-    } else if (mes == '08') {
-        $(".agoEvent").empty().append();
-    } else if (mes == '09') {
-        $(".setEvent").empty().append();
-    } else if (mes == 10) {
-        $(".outEvent").empty().append();
-    } else if (mes == 11) {
-        $(".novEvent").empty().append();
-    } else if (mes == 12) {
-        $(".dezEvent").empty().append();
-    }
+        for (i in dados) {
+
+            var id = dados[i].id;
+            var dataEvento = dados[i].data_evento;
+            var titulo = dados[i].titulo;
+            var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&N";
+
+            var mes = dataEvento.slice(5, 7);
+            var dia = dataEvento.slice(8, 10);
+
+            var classMes;
+            if (mes == 01) {
+                classMes = 'janeiroEvent';
+            } else if (mes == 02) {
+                classMes = 'fevEvent';
+            } else if (mes == 03) {
+                classMes = 'marEvent';
+            } else if (mes == 04) {
+                classMes = 'abrEvent';
+            } else if (mes == 05) {
+                classMes = 'maiEvent';
+            } else if (mes == 06) {
+                classMes = 'junEvent';
+            } else if (mes == 07) {
+                classMes = 'julEvent';
+            } else if (mes == '08') {
+                classMes = 'agoEvent';
+            } else if (mes == '09') {
+                classMes = 'setEvent';
+            } else if (mes == 10) {
+                classMes = 'outEvent';
+            } else if (mes == 11) {
+                classMes = 'novEvent';
+            } else if (mes == 12) {
+                classMes = 'dezEvent';
+            }
+
+            $("." + classMes).append("<ion-item style=\"padding: 0px!important;\">\n" +
+                "                <a style=\"border-style: none!important;\" href='#' class=\"item item-avatar item-icon-right animated fadeIn\">\n" +
+                "                    <img id='"+id+"' src='" + urlImagem + "'>\n" +
+                "                    <h2 style=\"display: inline-block\">" + titulo + "</h2>\n" +
+                "                    <span class=\"item-note\">Dia " + dia + "</span>\n" +
+                "                </a>\n" +
+                "            </ion-item>");
+
+            $("img#" + id).attr("src", urlImagem)
+        }
+        carregando(2)
+    };
+    $.getJSON(json, onSuccess).fail(
+    );
 }

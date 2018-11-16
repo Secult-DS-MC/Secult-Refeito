@@ -17,12 +17,12 @@ public class AcontecimentoDao {
 
     private Connection connection;
 
-    public long insert(Acontecimento evento) {
+    public long insertEvento(Acontecimento evento) {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs;
         long id = 0;
-        String sql = "INSERT INTO public.evento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_localidade, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO public.acontecimento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_localidade, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             Date date = Date.valueOf(evento.getData_evento());
             stmt = connection.prepareStatement(sql, (Statement.RETURN_GENERATED_KEYS));
@@ -100,7 +100,7 @@ public class AcontecimentoDao {
     public List<Acontecimento> getAcontecimentoById(Acontecimento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from evento where  id = ?";
+        String sql = "select * from acontecimento where  id = ?";
         ResultSet rs = null;
         try {
             pstmt = connection.prepareStatement(sql);
@@ -120,13 +120,13 @@ public class AcontecimentoDao {
         }
 
     }
-
+    
     public boolean updateAcontecimento(Acontecimento evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         PreparedStatement stmt = null;
 
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
-        String sql = "UPDATE evento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_localidade=?, local_cidade=? WHERE id=?";
+        String sql = "UPDATE acontecimento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_localidade=?, local_cidade=? WHERE id=?";
         try {
 
             //converte String para o tipo Date
@@ -157,12 +157,12 @@ public class AcontecimentoDao {
 
     }
 
-    public boolean deletarEvento(Acontecimento evento) throws Exception {
+    public boolean deletarAcontecimento (Acontecimento evento) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
 
-        String sql = "DELETE FROM evento WHERE id=?";
+        String sql = "DELETE FROM acontecimento WHERE id=?";
         try {
             stmt = connection.prepareStatement(sql);
 

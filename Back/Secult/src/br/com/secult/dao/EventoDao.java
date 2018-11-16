@@ -27,7 +27,7 @@ public class EventoDao {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
   
-        String sql = "SELECT e.id,titulo,e.descricao,data_evento, local_cidade,hora_evento ,id_localidade, l.nome as nomeLocalidade FROM evento as e join localidade as l on (l.id= e.id)where visibilidade = 's' and tipo_evento = 'p'";
+        String sql = "SELECT A.id, titulo, A.descricao, data_evento, local_cidade, hora_evento, id_localidade, l.nome as nome_localidade FROM acontecimento as A join localidade as l on (l.id = A.id_localidade) where visibilidade = 's' and tipo_evento = 'E'";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -43,7 +43,7 @@ public class EventoDao {
                 even.setHora_evento(rs.getString("hora_evento"));
                 even.setIdLocalidade(rs.getInt("id_localidade"));
                 even.setLocalCidade(rs.getString("local_cidade"));
-                even.setNomeLocalidade(rs.getString("nomeLocalidade"));
+                even.setNomeLocalidade(rs.getString("nome_localidade"));
 
                 objs.add(even);
 

@@ -1,4 +1,10 @@
 <ion-view title="Cadastrar" id="page14">
+    <ion-nav-buttons side="left" class="has-header">
+        <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style=""><i
+                class="icon ion-ios-arrow-back"></i> <span class="back-text"
+                                                           style="transform: translate3d(0px, 0px, 0px);"></span>
+        </button>
+    </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div style="display: none">
@@ -23,37 +29,44 @@
         </button>
 
 
-        <form id="cadastrar-form9" class="list">
+        <form id="cadastrar-form9" class="list alinharEstrelinha">
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Descrição:*</span>
+                <span class="input-label">Descrição:</span>
+                <div>*</div>
                 <textarea maxlength="500" placeholder="Escreva uma breve descrição sobre você"
                           id="descricaoCdt"></textarea>
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Projetos Atuais:*</span><textarea
-                    placeholder="O que esta fazendo ou projetos futuros" id="projetosCdt"
-                    maxlength="400"></textarea></label>
+                <span class="input-label">Projetos atuais:</span>
+                <div>*</div>
+                <textarea placeholder="O que esta fazendo ou projetos futuros" id="projetosCdt"
+                          maxlength="400"></textarea></label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label ">Nome:*</span>
+                <span class="input-label ">Nome:</span>
+                <div>*</div>
                 <input type="text" placeholder="Seu nome completo" id="nomeCdt">
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label ">Nome Artístico:*</span>
+                <span class="input-label ">Nome artístico:</span>
+                <div>*</div>
                 <input type="text" placeholder="Nome pelo qual é conhecido" id="nomeArtCdt">
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">CPF:*</span>
+                <span class="input-label">CPF:</span>
+                <div>*</div>
                 <input type="text" placeholder="Seu Cpf" id="cpfCdt">
                 <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
             </label>
 
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Email:*</span>
+                <span class="input-label">Email:</span>
+                <div>*</div>
                 <input type="email" placeholder="Seu Email" id="emalCdt">
             </label>
 
             <label class="item item-input redeSocial">
-                <span class="input-label icon-right"><i style="margin-right: 8px" class="icon ion-social-facebook-outline"></i> Facebook:</span>
+                <span class="input-label icon-right"><i style="margin-right: 8px"
+                                                        class="icon ion-social-facebook-outline"></i> Facebook:</span>
                 <input type="text" id="redeSocial1" placeholder="Link do seu perfil">
             </label>
 
@@ -64,7 +77,7 @@
 
             <label class="item item-input redeSocial">
                 <span class="input-label"><i style="margin-right: 8px" class="icon ion-social-youtube-outline"></i>Youtube:</span>
-                <input type="text" id="redeSocial3"  placeholder="Link do video ou canal">
+                <input type="text" id="redeSocial3" placeholder="Link do video ou canal">
             </label>
 
 
@@ -76,19 +89,20 @@
                         precisa ser válido</p>
                 </label>
                 <label class="item item-input" style="margin: 0px; width: 49%; display: inline-block;">
-                    <span class="input-label" for="dtNascimentoUp">Sua Idade:*</span>
-                    <input type="number" id="dataNascimentoCdt" placeholder="anos">
+                    <span class="input-label" for="dtNascimentoUp">Idade:*</span>
+                    <input type="number" id="dataNascimentoCdt" placeholder="Anos">
                 </label>
             </div>
             <div class="divSelect">
                 <select id="sexoCdt" class="item">
-                    <option value="">Seu Gênero:*</option>
+                    <option value="">Gênero:*</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
+                    <option value="o">Outros</option>
                 </select>
 
                 <select id="arteCdt" class="item">
-                    <option value="">Sua Arte? *</option>
+                    <option value="">Arte?*</option>
                     <option value="1">Ator/Atriz</option>
                     <option value="2">Músico</option>
                     <option value="3">Pintor</option>
@@ -97,14 +111,16 @@
                 </select>
             </div>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Senha*</span>
+                <span class="input-label">Senha</span>
+                <div>*</div>
                 <input type="password" placeholder="Sua Senha" id="senhaCdt">
                 <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6
                     caracteres!</p>
 
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Senha*</span>
+                <span class="input-label">Digite a senha novamente</span>
+                <div>*</div>
                 <input type="password" placeholder="Confirmar Senha" id="senhaRedCdt">
                 <p class="invalido" id="senhaRedCdtInvalido" style="display: none">Senhas Inorretas!</p>
             </label>
