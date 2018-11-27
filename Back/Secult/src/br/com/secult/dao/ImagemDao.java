@@ -26,7 +26,7 @@ public class ImagemDao {
 //    public void inserirImagemEvento(Imagem imagem) throws Exception {
 //        this.connection = new ConnectionFactory().getConnection();
 //        PreparedStatement stmt = null;
-//        String sql = "INSERT INTO imagem (imagem, id_evento) values(?, ?)";
+//        String sql = "INSERT INTO imagem (imagem, id_acontecimento) values(?, ?)";
 //        try {
 //            stmt = connection.prepareStatement(sql);
 //
@@ -74,8 +74,8 @@ public class ImagemDao {
         boolean hasError = true;
         String sql = null;
         switch (sigla) {
-            case "E":
-                sql = "INSERT INTO imagem (imagem, id_evento) VALUES(?,?)";
+            case "A":
+                sql = "INSERT INTO imagem (imagem, id_acontecimento) VALUES(?,?)";
                 break;
             case "C":
                 sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
@@ -210,13 +210,13 @@ public class ImagemDao {
         String sql = null;
         switch (sigla) {
             case "E":
-                sql = "SELECT id, id_cadart, id_turismo, id_evento FROM imagem WHERE id_evento=?";
+                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_acontecimento=?";
                 break;
             case "C":
-                sql = "SELECT id, id_cadart, id_turismo, id_evento FROM imagem WHERE id_cadart=?";
+                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_cadart=?";
                 break;
             case "T":
-                sql = "SELECT id, id_cadart, id_turismo, id_evento FROM imagem WHERE id_turismo=?";
+                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_turismo=?";
                 break;
         }
 
@@ -231,7 +231,7 @@ public class ImagemDao {
                 Imagem imagem = new Imagem();
                 imagem.setId(rs.getInt("id"));
                 imagem.setIdTurismo(rs.getLong("id_turismo"));
-                imagem.setIdEvento(rs.getLong("id_evento"));
+                imagem.setIdEvento(rs.getLong("id_acontecimento"));
                 imagem.setIdCadart(rs.getLong("id_cadart"));
                 imagens.add(imagem);
             }
@@ -280,7 +280,7 @@ public class ImagemDao {
     public List<Imagem> getByIdEvento(long id) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from imagem where  id_evento = ?";
+        String sql = "select * from imagem where  id_acontecimento = ?";
         ResultSet rs = null;
 
         try {
@@ -313,8 +313,8 @@ public class ImagemDao {
         ResultSet rs = null;
         List<Imagem> objs = new Vector<>();
         switch (sigla) {
-            case "E":
-                sql = "select * from imagem where  id_evento = ?";
+            case "A":
+                sql = "select * from imagem where  id_acontecimento = ?";
                 break;
             case "C":
                 sql = "select * from imagem where  id_cadart = ?";
@@ -327,7 +327,7 @@ public class ImagemDao {
 
             pstmt = connection.prepareStatement(sql);
 
-            pstmt.setObject(1, id);
+            pstmt.setLong(1, id);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -356,7 +356,7 @@ public class ImagemDao {
         while (rs.next()) {
             Imagem imagem = new Imagem();
             imagem.setId(rs.getInt("id"));
-            imagem.setIdEvento(rs.getLong("id_evento"));
+            imagem.setIdEvento(rs.getLong("id_acontecimento"));
             imagem.setIdCadart(rs.getLong("id_cadart"));
             imagem.setIdTurismo(rs.getLong("id_turismo"));
             imagem.setImagem(rs.getBytes("imagem"));
