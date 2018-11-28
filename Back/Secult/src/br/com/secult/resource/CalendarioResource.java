@@ -1,5 +1,6 @@
 package br.com.secult.resource;
 
+import br.com.secult.dao.CalendarioDao;
 import br.com.secult.dao.NoticiaDao;
 import br.com.secult.model.Acontecimento;
 import com.google.gson.Gson;
@@ -21,11 +22,11 @@ public class CalendarioResource {
     @Path("/listarCalendario")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarCalendario() throws SQLException, Exception {
-        NoticiaDao noticiaDao = new NoticiaDao();
-        List<Acontecimento> noticias = noticiaDao.listarNoticia();
+        CalendarioDao calendarioDao = new CalendarioDao();
+        List<Acontecimento> calendario = calendarioDao.listarCalendario();
 
         Gson gson = new GsonBuilder().create();
-        JsonArray ArrayUsuarios = gson.toJsonTree(noticias).getAsJsonArray();
+        JsonArray ArrayUsuarios = gson.toJsonTree(calendario).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("calendario", ArrayUsuarios);
 

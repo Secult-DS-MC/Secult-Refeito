@@ -1,8 +1,10 @@
 <ion-view title="Administrador" id="page18">
-    <ion-nav-buttons side="right" class="has-header">
-        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"
-                onclick="pullToRefreshHome()"></button>
-    </ion-nav-buttons>
+    <!--<ion-nav-buttons side="left" class="has-header">-->
+        <!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style=""><i-->
+                <!--class="icon ion-ios-arrow-back"></i> <span class="back-text"-->
+                                                           <!--style="transform: translate3d(0px, 0px, 0px);"></span>-->
+        <!--</button>-->
+    <!--</ion-nav-buttons>-->
 
     <ion-content padding="true" class="has-header refresh">
         <form id="administrador-form" class="list">
@@ -10,26 +12,26 @@
                 <span class="input-label">Filtrar por:</span>
                 <select>
                     <option value="">Selecione o Filtro</option>
-                    <option value="1">Esta Semana</option>
-                    <option value="2">Este Mês</option>
-                    <option value="3">Este Ano</option>
-                    <option value="4">Todos</option>
+                    <option value="1">Visíveis</option>
+                    <option value="2">Invisíveis</option>
+                    <option value="3">Essa semana</option>
+                    <option value="4">Esse mês</option>
                 </select>
             </label>
         </form>
 
-        <div class="button-bar ">
-            <button class="button button-block button-dark button-small">Filtrar</button>
-            <button class="button button-block button-dark button-small tabs-icon-only ion-refresh"
-                    onclick="limparEListarEventoAdm()"></button>
-            <button class="button button-block button-dark button-small" ui-sref="cadastroEvento()">Adicionar</button>
-        </div>
+        <ul class='list' id="inicioListaEventoHoje">
 
-        <span id="inicioListaEventoHoje"></span>
-        <span id="listaEventoEvento"></span>
-
+        </ul>
 
         <div class="spacer" style="width: 300px; height: 20.9896px;"></div>
     </ion-content>
 
+    <ion-footer-bar style="padding: 0px; margin: 0px">
+        <div class="button-bar" style="width: 100%; margin: 0px; padding: 0px">
+            <button class="button  button-positive tabs-icon-only ion-refresh" style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"
+                    onclick="limparEListarEventoAdm()"></button>
+            <button class="button button-positive tabs-icon-only ion-person-add" ui-sref="cadastroEvento()" style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"></button>
+        </div>
+    </ion-footer-bar>
 </ion-view>

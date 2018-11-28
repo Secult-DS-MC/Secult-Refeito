@@ -24,7 +24,7 @@ function listarEventoNoticias() {
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
                 var nomeEvento = dados[i].nomeEvento;
-                var urlImagem = servidor + "/Secult/imagem/findETC/" + id+"&N";
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + id+"&A";
                 console.log(urlImagem)
 
                 dataEvento = dataEvento.replace(/\D/g, "");
@@ -48,7 +48,7 @@ function listarEventoNoticias() {
                     "            </ul>\n" +
                     "            <div class=\" item item-image \">\n" +
                     "                <img id='" + id + "' src='"+urlImagem+"' onError='this.onerror=null;this.src=\""+urlImagem+"\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                    "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
+                    "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location assertive\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
                     "</div>\n" +
                     "            <div id='" + id + "' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
                     "                <p style=\"margin-top:0px;color:#000000;\" >" + descricao.substring(0, 130) + "<span id='mostraDesc'>...<span style='color: #787878;' onclick='lerMais(\"" + id + '","' + descricao + "\")'> mais</span></span></p>\n" +

@@ -21,7 +21,7 @@
             </label>
 
             <label class="item item-input item-stacked-label" >
-                <span class="input-label">Data do Evento</span>
+                <span class="input-label">Data</span>
                 <input type="date" placeholder="" id="dataEventoAdm">
             </label>
 
@@ -31,16 +31,17 @@
             </label>
 
             <label class="item item-select">
-                <span class="input-label">Localidadde</span>
+                <span class="input-label">Localidade</span>
                 <select id="localidadeAdm">
                 </select>
             </label>
             <label class="item item-select">
-                <span class="input-label">Tipo do Evento</span>
-                <select  id="tipoAdm" onchange="mostrarInputCadastroEvento()">
+                <span class="input-label">Acontecimento</span>
+                <select id="tipoAdm" onchange="mostrarInputCadastroEvento()">
                     <option value="">Selecione</option>
-                    <option value="p">Pequeno</option>
-                    <option value="g">Grande</option>
+                    <option value="N">Notícia</option>
+                    <option value="E">Evento</option>
+                    <option value="C">Calendário</option>
                 </select>
             </label>
             <label class="item item-input item-stacked-label">
@@ -53,8 +54,8 @@
     </ion-content>
 
     <ion-footer-bar style="padding: 0px; margin: 0px">
-        <div class="buttons positive " style="width: 100%; display: block; margin: 0px; padding: 0px">
-            <button  id="cadastrarCadart" onclick="validarCadastroEvento()"  class="button button-block btn-preto button-full" style=" padding: 0px; margin: 0px; height: 100%;
+        <div class="buttons positive" style="width: 100%; display: block; margin: 0px; padding: 0px">
+            <button  id="cadastrarCadart" onclick="validarCadastroEvento()"  class="button button-block btn-preto button-full button-positive" style=" padding: 0px; margin: 0px; height: 100%;
     font-size: medium; color: white;
     ">Cadastrar
             </button>

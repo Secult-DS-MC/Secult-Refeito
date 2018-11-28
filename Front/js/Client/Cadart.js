@@ -64,48 +64,6 @@ function saveFotoLSUp() {
 
 }
 
-
-// function textAreaCadastro() {
-//     $("#descricaoCdt").focusin(function () {
-//         $(this).attr('rows', '11')
-//     })
-//     $("#descricaoCdt").focusout(function () {
-//         $(this).removeAttr('rows')
-//     })
-//     $("#projetosCdt").focusin(function () {
-//         $(this).attr('rows', '11')
-//     })
-//     $("#projetosCdt").focusout(function () {
-//         $(this).removeAttr('rows')
-//     })
-// }
-
-// function textAreaUp() {
-//     $("#descricaoUp").focusin(function () {
-//         $(this).attr('rows', '11')
-//     })
-//     $("#descricaoUp").focusout(function () {
-//         $(this).removeAttr('rows')
-//     })
-//     $("#projetosUp").focusin(function () {
-//         $(this).attr('rows', '11')
-//     })
-//     $("#projetosUp").focusout(function () {
-//         $(this).removeAttr('rows')
-//     })
-//
-// }
-
-// function textArea(id) {
-//     $("#" + id).focusin(function () {
-//         $(this).attr('rows', '11')
-//     })
-//     $("#" + id).focusout(function () {
-//         $(this).removeAttr('rows')
-//     })
-// }
-
-
 function mascarasCadart() {
     $("#telCdt").mask("00-00000-0000");
     $("#cpfCdt").mask("000.000.000-00");
@@ -445,8 +403,6 @@ function sairUsuario() {
     localStorage.removeItem("descricao");
     localStorage.removeItem("projetoAtual");
     localStorage.setItem("usuarioAtivo", "false");
-
-
 }
 
 function usuarioAtivo() {
@@ -734,10 +690,10 @@ function listarCadartAdm() {
                 var vindoDe = "desAutenticar";
 
                 console.log(tel)
-                var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
                 $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img src='" + urlImagem + "'>\n" +
+                    "                <img src='" + urlImagem + "' onError='this.onerror=null;this.src='"+urlImagem+"'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
                     "            </a>")
@@ -772,10 +728,8 @@ function cadartAutenticarVisibilidadeS() {
                 var projetoAtual = dados[i].projetoAtual;
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
-                var vindoDe = "adm"
-
-                var imagem = servidor
-
+                var vindoDe = "adm";
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
                 $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
                     "                <img id='"+cpf+"' src='img/pixelBranco.png' onError='this.onerror=null;this.src='\"+imagem+\"'>\n" +

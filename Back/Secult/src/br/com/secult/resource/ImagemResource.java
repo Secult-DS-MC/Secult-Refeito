@@ -1,8 +1,6 @@
 package br.com.secult.resource;
 
 import br.com.secult.dao.ImagemDao;
-import br.com.secult.dao.ImagemDao;
-import br.com.secult.model.Imagem;
 import br.com.secult.model.Imagem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,12 +11,11 @@ import com.sun.jersey.multipart.FormDataParam;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
+//import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

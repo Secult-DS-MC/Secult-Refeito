@@ -17,7 +17,7 @@ public class AcontecimentoDao {
 
     private Connection connection;
 
-    public long insertEvento(Acontecimento evento) {
+    public long insertAcontecimento(Acontecimento evento) {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs;
@@ -57,7 +57,7 @@ public class AcontecimentoDao {
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT e.id,titulo,e.descricao,data_evento, local_cidade,hora_evento,tipo_evento,data_cadastro,visibilidade  ,id_localidade, l.nome as nomeLocalidade FROM evento as e join localidade as l on (l.id= e.id)";
+        String sql = "SELECT * FROM acontecimento order by visibilidade = 'n'";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();

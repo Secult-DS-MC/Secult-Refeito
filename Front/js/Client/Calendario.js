@@ -6,6 +6,12 @@ function expandir(classe, mes) {
     } else {
         icone.removeClass('ion-minus').addClass('ion-plus')
     }
+
+    var vazio = $("."+classe+" ion-item").children();
+    if(vazio.length == "0"){
+
+        $("p#"+classe).css("display", "block");
+    }
 }
 
 function listarEventosCalendario() {
@@ -21,7 +27,7 @@ function listarEventosCalendario() {
             var id = dados[i].id;
             var dataEvento = dados[i].data_evento;
             var titulo = dados[i].titulo;
-            var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&N";
+            var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
 
             var mes = dataEvento.slice(5, 7);
             var dia = dataEvento.slice(8, 10);
@@ -54,14 +60,14 @@ function listarEventosCalendario() {
             }
 
             $("." + classMes).append("<ion-item style=\"padding: 0px!important;\">\n" +
-                "                <a style=\"border-style: none!important;\" href='#' class=\"item item-avatar item-icon-right animated fadeIn\">\n" +
-                "                    <img id='"+id+"' src='" + urlImagem + "'>\n" +
+                "                <a style=\"min-height: 71px!important;\" class=\"item item-thumbnail-left item-icon-right animated fadeIn\">\n" +
+                "                    <img style='max-width: 50px!important; max-height: 50px!important;' id='"+id+"' src='" + urlImagem + "'>\n" +
                 "                    <h2 style=\"display: inline-block\">" + titulo + "</h2>\n" +
                 "                    <span class=\"item-note\">Dia " + dia + "</span>\n" +
                 "                </a>\n" +
                 "            </ion-item>");
 
-            $("img#" + id).attr("src", urlImagem)
+            $("img#" + id).attr("src", urlImagem);
         }
         carregando(2)
     };

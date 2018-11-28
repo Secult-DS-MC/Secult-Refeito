@@ -28,24 +28,24 @@ import javax.ws.rs.core.Response;
  *
  * @author Computador
  */
-@Path("/Acontecimento")
+@Path("/acontecimento")
 public class AcontecimentoResource {
     @GET
-    @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_localidade}&{local_cidade}")
+    @Path("/insertAcontecimento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_localidade}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_localidade") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-        Acontecimento evento = new Acontecimento();
-        evento.setTitulo(titulo);
-        evento.setDescricao(descricao);
-        evento.setData_evento(data_evento);
-        evento.setVisibilidade(visibilidade);
-        evento.setTipo_evento(tipo_evento);
-        evento.setHora_evento(hora_evento);
-        evento.setIdLocalidade(id_povoado);
-        evento.setLocalCidade(localCidade);
+        Acontecimento acontecimento = new Acontecimento();
+        acontecimento.setTitulo(titulo);
+        acontecimento.setDescricao(descricao);
+        acontecimento.setData_evento(data_evento);
+        acontecimento.setVisibilidade(visibilidade);
+        acontecimento.setTipo_evento(tipo_evento);
+        acontecimento.setHora_evento(hora_evento);
+        acontecimento.setIdLocalidade(id_povoado);
+        acontecimento.setLocalCidade(localCidade);
 
-        AcontecimentoDao eventoDao = new AcontecimentoDao();
-        long id = eventoDao.insertEvento(evento);
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        long id = acontecimentoDao.insertAcontecimento(acontecimento);
         if (id > 0) {
             return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
@@ -55,16 +55,16 @@ public class AcontecimentoResource {
     }
 
     @GET
-    @Path("/listarEvento")
+    @Path("/listarAcontecimento")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarEvento() throws SQLException, Exception {
 
-        EventoDao eventoDao = new EventoDao();
-        List<Acontecimento> evento = eventoDao.listarEvento();
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.listaAcontecimento();
 
         Gson gson = new GsonBuilder().create();
 
-        JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("acontecimentos", ArrayUsuarios);
 

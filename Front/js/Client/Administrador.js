@@ -18,9 +18,9 @@ function deslogarAdministrador() {
 
 function mostrarInput(tipo) {
         setTimeout(function () {
-            if(tipo != 'p'){
+            if(tipo != 'E'){
                 $("#labelLocal").hide();
-            }else if(tipo == 'p') {
+            }else {
                 $("#labelLocal").show();
             }
         },300);

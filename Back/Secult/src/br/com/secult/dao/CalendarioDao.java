@@ -28,7 +28,7 @@ public class CalendarioDao {
 
         ResultSet rs = null;
 
-        String sql = "SELECT A.id, titulo, A.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento, l.nome as nome_localidade FROM acontecimento AS A JOIN localidade AS l ON(l.id = A.id_localidade) where visibilidade = 's' and tipo_evento = 'N' order by data_evento desc";
+        String sql = "SELECT A.id, titulo, A.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_localidade, tipo_evento FROM acontecimento AS A where visibilidade = 's' and tipo_evento = 'C'";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -45,8 +45,6 @@ public class CalendarioDao {
                 even.setTipo_evento(rs.getString("tipo_evento"));
                 even.setHora_evento(rs.getString("hora_evento"));
                 even.setVisibilidade(rs.getString("visibilidade"));
-                even.setIdLocalidade(rs.getInt("id_localidade"));
-                even.setNomeEvento(rs.getString("nome_localidade"));
                 objs.add(even);
             }
             return objs;
