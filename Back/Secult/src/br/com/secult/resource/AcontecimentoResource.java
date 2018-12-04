@@ -71,7 +71,79 @@ public class AcontecimentoResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+    
+    @GET
+    @Path("/listarAcontecimentoPorVisibilidadeS")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarAcontecimentoPorVisibilidadeS() throws SQLException, Exception {
 
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.listarAcontecimentoPorVisibilidadeS();
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("acontecimentos", ArrayUsuarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+
+     @GET
+    @Path("/listarAcontecimentoPorVisibilidadeN")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarAcontecimentoPorVisibilidadeN() throws SQLException, Exception {
+
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.listarAcontecimentoPorVisibilidadeN();
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("acontecimentos", ArrayUsuarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+
+      @GET
+    @Path("/listarAcontecimentoPorEsseMes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarAcontecimentoPorEsseMes() throws SQLException, Exception {
+
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.listarAcontecimentoPorEsseMes();
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("acontecimentos", ArrayUsuarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+    
+      @GET
+    @Path("/listarAcontecimentoUltimos6Meses")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarAcontecimentoUltimos6Meses() throws SQLException, Exception {
+
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+        List<Acontecimento> acontecimento = acontecimentoDao.listarAcontecimentoUltimos6Meses();
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsuarios = gson.toJsonTree(acontecimento).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("acontecimentos", ArrayUsuarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+    
     @GET
     @Path("/getAcontecimentoById/{id}")
     @Produces(MediaType.APPLICATION_JSON)

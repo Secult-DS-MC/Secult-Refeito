@@ -10,7 +10,10 @@ function expandir(classe, mes) {
     var vazio = $("."+classe+" ion-item").children();
     if(vazio.length == "0"){
 
-        $("p#"+classe).css("display", "block");
+        $("p#"+classe).css({"display": "block","font-size":"13px"});
+        setTimeout( function () {
+            $("p#"+classe).css("display", "none")
+        },10000);
     }
 }
 
@@ -21,6 +24,7 @@ function listarEventosCalendario() {
     var json = servidor + "/Secult/calendario/listarCalendario";
     var onSuccess = function (result) {
         dados = result.calendario;
+        var mesAtual =false;
 
         for (i in dados) {
 
@@ -33,6 +37,8 @@ function listarEventosCalendario() {
             var dia = dataEvento.slice(8, 10);
 
             var classMes;
+
+
             if (mes == 01) {
                 classMes = 'janeiroEvent';
             } else if (mes == 02) {
@@ -68,9 +74,24 @@ function listarEventosCalendario() {
                 "            </ion-item>");
 
             $("img#" + id).attr("src", urlImagem);
+
+            data = new Date()
+            mesAt = data.getMonth()+1
+            if(mes == mesAt){
+                mesAtual=true
+            }
+
         }
+        if(mesAtual){
+            expandirEsseMes(classMes.slice(0,3))
+        }
+
         carregando(2)
     };
     $.getJSON(json, onSuccess).fail(
     );
+}
+
+function expandirEsseMes(id) {
+    $("#"+id).click()
 }

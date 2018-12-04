@@ -3,11 +3,11 @@
         <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header has-footer">
-        <label class="item item-input item-stacked-label" for="btnFotoCadart">
-            <img src="img/semImagem.png" id="tableBannerEventoCdt" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
-            <input type="file" id="inputImagemEventoCdt" style="display: none" >
+        <label class="item item-input item-stacked-label" for="imputImg">
+            <img src="./img/sem-foto.jpg" id="imgThumbnail" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
+            <input type="file" id="inputImagem" style="display: none" >
         </label>
-        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="btnFotoCadart" onclick="abrirImpFile('inputImagemEventoCdt')">Alterar Foto</button>
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto</button>
 
         <form class="list">
             <label class="item item-input item-stacked-label">
@@ -65,5 +65,6 @@
 <script>
     $( document ).ready(function() {
         location.reload();
+
     });
 </script>

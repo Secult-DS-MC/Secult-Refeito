@@ -1,21 +1,21 @@
 <ion-view title="Administrador" id="page18">
     <!--<ion-nav-buttons side="left" class="has-header">-->
-        <!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style=""><i-->
-                <!--class="icon ion-ios-arrow-back"></i> <span class="back-text"-->
-                                                           <!--style="transform: translate3d(0px, 0px, 0px);"></span>-->
-        <!--</button>-->
+    <!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style=""><i-->
+    <!--class="icon ion-ios-arrow-back"></i> <span class="back-text"-->
+    <!--style="transform: translate3d(0px, 0px, 0px);"></span>-->
+    <!--</button>-->
     <!--</ion-nav-buttons>-->
 
     <ion-content padding="true" class="has-header refresh">
         <form id="administrador-form" class="list">
             <label class="item item-select">
                 <span class="input-label">Filtrar por:</span>
-                <select>
-                    <option value="">Selecione o Filtro</option>
-                    <option value="1">Visíveis</option>
-                    <option value="2">Invisíveis</option>
-                    <option value="3">Essa semana</option>
-                    <option value="4">Esse mês</option>
+                <select onchange="listarEventoFiltro(this.value)">
+                    <option value="Todos">Todos</option>
+                    <option value="Visivel">Visíveis</option>
+                    <option value="Invisivel">Invisíveis</option>
+                    <option value="1Mes">Esse mês</option>
+                    <option value="6Mes">Ultimos 6 meses</option>
                 </select>
             </label>
         </form>
@@ -29,9 +29,15 @@
 
     <ion-footer-bar style="padding: 0px; margin: 0px">
         <div class="button-bar" style="width: 100%; margin: 0px; padding: 0px">
-            <button class="button  button-positive tabs-icon-only ion-refresh" style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"
+            <button class="button  button-positive tabs-icon-only ion-refresh"
+                    style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"
                     onclick="limparEListarEventoAdm()"></button>
-            <button class="button button-positive tabs-icon-only ion-person-add" ui-sref="cadastroEvento()" style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"></button>
+            <button class="button button-positive tabs-icon-only ion-person-add" ui-sref="cadastroEvento()"
+                    style=" padding: 0px; margin: 0px; height: 100%; font-size: 22px;"></button>
         </div>
     </ion-footer-bar>
 </ion-view>
+<script>
+
+
+</script>

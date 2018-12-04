@@ -70,7 +70,6 @@ public class ImagemDao {
 
     public boolean inserirImagem(Imagem imagem, long id_coluna, String sigla) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = null;
         boolean hasError = true;
         String sql = null;
         switch (sigla) {
@@ -84,19 +83,21 @@ public class ImagemDao {
                 sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
                 break;
         }
+                  PreparedStatement  stmt = connection.prepareStatement(sql);
+
         try {
-            stmt = connection.prepareStatement(sql);
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setLong(2, id_coluna);
-
             stmt.executeUpdate();
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+             hasError = false;
         } finally {
             try {
                 stmt.close();
-                hasError = false;
+               
             } catch (Exception e) {
             }
         }
@@ -127,16 +128,16 @@ public class ImagemDao {
         return hasError;
     }
 
-    public boolean deletarEvento(Imagem imagem) throws Exception {
+    public boolean deletarImagem(long id) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
 
-        String sql = "DELETE FROM imagem WHERE id=?";
+        String sql = "DELETE FROM imagem WHERE id_acontecimento=?";
         try {
             stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1, imagem.getId());
+            stmt.setLong(1, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {

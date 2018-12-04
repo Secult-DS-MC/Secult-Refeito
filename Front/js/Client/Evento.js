@@ -1,9 +1,7 @@
 servidor = localStorage.getItem("servidor");
 
 function listarEventoEvento() {
-    var tres = 2;
-    var res;
-
+    carregando(2)
     $("#listaEventoEvento").empty();
     var json = servidor + "/Secult/evento/listarEvento";
 
@@ -25,31 +23,27 @@ function listarEventoEvento() {
                 var localCidade = dados[i].localCidade;
 
 
-                $("#listaEventoEvento").append("<a ui-sref='informacoesNoticias' class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'><li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
+                $("#listaEventoEvento").append("<a ui-sref='informacoesNoticias' class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'>" +
+                    "      <li class=\"item item-thumbnail-left item-icon-right balanced\" style='border-bottom: none;'>\n" +
                     "        <img src='" + imagem + "'>\n" +
                     "        <h2 class='positive' style='font-weight: bolder' >" + titulo + "\n" +
                     "          <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 47) + "...</p>\n" +
-                    "          <i class=\"icon ion-android-share\"></i>\n" +
+                    "          <i class=\"icon ion-android-share\" ></i>\n" +
                     "        </h2>\n" +
                     "      </li>\n" +
-                    "      <li class=\"item item-icon-left \">\n" +
+                    "      <li class=\"item item-icon-left \" style='border-top: none;'>\n" +
                     "        <i class=\"icon ion-location assertive\"></i> "+nomeLocalidade +"\n" +
                     "        <span class=\"item-note\">Na " + localCidade + " as "+horaEvento+"</span>\n" +
                     "      </li><div class=\"spacer\" style=\"height: 5px;\"></div></a>");
 
 
-                if (i == tres) {
-                    tres = tres + 3;
-                    $("#listaEventoHoje").append("    <span style='display: none'><div class=\"spacer\" style=\"height: 4px;\"></div>\n" +
-                        "    <div>\n" +
-                        "      <img src=\"img/sEbQCcVzT22AyiWd4w0I_WhatsAppImage2018-07-31at13.51.371.jpeg\" style=\"display:block;width:100%;height:50px;\">\n" +
-                        "    </div>\n" +
-                        "    <div class=\"spacer\" style=\"height: 5px;\"></div></span>\n");
-                }
+
             }
         }
     };
-    $.getJSON(json, onSuccess).fail(
+    $.getJSON(json, onSuccess).done(
+        carregando(2)
+    ).fail(
 
     );
 }
@@ -86,6 +80,9 @@ function inserirFotoEvento(id, sigla) {
     var json =  servidor + "/Secult/imagem/inserirImagem/" + id+"&"+sigla;
 
     var ImageURL = localStorage.getItem("fotoCadastroEvento");
+    if(localStorage.getItem("fotoCadastroEvento")==null){
+        ImageURL = ""
+    }
 
     var block = ImageURL.split(";");
 
@@ -158,10 +155,10 @@ function saveFotoEventoLS() {
 function saveFotoEventoLSCdt() {
 
     //document.getElementById("tableBannerEvento").style.display = "none";
-    var bannerImage = document.getElementById("inputImagemEventoCdt");
+    var bannerImage = document.getElementById("inputImagem");
 
     var img = document.getElementById("tableBannerEventoCdt");
-
+    localStorage.setItem("fotoCadastroEvento", toBase64String(img));
     bannerImage.addEventListener("change", function () {
 
         var file = this.files[0];

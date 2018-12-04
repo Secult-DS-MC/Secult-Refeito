@@ -88,12 +88,15 @@ angular.module('app.controllers', [])
 
     .controller('administradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventoAdm();
+            listarEventoFiltro('Todos');
         }])
 
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            saveFotoEventoLSCdt()
+        setTimeout(function () {
+            salvaImagemImput()
+        },1000)
+
             selectLocalidadeCadastro();
             mostrarInputCadastroEvento();
         }])

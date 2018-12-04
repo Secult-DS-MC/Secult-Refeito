@@ -224,6 +224,7 @@ function isCpf(strCPF) {
 
 
 function listarCadart() {
+    carregando(1)
     $("#listaCadart").empty();
     var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
     $.getJSON(json, function (result) {
@@ -245,20 +246,22 @@ function listarCadart() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var vindoDe = "";
-                var urlImagem = servidor+"/Secult/imagem/findETC/"+cpf+"&C";
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
                 console.log(urlImagem)
 
                 $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
-                    "                <img  src='"+urlImagem+"' onError='this.onerror=null;this.src='"+urlImagem+"'>\n" +
+                    "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
                     "            </a>")
             }
+
         }
     }).fail(function () {
         console.log("error");
     })
         .always(function () {
+            carregando(2)
             console.log("complete");
         });
 
@@ -693,7 +696,7 @@ function listarCadartAdm() {
                 var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
                 $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img src='" + urlImagem + "' onError='this.onerror=null;this.src='"+urlImagem+"'>\n" +
+                    "                <img src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
                     "            </a>")
@@ -729,10 +732,10 @@ function cadartAutenticarVisibilidadeS() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var vindoDe = "adm";
-                var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
+                var urlImagem  = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
                 $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img id='"+cpf+"' src='img/pixelBranco.png' onError='this.onerror=null;this.src='\"+imagem+\"'>\n" +
+                    "                <img id='" + cpf + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\'./img/semfoto.png>\''\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "            </a>")
             }
@@ -768,8 +771,8 @@ function cadartAutenticarVisibilidadeN() {
                 var foto = dados[i].fotoPerfil;
                 var vindoDe = "desAutenticar"
 
-                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\""+ nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img id='"+cpf+"' src='img/pixelBranco.png'>\n" +
+                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img id='" + cpf + "' src='img/pixelBranco.png'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "            </a>")
                 getPrimeiraImagem(cpf, cpf)

@@ -3,6 +3,10 @@ function inserirImagem(id_coluna,sigla) {
     var json = servidor + "/Secult/imagem/inserirImagem/"+id_coluna+"&"+ sigla;
 
     var ImageURL = localStorage.getItem("imagemSalva");
+    if(ImageURL ==null) {
+        ImageURL = localStorage.getItem("semfoto");
+
+    }
 
     var block = ImageURL.split(";");
 
@@ -41,10 +45,10 @@ function inserirImagem(id_coluna,sigla) {
 
 function salvaImagemImput() {
 
-    var bannerImage = document.getElementById("imputImg");
+    var bannerImage = document.getElementById("inputImagem");
 
     var img = document.getElementById("imgThumbnail");
-
+    localStorage.setItem("semfoto", toBase64String(img));
     bannerImage.addEventListener("change", function () {
 
         var file = this.files[0];

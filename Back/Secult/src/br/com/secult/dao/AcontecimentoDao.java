@@ -4,6 +4,9 @@ import br.com.secult.model.Acontecimento;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import br.com.secult.dao.Comum;
+import br.com.secult.model.Imagem;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +15,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
+
 
 public class AcontecimentoDao {
 
@@ -58,6 +62,102 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
 
         String sql = "SELECT * FROM acontecimento order by visibilidade = 'n'";
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
+     public List<Acontecimento> listarAcontecimentoPorVisibilidadeS() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+
+        String sql = "SELECT * FROM acontecimento WHERE visibilidade = 's'";
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+     
+     public List<Acontecimento> listarAcontecimentoPorVisibilidadeN() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+
+        String sql = "SELECT * FROM acontecimento WHERE visibilidade = 'n'";
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+     
+     public List<Acontecimento> listarAcontecimentoPorEsseMes() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+        int mes = Comum.mesAt();
+        String sql = "SELECT * FROM acontecimento where EXTRACT(month from data_evento)="+mes ;
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+     
+     public List<Acontecimento> listarAcontecimentoUltimos6Meses() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+        int mes = Comum.mesAt();
+        String sql = "SELECT * FROM acontecimento where EXTRACT(month from data_evento)>=6 order by EXTRACT(month from data_evento)";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -161,13 +261,17 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-
+        ImagemDao img=new ImagemDao();
         String sql = "DELETE FROM acontecimento WHERE id=?";
+        long id =  evento.getId();
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, evento.getId());
-            stmt.executeUpdate();
+            if(img.deletarImagem(id)){
+                 stmt.executeUpdate();
+            }
+           
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

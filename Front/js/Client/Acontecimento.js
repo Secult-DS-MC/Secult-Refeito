@@ -36,7 +36,7 @@ function cadastroAcontecimento() {
         var id = jsonAdministrador.id_usuario
 
         if (status != "erro") {
-            inserirFotoEvento(id, "E")
+            inserirImagem(id, "A")
 
         } else {
             swal("Não foi possivel Cadastrar o evento")
@@ -47,6 +47,8 @@ function cadastroAcontecimento() {
 }
 
 function listarEventoAdm() {
+    $("#inicioListaEventoHoje").empty()
+    console.log('todos')
     carregando(1)
     var json = servidor + "/Secult/acontecimento/listarAcontecimento";
 
@@ -105,6 +107,7 @@ function listarEventoAdm() {
 
     );
 }
+
 
 function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem, localCidade) {
     id = $("#" + id).attr('id');
@@ -191,14 +194,17 @@ function excluirAcontecimento(id) {
                         title: "Ocorreu um erro!",
                         icon: "erro",
                         button: false,
+
                     });
+
                 }
             }
             $.getJSON(json, onSuccess).fail();
 
 
+        }else{
+            carregando(2)
         }
     });
-
 
 }
