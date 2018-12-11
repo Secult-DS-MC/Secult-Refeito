@@ -99,6 +99,17 @@ function verificarTel() {
     })
 }
 
+function verificarIdade() {
+    var idade = $("#dataNascimentoCdt").val();
+
+    if(idade.length > 2){
+        $("#idadeInvalido").show('pulsate');
+        return false
+    }else{
+        return true
+    }
+}
+
 function verificarSenha() {
     $("#senhaCdt").keyup(function () {
 

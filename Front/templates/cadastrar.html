@@ -19,67 +19,70 @@
 
 
         <form id="cadastrar-form9" class="list alinharEstrelinha">
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label ">Nome:</span>
                 <input type="text" placeholder="Seu nome completo" id="nomeCdt" style="display: inline-block">
                 <div>*</div>
             </label>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Nome artístico:</span>
-                <input type="text" placeholder="Nome pelo qual é conhecido" id="nomeArtCdt" style="display: inline-block">
+                <input type="text" placeholder="Como você é conhecido?" id="nomeArtCdt" style="display: inline-block">
                 <div>*</div>
             </label>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Descrição:</span>
                 <textarea maxlength="500" placeholder="Uma breve descrição sobre você" style="display: inline-block"
                           id="descricaoCdt"></textarea>
                 <div>*</div>
             </label>
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Projetos atuais:</span>
                 <textarea placeholder="Projetos do momento/futuros" id="projetosCdt" style="display: inline-block"
                           maxlength="400"></textarea>
                 <div>*</div>
             </label>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">CPF:</span>
                 <input type="text" placeholder="Seu Cpf" id="cpfCdt" style="display: inline-block">
                 <div>*</div>
                 <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
             </label>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Email:</span>
                 <input type="email" placeholder="Seu Email" id="emalCdt" style="display: inline-block">
                 <div>*</div>
             </label>
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Telefone:</span>
                 <input type="text" placeholder="00-00000-0000" id="telCdt" style="display: inline-block">
                 <div>*</div>
-                <p id="telInvalido" style="display: none; color: red; text-align: center; font-size: 9pt;">Telefone
-                    precisa ser válido</p>
+                <p id="telInvalido" class="invalido" style="display: none;">Telefone precisa ser válido!</p>
             </label>
 
 
-            <label class="item item-input" >
+            <label class="item item-input">
                 <span class="input-label" for="dtNascimentoUp">Idade:</span>
                 <input type="number" id="dataNascimentoCdt" placeholder="Anos" style="display: inline-block">
                 <div>*</div>
+                <p id="idadeInvalido" class="invalido" style="display: none;">Idade inválida!</p>
             </label>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Senha:</span>
                 <input type="password" placeholder="Sua Senha" id="senhaCdt" style="display: inline-block">
                 <div>*</div>
+                <br>
                 <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6
                     caracteres!</p>
             </label>
+            <p class="invalido" id="senhaCdInvalido" style="display: none">Senha deve conter no pelo mínimo 6
+                caracteres!</p>
 
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input">
                 <span class="input-label">Confirmar:</span>
                 <input type="password" placeholder="Digite a senha novamente" id="senhaRedCdt" style="display: inline-block">
                 <div>*</div>
@@ -128,3 +131,8 @@
         </form>
     </ion-content>
 </ion-view>
+<script>
+    $(document).ready(function() {
+        location.reload();
+    });
+</script>
