@@ -67,7 +67,6 @@ public class ImagemDao {
 //        }
 //        return hasError;
 //    }
-
     public boolean inserirImagem(Imagem imagem, long id_coluna, String sigla) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
@@ -83,21 +82,57 @@ public class ImagemDao {
                 sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
                 break;
         }
-                  PreparedStatement  stmt = connection.prepareStatement(sql);
+        PreparedStatement stmt = connection.prepareStatement(sql);
 
         try {
 
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setLong(2, id_coluna);
             stmt.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-             hasError = false;
+            hasError = false;
         } finally {
             try {
                 stmt.close();
-               
+
+            } catch (Exception e) {
+            }
+        }
+        return hasError;
+    }
+
+    public boolean atualizarImagem(Imagem imagem, long id_coluna, String sigla) throws Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = null;
+        switch (sigla) {
+            case "A":
+                sql = "UPDATE imagem SET imagem=? WHERE id_acontecimento = ?";
+                break;
+            case "C":
+                sql = "UPDATE imagem SET imagem=? WHERE id_cadart = ?";
+                break;
+            case "T":
+                sql = "UPDATE imagem SET imagem=? WHERE id_turismo = ?";
+                break;
+        }
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        try {
+
+            stmt.setObject(1, tratarImagem(imagem.getImagem()));
+            stmt.setLong(2, id_coluna);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                stmt.close();
+
             } catch (Exception e) {
             }
         }
@@ -334,9 +369,8 @@ public class ImagemDao {
             while (rs.next()) {
                 Imagem imagem = new Imagem();
                 imagem.setImagem(rs.getBytes("imagem"));
-                 return imagem;
+                return imagem;
             }
-           
 
         } catch (Exception e) {
             throw e;
@@ -349,7 +383,7 @@ public class ImagemDao {
             }
 
         }
-        return  null;
+        return null;
     }
 
     private List<Imagem> resultSetToObjectTransfer(ResultSet rs) throws Exception {

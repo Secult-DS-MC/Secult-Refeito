@@ -63,6 +63,37 @@ public class ImagemResource {
 
     }
     
+    @POST
+    @Path("/atualizarImagem/{id_coluna}&{sigla}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response atualizarImagem(@FormDataParam("imagem") InputStream uploadedInputStream,
+            @PathParam("id_coluna") long id_coluna,@PathParam("sigla") String sigla, @FormDataParam("imagem") FormDataContentDisposition fileDetail) throws Exception {
+
+        ImagemDao imagemDao = new ImagemDao();
+        Imagem imagem = new Imagem();
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int read = 0;
+        byte[] bytes = new byte[1024];
+
+        while ((read = uploadedInputStream.read(bytes)) != -1) {
+            buffer.write(bytes, 0, read);
+        }
+
+        byte[] byteArray = buffer.toByteArray();
+        buffer.flush();
+        
+        imagem.setImagem(byteArray);
+
+         if (imagemDao.atualizarImagem(imagem, id_coluna, sigla)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+
+    }
+    
     
 
     @GET

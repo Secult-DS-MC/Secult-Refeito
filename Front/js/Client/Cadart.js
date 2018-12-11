@@ -519,7 +519,7 @@ function updateCadart() {
         var status = result.status;
 
         if (status == "ok") {
-            inserirFoto(cpf);
+            atualizarImagem(cpf, 'C');
 
 
             localStorage.setItem("cpf", cpf);

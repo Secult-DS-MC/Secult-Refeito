@@ -42,6 +42,50 @@ function inserirImagem(id_coluna,sigla) {
     })
 
 }
+function atualizarImagem(id_coluna,sigla) {
+
+    var json = servidor + "/Secult/imagem/atualizarImagem/"+id_coluna+"&"+ sigla;
+
+    var ImageURL = localStorage.getItem("imagemSalva");
+    if(ImageURL ==null) {
+        ImageURL = localStorage.getItem("semfoto");
+
+    }
+
+    var block = ImageURL.split(";");
+
+    var contentType = block[0].split(":")[1];
+
+    var realData = block[1].split(",")[1];
+
+    var blob = b64toBlob(realData, contentType);
+
+    var formDataToUpload = new FormData();
+
+    formDataToUpload.append("imagem", blob);
+    formDataToUpload.append("id_coluna", id_coluna);
+    formDataToUpload.append("sigla", sigla);
+
+    $.ajax({
+        url: json,
+        data: formDataToUpload,
+        type: "POST",
+        contentType: false,
+        processData: false,
+        cache: false,
+        dataType: "json",
+
+        error: function (err) {
+            console.log(err);
+
+        },
+
+        complete: function () {
+
+        },
+    })
+
+}
 
 function salvaImagemImput() {
 

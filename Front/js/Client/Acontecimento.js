@@ -149,11 +149,14 @@ function updateEvento(id) {
         Administrador = jsonAdministrador.status;
 
         if (Administrador == "ok") {
-            inserirFotoEvento(id, "A");
+            atualizarImagem(id, "A");
             setTimeout(function () {
                 window.location.href = "#/page18";
+                setTimeout(function () {
+                    window.location.reload()
+                }, 100);
             }, 1000);
-            listarEventoAdm();
+
 
         }
         ;

@@ -1,14 +1,17 @@
 <ion-view title="Usuario" id="page7">
     <ion-content padding="true" class="has-header animated fadeInDown faster">
         <div>
-            <img src="img/semfoto.jpeg"
-                 style="display: block; width: 150px; height: 100%; margin-left: auto; margin-right: auto;" id="tableBanner">
+            <label class="item item-input item-stacked-label" for="imputImg">
+                <img src="./img/semfoto.png" id="imgThumbnail" style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+                <input type="file" id="inputImagem" style="display: none" >
+            </label>
+
         </div>
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div class="button-bar">
             <input type="file" id="bannerImg" style="display: none;" class="btnFotoCadartUp">
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block" id="btnFotoCadart" onclick="saveFotoLSUp()">Alterar Foto
+                    class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto
             </button>
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
                     class="button button-dark button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha

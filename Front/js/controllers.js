@@ -25,6 +25,9 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
             botaoFotoFakeCadart(1);
             usuarioLogado();
+            setTimeout(function () {
+                salvaImagemImput()
+            },1000)
         }])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
@@ -33,7 +36,9 @@ angular.module('app.controllers', [])
             verificarSenha();
             verificarTel();
             verificarCpf();
-            saveFotoLS();
+            setTimeout(function () {
+                salvaImagemImput()
+            },1000)
             botaoFotoFakeCadart(2);
 
         }])
@@ -118,7 +123,9 @@ angular.module('app.controllers', [])
 
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            saveFotoEventoLS();
+            setTimeout(function () {
+                salvaImagemImput()
+            },1000)
             selectLocalidadeUp();
         }])
 
