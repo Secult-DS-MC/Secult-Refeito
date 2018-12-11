@@ -7,7 +7,7 @@ function inserirImagem(id_coluna,sigla) {
         ImageURL = localStorage.getItem("semfoto");
 
     }
-
+    window.location.href = "#/page18";
     var block = ImageURL.split(";");
 
     var contentType = block[0].split(":")[1];
@@ -49,8 +49,8 @@ function atualizarImagem(id_coluna,sigla) {
     var ImageURL = localStorage.getItem("imagemSalva");
     if(ImageURL ==null) {
         ImageURL = localStorage.getItem("semfoto");
-
     }
+    window.location.href = "#/page18";
 
     var block = ImageURL.split(";");
 

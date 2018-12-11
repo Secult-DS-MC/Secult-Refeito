@@ -1,15 +1,26 @@
-function validarCadastroEvento() {
+function validarVazio(valor) {
+    if (valor != "") return true;
+}
+
+function validarCadastroAcontecimento() {
     var titulo = $("#tituloAdm").val();
     var descricao = $("#descricaoAdm").val();
     var dataEvento = $("#dataEventoAdm").val();
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
     var tipo = $("#tipoAdm").val();
-    if (titulo != "" & dataEvento != "" & descricao != "" & horaEvento != "" & localidade != "" & tipo != "") {
-        cadastroAcontecimento();
+    var localCidade = $("#localAdm").val();
 
+    if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
+        if (tipo == "E") {
+            if (validarVazio(localCidade)) {
+                cadastroAcontecimento();
+            } else {
+                swal("Todo evento precisa de um ponto específico na localidade!")
+            }
+        }
     } else {
-        alert("Preencha todos os campos!")
+        swal("Preencha todos os campos!")
     }
 }
 
@@ -22,7 +33,7 @@ function cadastroAcontecimento() {
     var tipo = $("#tipoAdm").val();
     var localCidade = $("#localAdm").val();
 
-    if(localCidade == ""){
+    if (localCidade == "") {
         localCidade = "A";
     }
 
@@ -39,7 +50,7 @@ function cadastroAcontecimento() {
             inserirImagem(id, "A")
 
         } else {
-            swal("Não foi possivel Cadastrar o evento")
+            swal("Não foi possivel Cadastrar o evento");
         }
         ;
     };
@@ -65,7 +76,7 @@ function listarEventoAdm() {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento;
-                var imagem = servidor + "/Secult/imagem/findETC/" + id +"&A";
+                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
 
                 //if(imagem == null) imagem = "../../img/semImagem.png";
                 var horaEvento = dados[i].hora_evento;
@@ -74,14 +85,14 @@ function listarEventoAdm() {
                 var localCidade = dados[i].localCidade;
 
                 $("#inicioListaEventoHoje").append("<li id='" + id + "' style='border: none;' class=\"item item-thumbnail-left balanced\">\n" +
-                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
+                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='" + imagem + "'>\n" +
                     "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
                     "                <div class=\"item-icon-right\">\n" +
                     "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
                     "                </div>\n" +
                     "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
                     "                    <div style=\"height: 35px\">\n" +
-                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid;\" href='#/page20'>\n" +
+                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' class='button button-light' style=\"display: grid;\" href='#/page20'>\n" +
                     "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
                     "                        </a>\n" +
                     "                    </div>\n" +
@@ -138,37 +149,55 @@ function updateEvento(id) {
     var visibilidade = $("#visibilidadeUp").val();
     var local = $("#localUp").val();
 
-    if(local == 'undefined') local = "nulo";
 
-    var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
+    if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
+        if (tipo == "E") {
+            if (validarVazio(local)) {
 
-    var onSuccess = function (result) {
+                var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
 
-        jsonAdministrador = result;
+                var onSuccess = function (result) {
 
-        Administrador = jsonAdministrador.status;
+                    jsonAdministrador = result;
 
-        if (Administrador == "ok") {
-            atualizarImagem(id, "A");
-            setTimeout(function () {
-                window.location.href = "#/page18";
-                setTimeout(function () {
-                    window.location.reload()
-                }, 100);
-            }, 1000);
+                    Administrador = jsonAdministrador.status;
 
+                    if (Administrador == "ok") {
+                        atualizarImagem(id, "A");
+                        setTimeout(function () {
+                            window.location.reload()
+                        }, 100);
+                    }
+                    ;
+                };
+                $.getJSON(json, onSuccess).fail();
+            } else {
+                swal("Todo evento precisa de um ponto específico na localidade!");
+            }
+        } else {
+            local = "nulo";
+            var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
 
+            var onSuccess = function (result) {
+
+                jsonAdministrador = result;
+
+                Administrador = jsonAdministrador.status;
+
+                if (Administrador == "ok") atualizarImagem(id, "A");
+            };
+            $.getJSON(json, onSuccess).fail();
         }
-        ;
-    };
-    $.getJSON(json, onSuccess).fail();
+    } else {
+        swal("Preencha todos os campos!");
+    }
 }
 
-function mostrarInputCadastroEvento() {
-    if($("#tipoAdm").val() == "E"){
-        $("#localAdm").show();
-    }else {
-        $("#localAdm").hide();
+function mostrarInputCadastroEvento(tipo) {
+    if (tipo == "E") {
+        $("#labelLocal").show();
+    } else {
+        $("#labelLocal").hide();
     }
 }
 
@@ -185,7 +214,7 @@ function excluirAcontecimento(id) {
             var json = servidor + "/Secult/acontecimento/deletarAcontecimento/" + id;
             var onSuccess = function (result) {
                 if (result.status == "ok") {
-                    $("#"+id).remove();
+                    $("#" + id).remove();
                     swal("Puff! Evento deletado com sucesso!", {
                         icon: "success",
                         buttons: false,
@@ -205,7 +234,7 @@ function excluirAcontecimento(id) {
             $.getJSON(json, onSuccess).fail();
 
 
-        }else{
+        } else {
             carregando(2)
         }
     });

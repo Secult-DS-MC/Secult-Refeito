@@ -12,8 +12,14 @@ function expandir(classe, mes) {
 
         $("p#"+classe).css({"display": "block","font-size":"13px"});
         setTimeout( function () {
-            $("p#"+classe).css("display", "none")
-        },10000);
+            $('.' + classe).toggle(300);
+            if (icone.hasClass("ion-plus")) {
+                icone.removeClass('ion-plus').addClass('ion-minus')
+            } else {
+                icone.removeClass('ion-minus').addClass('ion-plus')
+            }
+            //$("p#"+classe).css("display", "none")
+        },3000);
     }
 }
 
@@ -65,13 +71,13 @@ function listarEventosCalendario() {
                 classMes = 'dezEvent';
             }
 
-            $("." + classMes).append("<ion-item style=\"padding: 0px!important;\">\n" +
-                "                <a style=\"min-height: 71px!important;\" class=\"item item-thumbnail-left item-icon-right animated fadeIn\">\n" +
-                "                    <img style='max-width: 50px!important; max-height: 50px!important;' id='"+id+"' src='" + urlImagem + "'>\n" +
-                "                    <h2 style=\"display: inline-block\">" + titulo + "</h2>\n" +
-                "                    <span class=\"item-note\">Dia " + dia + "</span>\n" +
-                "                </a>\n" +
-                "            </ion-item>");
+            $("." + classMes).append("<ion-item class=\"list\">\n" +
+                "    <a class=\"item item-thumbnail-left\" href=\"#\">\n" +
+                "      <img src='" + urlImagem + "'>\n" +
+                "      <h2>" + titulo + "</h2>\n" +
+                "      <p>Dia " + dia + "</p>\n" +
+                "    </a>\n" +
+                "</ion-item>");
 
             $("img#" + id).attr("src", urlImagem);
 

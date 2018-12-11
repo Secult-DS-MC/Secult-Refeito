@@ -45,8 +45,8 @@
                 </select>
             </label>
             <label class="item item-select">
-                <span class="input-label">Tipo do Evento</span>
-                <select id="tipoUp">
+                <span class="input-label">Acontecimento</span>
+                <select id="tipoUp" onchange="mostrarInputCadastroEvento(this.value)">
                     <option value="">Selecione</option>
                     <option value="N">Notícia</option>
                     <option value="E">Evento</option>
@@ -55,7 +55,7 @@
             </label>
             <label class="item item-input item-stacked-label" id="labelLocal">
                 <span class="input-label">Local da cidade</span>
-                <input type="text" placeholder="" id="localUp">
+                <input type="text" placeholder="Local do evento na cidade" id="localUp">
             </label>
 
         </form>
