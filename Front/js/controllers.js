@@ -1,11 +1,8 @@
 angular.module('app.controllers', [])
 
-    .controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
+    .controller('menuCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
-
+            $('.fab-buttons').toggle();
         }])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
@@ -147,7 +144,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
 
         }])
-    .controller('testeCtrl', ['$scope', '$stateParams',
+    .controller('infoCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])

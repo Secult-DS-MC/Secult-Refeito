@@ -327,3 +327,9 @@ select#sexoCdt {
     width: 40px;
     height: 40px;
 }
+
+.pDesc p{
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 15px;
+}

@@ -850,3 +850,14 @@ function aparecer() {
         $('.fab-buttons__link').css({'transform': 'scaleY(1) scaleX(1) translateY(-16px) translateX(0px)'});
     }, 10);
 }
+
+function sobreCadart() {
+    swal({
+        title: "O que é o cadart?",
+        text: "É um projeto criado pela secretaria de cultura de Tobias Barreto SE que tem como objetivo mapear os artistas locais.",
+        title: "O que é o cadart?",
+        text: "É um projeto criado pela secretaria de cultura de Tobias Barreto SE que tem como objetivo mapear os artistas locais.",
+        icon: "info",
+        buttons: true
+    })
+}
