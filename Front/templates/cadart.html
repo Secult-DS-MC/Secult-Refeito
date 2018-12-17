@@ -2,34 +2,42 @@
     <ion-nav-buttons side="right" class="has-header">
         <button class="button button-clear icon ion-android-refresh" onclick="atualizarPaginas()"></button>
     </ion-nav-buttons>
+
+    <div class="fab">
+        <span class="fab-action-button" onclick="aparecer(), $('.fab-buttons').toggle();">
+            <i class="icon ion-android-add iconFab"></i>
+        </span>
+        <ul class="fab-buttons" style="display: none">
+            <li class="fab-buttons__item alt-estado" style="display: block;">
+                <a ui-sref="cadastrar()" class="fab-buttons__link" >
+                    <i class="icon ion-person-add iconCentro"><span class="dataAlgum">Cadastre-se</span></i>
+                </a>
+            </li>
+            <li class="fab-buttons__item alt-estado" style="display: block;">
+                <a ui-sref="login()" class="fab-buttons__link" >
+                    <i class="icon ion-log-in iconCentro"><span class="dataAlgum">Entrar</span></i>
+                </a>
+            </li>
+            <li class="fab-buttons__item alt-estado" style="display: none;">
+                <a ui-sref="usuario()" class="fab-buttons__link" >
+                    <i class="icon ion-person-stalker iconCentro"><span class="dataAlgum">Meus dados</span></i>
+                </a>
+            </li>
+            <li class="fab-buttons__item alt-estado" style="display: none;">
+                <a ui-sref="login()" class="fab-buttons__link"  onclick="sairUsuario()">
+                    <i class="icon ion-log-out iconCentro"><span class="dataAlgum">Sair</span></i>
+                </a>
+            </li>
+            <li class="fab-buttons__item">
+                <a href="#" class="fab-buttons__link" data-tooltip="">
+                    <i class="icon ion-information-circled iconCentro"><span class="dataAlgum">Sobre</span></i>
+                </a>
+            </li>
+        </ul>
+    </div>
     <ion-content padding="true" class="has-header">
-        <div id="cadart-button-bar2" class="button-bar"></div>
-        <div id="cadart-button-bar3" class="button-bar">
-            <a ui-sref="cadastrar()" id="cadart-button34"
-               style="display: block;"
-               class="button button-block button-positive button-small alt-estado">Cadastre-se</a>
-            <a ui-sref="login()" id="cadart-button35"
-               style="display: block;"
-               class="button button-block button-positive button-small alt-estado">Entrar</a>
-            <a ui-sref="usuario()" style="display: none;"
-               class="button button-block button-positive button-small alt-estado" id="meusDados">Meus Dados</a>
-            <a style=" display: none;"
-               class="button button-block button-positive button-small alt-estado"
-               onclick="sairUsuario()">Sair</a>
-        </div>
 
-        <ion-list id="listaCadart">
-        </ion-list>
-
-        <ion-fab right bottom>
-            <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-            <ion-fab-list side="left">
-                <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-                <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-                <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-                <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-            </ion-fab-list>
-        </ion-fab>
+        <ion-list id="listaCadart"></ion-list>
 
     </ion-content>
 </ion-view>

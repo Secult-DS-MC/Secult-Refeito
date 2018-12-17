@@ -102,10 +102,10 @@ function verificarTel() {
 function verificarIdade() {
     var idade = $("#dataNascimentoCdt").val();
 
-    if(idade.length > 2){
+    if (idade.length > 2) {
         $("#idadeInvalido").show('pulsate');
         return false
-    }else{
+    } else {
         return true
     }
 }
@@ -706,7 +706,7 @@ function listarCadartAdm() {
                 console.log(tel)
                 var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
-                $("#listaCadartAdm").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadartAdm").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -743,7 +743,7 @@ function cadartAutenticarVisibilidadeS() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var vindoDe = "adm";
-                var urlImagem  = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + cpf + "&C";
 
                 $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
                     "                <img id='" + cpf + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\'./img/semfoto.png>\''\n" +
@@ -841,4 +841,12 @@ function autenticarVisibilidadeN(cpf) {
         }
     }
     $.getJSON(json, onSuccess).fail();
+}
+
+function aparecer() {
+    $('.fab-buttons__link').css({'transform': 'scaleY(0.5) scaleX(0.5) translateY(0px) translateX(0px)'});
+
+    setTimeout(function () {
+        $('.fab-buttons__link').css({'transform': 'scaleY(1) scaleX(1) translateY(-16px) translateX(0px)'});
+    }, 10);
 }

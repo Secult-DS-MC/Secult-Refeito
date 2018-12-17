@@ -19,6 +19,7 @@ angular.module('app.controllers', [])
             $("#listaCadart").empty();
             listarCadart()
             usuarioAtivo();
+            localStorage.setItem("Ativo", "Sim");
         }])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
