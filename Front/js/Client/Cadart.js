@@ -65,6 +65,7 @@ function saveFotoLSUp() {
 }
 
 function mascarasCadart() {
+    $("#dataNascimentoCdt").mask("00");
     $("#telCdt").mask("00-00000-0000");
     $("#cpfCdt").mask("000.000.000-00");
 }

@@ -19,8 +19,8 @@ function preencherDadosLocalidade() {
                 $("#nomeLocalidade").append(nome);
                 $("#descLocalidade").append(descricao);
 
-                $("#nomeEvento").append("<ion-item class=\"item-icon-right item assertive\">"+nomeEvento+"\n" +
-                    "        <i class=\"icon ion-flame\"></i>\n" +
+                $("#nomeEvento").append("<ion-item style='border: none' class=\"item-icon-right item assertive\">"+nomeEvento+"\n" +
+                    "        <i class=\"icon ion-android-alert\"></i>\n" +
                     "      </ion-item>");
             }
         }

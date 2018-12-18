@@ -203,10 +203,20 @@ label.item.item-input {
     border-width: 1px 0px 1px 0px;
 }
 select#arteCdt {
-    border-width: 0px 0px 0px 1px;
+    width: 100%;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    color: #aaaaaa;
 }
+
 select#sexoCdt {
-    border-width: 0px 0px 0px 0px;
+    width: 100%;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    color: #aaaaaa;
+    height: 45px;
 }
 
 .alinharEstrelinha div{
@@ -214,6 +224,10 @@ select#sexoCdt {
     display: inline-block;
     position: absolute;
     right: 0%;
+}
+
+.alinharEstrelinha label{
+    border-bottom: none;
 }
 
 .fab {

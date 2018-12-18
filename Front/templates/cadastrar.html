@@ -9,110 +9,101 @@
         <div class="spacer" style="width: 300px; height: 5px;"></div>
 
 
-        <label class="item item-input item-stacked-label" for="imputImg">
-            <img src="./img/semfoto.png" id="imgThumbnail" style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
-            <input type="file" id="inputImagem" style="display: none" >
+        <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none">
+            <img src="./img/semfoto.png" id="imgThumbnail"
+                 style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+            <input type="file" id="inputImagem" style="display: none">
         </label>
-        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto</button>
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                class="button button-dark button-small button-block" id="imputImg"
+                onclick="abrirImpFile('inputImagem')">Alterar Foto
+        </button>
 
-
-
-
-        <form id="cadastrar-form9" class="list alinharEstrelinha">
+        <form class="list alinharEstrelinha">
             <label class="item item-input">
-                <span class="input-label ">Nome:</span>
-                <input type="text" placeholder="Seu nome completo" id="nomeCdt" style="display: inline-block">
+                <input type="text" placeholder="Nome completo" id="nomeCdt" style="display: inline-block">
                 <div>*</div>
             </label>
 
             <label class="item item-input">
-                <span class="input-label">Nome artístico:</span>
-                <input type="text" placeholder="Como você é conhecido?" id="nomeArtCdt" style="display: inline-block">
+                <input type="text" placeholder="Nome artístico (como você é conhecido?)" id="nomeArtCdt" style="display: inline-block">
                 <div>*</div>
             </label>
 
             <label class="item item-input">
-                <span class="input-label">Descrição:</span>
                 <textarea maxlength="500" placeholder="Uma breve descrição sobre você" style="display: inline-block"
                           id="descricaoCdt"></textarea>
                 <div>*</div>
             </label>
             <label class="item item-input">
-                <span class="input-label">Projetos atuais:</span>
-                <textarea placeholder="Projetos do momento/futuros" id="projetosCdt" style="display: inline-block"
+                <textarea placeholder="Projetos do momento ou futuros" id="projetosCdt" style="display: inline-block"
                           maxlength="400"></textarea>
                 <div>*</div>
             </label>
 
             <label class="item item-input">
-                <span class="input-label">CPF:</span>
-                <input type="text" placeholder="Seu Cpf" id="cpfCdt" style="display: inline-block">
+                <input type="text" placeholder="CPF" id="cpfCdt" style="display: inline-block">
                 <div>*</div>
-                <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
+            </label>
+            <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
+
+            <label class="item item-input">
+                <input type="email" placeholder="Email" id="emalCdt" style="display: inline-block">
+                <div>*</div>
             </label>
 
             <label class="item item-input">
-                <span class="input-label">Email:</span>
-                <input type="email" placeholder="Seu Email" id="emalCdt" style="display: inline-block">
+                <input type="text" placeholder="Telefone Ex: 00-00000-0000" id="telCdt" style="display: inline-block">
                 <div>*</div>
             </label>
-            <label class="item item-input">
-                <span class="input-label">Telefone:</span>
-                <input type="text" placeholder="00-00000-0000" id="telCdt" style="display: inline-block">
-                <div>*</div>
-                <p id="telInvalido" class="invalido" style="display: none;">Telefone precisa ser válido!</p>
-            </label>
-
+            <p id="telInvalido" class="invalido" style="display: none;">Telefone precisa ser válido!</p>
 
             <label class="item item-input">
-                <span class="input-label" for="dtNascimentoUp">Idade:</span>
-                <input type="number" id="dataNascimentoCdt" placeholder="Anos" style="display: inline-block">
+                <input type="number" id="dataNascimentoCdt" placeholder="Idade" style="display: inline-block">
                 <div>*</div>
-                <p id="idadeInvalido" class="invalido" style="display: none;">Idade inválida!</p>
             </label>
+            <p id="idadeInvalido" class="invalido" style="display: none;">Idade inválida!</p>
 
-            <label class="item item-input">
-                <span class="input-label">Senha:</span>
-                <input type="password" placeholder="Sua Senha" id="senhaCdt" style="display: inline-block">
-                <div>*</div>
-                <br>
-                <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6
-                    caracteres!</p>
-            </label>
-            <p class="invalido" id="senhaCdInvalido" style="display: none">Senha deve conter no pelo mínimo 6
-                caracteres!</p>
-
-            <label class="item item-input">
-                <span class="input-label">Confirmar:</span>
-                <input type="password" placeholder="Digite a senha novamente" id="senhaRedCdt" style="display: inline-block">
-                <div>*</div>
-                <p class="invalido" id="senhaRedCdtInvalido" style="display: none">Senhas Inorretas!</p>
-            </label>
-
-            <label class="item item-input redeSocial">
-                <span class="input-label icon-right"><i style="margin-right: 8px"
-                                                        class="icon ion-social-facebook-outline"></i> Facebook:</span>
-                <input type="text" id="redeSocial1" placeholder="Link do seu perfil">
-            </label>
-
-            <label class="item item-input redeSocial">
-                <span class="input-label"><i style="margin-right: 8px" class="icon ion-social-instagram-outline"></i>Instagram:</span>
-                <input type="text" id="redeSocial2" placeholder="Nome de usuário">
-            </label>
-
-            <label class="item item-input redeSocial">
-                <span class="input-label"><i style="margin-right: 8px" class="icon ion-social-youtube-outline"></i>Youtube:</span>
-                <input type="text" id="redeSocial3" placeholder="Link do video ou canal">
-            </label>
-
-            <span class="divSelect">
-                <select id="sexoCdt" class="item">
+            <label>
+                <select id="sexoCdt" class="item item-input">
                     <option value="">Gênero:</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                     <option value="o">Outros</option>
                 </select>
+            </label>
 
+            <label class="item item-input">
+                <input type="password" placeholder="Senha" id="senhaCdt" style="display: inline-block">
+                <div>*</div>
+                <br>
+            </label>
+            <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6
+                caracteres!</p>
+
+            <label class="item item-input">
+                <input type="password" placeholder="Digite a senha novamente" id="senhaRedCdt"
+                       style="display: inline-block">
+                <div>*</div>
+            </label>
+            <p class="invalido" id="senhaRedCdtInvalido" style="display: none">Senhas Inorretas!</p>
+
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-facebook-outline"></i>
+                <input type="text" id="redeSocial1" placeholder="Link do seu perfil no Facebook">
+            </label>
+
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-instagram-outline"></i>
+                <input type="text" id="redeSocial2" placeholder="Nome de usuário no Instagram">
+            </label>
+
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-youtube-outline"></i>
+                <input type="text" id="redeSocial3" placeholder="Link do vídeo ou canal no YouTube">
+            </label>
+
+            <span class="divSelect">
                 <select id="arteCdt" class="item">
                     <option value="">Arte:</option>
                     <option value="1">Ator/Atriz</option>
@@ -127,12 +118,12 @@
 
             <button id="cadastrarCdt" onclick="validarCampos()" class="button button-positive button-block">Cadastrar
             </button>
-
         </form>
+
     </ion-content>
 </ion-view>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         location.reload();
     });
 </script>
