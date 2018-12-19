@@ -284,14 +284,7 @@ function InputEmailValido() {
     var emailImp = $("#email").val();
     var senha = $("#senha").val();
 
-    if (emailImp == "admseculttb" && senha == "admseculttb") {
-        localStorage.setItem("admOn", 'true');
-        $(".funcoesAdministrativas").show();
-        $("#email").val('');
-        $("#senha").val('');
-        window.location.href = "#/page1";
 
-    }
     if (emailImp != "") {
 
         if (emailImp.indexOf("@") != -1) {
@@ -364,6 +357,7 @@ function autenticar(txtEmail, txtSenha) {
             var descricao = dados[0].descricao;
             var projetoAtual = dados[0].projetoAtual;
             var email = dados[0].email;
+            var tipo = dados[0].tipo;
 
 
             localStorage.setItem("cpf", cpf);
@@ -378,15 +372,28 @@ function autenticar(txtEmail, txtSenha) {
             localStorage.setItem("descricao", descricao);
             localStorage.setItem("projetoAtual", projetoAtual);
             localStorage.setItem("usuarioAtivo", "true")
+            localStorage.setItem("tipo", tipo);
 
 
-            setTimeout(function () {
-                window.location.href = "#/page1/page3";
+            $("#email").val('');
+            $("#senha").val('');
+
+            if (tipo == 1) {
                 setTimeout(function () {
                     $(".alt-estado").toggle()
+                    localStorage.setItem("admOn", 'true');
+                    $(".funcoesAdministrativas").show();
+                    window.location.href = "#/page22";
                 }, 100)
+            } else {
+                setTimeout(function () {
+                    window.location.href = "#/page1/page3";
+                    setTimeout(function () {
+                        $(".alt-estado").toggle()
+                    }, 100)
 
-            }, 1000)
+                }, 1000)
+            }
 
 
         } else {
@@ -418,7 +425,14 @@ function sairUsuario() {
     localStorage.removeItem("descricao");
     localStorage.removeItem("projetoAtual");
     localStorage.setItem("usuarioAtivo", "false");
+    localStorage.setItem("admOn", "false");
+    localStorage.setItem("tipo", "");
+    localStorage.setItem("fotoCadastroEvento", "");
+    localStorage.setItem("fotoCadastro", "");
+    window.location.href = "#/page1/page2";
+    $(".funcoesAdministrativas").hide();
 }
+
 
 function usuarioAtivo() {
     if (localStorage.getItem("usuarioAtivo") == "true") {

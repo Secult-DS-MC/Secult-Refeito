@@ -75,6 +75,7 @@ public class CadartDao {
             cadart.setTelefone(rs.getString("telefone"));
             cadart.setSenha(rs.getString("senha"));
             cadart.setVisibilidade(rs.getString("visibilidade"));
+            cadart.setTipo(rs.getInt("tipo"));
 
             objs.add(cadart);
         }

@@ -10,9 +10,7 @@ function verificarAdministrador() {
 }
 
 function deslogarAdministrador() {
-    localStorage.removeItem('admOn');
-    $(".funcoesAdministrativas").hide();
-    window.location.href = "#/page1";
+
 
 }
 

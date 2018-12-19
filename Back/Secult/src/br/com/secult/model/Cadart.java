@@ -25,6 +25,15 @@ public class Cadart {
     private int idArte;
     private int idImagem;
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+    private int tipo;
+
     public int getIdImagem() {
         return idImagem;
     }
