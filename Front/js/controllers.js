@@ -17,6 +17,9 @@ angular.module('app.controllers', [])
             listarCadart()
             usuarioAtivo();
             localStorage.setItem("Ativo", "Sim");
+            setTimeout(function () {
+                $(".cadastrar").css("height", tamanhoTela())
+            },100)
         }])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',

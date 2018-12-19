@@ -9,22 +9,22 @@
         </span>
         <ul class="fab-buttons" style="display: none">
             <li class="fab-buttons__item alt-estado" style="display: block;" onclick="$('.fab-buttons').toggle();">
-                <a ui-sref="cadastrar()" class="fab-buttons__link" >
+                <a ui-sref="cadastrar()" class="fab-buttons__link">
                     <i class="icon ion-person-add iconCentro"><span class="dataAlgum">Cadastre-se</span></i>
                 </a>
             </li>
             <li class="fab-buttons__item alt-estado" style="display: block;" onclick="$('.fab-buttons').toggle();">
-                <a ui-sref="login()" class="fab-buttons__link" >
+                <a ui-sref="login()" class="fab-buttons__link">
                     <i class="icon ion-log-in iconCentro"><span class="dataAlgum">Entrar</span></i>
                 </a>
             </li>
             <li class="fab-buttons__item alt-estado" style="display: none;" onclick="$('.fab-buttons').toggle();">
-                <a ui-sref="usuario()" class="fab-buttons__link" >
+                <a ui-sref="usuario()" class="fab-buttons__link">
                     <i class="icon ion-person-stalker iconCentro"><span class="dataAlgum">Meus dados</span></i>
                 </a>
             </li>
             <li class="fab-buttons__item alt-estado" style="display: none;" onclick="$('.fab-buttons').toggle();">
-                <a class="fab-buttons__link"  onclick="sairUsuario()">
+                <a class="fab-buttons__link" onclick="sairUsuario()">
                     <i class="icon ion-log-out iconCentro"><span class="dataAlgum">Sair</span></i>
                 </a>
             </li>
@@ -36,6 +36,91 @@
         </ul>
     </div>
     <ion-content padding="true" class="has-header">
+
+        <div class="cadastrar">
+            <div class="cadastrar-tela">
+                <div class="button-bar">
+                    <a class="button button-clear estagio estagio1"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: #86e286">1</a>
+                    <a class="button button-clear estagio estagio2"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">2</a>
+                    <a class="button button-clear estagio estagio3"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">3</a>
+                    <a class="button button-clear estagio estagio4"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">4</a>
+                    <a class="button button-clear estagio estagio5"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">5</a>
+                    <a class="button button-clear estagio estagio6"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">6</a>
+
+                </div>
+                <div id="cdt-inicio" style="display: block">
+                    <h3>Para poder se cadastrar você concorda em nos dar algumas informações?</h3>
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="$('.cadastrar').hide()" class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Não</a>
+                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-inicio').hide(), $('#cdt-pessoal').show()" class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Sim</a>
+                    </div>
+                </div>
+                <div id="cdt-pessoal" style="display: none">
+                    <h3 style="text-align: center">Informe seus nomes!</h3>
+
+                    <h4>Seu nome completo: (obrigatório)</h4>
+                    <input type="text" placeholder="João Roberto da Silva" >
+                    <h4>Qual seu nome artístico?  (obrigatório)</h4>
+                    <input type="text" placeholder="Joãozinho" >
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="posicaoCadastro('estagio1'),$('#cdt-inicio').show(), $('#cdt-pessoal').hide()"  class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio3'),$('#cdt-pessoal').hide(), $('#cdt-descricao').show()" class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+                <div id="cdt-descricao" style="display: none;  margin-top: 5%;">
+                    <h3 style="text-align: center">Fale mais sobre você!</h3>
+
+                    <h4>Descreva o que faz! (obrigatório)</h4>
+                    <textarea rows="5" maxlength="500" placeholder="Sou cantor e tenho uma banda chamada Arroz com Feijão" ></textarea>
+                    <h4>Esta atualmente em algum projeto? (obrigatório)</h4>
+                    <textarea rows="5" maxlength="500" placeholder="Estamos ensaiando para nos apresentar no festival de musica!" ></textarea>
+
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-pessoal').show(), $('#cdt-descricao').hide()"  class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio4'),$('#cdt-descricao').hide(), $('#cdt-contato').show()" class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+                <div id="cdt-contato" style="display: none;  margin-top: 5%;">
+                    <h3 style="text-align: center">Como podemos entrar em contato?</h3>
+
+                    <h4>Qual o seu email? (obrigatório)</h4>
+                    <input type="email" placeholder="joaoroberto@e-mail.com" >
+                    <h4>E o seu telefone?  (obrigatório)</h4>
+                    <input type="text" placeholder="00-00000-0000" onclick="$(this).mask('00-00000-0000')">
+                    <h3 style="text-align: center">Quer compartilhar suas redes sociais?</h3>
+
+                    <h4>E o seu telefone?  (obrigatório)</h4>
+                    <input type="text" placeholder="00-00000-0000" onclick="$(this).mask('00-00000-0000')">
+                     <h4>E o seu telefone?  (obrigatório)</h4>
+                    <input type="text" placeholder="00-00000-0000" onclick="$(this).mask('00-00000-0000')">
+                     <h4>E o seu telefone?  (obrigatório)</h4>
+                    <input type="text" placeholder="00-00000-0000" onclick="$(this).mask('00-00000-0000')">
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="posicaoCadastro('estagio3'),$('#cdt-descricao').show(), $('#cdt-contato').hide()"  class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio5'),$('#cdt-descricao').hide(), $('#cdt-descricao').show()" class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
 
         <ion-list id="listaCadart"></ion-list>
 

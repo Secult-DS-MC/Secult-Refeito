@@ -62,3 +62,13 @@ function b64toBlob(b64Data, contentType, sliceSize) {
     var blob = new Blob(byteArrays, {type: contentType});
     return blob;
 }
+
+
+tamanhoTela = function () {
+    return screen.availHeight;
+}
+
+function posicaoCadastro(pos){
+    $(".estagio").css('color', 'white')
+    $("."+pos).css('color', '#86e286')
+}
