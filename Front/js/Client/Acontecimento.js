@@ -18,6 +18,8 @@ function validarCadastroAcontecimento() {
             } else {
                 swal("Todo evento precisa de um ponto específico na localidade!")
             }
+        }else {
+            cadastroAcontecimento();
         }
     } else {
         swal("Preencha todos os campos!")
@@ -48,9 +50,8 @@ function cadastroAcontecimento() {
 
         if (status != "erro") {
             inserirImagem(id, "A")
-
         } else {
-            swal("Não foi possivel Cadastrar o evento");
+            swal("Não foi possivel cadastrar o acontecimento!");
         }
         ;
     };
@@ -84,7 +85,7 @@ function listarEventoAdm() {
                 var idLocalidade = dados[i].idLocalidade;
                 var localCidade = dados[i].localCidade;
 
-                $("#inicioListaEventoHoje").append("<li id='" + id + "' style='border: none;' class=\"item item-thumbnail-left balanced\">\n" +
+                $("#inicioListaEventoHoje").append("<li id='" + id + "' style='border-width: 1px 0;' class=\"item item-thumbnail-left balanced\">\n" +
                     "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='" + imagem + "'>\n" +
                     "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
                     "                <div class=\"item-icon-right\">\n" +
@@ -92,7 +93,7 @@ function listarEventoAdm() {
                     "                </div>\n" +
                     "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
                     "                    <div style=\"height: 35px\">\n" +
-                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' class='button button-light' style=\"display: grid;\" href='#/page20'>\n" +
+                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' class='button button-light' style=\"display: grid;\" ui-sref='updateEvento()'>\n" +
                     "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
                     "                        </a>\n" +
                     "                    </div>\n" +
@@ -103,7 +104,7 @@ function listarEventoAdm() {
                     "                        </a>\n" +
                     "                    </div>\n" +
                     "                </div>\n" +
-                    "            </li><hr>\n");
+                    "            </li>\n");
 
                 if (visibilidade == "s") {
                     $("#checked" + id).css('color', 'green');
@@ -124,8 +125,8 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
     id = $("#" + id).attr('id');
     setTimeout(function () {
         $("#tituloUp").val(titulo);
-        $("#tableBannerEvento").attr('src', imagem);
-        localStorage.setItem('imgTeste', imagem)
+        $("#imgThumbnail").attr('src', imagem);
+        localStorage.setItem('imgTeste', imagem);
         $("#descricaoUp").val(descricao);
         $("#dataEventoUp").val(dataEvento);
         $("#horarioUp").val(horaEvento);
@@ -195,7 +196,7 @@ function updateEvento(id) {
 
 function mostrarInputCadastroEvento(tipo) {
     if (tipo == "E") {
-        $("#labelLocal").show();
+        $("#labelLocal").show().scrollBottom(0, 500);
     } else {
         $("#labelLocal").hide();
     }
@@ -215,11 +216,11 @@ function excluirAcontecimento(id) {
             var onSuccess = function (result) {
                 if (result.status == "ok") {
                     $("#" + id).remove();
-                    swal("Puff! Evento deletado com sucesso!", {
+                    swal("Evento deletado com sucesso!", {
                         icon: "success",
                         buttons: false,
                     });
-
+                    $("#"+id).css("display", "none");
                     carregando(2)
                 } else {
                     swal({
