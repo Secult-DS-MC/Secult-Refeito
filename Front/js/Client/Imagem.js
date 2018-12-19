@@ -1,13 +1,20 @@
-function inserirImagem(id_coluna,sigla) {
+function inserirImagem(id_coluna, sigla) {
 
-    var json = servidor + "/Secult/imagem/inserirImagem/"+id_coluna+"&"+ sigla;
+    var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;
 
     var ImageURL = localStorage.getItem("imagemSalva");
-    if(ImageURL ==null) {
+    if (ImageURL == null) {
         ImageURL = localStorage.getItem("semfoto");
 
     }
+
     window.location.href = "#/page18";
+
+    setTimeout(function () {
+        listarEventoAdm();
+    }, 300);
+
+
     var block = ImageURL.split(";");
 
     var contentType = block[0].split(":")[1];
@@ -42,12 +49,13 @@ function inserirImagem(id_coluna,sigla) {
     })
 
 }
-function atualizarImagem(id_coluna,sigla) {
 
-    var json = servidor + "/Secult/imagem/atualizarImagem/"+id_coluna+"&"+ sigla;
+function atualizarImagem(id_coluna, sigla) {
+
+    var json = servidor + "/Secult/imagem/atualizarImagem/" + id_coluna + "&" + sigla;
 
     var ImageURL = localStorage.getItem("imagemSalva");
-    if(ImageURL ==null) {
+    if (ImageURL == null) {
         ImageURL = localStorage.getItem("semfoto");
     }
     window.location.href = "#/page18";

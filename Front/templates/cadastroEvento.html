@@ -3,49 +3,48 @@
         <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header has-footer">
-        <label class="item item-input item-stacked-label" for="imputImg">
+        <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none;">
             <img src="./img/sem-foto.jpg" id="imgThumbnail" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
             <input type="file" id="inputImagem" style="display: none" >
         </label>
         <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto</button>
 
         <form class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Titulo</span>
-                <input type="text" placeholder="" id="tituloAdm">
+            <label class="item item-input">
+                <input type="text" placeholder="Título" id="tituloAdm">
             </label>
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Descrição</span>
-                <textarea placeholder="" rows="3" id="descricaoAdm"></textarea>
+            <label class="item item-input">
+                <textarea style="height: 35px;" placeholder="Descrição do acontecimento" rows="3" id="descricaoAdm"></textarea>
             </label>
 
-            <label class="item item-input item-stacked-label" >
-                <span class="input-label">Data</span>
-                <input type="date" placeholder="" id="dataEventoAdm">
+            <label class="item item-input" >
+                <span class="input-label">Data:</span>
+                <input type="date" id="dataEventoAdm">
             </label>
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Horário</span>
+            <label class="item item-input">
+                <span class="input-label">Horário:</span>
                 <input type="time" placeholder="" id="horarioAdm">
             </label>
 
-            <label class="item item-select">
-                <span class="input-label">Localidade</span>
+            <label class="item item-select" style="border-width: 1px 0;">
+                <span class="input-label">Localidade:</span>
                 <select id="localidadeAdm">
                 </select>
             </label>
-            <label class="item item-select">
-                <span class="input-label">Acontecimento</span>
-                <select id="tipoAdm" onchange="mostrarInputCadastroEvento('tipoAdm')">
+
+            <label class="item item-select" style="border-width: 1px 0;">
+                <span class="input-label">Tipo:</span>
+                <select id="tipoAdm" onchange="mostrarInputCadastroEvento($('#tipoAdm').val())">
                     <option value="">Selecione</option>
                     <option value="N">Notícia</option>
                     <option value="E">Evento</option>
                     <option value="C">Calendário</option>
                 </select>
             </label>
-            <label class="item item-input item-stacked-label" id="labelLocal">
-                <span class="input-label"></span>
+
+            <label class="item item-input" id="labelLocal">
                 <input type="text" placeholder="Local do evento na cidade" id="localAdm">
             </label>
         </form>
@@ -54,13 +53,14 @@
     </ion-content>
 
     <ion-footer-bar style="padding: 0px; margin: 0px">
-        <div class="buttons positive" style="width: 100%; display: block; margin: 0px; padding: 0px">
-            <button  id="cadastrarCadart" onclick="validarCadastroAcontecimento()"  class="button button-block btn-preto button-full button-positive" style=" padding: 0px; margin: 0px; height: 100%;
-    font-size: medium; color: white;
-    ">Cadastrar
-            </button>
+        <div class="tabs tabs-icon-top" style="background-color: #387ef5; color: white">
+            <a class="tab-item" onclick="validarCadastroAcontecimento()">
+                <i class="icon ion-checkmark-round"></i>
+                Cadastrar
+            </a>
         </div>
     </ion-footer-bar>
+
 </ion-view>
 <script>
     $( document ).ready(function() {
