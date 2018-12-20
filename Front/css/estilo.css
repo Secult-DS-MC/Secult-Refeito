@@ -348,6 +348,7 @@ select#sexoCdt {
 
 .cadastrar{
     width: 100%;
+    height: unset;
     margin: 0px;
     background-color: #a9a9a973;
     position: fixed;
@@ -358,7 +359,7 @@ select#sexoCdt {
 }
 .cadastrar-tela{
     width: 100%;
-    height: 100%;
+    height: inherit;
     margin: auto;
     background: #387ef5;
     z-index: 1000;
@@ -366,14 +367,14 @@ select#sexoCdt {
 }
 .cadastrar-tela h3{
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-style: oblique;
     text-align: justify;
     margin-top: 10%;
 }
 .cadastrar-tela h4{
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-style: oblique;
     text-align: justify;
     margin-top: 10%;
@@ -382,9 +383,9 @@ select#sexoCdt {
     outline: none;
     background: transparent;
     height: 25px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     width: 100%;
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
     color: white;
 }
 
@@ -405,3 +406,16 @@ select#sexoCdt {
     color: white;
     min-width: unset;
 }
+
+#cdt-inicio p {
+    color: white;
+}
+#cdt-inicio h4 {
+    font-size: 1.1rem;
+}
+
+
+
+
+
+

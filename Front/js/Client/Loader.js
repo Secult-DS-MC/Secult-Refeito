@@ -65,7 +65,7 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 
 
 tamanhoTela = function () {
-    return screen.availHeight;
+    return $('html').css('height') +100
 }
 
 function posicaoCadastro(pos){
