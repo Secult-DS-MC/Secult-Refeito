@@ -375,8 +375,6 @@ select#sexoCdt {
 .cadastrar-tela h4{
     color: white;
     font-size: 1rem;
-    font-style: oblique;
-    text-align: justify;
     margin-top: 10%;
 }
 .cadastrar-tela input {

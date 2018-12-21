@@ -60,6 +60,10 @@ function atualizarImagem(id_coluna, sigla) {
     }
     window.location.href = "#/page18";
 
+    setTimeout(function () {
+        listarEventoAdm();
+    }, 300);
+
     var block = ImageURL.split(";");
 
     var contentType = block[0].split(":")[1];

@@ -107,19 +107,19 @@ angular.module('app.routes', [])
 
             .state('administrador', {
                 url: '/page18',
-                templateUrl: 'templates/administrador.html',
-                controller: 'administradorCtrl'
+                templateUrl: 'templates/acontecimentoAdm.html',
+                controller: 'acontecimentoAdmCtrl'
             })
 
             .state('cadastroEvento', {
                 url: '/page19',
-                templateUrl: 'templates/cadastroEvento.html',
-                controller: 'cadastroEventoCtrl'
+                templateUrl: 'templates/cadastrarAcontecimentoAdm.html',
+                controller: 'cadastrarAcontecimentoAdmCtrl'
             })
             .state('updateEvento', {
                 url: '/page20',
-                templateUrl: 'templates/updateEvento.html',
-                controller: 'updateEventoCtrl'
+                templateUrl: 'templates/alterarAcontecimentoAdm.html',
+                controller: 'alterarAcontecimentoAdmCtrl'
             })
             .state('administradorOpcoes', {
                 url: '/page22',

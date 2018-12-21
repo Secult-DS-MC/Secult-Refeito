@@ -92,12 +92,12 @@ angular.module('app.controllers', [])
             selectLocalidade();
         }])
 
-    .controller('administradorCtrl', ['$scope', '$stateParams',
+    .controller('acontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarEventoFiltro('Todos');
         }])
 
-    .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
+    .controller('cadastrarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
         setTimeout(function () {
             salvaImagemImput()
@@ -122,7 +122,7 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('updateEventoCtrl', ['$scope', '$stateParams',
+    .controller('alterarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             setTimeout(function () {
                 salvaImagemImput()
