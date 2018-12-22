@@ -412,7 +412,9 @@ select#sexoCdt {
     font-size: 1.1rem;
 }
 
-
+.button.button-positive.activated #footer{
+    background-color: #387ef5!important;
+}
 
 
 

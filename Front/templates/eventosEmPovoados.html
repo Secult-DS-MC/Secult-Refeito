@@ -4,16 +4,18 @@
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <form id="eventosEmPovoados-form11" class="list">
-            <h1 style="text-align:center;" id="nomeLocalidade"></h1>
-
-            <div class="spacer" style="width: 300px; height: 33px;"></div>
-            <label class="item item-select">
+            <label class="item item-select" style="border: none; border-bottom: 1px solid #616161;">
                 <span class="input-label">Selecione a localidade:</span>
                 <select id="idLocalidade" onchange="preencherDadosLocalidade()">
 
                 </select>
             </label>
+
+            <h1 style="text-align:center;" id="nomeLocalidade"></h1>
+
+            <div class="spacer" style="width: 300px; height: 33px;"></div>
         </form>
+
         <div class="show-list-numbers-and-dots pDesc">
             <p style="text-align: center;" id="descLocalidade"></p>
         </div>
