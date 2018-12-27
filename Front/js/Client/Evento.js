@@ -13,7 +13,7 @@ function listarEventoEvento() {
 
             for (var i in dados) {
                 var id = dados[i].id;
-                var imagem = servidor + "/Secult/imagem/findETC/"+id+"&A"
+                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A"
 
                 var titulo = dados[i].titulo;
                 var descricao = dados[i].descricao;
@@ -23,19 +23,35 @@ function listarEventoEvento() {
                 var localCidade = dados[i].localCidade;
 
 
-                $("#listaEventoEvento").append("<a ui-sref='informacoesNoticias' class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'>" +
-                    "      <li class=\"item item-thumbnail-left item-icon-right balanced\" style='border-bottom: none;'>\n" +
-                    "        <img src='" + imagem + "'>\n" +
-                    "        <h2 class='positive' style='font-weight: bolder' >" + titulo + "\n" +
-                    "          <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 47) + "...</p>\n" +
-                    "          <i class=\"icon ion-android-share\" ></i>\n" +
-                    "        </h2>\n" +
-                    "      </li>\n" +
-                    "      <li class=\"item item-icon-left \" style='border-top: none;'>\n" +
-                    "        <i class=\"icon ion-location assertive\"></i> "+nomeLocalidade +"\n" +
-                    "        <span class=\"item-note\">Na " + localCidade + " as "+horaEvento+"</span>\n" +
-                    "      </li><div class=\"spacer\" style=\"height: 5px;\"></div></a>");
+                $("#listaEventoEvento").append("<a class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'>\n" +
+                    "            <li class=\"item item-thumbnail-left item-icon-right\" style='padding-right: 45px; border-bottom: none;'><img src='" + imagem + "'>\n" +
+                    "                <h2 class='positive' style='font-weight: bolder'>" + titulo + "\n" +
+                    "                    <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 60) + "...</p>\n" +
+                    "                </h2>\n" +
+                    "                <div class=\"tabs-icon-top icon positive\"><div class=\"tab-item\" style='position: relative; top: 25px; height: 20px;'>" + horaEvento + "</div><i style='position: absolute; right: 0px!important;' class=\"icon ion-android-time\"></i></div>\n" +
+                    "            </li>\n" +
+                    "        </a>\n" +
+                    "        <li class=\"item\" style=\"color:gray; padding: 0; margin: 0; zoom: 0.80;\">\n" +
+                    "            <div style=\"display: flex;\">\n" +
+                    "                <a style='max-width: none;' class=\"tab-item assertive\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item dark\"><i class=\"icon ion-android-locate\"></i><span class=\"tab-title\">" + localCidade + "</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item balanced\" href='https://api.whatsapp.com/send?text=Título: "+titulo+", Descrição: "+descricao+"'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +
+                    "            </div>\n" +
+                    "        </li>\n" +
+                    "        <div class=\"spacer\" style=\"height: 10px;\"></div>");
 
+                // $("#listaEventoEvento").append("<a ui-sref='informacoesNoticias' class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'>" +
+                //     "      <li class=\"item item-thumbnail-left item-icon-right balanced\" style='border-bottom: none;'>\n" +
+                //     "        <img src='" + imagem + "'>\n" +
+                //     "        <h2 class='positive' style='font-weight: bolder' >" + titulo + "\n" +
+                //     "          <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 47) + "...</p>\n" +
+                //     "          <i class=\"icon ion-android-share\" href='https://api.whatsapp.com/send?text=Título: "+titulo+", Descrição: "+descricao+"'></i>\n" +
+                //     "        </h2>\n" +
+                //     "      </li>\n" +
+                //     "      <li class=\"item item-icon-left \" style='border-top: none;'>\n" +
+                //     "        <i class=\"icon ion-location assertive\"></i> "+nomeLocalidade +"\n" +
+                //     "        <span class=\"item-note\">Na " + localCidade + " as "+horaEvento+"</span>\n" +
+                //     "      </li><div class=\"spacer\" style=\"height: 5px;\"></div></a>");
 
 
             }
@@ -49,20 +65,20 @@ function listarEventoEvento() {
 }
 
 function abrirPage(el) {
-    $(el).attr("ui-sref","informacoesNoticias")
+    $(el).attr("ui-sref", "informacoesNoticias")
 
 }
 
-function preencherEventoInfo(d,img,t) {
+function preencherEventoInfo(d, img, t) {
 
     $("#titloNoticia").empty();
     $("#descricaoNoticia").empty();
     setTimeout(function () {
         $("#imagemNoticiaInfo").attr("src", img);
-        $("#titloNoticia").append(""+t);
-        $("#descricaoNoticia").append(""+d);
+        $("#titloNoticia").append("" + t);
+        $("#descricaoNoticia").append("" + d);
 
-    },100)
+    }, 100)
 }
 
 function limparEListarEventoAdm() {
@@ -77,10 +93,10 @@ function limparEListarEventoAdm() {
 //////////////////FOTO EVENTO///////////////////
 
 function inserirFotoEvento(id, sigla) {
-    var json =  servidor + "/Secult/imagem/inserirImagem/" + id+"&"+sigla;
+    var json = servidor + "/Secult/imagem/inserirImagem/" + id + "&" + sigla;
 
     var ImageURL = localStorage.getItem("fotoCadastroEvento");
-    if(localStorage.getItem("fotoCadastroEvento")==null){
+    if (localStorage.getItem("fotoCadastroEvento") == null) {
         ImageURL = ""
     }
 

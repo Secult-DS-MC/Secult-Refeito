@@ -1,25 +1,31 @@
 function expandir(classe, mes) {
     var icone = $("#" + mes).children();
-    $('.' + classe).toggle(300);
+
     if (icone.hasClass("ion-plus")) {
-        icone.removeClass('ion-plus').addClass('ion-minus')
+        icone.removeClass('ion-plus').addClass('ion-minus');
+        $('.' + classe).toggle(300);
+        diminuirMes(classe, icone);
     } else {
-        icone.removeClass('ion-minus').addClass('ion-plus')
+        icone.removeClass('ion-minus').addClass('ion-plus');
+        $('.' + classe).toggle(300);
     }
+}
 
-    var vazio = $("."+classe+" ion-item").children();
-    if(vazio.length == "0"){
-
-        $("p#"+classe).css({"display": "block","font-size":"13px"});
-        setTimeout( function () {
-            $('.' + classe).toggle(300);
-            if (icone.hasClass("ion-plus")) {
-                icone.removeClass('ion-plus').addClass('ion-minus')
-            } else {
-                icone.removeClass('ion-minus').addClass('ion-plus')
-            }
-            //$("p#"+classe).css("display", "none")
-        },3000);
+function diminuirMes(classe, icone) {
+    var vazio = $("." + classe + " ion-item").children();
+    var aut = $('.' + classe).css("display");
+    if (vazio.length == "0") {
+        $('.' + classe).children().css("opacity", "1");
+        $("p#" + classe).css({"display": "block", "font-size": "13px"});
+        if (aut == "inline-block") {
+            setTimeout(function () {
+                icone.removeClass('ion-minus').addClass('ion-plus');
+                $('.' + classe).children().css({"opacity": "0", "transition": "visibility 0s, opacity 0.5s linear"});
+                setTimeout(function () {
+                    $('.' + classe).css("display", "none");
+                }, 200);
+            }, 3000);
+        }
     }
 }
 
@@ -30,7 +36,7 @@ function listarEventosCalendario() {
     var json = servidor + "/Secult/calendario/listarCalendario";
     var onSuccess = function (result) {
         dados = result.calendario;
-        var mesAtual =false;
+        var mesAtual = false;
 
         for (i in dados) {
 
@@ -43,7 +49,6 @@ function listarEventosCalendario() {
             var dia = dataEvento.slice(8, 10);
 
             var classMes;
-
 
             if (mes == 01) {
                 classMes = 'janeiroEvent';
@@ -82,14 +87,14 @@ function listarEventosCalendario() {
             $("img#" + id).attr("src", urlImagem);
 
             data = new Date()
-            mesAt = data.getMonth()+1
-            if(mes == mesAt){
-                mesAtual=true
+            mesAt = data.getMonth() + 1
+            if (mes == mesAt) {
+                mesAtual = true
             }
 
         }
-        if(mesAtual){
-            expandirEsseMes(classMes.slice(0,3))
+        if (mesAtual) {
+            expandirEsseMes(classMes.slice(0, 3))
         }
 
         carregando(2)
@@ -99,5 +104,5 @@ function listarEventosCalendario() {
 }
 
 function expandirEsseMes(id) {
-    $("#"+id).click()
+    $("#" + id).click();
 }

@@ -16,16 +16,34 @@ function preencherDadosLocalidade() {
             var nome = dados[i].nome;
             var descricao = dados[i].descricao;
 
-            if ($("#idLocalidade").val() == idLocal) {
-                $("#nomeLocalidade").empty();
-                $("#descLocalidade").empty();
-                $("#nomeLocalidade").append(nome);
-                $("#descLocalidade").append(descricao);
+            $("#nomeLocalidade").empty();
+            $("#descLocalidade").empty();
 
+            var descMin = descricao.slice(0, 129);
+            var descMax = descricao;
+            var descExibida;
+            var descCompleta = false
+
+            if (descricao.length >= 130) {
+                descExibida = descMin;
+            } else {
+                descCompleta = true;
+                descExibida = descMax;
+            }
+
+            if ($("#idLocalidade").val() == idLocal) {
+                $("#nomeLocalidade").append(nome);
+                $("#descLocalidade").append("<p class='descLocal' style=\"text-align: center; display: block\">" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + idLocal + "' onclick='lerMaisLocalidade()'> mais</span></span></p>\n" +
+                    "                <p class='descLocal' style=\"text-align: center; display: none\" >" + descMax + "<span id='mostraDesc'>...<span id='descMax" + idLocal + "' onclick='lerMaisLocalidade()'> menos</span></span></p>\n");
 
                 $("#nomeEvento").append("<ion-item style='border: none' class=\"item-icon-right item assertive\">" + nomeEvento + "\n" +
                     "        <i class=\"icon ion-android-alert\"></i>\n" +
                     "      </ion-item>");
+
+                if (descCompleta) {
+                    $("#descMin" + idLocal).remove();
+                    $("#descMax" + idLocal).remove();
+                }
             }
         }
 
@@ -37,6 +55,14 @@ function preencherDadosLocalidade() {
         }, 500);
     }
     $.getJSON(json, onSuccess).fail();
+}
+
+function lerMaisLocalidade() {
+    $(".descLocal").slideToggle();
+
+    //$('ion-view').scrollTop();
+
+    //animate({scrollTop: 0}, 1000, 'linear');
 }
 
 function carregarNomeEdescEvento(id) {

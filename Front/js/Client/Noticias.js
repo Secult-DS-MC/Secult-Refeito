@@ -49,7 +49,7 @@ function listarEventoNoticias() {
                     "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                     "                <i class=\"icon ion-android-calendar \"></i>\n" +
                     "                <p style=\"text-align: left; padding-left: 10px; font-weight: bold; font-size: large; color: #3f83f5;\">" + titulo + "</p>\n" +
-                    "                <i class=\"icon ion-android-share-alt\" style='display: none'></i>\n" +
+                    "                <a href='https://api.whatsapp.com/send?text=Título: "+titulo+", Descrição: "+descricao+"' class=\"icon ion-android-share\" style='text-decoration: none'></a>\n" +
                     "            </ul>\n" +
                     "            <div class=\" item item-image \" style='border: none;'>\n" +
                     "                <img id='" + id + "' src='"+urlImagem+"' onError='this.onerror=null;this.src=\""+urlImagem+"\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
@@ -85,8 +85,8 @@ function checarDataEvento(data) {
 }
 
 function lerMais() {
-    $(".desc").toggle()
-
+    $(".desc").slideToggle();
+    $('ion-content, body').animate({scrollTop:0}, 'slow');
 }
 
 
