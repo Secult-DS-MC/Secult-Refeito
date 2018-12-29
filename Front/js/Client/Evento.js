@@ -1,7 +1,7 @@
 servidor = localStorage.getItem("servidor");
 
 function listarEventoEvento() {
-    carregando(2)
+    carregando(2);
     $("#listaEventoEvento").empty();
     var json = servidor + "/Secult/evento/listarEvento";
 
@@ -22,11 +22,23 @@ function listarEventoEvento() {
                 var nomeLocalidade = dados[i].nomeLocalidade;
                 var localCidade = dados[i].localCidade;
 
+                var descMin = descricao.slice(0, 60);
+                var descMax = descricao.slice(0, 191);
+                var descExibida;
+                var descCompleta = false
+                if (descricao.length >= 61) {
+                    descExibida = descMin;
+                } else {
+                    descCompleta = true;
+                    descExibida = descMax;
+                }
 
-                $("#listaEventoEvento").append("<a class='linkSemDecoracao' onclick='abrirPage(this),preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'>\n" +
+
+                $("#listaEventoEvento").append("<a class='linkSemDecoracao'>\n" +
                     "            <li class=\"item item-thumbnail-left item-icon-right\" style='padding-right: 45px; border-bottom: none;'><img src='" + imagem + "'>\n" +
                     "                <h2 class='positive' style='font-weight: bolder'>" + titulo + "\n" +
-                    "                    <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 60) + "...</p>\n" +
+                    "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block; font-size: 0.8rem;\" >" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> mais</span></span></p>\n" +
+                    "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: none; font-size: 0.8rem;\" >" + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> menos</span></span></p>\n" +
                     "                </h2>\n" +
                     "                <div class=\"tabs-icon-top icon positive\"><div class=\"tab-item\" style='position: relative; top: 25px; height: 20px;'>" + horaEvento + "</div><i style='position: absolute; right: 0px!important;' class=\"icon ion-android-time\"></i></div>\n" +
                     "            </li>\n" +
@@ -35,7 +47,7 @@ function listarEventoEvento() {
                     "            <div style=\"display: flex;\">\n" +
                     "                <a style='max-width: none;' class=\"tab-item assertive\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
                     "                <a style='max-width: none;' class=\"tab-item dark\"><i class=\"icon ion-android-locate\"></i><span class=\"tab-title\">" + localCidade + "</span></a>\n" +
-                    "                <a style='max-width: none;' class=\"tab-item balanced\" href='https://api.whatsapp.com/send?text=Título: "+titulo+", Descrição: "+descricao+"'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item balanced\" href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +
                     "            </div>\n" +
                     "        </li>\n" +
                     "        <div class=\"spacer\" style=\"height: 10px;\"></div>");
@@ -64,29 +76,20 @@ function listarEventoEvento() {
     );
 }
 
-function abrirPage(el) {
-    $(el).attr("ui-sref", "informacoesNoticias")
-
-}
-
-function preencherEventoInfo(d, img, t) {
-
-    $("#titloNoticia").empty();
-    $("#descricaoNoticia").empty();
-    setTimeout(function () {
-        $("#imagemNoticiaInfo").attr("src", img);
-        $("#titloNoticia").append("" + t);
-        $("#descricaoNoticia").append("" + d);
-
-    }, 100)
-}
+// function preencherEventoInfo(d, img, t) {
+//
+//     $("#tituloAcon").empty();
+//     $("#descricaoAcon").empty();
+//     setTimeout(function () {
+//         $("#imagemAcon").attr("src", img);
+//         $("#tituloAcon").append(t);
+//         $("#descricaoAcon").append(d);
+//     }, 100)
+// }
 
 function limparEListarEventoAdm() {
-
     $("#inicioListaEventoHoje").empty();
     listarEventoAdm();
-
-
 }
 
 //////////////////FOTO EVENTO///////////////////

@@ -44,8 +44,7 @@ function listarEventoNoticias() {
                     descExibida=descMax;
                 }
 
-                $("#listaEventoNoticas").append("  " +
-                    "        <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px;box-shadow: 0 0 0; border-width: 1px 0px 1px 0px; border-style: groove;'>\n" +
+                $("#listaEventoNoticas").append("<div class=\"list card manual-card-fullwidth \" style='padding-top: 0px;box-shadow: 0 0 0; border-width: 1px 0px 1px 0px; border-style: groove;'>\n" +
                     "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                     "                <i class=\"icon ion-android-calendar \"></i>\n" +
                     "                <p style=\"text-align: left; padding-left: 10px; font-weight: bold; font-size: large; color: #3f83f5;\">" + titulo + "</p>\n" +
@@ -56,8 +55,8 @@ function listarEventoNoticias() {
                     "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location assertive\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
                     "            </div>\n" +
                     "            <div id='" + id + "' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
-                    "                <p class='desc' style=\"margin-top:0px;color:#000000; display: block\" >" +descExibida + "<span id='mostraDesc'>...<span id='descMin"+id+"' style='color: #787878;' onclick='lerMais()'> mais</span></span></p>\n" +
-                    "                <p class='desc' style=\"margin-top:0px;color:#000000; display: none\" >" +descMax + "<span id='mostraDesc'>...<span id='descMax"+id+"' style='color: #787878;' onclick='lerMais()'> menos</span></span></p>\n" +
+                    "                <p class='desc"+id+"' style=\"margin-top:0px;color:#000000; display: block\" >" +descExibida + "<span id='mostraDesc'>...<span id='descMin"+id+"' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> mais</span></span></p>\n" +
+                    "                <p class='desc"+id+"' style=\"margin-top:0px;color:#000000; display: none\" >" +descMax + "<span id='mostraDesc'><span id='descMax"+id+"' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> menos</span></span></p>\n" +
                     "            </div>\n" +
                     "        </div>");
 
@@ -73,7 +72,10 @@ function listarEventoNoticias() {
     };
     $.getJSON(json, onSuccess).fail(
     );
+}
 
+function lerMais(id) {
+    $("."+id).toggle();
 }
 
 function checarDataEvento(data) {
@@ -84,20 +86,13 @@ function checarDataEvento(data) {
     }
 }
 
-function lerMais() {
-    $(".desc").slideToggle();
-    $('ion-content, body').animate({scrollTop:0}, 'slow');
-}
-
-
 function preencherNoticiaInfo(d, imagem, t) {
-    $("#titloNoticia").empty();
-    $("#descricaoNoticia").empty();
+    $("#tituloAcon").empty();
+    $("#descricaoAcon").empty();
     setTimeout(function () {
         $("#imagemNoticiaInfo").attr('src', imagem);
-        $("#titloNoticia").append("" + t);
-        $("#descricaoNoticia").append("" + d);
-
+        $("#tituloAcon").append("" + t);
+        $("#descricaoAcon").append("" + d);
     }, 10)
 }
 

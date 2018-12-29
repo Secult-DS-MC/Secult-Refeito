@@ -2,6 +2,22 @@ function validarVazio(valor) {
     if (valor != "") return true;
 }
 
+function validarDescAcon(){
+    $("#descricaoAdm").keyup(function () {
+        if ($("#descricaoAdm").val() != '') {
+            if ($("#descricaoAdm").val().length < 191 & $("#descricaoAdm").val().length > 0) {
+                $("#descricaoAdm").show('pulsate');
+            } else {
+                return true
+                $("#descricaoAdm").hide();
+            }
+        } else {
+            return true
+            $("#descricaoAdm").hide();
+        }
+    })
+}
+
 function validarCadastroAcontecimento() {
     var titulo = $("#tituloAdm").val();
     var descricao = $("#descricaoAdm").val();
@@ -13,7 +29,7 @@ function validarCadastroAcontecimento() {
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
         if (tipo == "E") {
-            if (validarVazio(localCidade)) {
+            if (validarVazio(localCidade) && validarDescAcon()) {
                 cadastroAcontecimento();
             } else {
                 swal("Todo evento precisa de um ponto específico na localidade!")
@@ -93,7 +109,7 @@ function listarEventoAdm() {
                     "                </div>\n" +
                     "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
                     "                    <div style=\"height: 35px\">\n" +
-                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" href='#/page20'>\n" +
+                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" ui-sref='alterarAcontecimentoAdm'>\n" +
                     "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
                     "                        </a>\n" +
                     "                    </div>\n" +

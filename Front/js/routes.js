@@ -105,18 +105,18 @@ angular.module('app.routes', [])
                 controller: 'eventosEmPovoadosCtrl'
             })
 
-            .state('administrador', {
+            .state('acontecimentoAdm', {
                 url: '/page18',
                 templateUrl: 'templates/acontecimentoAdm.html',
                 controller: 'acontecimentoAdmCtrl'
             })
 
-            .state('cadastroEvento', {
+            .state('cadastrarAcontecimentoAdm', {
                 url: '/page19',
                 templateUrl: 'templates/cadastrarAcontecimentoAdm.html',
                 controller: 'cadastrarAcontecimentoAdmCtrl'
             })
-            .state('updateEvento', {
+            .state('alterarAcontecimentoAdm', {
                 url: '/page20',
                 templateUrl: 'templates/alterarAcontecimentoAdm.html',
                 controller: 'alterarAcontecimentoAdmCtrl'
@@ -133,10 +133,10 @@ angular.module('app.routes', [])
                 controller: 'autenticarCadartCtrl'
             })
 
-            .state('informacoesNoticias', {
+            .state('infoEventoCalendario', {
                 url: '/page21',
-                templateUrl: 'templates/informacoesNoticias.html',
-                controller: 'informacoesNoticiasCtrl'
+                templateUrl: 'templates/infoEventoCalendario.html',
+                controller: 'infoEventoCalendarioCtrl'
             })
             .state('cultTobiasCidade', {
                 url: '/page25',

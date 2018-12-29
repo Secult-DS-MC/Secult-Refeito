@@ -107,7 +107,7 @@ angular.module('app.controllers', [])
             mostrarInputCadastroEvento();
         }])
 
-    .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',
+    .controller('infoEventoCalendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])
