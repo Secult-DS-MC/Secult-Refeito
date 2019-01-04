@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
-
 public class AcontecimentoDao {
 
     private Connection connection;
@@ -57,12 +56,44 @@ public class AcontecimentoDao {
         return id;
     }
 
+    public List<Acontecimento> listarAcontecimentoTipo(String tipo) throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem)\n"
+                + "  WHERE origem = " + tipo + "";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
     public List<Acontecimento> listaAcontecimento() throws SQLException, Exception {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT * FROM acontecimento order by visibilidade = 'n'";
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) order by visibilidade = 'n';";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -81,12 +112,16 @@ public class AcontecimentoDao {
 
     }
 
-     public List<Acontecimento> listarAcontecimentoPorVisibilidadeS() throws SQLException, Exception {
+    public List<Acontecimento> listarAcontecimentoPorVisibilidadeS() throws SQLException, Exception {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT * FROM acontecimento WHERE visibilidade = 's'";
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) \n"
+                + "  WHERE visibilidade = 's';";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -104,13 +139,17 @@ public class AcontecimentoDao {
         }
 
     }
-     
-     public List<Acontecimento> listarAcontecimentoPorVisibilidadeN() throws SQLException, Exception {
+
+    public List<Acontecimento> listarAcontecimentoPorVisibilidadeN() throws SQLException, Exception {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
 
-        String sql = "SELECT * FROM acontecimento WHERE visibilidade = 'n'";
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) \n"
+                + "  WHERE visibilidade = 'n';";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -128,37 +167,17 @@ public class AcontecimentoDao {
         }
 
     }
-     
-     public List<Acontecimento> listarAcontecimentoPorEsseMes() throws SQLException, Exception {
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        this.connection = new ConnectionFactory().getConnection();
-        int mes = Comum.mesAt();
-        String sql = "SELECT * FROM acontecimento where EXTRACT(month from data_evento)="+mes ;
-        try {
-            stmt = connection.prepareStatement(sql);
-            rs = stmt.executeQuery();
 
-            return resultSetToObjectTransfer(rs);
-
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (Exception e) {
-            }
-        }
-
-    }
-     
-     public List<Acontecimento> listarAcontecimentoUltimos6Meses() throws SQLException, Exception {
+    public List<Acontecimento> listarAcontecimentoPorEsseMes() throws SQLException, Exception {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         this.connection = new ConnectionFactory().getConnection();
         int mes = Comum.mesAt();
-        String sql = "SELECT * FROM acontecimento where EXTRACT(month from data_evento)>=6 order by EXTRACT(month from data_evento)";
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) \n"
+                + "  WHERE EXTRACT(month from data_evento)=" + mes;
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -176,11 +195,43 @@ public class AcontecimentoDao {
         }
 
     }
-     
-      public List<Acontecimento> getAcontecimentoById(Acontecimento evento) throws SQLException, Exception {
+
+    public List<Acontecimento> listarAcontecimentoUltimos6Meses() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        this.connection = new ConnectionFactory().getConnection();
+        int mes = Comum.mesAt();
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) \n"
+                + "  where EXTRACT(month from data_evento)>=6 order by EXTRACT(month from data_evento)";
+        try {
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
+    public List<Acontecimento> getAcontecimentoById(Acontecimento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from acontecimento where  id = ?";
+        String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
+                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "  FROM acontecimento as a JOIN origem as o\n"
+                + "  ON(a.origem = o.id_origem) \n"
+                + "  WHERE id = ?";
         ResultSet rs = null;
         try {
             pstmt = connection.prepareStatement(sql);
@@ -216,13 +267,14 @@ public class AcontecimentoDao {
             acontecimento.setIdLocalidade(rs.getInt("id_localidade"));
             acontecimento.setLocalCidade(rs.getString("local_cidade"));
             acontecimento.setOrigem(rs.getInt("origem"));
+            acontecimento.setNomeOrigem(rs.getString("nome_origem"));
 
             objs.add(acontecimento);
 
         }
         return objs;
     }
-    
+
     public boolean updateAcontecimento(Acontecimento evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         PreparedStatement stmt = null;
 
@@ -259,21 +311,20 @@ public class AcontecimentoDao {
 
     }
 
-    public boolean deletarAcontecimento (Acontecimento evento) throws Exception {
+    public boolean deletarAcontecimento(Acontecimento evento) throws Exception {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-        ImagemDao img=new ImagemDao();
+        ImagemDao img = new ImagemDao();
         String sql = "DELETE FROM acontecimento WHERE id=?";
-        long id =  evento.getId();
+        long id = evento.getId();
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, evento.getId());
-            if(img.deletarImagem(id)){
-                 stmt.executeUpdate();
+            if (img.deletarImagem(id)) {
+                stmt.executeUpdate();
             }
-           
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

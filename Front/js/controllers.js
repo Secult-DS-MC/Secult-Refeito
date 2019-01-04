@@ -7,6 +7,7 @@ angular.module('app.controllers', [])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            listarPublicidade();
             listarEventoNoticias();
             verificarAdministrador();
         }])

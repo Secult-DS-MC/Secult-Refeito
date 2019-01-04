@@ -1,76 +1,97 @@
 <ion-view title="Cadastro de evento" id="page19">
     <ion-nav-buttons side="right" class="has-header">
-        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
+        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias"></button>
     </ion-nav-buttons>
-    <ion-content padding="true" class="has-header has-footer">
-        <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none;">
-            <img src="./img/sem-foto.jpg" id="imgThumbnail" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
-            <input type="file" id="inputImagem" style="display: none" >
-        </label>
-        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto</button>
 
-        <form class="list">
-            <label class="item item-input">
-                <input type="text" placeholder="Título" id="tituloAdm">
+    <div style="display: block" onclick="$('#cadastroAcon').toggle('slow'), $(this).toggle('slow')">
+        <ion-content padding="true" class="has-header has-footer">
+            <button-bar>
+                <button class="button button-full button-positive" onclick="localStorage.setItem('origemAcom', 10)">
+                    Patrocinado
+                </button>
+                <button class="button button-full button-positive" onclick="localStorage.setItem('origemAcom', 20)">
+                    Publicidade
+                </button>
+                <button class="button button-full button-positive" onclick="localStorage.setItem('origemAcom', 30)">
+                    Oficial
+                </button>
+                <button class="button button-full button-positive" onclick="localStorage.setItem('origemAcom', 40)">
+                    Comunidade
+                </button>
+            </button-bar>
+        </ion-content>
+    </div>
+
+    <div style="display: none" id="cadastroAcon">
+
+        <ion-content padding="true" class="has-header has-footer">
+
+            <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none;">
+                <img src="./img/sem-foto.jpg" id="imgThumbnail"
+                     style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
+                <input type="file" id="inputImagem" style="display: none">
             </label>
-
-            <label class="item item-input">
-                <textarea style="height: 35px;" placeholder="Descrição do acontecimento" rows="3" id="descricaoAdm"></textarea>
-            </label>
-
-            <label class="item item-input" >
-                <span class="input-label">Data:</span>
-                <input type="date" id="dataEventoAdm">
-            </label>
-
-            <label class="item item-input">
-                <span class="input-label">Horário:</span>
-                <input type="time" placeholder="" id="horarioAdm">
-            </label>
-
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Localidade:</span>
-                <select id="localidadeAdm">
-                </select>
-            </label>
-
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Tipo:</span>
-                <select id="tipoAdm" onchange="mostrarInputCadastroEvento(this.value)">
-                    <option value="">Selecione</option>
-                    <option value="N">Notícia</option>
-                    <option value="E">Evento</option>
-                    <option value="C">Calendário</option>
-                </select>
-            </label>
-
-            <label class="item item-input" id="labelLocal">
-                <input type="text" placeholder="Local do evento na cidade" id="localAdm">
-            </label>
-        </form>
-
-
-    </ion-content>
-
-    <ion-footer-bar style="padding: 0px; margin: 0px">
-        <div onclick="validarCadastroAcontecimento()" class="tabs positive-bg" style="background-color: #387ef5; color: white">
-            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-checkmark-round button-positive">Cadastrar
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                    class="button button-dark button-small button-block" id="imputImg"
+                    onclick="abrirImpFile('inputImagem')">Alterar Foto
             </button>
-        </div>
-    </ion-footer-bar>
 
-    <!--<ion-footer-bar style="padding: 0px; margin: 0px">-->
-        <!--<div class="tabs tabs-icon-top" style="background-color: #387ef5; color: white">-->
-            <!--<a class="tab-item" onclick="validarCadastroAcontecimento()">-->
-                <!--<i class="icon ion-checkmark-round"></i>-->
-                <!--Cadastrar-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</ion-footer-bar>-->
+            <form class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="Título" id="tituloAdm">
+                </label>
 
+                <label class="item item-input">
+                    <textarea style="height: 35px;" placeholder="Descrição do acontecimento" rows="3"
+                              id="descricaoAdm"></textarea>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Data:</span>
+                    <input type="date" id="dataEventoAdm">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Horário:</span>
+                    <input type="time" placeholder="" id="horarioAdm">
+                </label>
+
+                <label class="item item-select" style="border-width: 1px 0;">
+                    <span class="input-label">Localidade:</span>
+                    <select id="localidadeAdm">
+                    </select>
+                </label>
+
+                <label class="item item-select" style="border-width: 1px 0;">
+                    <span class="input-label">Tipo:</span>
+                    <select id="tipoAdm" onchange="mostrarInputCadastroEvento(this.value)">
+                        <option value="">Selecione</option>
+                        <option value="N">Notícia</option>
+                        <option value="E">Evento</option>
+                        <option value="C">Calendário</option>
+                    </select>
+                </label>
+
+                <label class="item item-input" id="labelLocal">
+                    <input type="text" placeholder="Local do evento na cidade" id="localAdm">
+                </label>
+            </form>
+
+        </ion-content>
+
+        <ion-footer-bar style="padding: 0px; margin: 0px">
+            <div onclick="validarCadastroAcontecimento()" class="tabs positive-bg"
+                 style="background-color: #387ef5; color: white">
+                <button style="background-color: #387ef5!important; border-color: transparent!important;"
+                        class="button icon-left ion-checkmark-round button-positive">Cadastrar
+                </button>
+            </div>
+        </ion-footer-bar>
+    </div>
 </ion-view>
+
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
         location.reload();
     });
 </script>

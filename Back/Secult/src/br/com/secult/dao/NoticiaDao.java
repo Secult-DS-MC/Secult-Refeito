@@ -60,5 +60,39 @@ public class NoticiaDao {
         }
 
     }
+    
+    public List<Acontecimento> listarPublicidade() throws SQLException, Exception {
+        PreparedStatement stmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+
+        ResultSet rs = null;
+
+        String sql = "SELECT id, titulo, visibilidade, origem FROM acontecimento WHERE origem = '10' AND visibilidade = 's';";
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+
+            List<Acontecimento> objs = new ArrayList<Acontecimento>();
+            while (rs.next()) {
+                Acontecimento noticia = new Acontecimento();
+                noticia.setId(rs.getLong("id"));
+                noticia.setTitulo(rs.getString("titulo"));
+                noticia.setVisibilidade(rs.getString("visibilidade"));
+                noticia.setOrigem(rs.getInt("origem"));
+                objs.add(noticia);
+            }
+            return objs;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
 
 }

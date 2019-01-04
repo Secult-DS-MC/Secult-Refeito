@@ -29,7 +29,7 @@ function validarCadastroAcontecimento() {
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
         if (tipo == "E") {
-            if (validarVazio(localCidade) && validarDescAcon()) {
+            if (validarVazio(localCidade)) {
                 cadastroAcontecimento();
             } else {
                 swal("Todo evento precisa de um ponto específico na localidade!")
@@ -50,12 +50,13 @@ function cadastroAcontecimento() {
     var localidade = $("#localidadeAdm").val();
     var tipo = $("#tipoAdm").val();
     var localCidade = $("#localAdm").val();
+    var origem = localStorage.getItem("origemAcom");
 
     if (localCidade == "") {
         localCidade = "A";
     }
 
-    var json = servidor + "/Secult/acontecimento/insertAcontecimento/" + titulo + "&" + descricao + "&" + dataEvento + "&n&" + tipo + "&" + horaEvento + "&" + localidade + "&" + localCidade;
+    var json = servidor + "/Secult/acontecimento/insertAcontecimento/" + titulo + "&" + descricao + "&" + dataEvento + "&n&" + tipo + "&" + horaEvento + "&" + localidade + "&" + localCidade + "&" + origem;
 
     var onSuccess = function (result) {
 
@@ -279,7 +280,18 @@ function listarEventoFiltro(filtro) {
         case "6Mes":
             json = servidor + "/Secult/acontecimento/listarAcontecimentoUltimos6Meses";
             break;
-
+        case "10":
+            json = servidor + "/Secult/acontecimento/listarAcontecimentoTipo/" + filtro;
+            break;
+        case "20":
+            json = servidor + "/Secult/acontecimento/listarAcontecimentoTipo/" + filtro;
+            break;
+        case "30":
+            json = servidor + "/Secult/acontecimento/listarAcontecimentoTipo/" + filtro;
+            break;
+        case "40":
+            json = servidor + "/Secult/acontecimento/listarAcontecimentoTipo/" + filtro;
+            break;
     }
 
 
@@ -296,6 +308,7 @@ function listarEventoFiltro(filtro) {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento;
+                var nomeTipo = dados[i].nome_origem;
                 var imagem = servidor + "/Secult/imagem/findETC/" + id +"&A";
 
                 //if(imagem == null) imagem = "../../img/semImagem.png";
@@ -306,7 +319,8 @@ function listarEventoFiltro(filtro) {
 
                 $("#inicioListaEventoHoje").append("<li id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
                     "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
-                    "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
+                    "                <h2 id='titulo" + id + "'  style=\"font-weight: bolder; font-size: larger\">" + titulo + "</h2>\n" +
+                    "                   <p style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block;\">" + nomeTipo + "</p>\n" +
                     "                <div class=\"item-icon-right\">\n" +
                     "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
                     "                </div>\n" +
@@ -338,3 +352,73 @@ function listarEventoFiltro(filtro) {
 
     );
 }
+
+// function listarEventoFiltroTipo(tipo) {
+//     $("#inicioListaEventoHoje").empty()
+//     carregando(1)
+//
+//     var json;
+//     console.log(tipo)
+//
+//
+//     if(tipo == "Todos"){
+//         json = servidor + "/Secult/acontecimento/listarAcontecimento";
+//     }else{
+//         json = servidor + "
+//     }
+//
+//     var onSuccess = function (result) {
+//
+//         var dados = result.acontecimentos;
+//
+//         if (dados[0]) {
+//
+//             for (var i in dados) {
+//
+//                 var id = dados[i].id;
+//                 var titulo = dados[i].titulo;
+//                 var descricao = dados[i].descricao;
+//                 var visibilidade = dados[i].visibilidade;
+//                 var tipo = dados[i].tipo_evento;
+//                 var imagem = servidor + "/Secult/imagem/findETC/" + id +"&A";
+//
+//                 //if(imagem == null) imagem = "../../img/semImagem.png";
+//                 var horaEvento = dados[i].hora_evento;
+//                 var dataEvento = dados[i].data_evento;
+//                 var idLocalidade = dados[i].idLocalidade;
+//                 var localCidade = dados[i].localCidade;
+//
+//                 $("#inicioListaEventoHoje").append("<li id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
+//                     "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
+//                     "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
+//                     "                <div class=\"item-icon-right\">\n" +
+//                     "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
+//                     "                </div>\n" +
+//                     "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
+//                     "                    <div style=\"height: 35px\">\n" +
+//                     "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" href='#/page20'>\n" +
+//                     "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
+//                     "                        </a>\n" +
+//                     "                    </div>\n" +
+//                     "                    <div style=\"height: 30px\">\n" +
+//                     "                        <a class='button button-light' onclick=\"excluirAcontecimento(" + id + ")\">\n" +
+//                     "                            <div style=\"font-weight:600;color:#FF0020;font-size:15px;\">Excluir\n" +
+//                     "                            </div>\n" +
+//                     "                        </a>\n" +
+//                     "                    </div>\n" +
+//                     "                </div>\n" +
+//                     "            </li>\n");
+//
+//                 if (visibilidade == "s") {
+//                     $("#checked" + id).css('color', 'green');
+//                 } else {
+//                     $("#checked" + id).css('color', '#e43a38');
+//                 }
+//             }
+//         }
+//         carregando(2)
+//     };
+//     $.getJSON(json, onSuccess).fail(
+//
+//     );
+// }

@@ -31,4 +31,19 @@ public class NoticiaResource {
 
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
+    
+    @GET
+    @Path("/listarPublicidade")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarPublicidade() throws SQLException, Exception {
+        NoticiaDao noticiaDao = new NoticiaDao();
+        List<Acontecimento> noticias = noticiaDao.listarPublicidade();
+
+        Gson gson = new GsonBuilder().create();
+        JsonArray ArrayUsuarios = gson.toJsonTree(noticias).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("publicidade", ArrayUsuarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+    }
 }
