@@ -21,24 +21,25 @@ public class AcontecimentoDao {
 
     private Connection connection;
 
-    public long insertAcontecimento(Acontecimento evento) {
+    public long insertAcontecimento(Acontecimento acontecimento) {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs;
         long id = 0;
-        String sql = "INSERT INTO public.acontecimento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_localidade, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO public.acontecimento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_localidade, local_cidade, origem)  values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
-            Date date = Date.valueOf(evento.getData_evento());
+            Date date = Date.valueOf(acontecimento.getData_evento());
             stmt = connection.prepareStatement(sql, (Statement.RETURN_GENERATED_KEYS));
 
-            stmt.setString(1, evento.getTitulo());
-            stmt.setString(2, evento.getDescricao());
+            stmt.setString(1, acontecimento.getTitulo());
+            stmt.setString(2, acontecimento.getDescricao());
             stmt.setDate(3, date);
-            stmt.setString(4, evento.getVisibilidade());
-            stmt.setString(5, evento.getTipo_evento());
-            stmt.setString(6, evento.getHora_evento());
-            stmt.setInt(7, evento.getIdLocalidade());
-            stmt.setString(8, evento.getLocalCidade());
+            stmt.setString(4, acontecimento.getVisibilidade());
+            stmt.setString(5, acontecimento.getTipo_evento());
+            stmt.setString(6, acontecimento.getHora_evento());
+            stmt.setInt(7, acontecimento.getIdLocalidade());
+            stmt.setString(8, acontecimento.getLocalCidade());
+            stmt.setInt(9, acontecimento.getOrigem());
 
             stmt.executeUpdate();
 
@@ -175,29 +176,8 @@ public class AcontecimentoDao {
         }
 
     }
-
-    private List<Acontecimento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
-        List<Acontecimento> objs = new Vector();
-        while (rs.next()) {
-            Acontecimento even = new Acontecimento();
-            even.setId(rs.getLong("id"));
-            even.setTitulo(rs.getString("titulo"));
-            even.setDescricao(rs.getString("descricao"));
-            even.setData_evento(rs.getString("data_evento"));
-            even.setData_cadastro(rs.getDate("data_cadastro"));
-            even.setTipo_evento(rs.getString("tipo_evento"));
-            even.setHora_evento(rs.getString("hora_evento"));
-            even.setVisibilidade(rs.getString("visibilidade"));
-            even.setIdLocalidade(rs.getInt("id_localidade"));
-            even.setLocalCidade(rs.getString("local_cidade"));
-
-            objs.add(even);
-
-        }
-        return objs;
-    }
-
-    public List<Acontecimento> getAcontecimentoById(Acontecimento evento) throws SQLException, Exception {
+     
+      public List<Acontecimento> getAcontecimentoById(Acontecimento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "select * from acontecimento where  id = ?";
@@ -219,6 +199,28 @@ public class AcontecimentoDao {
             }
         }
 
+    }
+
+    private List<Acontecimento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
+        List<Acontecimento> objs = new Vector();
+        while (rs.next()) {
+            Acontecimento acontecimento = new Acontecimento();
+            acontecimento.setId(rs.getLong("id"));
+            acontecimento.setTitulo(rs.getString("titulo"));
+            acontecimento.setDescricao(rs.getString("descricao"));
+            acontecimento.setData_evento(rs.getString("data_evento"));
+            acontecimento.setData_cadastro(rs.getDate("data_cadastro"));
+            acontecimento.setTipo_evento(rs.getString("tipo_evento"));
+            acontecimento.setHora_evento(rs.getString("hora_evento"));
+            acontecimento.setVisibilidade(rs.getString("visibilidade"));
+            acontecimento.setIdLocalidade(rs.getInt("id_localidade"));
+            acontecimento.setLocalCidade(rs.getString("local_cidade"));
+            acontecimento.setOrigem(rs.getInt("origem"));
+
+            objs.add(acontecimento);
+
+        }
+        return objs;
     }
     
     public boolean updateAcontecimento(Acontecimento evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {

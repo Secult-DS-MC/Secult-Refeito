@@ -27,7 +27,16 @@ public class Acontecimento {
     private String nomeLocalidade;
     private String localCidade;
     private int id_imagem;
+    private int origem;
     private byte[] imagem;
+    
+    public int getOrigem(){
+        return origem;
+    }
+    
+    public void setOrigem(int origem){
+        this.origem = origem;
+    }
 
     public int getIdLocalidade() {
         return idLocalidade;

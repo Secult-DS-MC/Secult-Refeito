@@ -6,8 +6,6 @@
 package br.com.secult.resource;
 
 import br.com.secult.dao.AcontecimentoDao;
-import javax.ws.rs.Path;
-import br.com.secult.dao.EventoDao;
 import br.com.secult.model.Acontecimento;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,10 +29,14 @@ import javax.ws.rs.core.Response;
 @Path("/acontecimento")
 public class AcontecimentoResource {
     @GET
-    @Path("/insertAcontecimento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_localidade}&{local_cidade}")
+    @Path("/insertAcontecimento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_localidade}&{local_cidade}&{origem}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_localidade") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, 
+           @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, 
+           @PathParam("id_localidade") int id_povoado, @PathParam("local_cidade") String localCidade, @PathParam("origem") int origem) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        
         Acontecimento acontecimento = new Acontecimento();
+        
         acontecimento.setTitulo(titulo);
         acontecimento.setDescricao(descricao);
         acontecimento.setData_evento(data_evento);
@@ -43,6 +45,7 @@ public class AcontecimentoResource {
         acontecimento.setHora_evento(hora_evento);
         acontecimento.setIdLocalidade(id_povoado);
         acontecimento.setLocalCidade(localCidade);
+        acontecimento.setOrigem(origem);
 
         AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
         long id = acontecimentoDao.insertAcontecimento(acontecimento);
