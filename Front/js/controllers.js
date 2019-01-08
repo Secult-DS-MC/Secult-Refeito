@@ -175,7 +175,7 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('testesCtrl', ['$scope', '$stateParams',
+    .controller('cadastroArtistaCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])
