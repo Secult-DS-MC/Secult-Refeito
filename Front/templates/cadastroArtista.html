@@ -1,0 +1,134 @@
+<ion-view title="Cadastro de Artistas" id="page28" style="    background: #387ef5;">
+    <ion-nav-buttons drag-content="false" side="left"></ion-nav-buttons>
+
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <div class="cadastrar">
+            <div class="cadastrar-tela">
+                <div class="button-bar">
+                    <a class="button button-clear estagio estagio1"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: #86e286">1</a>
+                    <a class="button button-clear estagio estagio2"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">2</a>
+                    <a class="button button-clear estagio estagio3"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">3</a>
+                    <a class="button button-clear estagio estagio4"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">4</a>
+                    <a class="button button-clear estagio estagio5"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">5</a>
+                    <a class="button button-clear estagio estagio6"
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">6</a>
+
+                </div>
+                <div id="cdt-inicio" style="display: block">
+                    <div class="" style="margin-top: 20px; margin-left: 15px; margin-right: 15px;">
+                        <h4>O que é o cadart?</h4>
+                        <p>É um projeto criado pela secretaria de cultura de Tobias Barreto SE que tem como objetivo
+                            mapear os
+                            artistas locais.</p>
+                        <h4>Quais são os beneficios em se cadastrar?</h4>
+                        <p>Cadastrando-se o artista estará exposto a todos que tem interesse em contratar seus serviços
+                            assim como
+                            poderá ser indicado para serviços ou eventos ligados a prefeitura ou serviços e eventos
+                            privados.</p>
+                        <h4>Quem pode se cadastrar?</h4>
+                        <p>Toda pessoa que possua alguma arte e esteja disposta a compartilhar seu "dom" com todos!</p>
+                    </div>
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="$('.cadastrar').hide()" class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-inicio').hide(), $('#cdt-pessoal').show()"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Próximo</a>
+                    </div>
+                </div>
+                <div id="cdt-pessoal" style="display: none">
+                    <h3 style="text-align: center">Nos passe alguns dados!</h3>
+
+                    <h4>Seu nome completo: (obrigatório)</h4>
+                    <input type="text" id="nomeCompleto" class="obrigatorio2" placeholder="João Roberto da Silva">
+                    <h4>Qual seu nome artístico? (obrigatório)</h4>
+                    <input type="text" id="nomeArtistico"  class="obrigatorio2" placeholder="Joãozinho">
+                    <h4>E Sua arte? (obrigatório)</h4>
+                    <select style="width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;" id="cdtArte" class="obrigatorio2">
+                        <option value="">Selecione sua arte!</option>
+                        <option value="0">Outra</option>
+                    </select>
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a id="voltar2" onclick="posicaoCadastro('estagio1'),$('#cdt-inicio').show(), $('#cdt-pessoal').hide()"
+                           class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a id="proximo2" disabled onclick="posicaoCadastro('estagio3'),$('#cdt-pessoal').hide(), $('#cdt-descricao').show()"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+                <div id="cdt-descricao" style="display: none;  margin-top: 5%;">
+                    <h3 style="text-align: center">Fale mais sobre você!</h3>
+
+                    <h4>Descreva o que faz! (obrigatório)</h4>
+                    <textarea rows="5" maxlength="500"
+                              placeholder="Sou cantor e tenho uma banda chamada Arroz com Feijão"></textarea>
+                    <h4>Esta atualmente em algum projeto? (obrigatório)</h4>
+                    <textarea rows="5" maxlength="500"
+                              placeholder="Estamos ensaiando para nos apresentar no festival de musica!"></textarea>
+                    <h4>Qual sua idade? (obrigatório)</h4>
+                    <input type="text" placeholder="25">
+                    <div>
+                        <h4>Com qual gênero você se identifica?  (obrigatório)</h4>
+                        <select style="width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;">
+                            <option value="0">Prefiro não informar</option>
+                            <option value="f">Feminino</option>
+                            <option value="m">Masculino</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="button-bar" style="margin-top: 20%;">
+                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-pessoal').show(), $('#cdt-descricao').hide()"
+                           class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio4'),$('#cdt-descricao').hide(), $('#cdt-contato').show(),$('.cadastrar').css('height', tamanhoTela())"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+                <div id="cdt-contato" style="display: none;  margin-top: 5%;">
+                    <h3 style="text-align: center">Como podemos entrar em contato?</h3>
+
+                    <h4>Qual o seu email? (obrigatório)</h4>
+                    <input type="email" placeholder="joaoroberto@e-mail.com">
+                    <h4>E o seu telefone? (obrigatório)</h4>
+                    <input type="text" placeholder="00-00000-0000" onclick="$(this).mask('00-00000-0000')">
+                    <h4 style="text-align: center">Quer compartilhar suas redes sociais? (Opcional)</h4>
+
+                    <h4><i class="icon ion-social-facebook"></i> Facebook? (link do perfil) </h4>
+                    <input type="text" placeholder="https://www.facebook.com/joaozinhoinho.silva">
+                    <h4><i class="icon ion-social-youtube-outline"></i> Youtube:? (link do video/canal)</h4>
+                    <input type="text" placeholder="https://www.youtube.com/watch?v=gYaZY-gFh2c">
+                    <h4><i class="icon ion-social-instagram-outline"></i> Instagram: (nome de usuario)</h4>
+                    <input type="text" placeholder="joazinhoinho_inho">
+                    <div class="button-bar" style="margin-top: 10%;">
+                        <a onclick="posicaoCadastro('estagio3'),$('#cdt-descricao').show(), $('#cdt-contato').hide(),$('.cadastrar').css('height', tamanhoTela())"
+                           class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a onclick="posicaoCadastro('estagio5'),$('#cdt-descricao').hide(), $('#cdt-descricao').show()"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Proximo</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </ion-content>
+
+
+
+</ion-view>
