@@ -91,7 +91,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
 
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) order by visibilidade = 'n';";
         try {

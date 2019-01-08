@@ -342,10 +342,11 @@ function preencherClonar(id) {
                 var nomeTipo = dados[i].nome_origem;
                 setTimeout(function () {
                     var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
+                    console.log(imagem)
 
-                    $("#imgThumbnail").attr('src', imagem);
+                    $(".imgThumbnail1").attr('src', imagem);
                     localStorage.setItem('imgTeste', imagem);
-                }, 4000);
+                }, 100);
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].idLocalidade;
