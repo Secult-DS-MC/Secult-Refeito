@@ -1,5 +1,36 @@
 angular.module('app.controllers', [])
 
+    .controller('acontecimentoCtrl', function ($scope, $ionicActionSheet) {
+
+        $scope.triggerActionSheet = function () {
+            // Show the action sheet
+            var showActionSheet = $ionicActionSheet.show({
+                buttons: [
+                    {text: 'Clonar'}
+                ],
+
+                destructiveText: 'Excluir',
+                titleText: 'Opções',
+                cancelText: 'Cancel',
+
+                cancel: function () {
+                    // add cancel code...
+                },
+
+                buttonClicked: function (index) {
+                    if (index === 0) {
+                        window.location.href = "#/page30";
+                        preencherClonar(localStorage.getItem("idAcontecimento"));
+                    }
+                },
+
+                destructiveButtonClicked: function () {
+                    excluirAcontecimento(localStorage.getItem("idAcontecimento"));
+                }
+            });
+        };
+    })
+
     .controller('menuCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $('.fab-buttons').toggle();
@@ -20,7 +51,7 @@ angular.module('app.controllers', [])
             localStorage.setItem("Ativo", "Sim");
             setTimeout(function () {
                 $(".cadastrar").css("height", tamanhoTela())
-            },100)
+            }, 100)
         }])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
@@ -29,7 +60,7 @@ angular.module('app.controllers', [])
             usuarioLogado();
             setTimeout(function () {
                 salvaImagemImput()
-            },1000)
+            }, 1000)
         }])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
@@ -40,7 +71,7 @@ angular.module('app.controllers', [])
             verificarCpf();
             setTimeout(function () {
                 salvaImagemImput()
-            },1000)
+            }, 1000)
             botaoFotoFakeCadart(2);
 
         }])
@@ -56,7 +87,7 @@ angular.module('app.controllers', [])
         }])
 
     .controller('culturaCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams, $ionicSideMenuDelegate)  {
+        function ($scope, $stateParams, $ionicSideMenuDelegate) {
 
         }])
 
@@ -90,21 +121,21 @@ angular.module('app.controllers', [])
     .controller('eventosEmPovoadosCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             preencherDadosLocalidade();
-            selectLocalidade();
+            selectLocalidade('idLocalidade');
         }])
 
     .controller('acontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventoFiltro('Todos');
+            listarEventoFiltro('Todos')
         }])
 
     .controller('cadastrarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-        setTimeout(function () {
-            salvaImagemImput()
-        },1000)
+            setTimeout(function () {
+                salvaImagemImput()
+            }, 1000)
 
-            selectLocalidadeCadastro();
+            selectLocalidade('localidadeAdm');
             mostrarInputCadastroEvento();
         }])
 
@@ -127,8 +158,8 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
             setTimeout(function () {
                 salvaImagemImput()
-            },1000)
-            selectLocalidadeUp();
+            }, 1000)
+            selectLocalidade('localidadeUp');
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',
@@ -155,5 +186,9 @@ angular.module('app.controllers', [])
     .controller('superAdministradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
-        }]);
- 
+        }])
+
+    .controller('clonarAcontecimentoCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+            selectLocalidade('localidadeCl');
+        }])

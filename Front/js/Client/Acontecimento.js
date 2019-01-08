@@ -2,7 +2,39 @@ function validarVazio(valor) {
     if (valor != "") return true;
 }
 
-function validarDescAcon(){
+function validarDescAcon() {
+    $("#descricaoAdm").keyup(function () {
+        if ($("#descricaoAdm").val() != '') {
+            if ($("#descricaoAdm").val().length < 191 & $("#descricaoAdm").val().length > 0) {
+                $("#descricaoAdm").show('pulsate');
+            } else {
+                return true
+                $("#descricaoAdm").hide();
+            }
+        } else {
+            return true
+            $("#descricaoAdm").hide();
+        }
+    })
+}
+
+function validarDescAconUp() {
+    $("#descricaoUp").keyup(function () {
+        if ($("#descricaoUp").val() != '') {
+            if ($("#descricaoUp").val().length < 191 & $("#descricaoUp").val().length > 0) {
+                $("#descricaoUp").show('pulsate');
+            } else {
+                return true
+                $("#descricaoUp").hide();
+            }
+        } else {
+            return true
+            $("#descricaoUp").hide();
+        }
+    })
+}
+
+function validarDescAcon() {
     $("#descricaoAdm").keyup(function () {
         if ($("#descricaoAdm").val() != '') {
             if ($("#descricaoAdm").val().length < 191 & $("#descricaoAdm").val().length > 0) {
@@ -29,12 +61,16 @@ function validarCadastroAcontecimento() {
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
         if (tipo == "E") {
-            if (validarVazio(localCidade)) {
-                cadastroAcontecimento();
-            } else {
-                swal("Todo evento precisa de um ponto específico na localidade!")
+            if(descricao.length < 191){
+                if (validarVazio(localCidade)) {
+                    cadastroAcontecimento();
+                } else {
+                    swal("Todo evento precisa de um ponto específico na localidade!")
+                }
+            }else{
+                swal("Um evento só pode ter 191 caracter!")
             }
-        }else {
+        } else {
             cadastroAcontecimento();
         }
     } else {
@@ -66,7 +102,10 @@ function cadastroAcontecimento() {
         var id = jsonAdministrador.id_usuario
 
         if (status != "erro") {
-            inserirImagem(id, "A")
+            inserirImagem(id, "A");
+            $("#page19").click(function () {
+                location.reload();
+            });
         } else {
             swal("Não foi possivel cadastrar o acontecimento!");
         }
@@ -75,70 +114,8 @@ function cadastroAcontecimento() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function listarEventoAdm() {
-    $("#inicioListaEventoHoje").empty()
-    console.log('todos')
-    carregando(1)
-    var json = servidor + "/Secult/acontecimento/listarAcontecimento";
-
-    var onSuccess = function (result) {
-
-        var dados = result.acontecimentos;
-
-        if (dados[0]) {
-
-            for (var i in dados) {
-
-                var id = dados[i].id;
-                var titulo = dados[i].titulo;
-                var descricao = dados[i].descricao;
-                var visibilidade = dados[i].visibilidade;
-                var tipo = dados[i].tipo_evento;
-                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
-
-                //if(imagem == null) imagem = "../../img/semImagem.png";
-                var horaEvento = dados[i].hora_evento;
-                var dataEvento = dados[i].data_evento;
-                var idLocalidade = dados[i].idLocalidade;
-                var localCidade = dados[i].localCidade;
-
-                $("#inicioListaEventoHoje").append("<li id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
-                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
-                    "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
-                    "                <div class=\"item-icon-right\">\n" +
-                    "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
-                    "                </div>\n" +
-                    "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
-                    "                    <div style=\"height: 35px\">\n" +
-                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" ui-sref='alterarAcontecimentoAdm'>\n" +
-                    "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
-                    "                        </a>\n" +
-                    "                    </div>\n" +
-                    "                    <div style=\"height: 30px\">\n" +
-                    "                        <a class='button button-light' onclick=\"excluirAcontecimento(" + id + ")\">\n" +
-                    "                            <div style=\"font-weight:600;color:#FF0020;font-size:15px;\">Excluir\n" +
-                    "                            </div>\n" +
-                    "                        </a>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "            </li>\n");
-
-                if (visibilidade == "s") {
-                    $("#checked" + id).css('color', 'green');
-                } else {
-                    $("#checked" + id).css('color', '#e43a38');
-                }
-            }
-        }
-        carregando(2)
-    };
-    $.getJSON(json, onSuccess).fail(
-
-    );
-}
-
-
 function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem, localCidade) {
+    localStorage.setItem("idAcontecimento", id);
     id = $("#" + id).attr('id');
     setTimeout(function () {
         $("#tituloUp").val(titulo);
@@ -237,7 +214,8 @@ function excluirAcontecimento(id) {
                         icon: "success",
                         buttons: false,
                     });
-                    $("#"+id).css("display", "none");
+                    window.location.href = "#/page18";
+                    $("#" + id).css("display", "none");
                     carregando(2)
                 } else {
                     swal({
@@ -309,7 +287,7 @@ function listarEventoFiltro(filtro) {
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento;
                 var nomeTipo = dados[i].nome_origem;
-                var imagem = servidor + "/Secult/imagem/findETC/" + id +"&A";
+                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
 
                 //if(imagem == null) imagem = "../../img/semImagem.png";
                 var horaEvento = dados[i].hora_evento;
@@ -317,32 +295,21 @@ function listarEventoFiltro(filtro) {
                 var idLocalidade = dados[i].idLocalidade;
                 var localCidade = dados[i].localCidade;
 
-                $("#inicioListaEventoHoje").append("<li id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
-                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
+                localStorage.setItem('dadosClone', JSON.stringify(dados));
+
+                $("#inicioListaEventoHoje").append("<a href='#page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
+                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='" + imagem + "'>\n" +
                     "                <h2 id='titulo" + id + "'  style=\"font-weight: bolder; font-size: larger\">" + titulo + "</h2>\n" +
                     "                   <p style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block;\">" + nomeTipo + "</p>\n" +
                     "                <div class=\"item-icon-right\">\n" +
-                    "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
+                    "                    <i id='checked" + id + "' class=\"icon ion-eye inline\"></i>\n" +
                     "                </div>\n" +
-                    "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
-                    "                    <div style=\"height: 35px\">\n" +
-                    "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" href='#/page20'>\n" +
-                    "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
-                    "                        </a>\n" +
-                    "                    </div>\n" +
-                    "                    <div style=\"height: 30px\">\n" +
-                    "                        <a class='button button-light' onclick=\"excluirAcontecimento(" + id + ")\">\n" +
-                    "                            <div style=\"font-weight:600;color:#FF0020;font-size:15px;\">Excluir\n" +
-                    "                            </div>\n" +
-                    "                        </a>\n" +
-                    "                    </div>\n" +
-                    "                </div>\n" +
-                    "            </li>\n");
+                    "            </a>\n");
 
                 if (visibilidade == "s") {
                     $("#checked" + id).css('color', 'green');
                 } else {
-                    $("#checked" + id).css('color', '#e43a38');
+                    $("#checked" + id).removeClass("ion-eye").addClass("ion-eye-disabled").css('color', 'gray');
                 }
             }
         }
@@ -353,72 +320,113 @@ function listarEventoFiltro(filtro) {
     );
 }
 
-// function listarEventoFiltroTipo(tipo) {
-//     $("#inicioListaEventoHoje").empty()
-//     carregando(1)
-//
-//     var json;
-//     console.log(tipo)
-//
-//
-//     if(tipo == "Todos"){
-//         json = servidor + "/Secult/acontecimento/listarAcontecimento";
-//     }else{
-//         json = servidor + "
-//     }
-//
-//     var onSuccess = function (result) {
-//
-//         var dados = result.acontecimentos;
-//
-//         if (dados[0]) {
-//
-//             for (var i in dados) {
-//
-//                 var id = dados[i].id;
-//                 var titulo = dados[i].titulo;
-//                 var descricao = dados[i].descricao;
-//                 var visibilidade = dados[i].visibilidade;
-//                 var tipo = dados[i].tipo_evento;
-//                 var imagem = servidor + "/Secult/imagem/findETC/" + id +"&A";
-//
-//                 //if(imagem == null) imagem = "../../img/semImagem.png";
-//                 var horaEvento = dados[i].hora_evento;
-//                 var dataEvento = dados[i].data_evento;
-//                 var idLocalidade = dados[i].idLocalidade;
-//                 var localCidade = dados[i].localCidade;
-//
-//                 $("#inicioListaEventoHoje").append("<li id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
-//                     "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='"+imagem+"'>\n" +
-//                     "                <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
-//                     "                <div class=\"item-icon-right\">\n" +
-//                     "                    <i id='checked" + id + "' style=\"height: 23%; margin-right: 3%\" class=\"icon ion-eye inline\"></i>\n" +
-//                     "                </div>\n" +
-//                     "                <div style=\"float: right; margin-right: -15px; margin-top: -33px; text-align: center;\">\n" +
-//                     "                    <div style=\"height: 35px\">\n" +
-//                     "                        <a onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")' class='button button-light' style=\"display: grid; z-index: 2;\" href='#/page20'>\n" +
-//                     "                            <div id='" + id + "' style=\"font-weight:600;color:#0092FF;font-size:15px;\">Editar</div>\n" +
-//                     "                        </a>\n" +
-//                     "                    </div>\n" +
-//                     "                    <div style=\"height: 30px\">\n" +
-//                     "                        <a class='button button-light' onclick=\"excluirAcontecimento(" + id + ")\">\n" +
-//                     "                            <div style=\"font-weight:600;color:#FF0020;font-size:15px;\">Excluir\n" +
-//                     "                            </div>\n" +
-//                     "                        </a>\n" +
-//                     "                    </div>\n" +
-//                     "                </div>\n" +
-//                     "            </li>\n");
-//
-//                 if (visibilidade == "s") {
-//                     $("#checked" + id).css('color', 'green');
-//                 } else {
-//                     $("#checked" + id).css('color', '#e43a38');
-//                 }
-//             }
-//         }
-//         carregando(2)
-//     };
-//     $.getJSON(json, onSuccess).fail(
-//
-//     );
-// }
+function preencherClonar(id) {
+
+    var dados = JSON.parse(localStorage.getItem('dadosClone'));
+
+    if (dados[0]) {
+
+        for (var i in dados) {
+            console.log(id)
+            console.log(dados[i].id)
+
+            if (dados[i].id == id) {
+
+                var titulo = dados[i].titulo;
+                var descricao = dados[i].descricao;
+                var visibilidade = dados[i].visibilidade;
+                var tipo = dados[i].tipo_evento;
+
+                mostrarInput(tipo);
+
+                var nomeTipo = dados[i].nome_origem;
+                setTimeout(function () {
+                    var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
+
+                    $("#imgThumbnail").attr('src', imagem);
+                    localStorage.setItem('imgTeste', imagem);
+                }, 4000);
+                var horaEvento = dados[i].hora_evento;
+                var dataEvento = dados[i].data_evento;
+                var idLocalidade = dados[i].idLocalidade;
+                var localCidade = dados[i].localCidade;
+                var origem = dados[i].origem;
+
+                localStorage.setItem("origemAcom", origem);
+
+                setTimeout(function () {
+                    $("#tituloCl").val(titulo);
+                    $("#descricaoCl").val(descricao);
+                    $("#dataEventoCl").val(dataEvento);
+                    $("#horarioCl").val(horaEvento);
+                    setTimeout(function () {
+                        $("#localidadeCl").val(idLocalidade);
+                    }, 2000);
+                    $("#tipoCl").val(tipo);
+                    $("#visibilidadeCl").val(visibilidade);
+                    $("#localCl").val(localCidade);
+                }, 1000);
+            }
+        }
+    }
+}
+
+function validarCloneAcontecimento() {
+    var titulo = $("#tituloCl").val();
+    var descricao = $("#descricaoCl").val();
+    var dataEvento = $("#dataEventoCl").val();
+    var horaEvento = $("#horarioCl").val();
+    var localidade = $("#localidadeCl").val();
+    var tipo = $("#tipoCl").val();
+    var localCidade = $("#localCl").val();
+
+    if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
+        if (tipo == "E") {
+            if (validarVazio(localCidade)) {
+                cloneAcontecimento();
+            } else {
+                swal("Todo evento precisa de um ponto específico na localidade!")
+            }
+        } else {
+            cloneAcontecimento();
+        }
+    } else {
+        swal("Preencha todos os campos!")
+    }
+}
+
+function cloneAcontecimento() {
+    var titulo = $("#tituloCl").val();
+    var descricao = $("#descricaoCl").val();
+    var dataEvento = $("#dataEventoCl").val();
+    var horaEvento = $("#horarioCl").val();
+    var localidade = $("#localidadeCl").val();
+    var tipo = $("#tipoCl").val();
+    var localCidade = $("#localCl").val();
+    var origem = localStorage.getItem("origemAcom");
+
+    if (localCidade == "") {
+        localCidade = "A";
+    }
+
+    var json = servidor + "/Secult/acontecimento/insertAcontecimento/" + titulo + "&" + descricao + "&" + dataEvento + "&n&" + tipo + "&" + horaEvento + "&" + localidade + "&" + localCidade + "&" + origem;
+
+    var onSuccess = function (result) {
+
+        jsonAdministrador = result;
+
+        var status = jsonAdministrador.status;
+        var id = jsonAdministrador.id_usuario
+
+        if (status != "erro") {
+            inserirImagem(id, "A");
+            $("#page19, #page30").click(function () {
+                location.reload();
+            });
+        } else {
+            swal("Não foi possivel clonar o acontecimento!");
+        }
+        ;
+    };
+    $.getJSON(json, onSuccess).fail();
+}

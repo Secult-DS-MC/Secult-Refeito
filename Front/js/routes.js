@@ -3,6 +3,12 @@ angular.module('app.routes', [])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
+            .state('tabsController', {
+                url: '/page1',
+                templateUrl: 'templates/tabsController.html',
+                abstract: true
+            })
+
             .state('tabsController.noticias', {
                 url: '/page2',
                 views: {
@@ -28,31 +34,6 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/usuario.html',
                 controller: 'usuarioCtrl'
 
-            })
-
-            .state('cadastrar', {
-                url: '/page14',
-                templateUrl: 'templates/cadastrar.html',
-                controller: 'cadastrarCtrl'
-
-            })
-
-            .state('tabsController', {
-                url: '/page1',
-                templateUrl: 'templates/tabsController.html',
-                abstract: true
-            })
-
-            .state('login', {
-                url: '/page15',
-                templateUrl: 'templates/login.html',
-                controller: 'loginCtrl'
-            })
-
-            .state('informacoes', {
-                url: '/page16',
-                templateUrl: 'templates/informacoes.html',
-                controller: 'informacoesCtrl'
             })
 
             .state('cultura', {
@@ -99,6 +80,26 @@ angular.module('app.routes', [])
                 }
             })
 
+            .state('cadastrar', {
+                url: '/page14',
+                templateUrl: 'templates/cadastrar.html',
+                controller: 'cadastrarCtrl'
+
+            })
+
+            .state('login', {
+                url: '/page15',
+                templateUrl: 'templates/login.html',
+                controller: 'loginCtrl'
+            })
+
+            .state('informacoes', {
+                url: '/page16',
+                templateUrl: 'templates/informacoes.html',
+                controller: 'informacoesCtrl'
+            })
+
+
             .state('eventosEmPovoados', {
                 url: '/page17',
                 templateUrl: 'templates/eventosEmPovoados.html',
@@ -121,6 +122,11 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/alterarAcontecimentoAdm.html',
                 controller: 'alterarAcontecimentoAdmCtrl'
             })
+            .state('infoEventoCalendario', {
+                url: '/page21',
+                templateUrl: 'templates/infoEventoCalendario.html',
+                controller: 'infoEventoCalendarioCtrl'
+            })
             .state('administradorOpcoes', {
                 url: '/page22',
                 templateUrl: 'templates/administradorOpcoes.html',
@@ -133,10 +139,10 @@ angular.module('app.routes', [])
                 controller: 'autenticarCadartCtrl'
             })
 
-            .state('infoEventoCalendario', {
-                url: '/page21',
-                templateUrl: 'templates/infoEventoCalendario.html',
-                controller: 'infoEventoCalendarioCtrl'
+            .state('autenticadosCadart', {
+                url: '/page24',
+                templateUrl: 'templates/autenticadosCadart.html',
+                controller: 'autenticadosCadartCtrl'
             })
             .state('cultTobiasCidade', {
                 url: '/page25',
@@ -163,11 +169,12 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/infoCadart.html',
                 controller: 'infoCadartCtrl'
             })
-            .state('autenticadosCadart', {
-                url: '/page24',
-                templateUrl: 'templates/autenticadosCadart.html',
-                controller: 'autenticadosCadartCtrl'
-            });
+
+            .state('clonarAcontecimento', {
+                url: '/page30',
+                templateUrl: 'templates/clonarAcontecimento.html',
+                controller: 'clonarAcontecimentoCtrl'
+            })
 
         $urlRouterProvider.otherwise('/page1/page2')
 

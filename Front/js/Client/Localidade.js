@@ -87,7 +87,7 @@ function carregarNomeEdescEvento(id) {
     $.getJSON(json, onSuccess).fail();
 }
 
-function selectLocalidade() {
+function selectLocalidade(input) {
     setTimeout(function () {
 
         var json = servidor + "/Secult/localidade/carregarLocalidade";
@@ -101,53 +101,9 @@ function selectLocalidade() {
                 var idLocal = dados[i].id;
                 var local = dados[i].nome;
 
-                $("#idLocalidade").append("<option value=" + idLocal + ">" + local + "</option>")
+                $("#"+ input).append("<option value=" + idLocal + ">" + local + "</option>")
             }
-            $("#idLocalidade option[value=1]").prop("selected", true).change()
-        }
-        $.getJSON(json, onSuccess).fail();
-    }, 1000)
-}
-
-function selectLocalidadeCadastro() {
-    setTimeout(function () {
-
-        var json = servidor + "/Secult/localidade/carregarLocalidade";
-
-        var onSuccess = function (result) {
-
-            dados = result.localidades;
-
-            for (var i in dados) {
-
-                var idLocal = dados[i].id;
-                var local = dados[i].nome;
-
-                $("#localidadeAdm").append("<option value=" + idLocal + ">" + local + "</option>")
-            }
-            $("#localidadeAdm option[value=1]").prop("selected", true).change()
-        }
-        $.getJSON(json, onSuccess).fail();
-    }, 1000)
-}
-
-function selectLocalidadeUp() {
-    setTimeout(function () {
-
-        var json = servidor + "/Secult/localidade/carregarLocalidade";
-
-        var onSuccess = function (result) {
-
-            dados = result.localidades;
-
-            for (var i in dados) {
-
-                var idLocal = dados[i].id;
-                var local = dados[i].nome;
-
-                $("#localidadeUp").append("<option value=" + idLocal + ">" + local + "</option>")
-            }
-            $("#localidadeUp option[value=1]").prop("selected", true).change()
+            $("#"+input+" option[value=1]").prop("selected", true).change()
         }
         $.getJSON(json, onSuccess).fail();
     }, 1000)

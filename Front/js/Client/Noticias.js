@@ -12,11 +12,11 @@ function listarPublicidade() {
             for (var i in dados) {
 
                 var id = dados[i].id;
-                var titulo = dados[i].titulo;
-                var visibilidade = dados[i].visibilidade;
                 var origem = dados[i].origem;
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
 
-                $("#listaPublicidade").append("");
+                //$("#listaPublicidade").append("<ion-slide-page id='"+id+"' style=\"background:url("+ urlImagem +") no-repeat center;background-size:cover;\"></ion-slide-page>");
+                //$("#listaPublicidade").append("<ion-slide-page style=\"background-repeat:no-repeat; background-position: center; background-size:cover;\"><img src='"+urlImagem+"' style=\"background-size:cover;width:calc(100% + 20px)\"></ion-slide-page>");
             }
         }
     }

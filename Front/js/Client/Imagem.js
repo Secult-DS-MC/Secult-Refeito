@@ -11,7 +11,7 @@ function inserirImagem(id_coluna, sigla) {
     window.location.href = "#/page18";
 
     setTimeout(function () {
-        listarEventoAdm();
+        listarEventoFiltro('Todos');
     }, 300);
 
 
@@ -61,7 +61,7 @@ function atualizarImagem(id_coluna, sigla) {
     window.location.href = "#/page18";
 
     setTimeout(function () {
-        listarEventoAdm();
+        listarEventoFiltro('Todos');
     }, 300);
 
     var block = ImageURL.split(";");
