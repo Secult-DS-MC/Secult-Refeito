@@ -2,52 +2,44 @@ function validarVazio(valor) {
     if (valor != "") return true;
 }
 
-function validarDescAcon() {
-    $("#descricaoAdm").keyup(function () {
-        if ($("#descricaoAdm").val() != '') {
-            if ($("#descricaoAdm").val().length < 191 & $("#descricaoAdm").val().length > 0) {
-                $("#descricaoAdm").show('pulsate');
-            } else {
-                return true
-                $("#descricaoAdm").hide();
-            }
-        } else {
-            return true
-            $("#descricaoAdm").hide();
+function mostrarTipoAcontecimento() {
+    $("#cadastroAcon").toggle('slow');
+    $("#origemToggle").toggle('slow');
+
+    setTimeout(function () {
+        var origem = localStorage.getItem("origemAcom");
+
+        if (origem == 20) {
+            $("#descricaoAdm").attr("readonly", false);
+            $("#tipoValor").append("<input type='text' id='tipoAdm' value='N' style='display: none'>");
+            $("#tipoToggle").css("display", "none");
         }
-    })
+    }, 300);
 }
 
-function validarDescAconUp() {
-    $("#descricaoUp").keyup(function () {
-        if ($("#descricaoUp").val() != '') {
-            if ($("#descricaoUp").val().length < 191 & $("#descricaoUp").val().length > 0) {
-                $("#descricaoUp").show('pulsate');
-            } else {
-                return true
-                $("#descricaoUp").hide();
-            }
-        } else {
-            return true
-            $("#descricaoUp").hide();
-        }
-    })
-}
+function habilitarDescricaoAcontecimento(tipo) {
+    if (tipo == "E") {
+        $("#labelLocal").show();
+    } else {
+        $("#labelLocal").hide();
+    }
 
-function validarDescAcon() {
-    $("#descricaoAdm").keyup(function () {
-        if ($("#descricaoAdm").val() != '') {
-            if ($("#descricaoAdm").val().length < 191 & $("#descricaoAdm").val().length > 0) {
-                $("#descricaoAdm").show('pulsate');
-            } else {
-                return true
-                $("#descricaoAdm").hide();
-            }
-        } else {
-            return true
-            $("#descricaoAdm").hide();
+    var descricao = $("#descricaoAdm");
+    var quantidade;
+
+    localStorage.setItem("tipoAcontecimento", tipo);
+
+    descricao.attr("readonly", false).on("keypress", function () {
+        quantidade = descricao.val().length;
+
+        if (tipo == "E" && quantidade >= "191") {
+            descricao.attr("readonly", true);
         }
-    })
+
+        if (tipo == "N" && quantidade >= "2000") {
+            descricao.attr("readonly", true);
+        }
+    });
 }
 
 function validarCadastroAcontecimento() {
@@ -56,19 +48,15 @@ function validarCadastroAcontecimento() {
     var dataEvento = $("#dataEventoAdm").val();
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
-    var tipo = $("#tipoAdm").val();
+    var tipo = localStorage.getItem("tipoAcontecimento");
     var localCidade = $("#localAdm").val();
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
         if (tipo == "E") {
-            if(descricao.length < 191){
-                if (validarVazio(localCidade)) {
-                    cadastroAcontecimento();
-                } else {
-                    swal("Todo evento precisa de um ponto específico na localidade!")
-                }
-            }else{
-                swal("Um evento só pode ter 191 caracter!")
+            if (validarVazio(localCidade)) {
+                cadastroAcontecimento();
+            } else {
+                swal("Todo evento precisa de um ponto específico na localidade!")
             }
         } else {
             cadastroAcontecimento();
@@ -132,6 +120,18 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
         $("#localUp").val(localCidade);
         $("#updateEventoBtn").attr('onclick', "updateEvento(" + id + ")");
     }, 1000);
+
+    $("#descricaoUp").on("keypress", function () {
+    var quantidade = $("#descricaoUp").val().length;
+console.log()
+        if (tipo == "E" && quantidade >= "191") {
+            $("#descricaoUp").attr("readonly", true);
+        }
+
+        if (tipo == "N" && quantidade >= "2000") {
+            $("#descricaoUp").attr("readonly", true);
+        }
+    });
 }
 
 function updateEvento(id) {
@@ -141,7 +141,7 @@ function updateEvento(id) {
     var horaEvento = $("#horarioUp").val();
     var localidade = $("#localidadeUp").val();
     var tipo = $("#tipoUp").val();
-    var visibilidade = $("#visibilidadeUp").val();
+    var visibilidade = localStorage.getItem("visibilidadeAcon");
     var local = $("#localUp").val();
 
 
@@ -185,14 +185,6 @@ function updateEvento(id) {
         }
     } else {
         swal("Preencha todos os campos!");
-    }
-}
-
-function mostrarInputCadastroEvento(tipo) {
-    if (tipo == "E") {
-        $("#labelLocal").show().scrollBottom(0, 500);
-    } else {
-        $("#labelLocal").hide();
     }
 }
 
@@ -327,8 +319,6 @@ function preencherClonar(id) {
     if (dados[0]) {
 
         for (var i in dados) {
-            console.log(id)
-            console.log(dados[i].id)
 
             if (dados[i].id == id) {
 
@@ -336,14 +326,11 @@ function preencherClonar(id) {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento;
-
                 mostrarInput(tipo);
 
                 var nomeTipo = dados[i].nome_origem;
                 setTimeout(function () {
                     var imagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
-                    console.log(imagem)
-
                     $(".imgThumbnail1").attr('src', imagem);
                     localStorage.setItem('imgTeste', imagem);
                 }, 100);

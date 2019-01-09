@@ -88,8 +88,9 @@ function carregarNomeEdescEvento(id) {
 }
 
 function selectLocalidade(input) {
-    setTimeout(function () {
 
+    $("#"+input).empty();
+    setTimeout(function () {
         var json = servidor + "/Secult/localidade/carregarLocalidade";
 
         var onSuccess = function (result) {

@@ -44,7 +44,7 @@ function inserirImagem(id_coluna, sigla) {
         },
 
         complete: function () {
-
+            localStorage.setItem("imagemSalva", "");
         },
     })
 

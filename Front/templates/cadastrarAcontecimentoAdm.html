@@ -1,6 +1,6 @@
 <ion-view title="Cadastro de evento" id="page30">
 
-    <div style="display: block" onclick="$('#cadastroAcon').toggle('slow'), $(this).toggle('slow')">
+    <div style="display: block" id="origemToggle" onclick="mostrarTipoAcontecimento();">
         <ion-content padding="true" class="has-header has-footer">
             <button-bar>
                 <button class="button button-full button-positive" onclick="localStorage.setItem('origemAcom', 10)">
@@ -33,13 +33,24 @@
                     onclick="abrirImpFile('inputImagem')">Alterar Foto
             </button>
 
+            <div style="display: block" id="tipoToggle">
+                <div class="item item-divider">
+                    Tipo acontecimento:
+                </div>
+
+                <ion-radio ng-repeat="item in acontecimentoList" ng-value="item.value" ng-click="serverSideChange(item)"
+                           ng-model="data.acontecimentoSide">
+                    {{ item.text }}
+                </ion-radio>
+            </div>
+
             <form class="list">
                 <label class="item item-input">
                     <input type="text" placeholder="Título" id="tituloAdm">
                 </label>
 
                 <label class="item item-input">
-                    <textarea style="height: 35px;" placeholder="Descrição do acontecimento" rows="3"
+                    <textarea readonly="true" style="height: 35px;" placeholder="Descrição do acontecimento" rows="3"
                               id="descricaoAdm"></textarea>
                 </label>
 
@@ -59,19 +70,13 @@
                     </select>
                 </label>
 
-                <label class="item item-select" style="border-width: 1px 0;">
-                    <span class="input-label">Tipo:</span>
-                    <select id="tipoAdm" onchange="mostrarInputCadastroEvento(this.value)">
-                        <option value="">Selecione</option>
-                        <option value="N">Notícia</option>
-                        <option value="E">Evento</option>
-                        <option value="C">Calendário</option>
-                    </select>
-                </label>
-
-                <label class="item item-input" id="labelLocal">
+                <label class="item item-input" id="labelLocal" style="display: none">
                     <input type="text" placeholder="Local do evento na cidade" id="localAdm">
                 </label>
+
+                <div id="tipoValor">
+
+                </div>
             </form>
 
         </ion-content>

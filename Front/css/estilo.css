@@ -433,3 +433,7 @@ select#sexoCdt {
     background-color: red;
 }
 
+.desabilitado{
+    pointer-events: none!important;
+    opacity: 0.6!important;
+}

@@ -136,7 +136,21 @@ angular.module('app.controllers', [])
             }, 1000)
 
             selectLocalidade('localidadeAdm');
-            mostrarInputCadastroEvento();
+
+            $scope.acontecimentoList = [
+                {text: "Notícia", value: "N"},
+                {text: "Evento", value: "E"},
+                {text: "Calendario", value: "C"}
+            ];
+
+            $scope.serverSideChange = function (item) {
+
+                var tipo = item.value;
+
+                $("#tipoToggle").toggle(500);
+
+                habilitarDescricaoAcontecimento(tipo);
+            };
         }])
 
     .controller('infoEventoCalendarioCtrl', ['$scope', '$stateParams',
@@ -160,6 +174,14 @@ angular.module('app.controllers', [])
                 salvaImagemImput()
             }, 1000)
             selectLocalidade('localidadeUp');
+
+            localStorage.setItem("visibilidadeAcon", "n");
+
+            $scope.emailNotificationChange = function() {
+                localStorage.setItem("visibilidadeAcon", $scope.emailNotification.checked);
+            };
+
+            $scope.emailNotification = { checked: true };
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',

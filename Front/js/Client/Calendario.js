@@ -86,16 +86,23 @@ function listarEventosCalendario() {
 
             $("img#" + id).attr("src", urlImagem);
 
-            data = new Date()
-            mesAt = data.getMonth() + 1
-            if (mes == mesAt) {
-                mesAtual = true
-            }
-
+            // data = new Date();
+            // if (mes != 10 && mes != 11 && mes != 12) {
+            //     mesAt = "0" + (data.getMonth() + 1);
+            //     if (mes === mesAt) {
+            //         mesAtual = true
+            //     }
+            // } else {
+            //     mesAtual = false;
+            //     mesAt = data.getMonth() + 1;
+            //     if (mes === mesAt) {
+            //         mesAtual = false
+            //     }
+            // }
         }
-        if (mesAtual) {
-            expandirEsseMes(classMes.slice(0, 3))
-        }
+        // if (mesAtual) {
+        //     expandirEsseMes(classMes.slice(0, 3))
+        // }
 
         carregando(2)
     };

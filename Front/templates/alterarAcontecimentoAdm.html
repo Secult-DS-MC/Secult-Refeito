@@ -16,13 +16,23 @@
         </button>
 
         <form class="list">
+
+            <label class="item item-select" style="border-width: 1px 0; pointer-events: none; opacity: 0.6%">
+                <span class="input-label">Tipo:</span>
+                <select id="tipoUp" readonly="true">
+                    <option value="">Selecione</option>
+                    <option value="N">Notícia</option>
+                    <option value="E">Evento</option>
+                    <option value="C">Calendário</option>
+                </select>
+            </label>
+
             <label class="item item-input">
                 <input type="text" placeholder="Título" id="tituloUp">
             </label>
 
             <label class="item item-input">
-                <textarea style="height: 35px;" placeholder="Descrição" rows="3" id="descricaoUp"
-                          maxLength="500"></textarea>
+                <textarea style="height: 35px;" placeholder="Descrição" rows="3" id="descricaoUp" readonly="false"></textarea>
             </label>
 
             <label class="item item-input">
@@ -41,24 +51,13 @@
                 </select>
             </label>
 
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Visibilidade:</span>
-                <select id="visibilidadeUp">
-                    <option value="">Selecione</option>
-                    <option value="s">Visivel</option>
-                    <option value="n">Invisivel</option>
-                </select>
-            </label>
 
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Tipo:</span>
-                <select id="tipoUp" onchange="mostrarInputCadastroEvento(this.value)">
-                    <option value="">Selecione</option>
-                    <option value="N">Notícia</option>
-                    <option value="E">Evento</option>
-                    <option value="C">Calendário</option>
-                </select>
-            </label>
+            <ion-toggle style="border-width: 1px 0;" toggle-class="toggle-positive"
+                        ng-model="emailNotification.checked"
+                        ng-true-value="'s'"
+                        ng-false-value="'n'" ng-change="emailNotificationChange()">
+                Visibilidade
+            </ion-toggle>
 
             <label class="item item-input" id="labelLocal">
                 <input type="text" placeholder="Local do evento na cidade" id="localUp">
