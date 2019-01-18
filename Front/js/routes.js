@@ -159,10 +159,10 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/superAdministrador.html',
                 controller: 'superAdministradorCtrl'
             })
-            .state('cadastroArtista', {
+            .state('artista', {
                 url: '/page28',
-                templateUrl: 'templates/cadastroArtista.html',
-                controller: 'cadastroArtistaCtrl'
+                templateUrl: 'templates/artista.html',
+                controller: 'artistaCtrl'
             })
             .state('infoCadart', {
                 url: '/page29',

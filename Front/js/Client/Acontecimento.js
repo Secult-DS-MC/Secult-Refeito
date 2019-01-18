@@ -72,7 +72,7 @@ function cadastroAcontecimento() {
     var dataEvento = $("#dataEventoAdm").val();
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
-    var tipo = $("#tipoAdm").val();
+    var tipo = localStorage.getItem("tipoAcontecimento")
     var localCidade = $("#localAdm").val();
     var origem = localStorage.getItem("origemAcom");
 

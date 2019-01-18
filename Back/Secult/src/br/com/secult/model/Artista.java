@@ -9,10 +9,10 @@ package br.com.secult.model;
  *
  * @author Computador
  */
-public class Artista {
+public class Artista extends Usuario {
 
-    private int id;
-    private String nome;
+    private int idArtista;
+    private String nomeArtistico;
     private String descricao;
     private String autenticacao;
 
@@ -24,20 +24,20 @@ public class Artista {
         this.autenticacao = autenticacao;
     }
 
-    public int getId() {
-        return id;
+    public int getIdArtista() {
+        return idArtista;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdArtista(int idArtista) {
+        this.idArtista = idArtista;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeArtistico() {
+        return nomeArtistico;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeArtistico(String nomeArtistico) {
+        this.nomeArtistico = nomeArtistico;
     }
 
     public String getDescricao() {

@@ -5,14 +5,29 @@ function inserirImagem(id_coluna, sigla) {
     var ImageURL = localStorage.getItem("imagemSalva");
     if (ImageURL == null) {
         ImageURL = localStorage.getItem("semfoto");
-
     }
 
-    window.location.href = "#/page18";
+    if(sigla == "A"){
+        window.location.href = "#/page18";
 
-    setTimeout(function () {
-        listarEventoFiltro('Todos');
-    }, 300);
+        setTimeout(function () {
+            listarEventoFiltro('Todos');
+        }, 300);
+    }
+   if(sigla == "U"){
+       window.location.href = "#/page1/page3";
+
+       setTimeout(function () {
+           listarEventoFiltro('Todos');
+       }, 300);
+   }
+    if(sigla == "C"){
+        window.location.href = "#/page18";
+
+        setTimeout(function () {
+            listarEventoFiltro('Todos');
+        }, 300);
+    }
 
 
     var block = ImageURL.split(";");

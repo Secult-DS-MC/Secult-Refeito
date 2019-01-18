@@ -48,7 +48,7 @@ public class ImagemDao {
 //        this.connection = new ConnectionFactory().getConnection();
 //        PreparedStatement stmt = null;
 //        boolean hasError = true;
-//        String sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
+//        String sql = "INSERT INTO imagem (imagem, id_usuario) VALUES(?,?)";
 //        try {
 //            stmt = connection.prepareStatement(sql);
 //
@@ -75,8 +75,8 @@ public class ImagemDao {
             case "A":
                 sql = "INSERT INTO imagem (imagem, id_acontecimento) VALUES(?,?)";
                 break;
-            case "C":
-                sql = "INSERT INTO imagem (imagem, id_cadart) VALUES(?,?)";
+            case "U":
+                sql = "INSERT INTO imagem (imagem, id_usuario) VALUES(?,?)";
                 break;
             case "T":
                 sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
@@ -89,7 +89,7 @@ public class ImagemDao {
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setLong(2, id_coluna);
             stmt.executeUpdate();
-
+            System.out.println(id_coluna+ "COLUNA");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             hasError = false;
@@ -111,8 +111,8 @@ public class ImagemDao {
             case "A":
                 sql = "UPDATE imagem SET imagem=? WHERE id_acontecimento = ?";
                 break;
-            case "C":
-                sql = "UPDATE imagem SET imagem=? WHERE id_cadart = ?";
+            case "U":
+                sql = "UPDATE imagem SET imagem=? WHERE id_usuario = ?";
                 break;
             case "T":
                 sql = "UPDATE imagem SET imagem=? WHERE id_turismo = ?";
@@ -246,13 +246,13 @@ public class ImagemDao {
         String sql = null;
         switch (sigla) {
             case "E":
-                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_acontecimento=?";
+                sql = "SELECT id, id_usuario, id_turismo, id_acontecimento FROM imagem WHERE id_acontecimento=?";
                 break;
-            case "C":
-                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_cadart=?";
+            case "U":
+                sql = "SELECT id, id_usuario, id_turismo, id_acontecimento FROM imagem WHERE id_usuario=?";
                 break;
             case "T":
-                sql = "SELECT id, id_cadart, id_turismo, id_acontecimento FROM imagem WHERE id_turismo=?";
+                sql = "SELECT id, id_usuario, id_turismo, id_acontecimento FROM imagem WHERE id_turismo=?";
                 break;
         }
 
@@ -268,7 +268,7 @@ public class ImagemDao {
                 imagem.setId(rs.getInt("id"));
                 imagem.setIdTurismo(rs.getLong("id_turismo"));
                 imagem.setIdEvento(rs.getLong("id_acontecimento"));
-                imagem.setIdCadart(rs.getLong("id_cadart"));
+                imagem.setIdUsuario(rs.getLong("id_usuario"));
                 imagens.add(imagem);
             }
         } catch (Exception e) {
@@ -342,7 +342,7 @@ public class ImagemDao {
 
     }
 
-    public Imagem getByIdAcontecimento(long id, String sigla) throws SQLException, Exception {
+    public Imagem buscarImagem(long id, String sigla) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "";
@@ -352,8 +352,8 @@ public class ImagemDao {
             case "A":
                 sql = "select * from imagem where  id_acontecimento = ?";
                 break;
-            case "C":
-                sql = "select * from imagem where  id_cadart = ?";
+            case "U":
+                sql = "select * from imagem where  id_usuario = ?";
                 break;
             case "T":
                 sql = "select * from imagem where  id_turismo = ?";
@@ -392,7 +392,7 @@ public class ImagemDao {
             Imagem imagem = new Imagem();
             imagem.setId(rs.getInt("id"));
             imagem.setIdEvento(rs.getLong("id_acontecimento"));
-            imagem.setIdCadart(rs.getLong("id_cadart"));
+            imagem.setIdUsuario(rs.getLong("id_usuario"));
             imagem.setIdTurismo(rs.getLong("id_turismo"));
             imagem.setImagem(rs.getBytes("imagem"));
 

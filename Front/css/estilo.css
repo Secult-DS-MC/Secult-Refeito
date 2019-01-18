@@ -437,3 +437,11 @@ select#sexoCdt {
     pointer-events: none!important;
     opacity: 0.6!important;
 }
+
+#artesSelecLista li{
+    font-size: 0.9rem;
+    color: white;
+    border-bottom: 1px solid;
+    text-align: center;
+    padding: 4px;
+}

@@ -46,7 +46,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $("#listaCadart").empty();
-            listarCadart()
+            listarArtistas()
             usuarioAtivo();
             localStorage.setItem("Ativo", "Sim");
             setTimeout(function () {
@@ -197,9 +197,14 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('cadastroArtistaCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
+    .controller('artistaCtrl', ['$scope', '$stateParams',
 
+        function ($scope, $stateParams) {
+            setTimeout(function () {
+                salvaImagemImput()
+            }, 1000)
+            botaoFotoFakeCadart(2);
+            listarArtes()
         }])
     .controller('infoCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
