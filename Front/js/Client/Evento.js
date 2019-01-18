@@ -36,7 +36,7 @@ function listarEventoEvento() {
 
                 $("#listaEventoEvento").append("<a class='linkSemDecoracao'>\n" +
                     "            <li class=\"item item-thumbnail-left item-icon-right\" style='padding-right: 45px; border-bottom: none;'><img src='" + imagem + "'>\n" +
-                    "                <h2 class='positive' style='font-weight: bolder'>" + titulo + "\n" +
+                    "                <h2 class='positive' style='font-weight: bolder; padding-right: 5px;'>" + titulo + "\n" +
                     "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block; font-size: 0.8rem;\" >" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> mais</span></span></p>\n" +
                     "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: none; font-size: 0.8rem;\" >" + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> menos</span></span></p>\n" +
                     "                </h2>\n" +

@@ -76,7 +76,7 @@ function listarEventosCalendario() {
                 classMes = 'dezEvent';
             }
 
-            $("." + classMes).append("<ion-item class=\"list\">\n" +
+            $("." + classMes).append("<ion-item>\n" +
                 "    <a class=\"item item-thumbnail-left\" href=\"#\">\n" +
                 "      <img src='" + urlImagem + "'>\n" +
                 "      <h2>" + titulo + "</h2>\n" +

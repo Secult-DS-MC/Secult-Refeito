@@ -3,19 +3,12 @@
         <button class="button button-clear icon ion-android-refresh" onclick="atualizarPaginas()"></button>
     </ion-nav-buttons>
     <ion-content padding="true" class="header-noticia refresh has-header">
-
-        <!--<ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider5" delegate-handle="slider5" id="noticias-slider5" style="width:calc(100% + 20px);height:100px;margin-left:-10px; margin-top: 6%">-->
-            <!--<ion-slide-page id="noticias-slide29" style="background:url(./img/Feira.JPG) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide27" style="background:url(./img/Mapa_de_Localização.png) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide28" style="background:url(./img/semImagem.png) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide29" style="background:url(./img/0ivQcAtGRBO6qP7sxlFv_t2.jpg) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide27" style="background:url(./img/8vVpimXRRnO1jfxmBPHd_tobias.jpg) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide28" style="background:url(./img/ionic.png) no-repeat center;background-size:cover;"></ion-slide-page>-->
-            <!--<ion-slide-page id="noticias-slide29" style="background:url(./img/Feira.JPG) no-repeat center;background-size:cover;"></ion-slide-page>-->
-        <!--</ion-slides>-->
-
-        <!--<ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider5" delegate-handle="slider5" id="listaPublicidade" style="width:calc(100% + 20px);height:100px;margin-left:-10px; margin-top: 6%">-->
-        <!--</ion-slides>-->
+        <ion-slide-box style="width:calc(100% + 20px);height:100px;margin-left:-10px; margin-top: 6%" options="{'loop': true}" options="options" show-pager="false" id>
+            <ion-slide><img style="width: calc(100% + 20px); height: 100px" src="./img/Mapa_de_Localização.png"></ion-slide>
+            <ion-slide><img style="width: calc(100% + 20px); height: 100px" src="./img/iEpQ3qQ9S6aoctpPEPBX_igreja.jpg"></ion-slide>
+            <ion-slide><img style="width: calc(100% + 20px); height: 100px" src="./img/Mapa_de_Localização.png"></ion-slide>
+            <ion-slide><img style="width: calc(100% + 20px); height: 100px" src="./img/iEpQ3qQ9S6aoctpPEPBX_igreja.jpg"></ion-slide>
+        </ion-slide-box>
 
         <div id="listaEventoNoticas"></div>
     </ion-content>

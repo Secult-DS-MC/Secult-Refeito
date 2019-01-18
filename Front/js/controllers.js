@@ -38,6 +38,13 @@ angular.module('app.controllers', [])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+        $scope.options = {
+            // autoplay: 2500,
+            loop: true
+            // speed: 1000,
+            // effect: 'fade'
+        }
+
             listarPublicidade();
             listarEventoNoticias();
             verificarAdministrador();
