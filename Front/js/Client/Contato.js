@@ -6,6 +6,9 @@ function cadastrarContato(id){
     var fbCadastro  = $("#fbCadastro").val();
     var ytCadastro  = $("#ytCadastro").val();
     var inCadastro  = $("#inCadastro").val();
+    if(fbCadastro == "") fbCadastro = "null";
+    if(ytCadastro == "") ytCadastro = "null";
+    if(inCadastro == "") inCadastro = "null";
 
     var json = servidor + "/Secult/contato/inserirContato/" + id + "&" + emailCadastro + "&" + telCadastro + "&" + fbCadastro + "&" + ytCadastro + "&" + inCadastro;
 

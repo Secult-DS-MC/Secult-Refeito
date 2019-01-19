@@ -1,21 +1,27 @@
 <ion-view id="page28" hide-nav-bar="true" style="background: #387ef5">
 
-    <ion-content >
+    <ion-content>
         <div class="cadastrar">
             <div class="cadastrar-tela">
                 <div class="button-bar">
                     <a class="button button-clear estagio estagio1"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: #86e286"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: #86e286"><i
+                            class="icon ion-android-radio-button-on"></i></a>
                     <a class="button button-clear estagio estagio2"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i
+                            class="icon ion-android-radio-button-on"></i></a>
                     <a class="button button-clear estagio estagio3"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i
+                            class="icon ion-android-radio-button-on"></i></a>
                     <a class="button button-clear estagio estagio4"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i
+                            class="icon ion-android-radio-button-on"></i></a>
                     <a class="button button-clear estagio estagio5"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i
+                            class="icon ion-android-radio-button-on"></i></a>
                     <a class="button button-clear estagio estagio6"
-                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i class="icon ion-android-radio-button-on"></i></a>
+                       style="border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white"><i
+                            class="icon ion-android-radio-button-on"></i></a>
 
                 </div>
                 <div id="cdt-inicio" style="display: block">
@@ -54,7 +60,7 @@
                             id="cdtArte" class="obrigatorio2" onchange="validacaoEtapa2(), addArteLista()">
 
                     </select>
-                    <ul id="artesSelecLista" >
+                    <ul id="artesSelecLista">
 
                     </ul>
                     <div class="button-bar" style="margin-top: 20%;">
@@ -119,9 +125,10 @@
                         <a onclick="posicaoCadastro('estagio3'),$('#cdt-descricao').show(), $('#cdt-contato').hide(),$('.cadastrar').css('height', tamanhoTela())"
                            class="button button-outline "
                            style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
-                        <a id="proximo4" disabled onclick="posicaoCadastro('estagio5'),$('#cdt-contato').hide(), $('#cdt-seguranca').show()"
-                        class="button button-outline"
-                        style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color:
+                        <a id="proximo4" disabled
+                           onclick="posicaoCadastro('estagio5'),$('#cdt-contato').hide(), $('#cdt-seguranca').show()"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color:
                         white">Proximo</a>
                     </div>
                 </div>
@@ -137,7 +144,7 @@
                     </label>
                     <button style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
                             class="button button-small button-outline" id="imputImg"
-                            onclick="abrirImpFile('inputImagem')" onchange="validacaoEtapa5()" >Alterar Foto
+                            onclick="abrirImpFile('inputImagem')" onchange="validacaoEtapa5()">Alterar Foto
                     </button>
 
                     <h4>Coloque uma senha segura! (obrigatório)</h4>
@@ -150,7 +157,7 @@
                         <a id="proximo5" disabled
                            onclick="cadastrarArtista(), posicaoCadastro('estagio4'),$('#cdt-pessoal').hide(),$('.cadastrar').css('height', tamanhoTela())"
                            class="button button-outline"
-                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white" >Cadastrar</a>
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Cadastrar</a>
                     </div>
                 </div>
 

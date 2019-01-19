@@ -6,13 +6,13 @@ function listarArtes() {
     var onSuccess = function (result) {
 
         dados = result.artes;
-        $("#cdtArte").append("<option value='0'>Selecione sua arte!</option>")
+        $("#cdtArte").append("<option value='0'>Selecione sua arte!<span id='numArte'></span></option>")
         if (dados[0]) {
 
             for (var i in dados) {
                 var id = dados[i].id;
                 var nome = dados[i].nome;
-                $("#cdtArte").append("<option value='"+id+"'>"+nome+"</option>");
+                $("#cdtArte").append("<option value='" + id + "'>" + nome + "</option>");
 
             }
         }
@@ -22,4 +22,10 @@ function listarArtes() {
     ).fail(
 
     );
+}
+
+function contarArtes() {
+    var quantidade = $("#artesSelecLista li").length;
+    
+
 }
