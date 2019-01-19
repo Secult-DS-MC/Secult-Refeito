@@ -1,12 +1,17 @@
 function validacaoEtapa2() {
-    var nomeCompleto = $("#nomeCompleto").val();
-    var nomeArtistico = $("#nomeArtistico").val();
-    var cdtArte = $("#cdtArte").val();
-    if (nomeCompleto != "" && nomeArtistico != "" && cdtArte != "") {
-        $("#proximo2").attr('disabled', false)
-    } else {
-        $("#proximo2").attr('disabled', true)
-    }
+    setTimeout(function () {
+
+        var nomeCompleto = $("#nomeCompleto").val();
+        var nomeArtistico = $("#nomeArtistico").val();
+        var numeroArte = $("#artesSelecLista li").length
+        if (nomeCompleto != "" && nomeArtistico != "" && numeroArte > 0) {
+            $("#proximo2").attr('disabled', false)
+        } else {
+            $("#proximo2").attr('disabled', true)
+
+        }
+    }, 10)
+
 }
 
 function validacaoEtapa3() {
@@ -46,12 +51,12 @@ function addArteLista() {
     var listaSelecionados = $("#artesSelecLista li")
     var existe = false
     for (var i = 0; i < listaSelecionados.length; i++) {
-        if (listaSelecionados[i].id == id || id == "0") {
+        if (listaSelecionados[i].id == id || id == "0" || listaSelecionados.length == 3) {
             existe = true;
         }
     }
     if (existe == false) {
-        $("#artesSelecLista").append("<li id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove()\"></i></li>\n")
+        $("#artesSelecLista").append("<li id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
     }
     $("#cdtArte").val(0);
 }
@@ -67,10 +72,24 @@ function cadastrarArtista() {
     var senhaCadastro = $("#senhaCadastro").val();
     var json = servidor + "/Secult/usuario/insertUsuarioArtista/" + nomeCompleto + "&" + generoArtista + "&" + senhaCadastro + "&" + idadeArtista + "&" + nomeArtistico + "&" + descricaoArtista;
     var onSuccess = function (result) {
-       var id = result.id_usuario;
-        inserirImagem(id, "U");
-        cadastrarContato(id)
+        var id = result.id_usuario;
+        if (id != 0) {
+            inserirImagem(id, "U");
+            cadastrarContato(id)
 
+            for(var i =0; i<3; i++){
+                var idArte = $("#artesSelecLista li")
+                if(idArte[i]!=undefined){
+                    inserirArteArtista(idArte[i].id, id)
+                }else{
+                    inserirArteArtista(0, id)
+                }
+
+            }
+            cadastroClick()
+        } else {
+            alert('Erro no cadastro, tente novamente ou contate o suporte!')
+        }
     }
     $.getJSON(json, onSuccess).fail();
 }
@@ -131,4 +150,30 @@ function listarArtistasNaoAutenticados() {
         }
     })
 
+}
+function limparCampos(){
+    var camposInp = $("input")
+    var camposSelect = $("select")
+    for(var i = 0; i < camposInp.length; i++){
+        $(camposInp[i]).val('');
+    }
+    for(var i = 0; i < camposSelect.length; i++){
+        $(camposSelect[i]).val(0);
+    }
+}
+function cadastroClick(){
+    $("#artesSelecLista li").remove()
+    posicaoCadastro('estagio4')
+    $('#cdt-seguranca').hide()
+    $('.cadastrar').css('height', tamanhoTela())
+    limparCampos()
+    $("#artesSelecLista li").remove()
+}
+
+
+function contarDescricao() {
+    setTimeout(function () {
+        var quantidade = $("#descricaoArtista").val().length;
+        $("#numCaractDescricao").text(quantidade + "/500");
+    }, 10)
 }

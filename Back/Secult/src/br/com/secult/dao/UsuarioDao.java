@@ -135,4 +135,33 @@ private List<Artista> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         }
         return objs;
     }
+public boolean verificarEmail(String email) throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "SELECT email FROM contato where email = ?";
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                if(rs.getString(1)== email){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        
+        return false;
+    }
 }

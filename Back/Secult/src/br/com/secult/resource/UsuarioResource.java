@@ -5,13 +5,11 @@
  */
 package br.com.secult.resource;
 
-import br.com.secult.dao.Arte_artistaDao;
+import br.com.secult.dao.ArteArtistaDao;
 import br.com.secult.dao.ArtistaDao;
-import br.com.secult.dao.CadartDao;
 import br.com.secult.dao.UsuarioDao;
-import br.com.secult.model.Arte_artista;
+import br.com.secult.model.ArteArtista;
 import br.com.secult.model.Artista;
-import br.com.secult.model.Cadart;
 import br.com.secult.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,7 +54,7 @@ public class UsuarioResource {
             artista.setDescricao(descricao);
             ArtistaDao artistaDao = new ArtistaDao();
             int id_artista = artistaDao.insert(artista);
-          
+
         }
         return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
@@ -79,8 +77,8 @@ public class UsuarioResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-    
-     @GET
+
+    @GET
     @Path("/listarAristasNaoAutenticados")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarAristasNaoAutenticados() throws SQLException, Exception {
@@ -98,7 +96,18 @@ public class UsuarioResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-    
-    
-}
 
+    @GET
+    @Path("/verificarEmail/email")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificarEmail(@PathParam("email") String email) throws SQLException, Exception {
+        System.out.println(email);
+        UsuarioDao usuarioDao = new UsuarioDao();
+        if (usuarioDao.verificarEmail(email) == false) {
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+        }
+        return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+}

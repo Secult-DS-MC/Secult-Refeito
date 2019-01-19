@@ -9,7 +9,7 @@ package br.com.secult.model;
  *
  * @author Computador
  */
-public class Arte_artista {
+public class ArteArtista {
     private int id;
     private int id_arte;
     private int id_artista;

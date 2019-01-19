@@ -1,7 +1,7 @@
 <ion-view id="page28" hide-nav-bar="true" style="background: #387ef5">
 
     <ion-content>
-        <div class="cadastrar">
+        <div class="cadastrar" >
             <div class="cadastrar-tela">
                 <div class="button-bar">
                     <a class="button button-clear estagio estagio1"
@@ -39,7 +39,7 @@
                         <p>Toda pessoa que possua alguma arte e esteja disposta a compartilhar seu "dom" com todos!</p>
                     </div>
                     <div class="button-bar" style="margin-top: 20%;">
-                        <a onclick="$('.cadastrar').hide()" class="button button-outline "
+                        <a onclick=" window.location.href ='#/page1/page3';" class="button button-outline "
                            style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
                         <a onclick="posicaoCadastro('estagio2'),$('#cdt-inicio').hide(), $('#cdt-pessoal').show()"
                            class="button button-outline"
@@ -55,9 +55,9 @@
                     <h4>Qual seu nome artístico? (obrigatório)</h4>
                     <input type="text" id="nomeArtistico" onkeyup="validacaoEtapa2()" class="obrigatorio2"
                            placeholder="Joãozinho">
-                    <h4>E Sua arte? (obrigatório)</h4>
+                    <h4>E Sua arte? (obrigatório) <span id="numArte" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/3</span></h4>
                     <select style="margin-bottom: 3px ; width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;"
-                            id="cdtArte" class="obrigatorio2" onchange="validacaoEtapa2(), addArteLista()">
+                            id="cdtArte" class="obrigatorio2" onchange="validacaoEtapa2(), addArteLista(),contarArtes()">
 
                     </select>
                     <ul id="artesSelecLista">
@@ -78,11 +78,11 @@
                 <div id="cdt-descricao" style="display: none;  margin-top: 5%;">
                     <h3 style="text-align: center">Fale mais sobre você!</h3>
 
-                    <h4>Descreva o que faz! (obrigatório)</h4>
-                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3()" rows="5" maxlength="500"
+                    <h4>Descreva o que faz! (obrigatório)<span id="numCaractDescricao" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/500</span></h4>
+                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3(), contarDescricao()" rows="5" maxlength="500"
                               placeholder="Sou cantor e tenho uma banda chamada Arroz com Feijão"></textarea>
                     <h4>Qual sua idade? (obrigatório)</h4>
-                    <input id="idadeArtista" onkeyup="validacaoEtapa3()" type="number" placeholder="25">
+                    <input id="idadeArtista" onkeyup="validacaoEtapa3(), $(this).mask('99')" type="text" placeholder="25" >
                     <div>
                         <h4>Com qual gênero você se identifica? (obrigatório)</h4>
                         <select style="width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;"
@@ -104,7 +104,7 @@
                     </div>
                 </div>
 
-                <div id="cdt-contato" style="display: none;  margin-top: 5%;">
+                <div id="cdt-contato" style="display: none;  margin-top: 20%;">
                     <h3 style="text-align: center">Como podemos entrar em contato?</h3>
 
                     <h4>Qual o seu email? (obrigatório)</h4>
@@ -113,7 +113,21 @@
                     <h4>E o seu telefone? (obrigatório)</h4>
                     <input id="telCadastro" onkeyup="validacaoEtapa4()" type="text" placeholder="00-00000-0000"
                            onclick="$(this).mask('00-00000-0000')">
-                    <h4 style="text-align: center">Quer compartilhar suas redes sociais? (Opcional)</h4>
+                    <div class="button-bar" style="margin-top: 10%;">
+
+                        <a onclick="posicaoCadastro('estagio3'),$('#cdt-descricao').show(), $('#cdt-contato').hide(),$('.cadastrar').css('height', tamanhoTela())"
+                           class="button button-outline "
+                           style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
+                        <a id="proximo4" disabled
+                           onclick="posicaoCadastro('estagio5'),$('#cdt-contato').hide(), $('#cdt-divulgacao').show()"
+                           class="button button-outline"
+                           style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color:
+                        white">Proximo</a>
+                    </div>
+                </div>
+                <div id="cdt-divulgacao" style="display: none;  margin-top: 5%;">
+
+                    <h3 style="text-align: center">Quer compartilhar suas redes sociais? (Opcional)</h3>
 
                     <h4><i class="icon ion-social-facebook"></i> Facebook? (link do perfil) </h4>
                     <input id="fbCadastro" type="text" placeholder="https://www.facebook.com/joaozinhoinho.silva">
@@ -122,11 +136,11 @@
                     <h4><i class="icon ion-social-instagram-outline"></i> Instagram: (nome de usuario)</h4>
                     <input id="inCadastro" type="text" placeholder="joazinhoinho_inho">
                     <div class="button-bar" style="margin-top: 10%;">
-                        <a onclick="posicaoCadastro('estagio3'),$('#cdt-descricao').show(), $('#cdt-contato').hide(),$('.cadastrar').css('height', tamanhoTela())"
+                        <a onclick="posicaoCadastro('estagio4'),$('#cdt-contato').show(), $('#cdt-divulgacao').hide(),$('.cadastrar').css('height', tamanhoTela())"
                            class="button button-outline "
                            style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
-                        <a id="proximo4" disabled
-                           onclick="posicaoCadastro('estagio5'),$('#cdt-contato').hide(), $('#cdt-seguranca').show()"
+                        <a id=""
+                           onclick="posicaoCadastro('estagio6'),$('#cdt-divulgacao').hide(), $('#cdt-seguranca').show()"
                            class="button button-outline"
                            style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color:
                         white">Proximo</a>
@@ -139,32 +153,28 @@
                     <h4>Ponha uma foto de perfil! (obrigatório)</h4>
                     <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none">
                         <img src="./img/user-foto.png" id="imgThumbnail"
-                             style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
-                        <input type="file" id="inputImagem" style="display: none">
+                             style="border: 1px solid #003a9c; border-radius: 20px;display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+                        <input type="file" id="inputImagem" style="display: none" onchange="validacaoEtapa5()">
                     </label>
-                    <button style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
+                    <button style="display: none;border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
                             class="button button-small button-outline" id="imputImg"
-                            onclick="abrirImpFile('inputImagem')" onchange="validacaoEtapa5()">Alterar Foto
+                            onclick="abrirImpFile('inputImagem')" >Alterar Foto
                     </button>
 
                     <h4>Coloque uma senha segura! (obrigatório)</h4>
-                    <input id="senhaCadastro" onkeyup="validacaoEtapa5()" type="text" placeholder="25">
+                    <input minlength="6" id="senhaCadastro" onkeyup="validacaoEtapa5()" type="text" placeholder="25">
 
                     <div class="button-bar" style="margin-top: 20%;">
-                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-pessoal').show(), $('#cdt-descricao').hide()"
+                        <a onclick="posicaoCadastro('estagio2'),$('#cdt-divulgacao').show(), $('#cdt-seguranca').hide()"
                            class="button button-outline "
                            style="border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white">Voltar</a>
                         <a id="proximo5" disabled
-                           onclick="cadastrarArtista(), posicaoCadastro('estagio4'),$('#cdt-pessoal').hide(),$('.cadastrar').css('height', tamanhoTela())"
+                           onclick="cadastrarArtista()"
                            class="button button-outline"
                            style="border:1px solid white;border-radius: 20px;font-size: 1rem;font-weight: bolder; color: white">Cadastrar</a>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </ion-content>
-
-
 </ion-view>

@@ -18,27 +18,25 @@ import java.sql.Statement;
  *
  * @author Computador
  */
-public class Arte_artistaDao {
+public class ArteArtistaDao {
 
     private Connection connection;
 
-    public int insert(int id_artista, int id_arte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public boolean insert(int id_artista, int id_arte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
-
+           boolean semErro = true;
         try {
             String sql = "INSERT INTO arte_artista (id_arte, id_artista) VALUES (?, ?)";
-            stmt = connection.prepareStatement(sql, (Statement.RETURN_GENERATED_KEYS));
+            stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, id_arte);
             stmt.setInt(2, id_artista);
 
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            int id = rs.getInt(1);
-            return id;
+            stmt.execute();
+           
         } catch (SQLException e) {
+            semErro = false;
             System.out.println(e.getMessage());
         } finally {
             try {
@@ -48,6 +46,6 @@ public class Arte_artistaDao {
 
         }
 
-        return 0;
+        return semErro;
     }
 }
