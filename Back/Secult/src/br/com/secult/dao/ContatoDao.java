@@ -8,25 +8,29 @@ package br.com.secult.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import br.com.secult.model.Contato;
 
 /**
  *
  * @author Computador
  */
 public class ContatoDao {
-      Connection connection;
-      
-       public boolean inserirContato(ContatoDao contato) throws SQLException {
+
+    Connection connection;
+
+    public boolean inserirContato(Contato contato) throws SQLException {
         this.connection = new ConnectionFactory().getConnection();
         boolean erro = true;
-           PreparedStatement stmt = null;
-        String sql = "INSERT INTO contato";
+        PreparedStatement stmt = null;
+        String sql = "INSERT INTO contato (id_usuario, email, telefone, facebook, youtube, instagram)values (?,?,?,?,?,?)";
         try {
             stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, redes.getNomeRede());
-            stmt.setString(2, redes.getNomeLink());
-            stmt.setLong(3, redes.getIdCadart());
+            stmt.setLong(1, contato.getId());
+            stmt.setString(2, contato.getEmail());
+            stmt.setString(3, contato.getTelefone());
+            stmt.setString(4, contato.getFacebook());
+            stmt.setString(5, contato.getYoutube());
+            stmt.setString(6, contato.getInstagram());
 
             stmt.execute();
         } catch (Exception e) {

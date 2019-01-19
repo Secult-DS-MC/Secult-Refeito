@@ -62,7 +62,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
 
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem)\n"
                 + "  WHERE origem = " + tipo + "";
@@ -118,7 +118,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
 
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) \n"
                 + "  WHERE visibilidade = 's';";
@@ -146,7 +146,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
 
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) \n"
                 + "  WHERE visibilidade = 'n';";
@@ -174,7 +174,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
         int mes = Comum.mesAt();
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) \n"
                 + "  WHERE EXTRACT(month from data_evento)=" + mes;
@@ -202,7 +202,7 @@ public class AcontecimentoDao {
         this.connection = new ConnectionFactory().getConnection();
         int mes = Comum.mesAt();
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) \n"
                 + "  where EXTRACT(month from data_evento)>=6 order by EXTRACT(month from data_evento)";
@@ -228,7 +228,7 @@ public class AcontecimentoDao {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
-                + "       a.tipo_evento, a.id_imagem, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
+                + "       a.tipo_evento,  a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
                 + "  ON(a.origem = o.id_origem) \n"
                 + "  WHERE id = ?";

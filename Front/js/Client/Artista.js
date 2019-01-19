@@ -69,6 +69,7 @@ function cadastrarArtista() {
     var onSuccess = function (result) {
        var id = result.id_usuario;
         inserirImagem(id, "U");
+        cadastrarContato(id)
 
     }
     $.getJSON(json, onSuccess).fail();

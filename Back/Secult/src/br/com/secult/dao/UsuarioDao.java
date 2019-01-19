@@ -42,15 +42,9 @@ public class UsuarioDao {
             stmt.setInt(4, usuario.getIdade());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            id = rs.getInt(1);
-            
-            System.out.println(id);
-            
-            sql = "INSERT INTO contato (id_usuario) values(?)";
-            stmt.setInt(1, id);
-            stmt.execute();
-           return id;
+            rs.next(); 
+         
+           return rs.getInt(1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -60,7 +54,7 @@ public class UsuarioDao {
             }
 
         }
-        return id;
+        return 0;
 
     }
 

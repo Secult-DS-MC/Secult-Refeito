@@ -3,7 +3,7 @@ function inserirImagem(id_coluna, sigla) {
     var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;
 
     var ImageURL = localStorage.getItem("imagemSalva");
-    if (ImageURL == null) {
+    if (ImageURL == "" || ImageURL == null) {
         ImageURL = localStorage.getItem("semfoto");
     }
 
