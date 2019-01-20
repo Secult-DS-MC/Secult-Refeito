@@ -135,21 +135,6 @@ angular.module('app.controllers', [])
             }, 1000)
 
             selectLocalidade('localidadeAdm');
-
-            $scope.acontecimentoList = [
-                {text: "Notícia", value: "N"},
-                {text: "Evento", value: "E"},
-                {text: "Calendario", value: "C"}
-            ];
-
-            $scope.serverSideChange = function (item) {
-
-                var tipo = item.value;
-
-                $("#tipoToggle").toggle(500);
-
-                habilitarDescricaoAcontecimento(tipo, $("#descricaoAdm"));
-            };
         }])
 
     .controller('administradorOpcoesCtrl', ['$scope', '$stateParams',

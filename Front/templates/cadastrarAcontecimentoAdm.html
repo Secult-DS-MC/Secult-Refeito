@@ -33,16 +33,30 @@
                     onclick="abrirImpFile('inputImagem')">Alterar Foto
             </button>
 
-            <div style="display: block" id="tipoToggle">
-                <div class="item item-divider">
-                    Tipo acontecimento:
+            <h4>Tipo do acontecimento&hellip;</h4>
+            <section id="sectionTipo">
+                <div>
+                    <input type="radio" id="control_01" name="select" value="N" checked>
+                    <label for="control_01">
+                        <h5>Notícia</h5>
+                        <p>Aparecerá na tela inicial, são os acontecimentos de maior visibilidade.</p>
+                    </label>
                 </div>
-
-                <ion-radio ng-repeat="item in acontecimentoList" ng-value="item.value" ng-click="serverSideChange(item)"
-                           ng-model="data.acontecimentoSide">
-                    {{ item.text }}
-                </ion-radio>
-            </div>
+                <div>
+                    <input type="radio" id="control_02" name="select" value="E">
+                    <label for="control_02">
+                        <h5>Evento</h5>
+                        <p>São os eventos mais próximos e relativamente menores.</p>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="control_03" name="select" value="C">
+                    <label for="control_03">
+                        <h5>Calendario</h5>
+                        <p>Acontecimentos sazonais e pré definidos.</p>
+                    </label>
+                </div>
+            </section>
 
             <form class="list">
                 <label class="item item-input">
@@ -51,7 +65,7 @@
 
                 <label class="item item-input">
                     <textarea readonly="true" style="height: 35px;" placeholder="Descrição do acontecimento" rows="3"
-                              id="descricaoAdm"></textarea>
+                              id="descricaoAdm" onclick='habilitarDescricaoAcontecimento($("input[name=\"select\"]:checked").val(), $("#descricaoAdm"))'></textarea>
                 </label>
 
                 <label class="item item-input">

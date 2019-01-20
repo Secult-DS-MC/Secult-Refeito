@@ -18,16 +18,12 @@ function mostrarTipoAcontecimento() {
 }
 
 function habilitarDescricaoAcontecimento(tipo, descricao) {
-
     if (tipo == "E") {
         $("#labelLocal").show();
     } else {
         $("#labelLocal").hide();
     }
-
     var quantidade;
-
-    localStorage.setItem("tipoAcontecimento", tipo);
 
     descricao.attr("readonly", false).on("keypress", function () {
         quantidade = descricao.val().length;
@@ -48,7 +44,7 @@ function validarCadastroAcontecimento() {
     var dataEvento = $("#dataEventoAdm").val();
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
-    var tipo = localStorage.getItem("tipoAcontecimento");
+    var tipo = $("input[name=\"select\"]:checked").val();
     var localCidade = $("#localAdm").val();
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
@@ -72,7 +68,7 @@ function cadastroAcontecimento() {
     var dataEvento = $("#dataEventoAdm").val();
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
-    var tipo = localStorage.getItem("tipoAcontecimento")
+    var tipo = $("input[name=\"select\"]:checked").val();
     var localCidade = $("#localAdm").val();
     var origem = localStorage.getItem("origemAcom");
 
