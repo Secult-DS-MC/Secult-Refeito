@@ -38,13 +38,6 @@ angular.module('app.controllers', [])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-        $scope.options = {
-            // autoplay: 2500,
-            loop: true
-            // speed: 1000,
-            // effect: 'fade'
-        }
-
             listarPublicidade();
             listarEventoNoticias();
             verificarAdministrador();
@@ -115,7 +108,6 @@ angular.module('app.controllers', [])
 
     .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventosCalendario();
 
         }])
 
@@ -156,13 +148,8 @@ angular.module('app.controllers', [])
 
                 $("#tipoToggle").toggle(500);
 
-                habilitarDescricaoAcontecimento(tipo);
+                habilitarDescricaoAcontecimento(tipo, $("#descricaoAdm"));
             };
-        }])
-
-    .controller('infoEventoCalendarioCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-
         }])
 
     .controller('administradorOpcoesCtrl', ['$scope', '$stateParams',
@@ -184,11 +171,11 @@ angular.module('app.controllers', [])
 
             localStorage.setItem("visibilidadeAcon", "n");
 
-            $scope.emailNotificationChange = function() {
+            $scope.emailNotificationChange = function () {
                 localStorage.setItem("visibilidadeAcon", $scope.emailNotification.checked);
             };
 
-            $scope.emailNotification = { checked: true };
+            $scope.emailNotification = {checked: true};
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',
@@ -213,10 +200,12 @@ angular.module('app.controllers', [])
             botaoFotoFakeCadart(2);
             listarArtes()
         }])
+
     .controller('infoCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])
+
     .controller('superAdministradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
@@ -225,4 +214,23 @@ angular.module('app.controllers', [])
     .controller('clonarAcontecimentoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             selectLocalidade('localidadeCl');
+
+            $scope.acontecimentoList = [
+                {text: "Notícia", value: "N"},
+                {text: "Evento", value: "E"},
+                {text: "Calendario", value: "C"}
+            ];
+
+            $scope.serverSideChange = function (item) {
+
+                var tipo = item.value;
+
+                $("#tipoToggle").toggle(500);
+
+                habilitarDescricaoAcontecimento(tipo, $("#descricaoCl"));
+            };
         }])
+
+    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }]);

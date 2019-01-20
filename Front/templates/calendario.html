@@ -1,128 +1,67 @@
 <ion-view title="Calendário" id="page12">
     <ion-content padding="true" class="has-header">
         <div>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="jan"
-                    onclick="expandir('janeiroEvent',this.id)">
+            <a onclick="listarEventosCalendario(this.id, 'Janeiro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="01">
                 Janeiro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="janeiroEvent">
-                <p id="janeiroEvent" style="display: none; color: red; font-size: 1rem; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="fev"
-                    onclick="expandir('fevEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Fevereiro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="02">
                 Fevereiro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="fevEvent">
-                <p id="fevEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="mar"
-                    onclick="expandir('marEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Março')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="03">
                 Março
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="marEvent">
-                <p id="marEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="abr"
-                    onclick="expandir('abrEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Abril')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="04">
                 Abril
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="abrEvent">
-                <p id="abrEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="mai"
-                    onclick="expandir('maiEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Maio')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="05">
                 Maio
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="maiEvent">
-                <p id="maiEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="jun"
-                    onclick="expandir('junEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Junho')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="06">
                 Junho
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="junEvent">
-                <p id="junEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="jul"
-                    onclick="expandir('julEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Julho')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="07">
                 Julho
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="julEvent">
-                <p id="julEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="ago"
-                    onclick="expandir('agoEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Agosto')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="08">
                 Agosto
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="agoEvent">
-                <p id="agoEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="set"
-                    onclick="expandir('setEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Setembro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="09">
                 Setembro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="setEvent">
-                <p id="setEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="out"
-                    onclick="expandir('outEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Outubro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="10">
                 Outubro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="outEvent">
-                <p id="outEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="nov"
-                    onclick="expandir('novEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Novembro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="11">
                 Novembro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="novEvent">
-                <p id="novEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
-
-            </ion-list>
-
-            <button class="button button-block button-outline button-positive button-small item-icon-right" id="dez"
-                    onclick="expandir('dezEvent',this.id)">
+                <i class="icon ion-android-calendar"></i>
+            </a>
+            <a onclick="listarEventosCalendario(this.id, 'Dezembro')"
+               class="button button-block button-outline button-positive button-small item-icon-right" id="12">
                 Dezembro
-                <i class="icon ion-plus"></i>
-            </button>
-            <ion-list style="display: none;" class="dezEvent">
-                <p id="dezEvent" style="display: none; color: red; font-size: 13px; text-align: center">Nenhum evento previsto para esse mês!</p>
+                <i class="icon ion-android-calendar"></i>
+            </a>
 
-            </ion-list>
         </div>
     </ion-content>
 </ion-view>

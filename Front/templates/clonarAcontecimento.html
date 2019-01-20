@@ -3,7 +3,7 @@
 
 
     <ion-content padding="true" class="has-header has-footer">
-        <label class="item item-input item-stacked-label desabilitado" for="imputImg" style="border-bottom: none;">
+        <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none;">
             <img src="./img/sem-foto.jpg" id="imgThumbnail" class="imgThumbnail1"
                  style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
             <input type="file" id="inputImagem" style="display: none">
@@ -14,13 +14,24 @@
         </button>
 
         <form class="list">
+
+            <div style="display: block" id="tipoToggle">
+                <div class="item item-divider">
+                    Tipo acontecimento:
+                </div>
+
+                <ion-radio ng-repeat="item in acontecimentoList" ng-value="item.value" ng-click="serverSideChange(item)"
+                           ng-model="data.acontecimentoSide">
+                    {{ item.text }}
+                </ion-radio>
+            </div>
+
             <label class="item item-input desabilitado">
                 <input type="text" placeholder="Título" id="tituloCl">
             </label>
 
             <label class="item item-input">
-                <textarea style="height: 35px;" placeholder="Descrição" rows="3" id="descricaoCl"
-                          maxLength="500"></textarea>
+                <textarea style="height: 35px;" placeholder="Descrição" readonly rows="3" id="descricaoCl"></textarea>
             </label>
 
             <label class="item item-input desabilitado">
@@ -39,26 +50,7 @@
                 </select>
             </label>
 
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Visibilidade:</span>
-                <select id="visibilidadeCl">
-                    <option value="">Selecione</option>
-                    <option value="s">Visivel</option>
-                    <option value="n">Invisivel</option>
-                </select>
-            </label>
-
-            <label class="item item-select" style="border-width: 1px 0;">
-                <span class="input-label">Tipo:</span>
-                <select id="tipoCl" onchange="mostrarInputCadastroEvento(this.value)">
-                    <option value="">Selecione</option>
-                    <option value="N">Notícia</option>
-                    <option value="E">Evento</option>
-                    <option value="C">Calendário</option>
-                </select>
-            </label>
-
-            <label class="item item-input" id="labelLocal">
+            <label class="item item-input" id="labelLocal" style="display: none">
                 <input type="text" placeholder="Local do evento na cidade" id="localCl">
             </label>
         </form>

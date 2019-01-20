@@ -17,14 +17,14 @@ function mostrarTipoAcontecimento() {
     }, 300);
 }
 
-function habilitarDescricaoAcontecimento(tipo) {
+function habilitarDescricaoAcontecimento(tipo, descricao) {
+
     if (tipo == "E") {
         $("#labelLocal").show();
     } else {
         $("#labelLocal").hide();
     }
 
-    var descricao = $("#descricaoAdm");
     var quantidade;
 
     localStorage.setItem("tipoAcontecimento", tipo);
@@ -120,18 +120,6 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
         $("#localUp").val(localCidade);
         $("#updateEventoBtn").attr('onclick', "updateEvento(" + id + ")");
     }, 1000);
-
-    $("#descricaoUp").on("keypress", function () {
-    var quantidade = $("#descricaoUp").val().length;
-console.log()
-        if (tipo == "E" && quantidade >= "191") {
-            $("#descricaoUp").attr("readonly", true);
-        }
-
-        if (tipo == "N" && quantidade >= "2000") {
-            $("#descricaoUp").attr("readonly", true);
-        }
-    });
 }
 
 function updateEvento(id) {
@@ -159,9 +147,6 @@ function updateEvento(id) {
 
                     if (Administrador == "ok") {
                         atualizarImagem(id, "A");
-                        // setTimeout(function () {
-                        //     window.location.reload()
-                        // }, 100);
                     }
                     ;
                 };

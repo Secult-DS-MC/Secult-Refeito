@@ -14,22 +14,22 @@ import java.sql.Timestamp;
  * @author Muquifo
  */
 public class Acontecimento {
-
-    private long id;
+    
     private String titulo;
     private String descricao;
     private String visibilidade;
     private String tipo_evento;
-    private Date data_cadastro;
     private String data_evento;
     private String hora_evento;
     private String nomeEvento;
     private String nomeLocalidade;
     private String localCidade;
-    private int id_imagem;
-    private int origem;
     private String nome_origem;
+    private Date data_cadastro;
     private byte[] imagem;
+    private int id_localidade;
+    private int origem;
+    private long id;
     
      public String getNomeOrigem() {
         return nome_origem;
@@ -48,19 +48,11 @@ public class Acontecimento {
     }
 
     public int getIdLocalidade() {
-        return idLocalidade;
+        return id_localidade;
     }
 
-    public void setIdLocalidade(int idLocalidade) {
-        this.idLocalidade = idLocalidade;
-    }
-    private int idLocalidade;
-    public int getId_Imagem() {
-        return id_imagem;
-    }
-
-    public void setId_Imagem(int id_imagem) {
-        this.id_imagem = id_imagem;
+    public void setIdLocalidade(int id_localidade) {
+        this.id_localidade = id_localidade;
     }
 
     public byte[] getImagem() {
@@ -157,7 +149,4 @@ public class Acontecimento {
     public void setHora_evento(String hora_evento) {
         this.hora_evento = hora_evento;
     }
-
-   
-    
 }

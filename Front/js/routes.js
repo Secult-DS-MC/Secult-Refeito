@@ -29,6 +29,26 @@ angular.module('app.routes', [])
                 }
             })
 
+            .state('tabsController.calendario', {
+                url: '/page12',
+                views: {
+                    'tab3': {
+                        templateUrl: 'templates/calendario.html',
+                        controller: 'calendarioCtrl'
+                    }
+                }
+            })
+
+            .state('tabsController.infoCalendario', {
+                url: '/page21',
+                views: {
+                    'tab3': {
+                        templateUrl: 'templates/infoCalendario.html',
+                        controller: 'infoCalendarioCtrl'
+                    }
+                }
+            })
+
             .state('usuario', {
                 url: '/page7',
                 templateUrl: 'templates/usuario.html',
@@ -58,16 +78,6 @@ angular.module('app.routes', [])
                 url: '/page11',
                 templateUrl: 'templates/turismo.html',
                 controller: 'turismoCtrl'
-            })
-
-            .state('tabsController.calendario', {
-                url: '/page12',
-                views: {
-                    'tab3': {
-                        templateUrl: 'templates/calendario.html',
-                        controller: 'calendarioCtrl'
-                    }
-                }
             })
 
             .state('tabsController.evento', {
@@ -122,10 +132,10 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/alterarAcontecimentoAdm.html',
                 controller: 'alterarAcontecimentoAdmCtrl'
             })
-            .state('infoEventoCalendario', {
+            .state('infoCalendario', {
                 url: '/page21',
-                templateUrl: 'templates/infoEventoCalendario.html',
-                controller: 'infoEventoCalendarioCtrl'
+                templateUrl: 'templates/infoCalendario.html',
+                controller: 'infoCalendarioCtrl'
             })
             .state('administradorOpcoes', {
                 url: '/page22',
