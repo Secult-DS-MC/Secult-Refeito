@@ -44,13 +44,14 @@ public class UsuarioDao {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             id = rs.getInt(1);
-            System.out.println("inserio usuario");
+            rs.close();
             return id;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
+                connection.close();
                 stmt.close();
             } catch (Exception e) {
             }
@@ -89,6 +90,7 @@ public class UsuarioDao {
             try {
                 rs.close();
                 stmt.close();
+                connection.close();
             } catch (Exception e) {
             }
         }
@@ -112,6 +114,7 @@ public class UsuarioDao {
             try {
                 rs.close();
                 stmt.close();
+                connection.close();
             } catch (Exception e) {
             }
         }
@@ -157,6 +160,7 @@ public class UsuarioDao {
             try {
                 rs.close();
                 stmt.close();
+                connection.close();
             } catch (Exception e) {
             }
         }

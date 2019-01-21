@@ -190,6 +190,11 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/clonarAcontecimento.html',
                 controller: 'clonarAcontecimentoCtrl'
             })
+            .state('infoAutenticarDesautenticar', {
+                url: '/page31',
+                templateUrl: 'templates/infoAutenticarDesautenticar.html',
+                controller: 'infoAutenticarDesautenticarCtrl'
+            })
 
         $urlRouterProvider.otherwise('/page1/page2')
     });

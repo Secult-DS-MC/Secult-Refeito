@@ -515,11 +515,11 @@ input[type="radio"] {
     margin-bottom: 0!important;
 
 }
-h2#redesSociaisInfo i {
+h2#redesSociaisInfo a {
     font-size: 2rem;
 }
 
-h2#redesSociaisInfo i.button {
+h2#redesSociaisInfo a.button {
     background-color: white!important;
 
 }

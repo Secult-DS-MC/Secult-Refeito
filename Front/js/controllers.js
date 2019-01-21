@@ -165,7 +165,7 @@ angular.module('app.controllers', [])
         }])
     .controller('autenticadosCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            listarArtistasAutenticados()
         }])
     .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
@@ -202,5 +202,9 @@ angular.module('app.controllers', [])
         }])
 
     .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('infoAutenticarDesautenticarCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
         }]);

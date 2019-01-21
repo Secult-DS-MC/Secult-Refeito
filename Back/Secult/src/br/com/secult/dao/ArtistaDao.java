@@ -104,4 +104,27 @@ public class ArtistaDao {
         }
         return hasError;
     }
+    public boolean updateVisibilidadeN(int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE artista SET autenticado='N' WHERE id=?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setLong(1, id);
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
 }

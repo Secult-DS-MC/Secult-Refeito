@@ -34,4 +34,15 @@ public class ArtistaResource {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
+      @GET
+    @Path("/updateVisibilidadeN/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateVisibilidadeN(@PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        ArtistaDao artistaDao = new ArtistaDao();
+        if (artistaDao.updateVisibilidadeN(id)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
 }
