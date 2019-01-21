@@ -49,11 +49,13 @@ public class UsuarioResource {
 
         if (id != 0) {
             Artista artista = new Artista();
-            artista.setId(id);
-            artista.setNome(nomeArtistico);
+            artista.setIdArtista(id);
+            artista.setNomeArtistico(nomeArtistico);
             artista.setDescricao(descricao);
             ArtistaDao artistaDao = new ArtistaDao();
-            int id_artista = artistaDao.insert(artista);
+            if(artistaDao.insert(artista)){
+            
+            }
 
         }
         return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
@@ -101,7 +103,6 @@ public class UsuarioResource {
     @Path("/verificarEmail/email")
     @Produces(MediaType.APPLICATION_JSON)
     public Response verificarEmail(@PathParam("email") String email) throws SQLException, Exception {
-        System.out.println(email);
         UsuarioDao usuarioDao = new UsuarioDao();
         if (usuarioDao.verificarEmail(email) == false) {
             return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();

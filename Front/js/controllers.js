@@ -46,7 +46,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $("#listaCadart").empty();
-            listarArtistas()
+            listarArtistas();
             usuarioAtivo();
             localStorage.setItem("Ativo", "Sim");
             setTimeout(function () {
@@ -81,10 +81,6 @@ angular.module('app.controllers', [])
             mudarCorbotaoEntrar();
         }])
 
-    .controller('informacoesCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-
-        }])
 
     .controller('culturaCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams, $ionicSideMenuDelegate) {
@@ -144,7 +140,7 @@ angular.module('app.controllers', [])
 
     .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            listarArtistasNaoAutenticados()
         }])
 
     .controller('alterarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
@@ -199,21 +195,10 @@ angular.module('app.controllers', [])
     .controller('clonarAcontecimentoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             selectLocalidade('localidadeCl');
+        }])
+    .controller('infoArtistaCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
 
-            $scope.acontecimentoList = [
-                {text: "Notícia", value: "N"},
-                {text: "Evento", value: "E"},
-                {text: "Calendario", value: "C"}
-            ];
-
-            $scope.serverSideChange = function (item) {
-
-                var tipo = item.value;
-
-                $("#tipoToggle").toggle(500);
-
-                habilitarDescricaoAcontecimento(tipo, $("#descricaoCl"));
-            };
         }])
 
     .controller('infoCalendarioCtrl', ['$scope', '$stateParams',

@@ -510,3 +510,29 @@ input[type="radio"] {
         flex-direction: row;
     }
 }
+.divBorda {
+    border-bottom: 0.2px solid #e9e9e9!important;
+    margin-bottom: 0!important;
+
+}
+h2#redesSociaisInfo i {
+    font-size: 2rem;
+}
+
+h2#redesSociaisInfo i.button {
+    background-color: white!important;
+
+}
+.buttonWhats {
+    color: #262626!important;
+    border: 0.51px solid #dbdbdb!important;
+    margin-top: 0!important;
+}
+
+.artesInfo{
+    width: 33%;
+    font-size: 0.9rem;
+    text-align: center;
+    border: none;
+    pointer-events: none;
+}

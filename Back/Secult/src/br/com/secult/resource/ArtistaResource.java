@@ -5,11 +5,8 @@
  */
 package br.com.secult.resource;
 
-import br.com.secult.dao.ArteArtistaDao;
 import br.com.secult.dao.ArtistaDao;
-import br.com.secult.model.ArteArtista;
 import br.com.secult.model.Artista;
-
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -24,21 +21,17 @@ import javax.ws.rs.core.Response;
  *
  * @author Computador
  */
-@Path("/arteArtista")
-public class ArteArtistaResource {
-
+@Path("/artista")
+public class ArtistaResource {
     @GET
-    @Path("/inserirArteArtista/{idArte}&{idArtista}")
+    @Path("/updateVisibilidadeS/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirArteArtista(@PathParam("idArte") int idArte, @PathParam("idArtista") int idArtista) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-
-        ArteArtistaDao arteArtistaDao = new ArteArtistaDao();
-
-        if (arteArtistaDao.insert(idArtista, idArte)) {
+    public Response updateVisibilidadeS(@PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        ArtistaDao artistaDao = new ArtistaDao();
+        if (artistaDao.updateVisibilidadeS(id)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
-
 }

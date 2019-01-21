@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import br.com.secult.model.Contato;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,5 +43,39 @@ public class ContatoDao {
             stmt.close();
         }
         return erro;
+    }
+
+    public List<Contato> listarContatos(int id) throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+        List<Contato> contatos = new ArrayList<Contato>();
+
+        try {
+            String sql = "SELECT * FROM contato WHERE id_usuario = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId(rs.getInt("id_usuario"));
+                contato.setEmail(rs.getString("email"));
+                contato.setTelefone(rs.getString("telefone"));
+                contato.setFacebook(rs.getString("facebook"));
+                contato.setYoutube(rs.getString("youtube"));
+                contato.setInstagram(rs.getString("instagram"));
+                contatos.add(contato);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return contatos;
     }
 }

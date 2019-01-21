@@ -42,9 +42,11 @@ public class UsuarioDao {
             stmt.setInt(4, usuario.getIdade());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next(); 
-         
-           return rs.getInt(1);
+            rs.next();
+            id = rs.getInt(1);
+            System.out.println("inserio usuario");
+            return id;
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -69,7 +71,7 @@ public class UsuarioDao {
         return senha;
     }
 
-public List<Artista> listarAristasAutenticados() throws Exception, Exception {
+    public List<Artista> listarAristasAutenticados() throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
         PreparedStatement stmt = null;
@@ -92,7 +94,7 @@ public List<Artista> listarAristasAutenticados() throws Exception, Exception {
         }
     }
 
-public List<Artista> listarAristasNaoAutenticados() throws Exception, Exception {
+    public List<Artista> listarAristasNaoAutenticados() throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
         PreparedStatement stmt = null;
@@ -115,9 +117,7 @@ public List<Artista> listarAristasNaoAutenticados() throws Exception, Exception 
         }
     }
 
-
-
-private List<Artista> resultSetToObjectTransfer(ResultSet rs) throws Exception {
+    private List<Artista> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Artista> objs = new Vector<>();
         while (rs.next()) {
 
@@ -129,13 +129,12 @@ private List<Artista> resultSetToObjectTransfer(ResultSet rs) throws Exception {
             artista.setNomeArtistico(rs.getString("nomeArtistico"));
             artista.setDescricao(rs.getString("descricao"));
 
-           
-
             objs.add(artista);
         }
         return objs;
     }
-public boolean verificarEmail(String email) throws Exception, Exception {
+
+    public boolean verificarEmail(String email) throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
         PreparedStatement stmt = null;
@@ -145,10 +144,10 @@ public boolean verificarEmail(String email) throws Exception, Exception {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
-            if(rs.next()){
-                if(rs.getString(1)== email){
+            if (rs.next()) {
+                if (rs.getString(1) == email) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -161,7 +160,7 @@ public boolean verificarEmail(String email) throws Exception, Exception {
             } catch (Exception e) {
             }
         }
-        
+
         return false;
     }
 }

@@ -29,6 +29,16 @@ angular.module('app.routes', [])
                 }
             })
 
+            .state('tabsController.infoArtista', {
+                url: '/page35',
+                views: {
+                    'tab1':{
+                        templateUrl: 'templates/infoArtista.html',
+                        controller: 'infoArtistaCtrl'
+                    }
+                }
+            })
+
             .state('tabsController.calendario', {
                 url: '/page12',
                 views: {
@@ -103,11 +113,6 @@ angular.module('app.routes', [])
                 controller: 'loginCtrl'
             })
 
-            .state('informacoes', {
-                url: '/page16',
-                templateUrl: 'templates/informacoes.html',
-                controller: 'informacoesCtrl'
-            })
 
 
             .state('eventosEmPovoados', {
@@ -187,6 +192,4 @@ angular.module('app.routes', [])
             })
 
         $urlRouterProvider.otherwise('/page1/page2')
-
-
     });

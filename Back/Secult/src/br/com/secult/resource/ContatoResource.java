@@ -7,7 +7,9 @@ package br.com.secult.resource;
 
 import br.com.secult.dao.CalendarioDao;
 import br.com.secult.dao.ContatoDao;
+import br.com.secult.dao.ContatoDao;
 import br.com.secult.model.Acontecimento;
+import br.com.secult.model.Artista;
 import br.com.secult.model.Contato;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,6 +53,25 @@ public class ContatoResource {
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
+    }
+    
+    @GET
+    @Path("/listarContatos/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarContatos(@PathParam("id") int id) throws SQLException, Exception {
+
+        ContatoDao contatoDao = new ContatoDao();
+        List<Contato> contato = contatoDao.listarContatos(id);
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsarios = gson.toJsonTree(contato).getAsJsonArray();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("contatos", ArrayUsarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
     }
 
 }
