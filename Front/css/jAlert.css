@@ -33,24 +33,6 @@ html,body
     user-select: none;
 }
 
-.toast{
-    border-radius: 10px;
-    padding: 7px;
-    text-align: center;
-    width: 270px;
-    height: 60px;
-    margin: auto;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 4;
-    background-color: white;
-    color: #4d4d4d;
-    box-shadow: 0px 0px 20px 20px hsla(0, 1%, 2%, 0.31);
-}
-
 .ja_wrap.ja_wrap_white
 {
     background: rgba(255,255,255,.75);
