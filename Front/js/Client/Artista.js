@@ -191,7 +191,9 @@ function AutenticarVisibilidade(id, acao) {
 
     $.getJSON(json, function (result) {
         if (result.status == 'ok') {
-            alert("di boas")
+            window.history.back();
+            listarArtistasAutenticados();
+            listarArtistasNaoAutenticados();
         }
     })
 }
@@ -265,11 +267,11 @@ function carregarInformacoesArtistasAutenticar(idArtista, nomeArtistico, descric
     window.location.href = "#/page31";
     if (estado == "nAutenticado") {
         $("#footerBarra").show()
-        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"A")').text('Desautenticar');
+        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"A")');
     }
     if (estado == "autenticado") {
         $("#footerBarra").show()
-        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"D")')
+        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"D")').text('Desautenticar');
     }
     setTimeout(function () {
         $("#page35 .title").append(nomeArtistico);
