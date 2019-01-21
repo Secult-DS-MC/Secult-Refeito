@@ -45,8 +45,9 @@
             </label>
 
             <label class="item item-input">
-                <textarea style="height: 35px;" placeholder="Descrição" readonly rows="3" id="descricaoCl"
-                          onclick='habilitarDescricaoAcontecimento($("input[name=\"select\"]:checked").val(), $("#descricaoCl"))'></textarea>
+                <span id="numCaractDescricao" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/0</span>
+                <textarea style="height: 35px;" placeholder="Descrição" id="descricaoCl"
+                          onkeypress='habilitarDescricaoAcontecimento($("input[name=\"select\"]:checked").val(), $("#descricaoCl"))'></textarea>
             </label>
 
             <label class="item item-input desabilitado">

@@ -23,19 +23,44 @@ function habilitarDescricaoAcontecimento(tipo, descricao) {
     } else {
         $("#labelLocal").hide();
     }
-    var quantidade;
 
-    descricao.attr("readonly", false).on("keypress", function () {
-        quantidade = descricao.val().length;
+    var quantidade = descricao.val().length;
 
-        if (tipo == "E" && quantidade >= "191") {
-            descricao.attr("readonly", true);
+    setTimeout(function () {
+        if (tipo == "N") {
+            $("#numCaractDescricao").text(quantidade + "/2000");
+        } else if (tipo == "E") {
+            $("#numCaractDescricao").text(quantidade + "/191");
+        } else if (tipo == "C") {
+            $("#numCaractDescricao").text(quantidade + "/2000");
         }
+    }, 10);
 
-        if (tipo == "N" && quantidade >= "2000") {
-            descricao.attr("readonly", true);
-        }
-    });
+    if (tipo == "E" && quantidade == "191") {
+        toast(1, "A descrição do evento só aparecerá até esse ponto.");
+        setTimeout(function () {
+            toast(2, "")
+        }, 3000);
+    }
+
+    if (tipo == "N" && quantidade == "2000") {
+        toast(1, "A descrição da noticia só aparecerá até esse ponto.");
+        setTimeout(function () {
+            toast(2, "")
+        }, 3000);
+    }
+}
+
+function toast(el, mensagem) {
+    if (el == 1) {
+        setTimeout(function () {
+            $("ion-content").prepend("<div class='toast'>" + mensagem + "</div>");
+        }, 200)
+    } else {
+        setTimeout(function () {
+            $(".toast").remove();
+        }, 200)
+    }
 }
 
 function validarCadastroAcontecimento() {
@@ -124,7 +149,7 @@ function updateEvento(id) {
     var dataEvento = $("#dataEventoUp").val();
     var horaEvento = $("#horarioUp").val();
     var localidade = $("#localidadeUp").val();
-    var tipo = $("#tipoUp").val();
+    var tipo = $("input[name=\"select\"]:checked").val();
     var visibilidade = localStorage.getItem("visibilidadeAcon");
     var local = $("#localUp").val();
 
@@ -265,7 +290,7 @@ function listarEventoFiltro(filtro) {
                 //if(imagem == null) imagem = "../../img/semImagem.png";
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
-                var idLocalidade = dados[i].idLocalidade;
+                var idLocalidade = dados[i].id_localidade;
                 var localCidade = dados[i].localCidade;
 
                 localStorage.setItem('dadosClone', JSON.stringify(dados));
@@ -317,7 +342,7 @@ function preencherClonar(id) {
                 }, 100);
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
-                var idLocalidade = dados[i].idLocalidade;
+                var idLocalidade = dados[i].id_localidade;
                 var localCidade = dados[i].localCidade;
                 var origem = dados[i].origem;
 
@@ -346,7 +371,7 @@ function validarCloneAcontecimento() {
     var dataEvento = $("#dataEventoCl").val();
     var horaEvento = $("#horarioCl").val();
     var localidade = $("#localidadeCl").val();
-    var tipo = $("#tipoCl").val();
+    var tipo = $("input[name=\"select\"]:checked").val();
     var localCidade = $("#localCl").val();
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
@@ -370,7 +395,7 @@ function cloneAcontecimento() {
     var dataEvento = $("#dataEventoCl").val();
     var horaEvento = $("#horarioCl").val();
     var localidade = $("#localidadeCl").val();
-    var tipo = $("#tipoCl").val();
+    var tipo = $("input[name=\"select\"]:checked").val();
     var localCidade = $("#localCl").val();
     var origem = localStorage.getItem("origemAcom");
 

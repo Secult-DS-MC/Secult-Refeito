@@ -35,7 +35,7 @@ function listarEventoEvento() {
 
 
                 $("#listaEventoEvento").append("<a class='linkSemDecoracao'>\n" +
-                    "            <li class=\"item item-thumbnail-left item-icon-right\" style='padding-right: 45px; border-bottom: none;'><img src='" + imagem + "'>\n" +
+                    "            <li class=\"item item-thumbnail-left item-icon-right\" style='padding-right: 45px; border: none;'><img src='" + imagem + "'>\n" +
                     "                <h2 class='positive' style='font-weight: bolder; padding-right: 5px;'>" + titulo + "\n" +
                     "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block; font-size: 0.8rem;\" >" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> mais</span></span></p>\n" +
                     "                   <p class='desc"+id+"' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: none; font-size: 0.8rem;\" >" + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc"+id+"\")'> menos</span></span></p>\n" +
@@ -43,11 +43,11 @@ function listarEventoEvento() {
                     "                <div class=\"tabs-icon-top icon positive\"><div class=\"tab-item\" style='position: relative; top: 25px; height: 20px;'>" + horaEvento + "</div><i style='position: absolute; right: 0px!important;' class=\"icon ion-android-time\"></i></div>\n" +
                     "            </li>\n" +
                     "        </a>\n" +
-                    "        <li class=\"item\" style=\"color:gray; padding: 0; margin: 0; zoom: 0.80;\">\n" +
+                    "        <li class=\"item\" style=\"color: gray; padding: 0; margin: 0; zoom: 0.80; border: none; border-bottom: 0.01rem solid #b4b2b2;\">\n" +
                     "            <div style=\"display: flex;\">\n" +
-                    "                <a style='max-width: none;' class=\"tab-item assertive\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
-                    "                <a style='max-width: none;' class=\"tab-item dark\"><i class=\"icon ion-android-locate\"></i><span class=\"tab-title\">" + localCidade + "</span></a>\n" +
-                    "                <a style='max-width: none;' class=\"tab-item balanced\" href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-android-locate\"></i><span class=\"tab-title\">" + localCidade + "</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item\" href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +
                     "            </div>\n" +
                     "        </li>\n" +
                     "        <div class=\"spacer\" style=\"height: 10px;\"></div>");

@@ -20,12 +20,12 @@ import javax.ws.rs.core.MediaType;
 public class LocalidadeResource {
 
     @GET
-    @Path("/listarLocalidade")
+    @Path("/listarLocalidade/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarLocalidade() throws SQLException, Exception {
+    public String listarLocalidade(@PathParam("id") int id) throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
-        List<Localidade> localidade = localidadeDao.listarLocalidade();
+        List<Localidade> localidade = localidadeDao.listarLocalidade(id);
 
         Gson gson = new GsonBuilder().create();
         JsonArray ArrayUsarios = gson.toJsonTree(localidade).getAsJsonArray();
@@ -54,12 +54,12 @@ public class LocalidadeResource {
     }
 
     @GET
-    @Path("/listarLocalidadeComEvento")
+    @Path("/listarLocalidadeComEvento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarLocalidadeComEvento() throws SQLException, Exception {
+    public String listarLocalidadeComEvento(@PathParam("id") int id) throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
-        List<Localidade> localidade = localidadeDao.listarLocalidadeComEvento();
+        List<Localidade> localidade = localidadeDao.listarLocalidadeComEvento(id);
 
         Gson gson = new GsonBuilder().create();
         JsonArray ArrayUsarios = gson.toJsonTree(localidade).getAsJsonArray();

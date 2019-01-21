@@ -64,8 +64,9 @@
                 </label>
 
                 <label class="item item-input">
-                    <textarea readonly="true" style="height: 35px;" placeholder="Descrição do acontecimento" rows="3"
-                              id="descricaoAdm" onclick='habilitarDescricaoAcontecimento($("input[name=\"select\"]:checked").val(), $("#descricaoAdm"))'></textarea>
+                    <span id="numCaractDescricao" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/0</span>
+                    <textarea style="height: 35px;" placeholder="Descrição do acontecimento" id="descricaoAdm"
+                              onkeypress='habilitarDescricaoAcontecimento($("input[name=\"select\"]:checked").val(), $("#descricaoAdm"))'></textarea>
                 </label>
 
                 <label class="item item-input">
@@ -87,10 +88,6 @@
                 <label class="item item-input" id="labelLocal" style="display: none">
                     <input type="text" placeholder="Local do evento na cidade" id="localAdm">
                 </label>
-
-                <div id="tipoValor">
-
-                </div>
             </form>
 
         </ion-content>
