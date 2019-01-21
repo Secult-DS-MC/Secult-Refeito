@@ -1,8 +1,5 @@
 servidor = localStorage.getItem("servidor");
 
-function ocultarFooter() {
-    if()
-}
 function verificarAdministrador() {
     if (localStorage.getItem('admOn') == 'true') {
         $(".funcoesAdministrativas").show()
