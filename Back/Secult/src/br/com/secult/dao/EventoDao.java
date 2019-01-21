@@ -54,6 +54,7 @@ public class EventoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {

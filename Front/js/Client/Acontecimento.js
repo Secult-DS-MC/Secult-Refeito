@@ -149,7 +149,7 @@ function updateEvento(id) {
     var dataEvento = $("#dataEventoUp").val();
     var horaEvento = $("#horarioUp").val();
     var localidade = $("#localidadeUp").val();
-    var tipo = $("input[name=\"select\"]:checked").val();
+    var tipo = $("#tipoUp").val();
     var visibilidade = localStorage.getItem("visibilidadeAcon");
     var local = $("#localUp").val();
 

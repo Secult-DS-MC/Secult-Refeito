@@ -77,6 +77,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -104,6 +105,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -132,6 +134,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -160,6 +163,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -188,6 +192,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -216,6 +221,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -244,6 +250,7 @@ public class AcontecimentoDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 pstmt.close();
             } catch (Exception e) {

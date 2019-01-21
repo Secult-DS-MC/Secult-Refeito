@@ -30,7 +30,7 @@ public class CalendarioDao {
 
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_evento, a.tipo_evento, a.id_localidade, a.origem,"
                  + "o.nome AS nome_origem, l.nome AS nome_localidade FROM acontecimento as a JOIN origem as o ON(a.origem = o.id_origem)"
-                 + "JOIN localidade AS l ON (a.id_localidade = l.id) where visibilidade = 's' and tipo_evento = 'C'";
+                 + "JOIN localidade AS l ON (a.id_localidade = l.id) where visibilidade = 's' and tipo_evento = 'C' ORDER BY a.data_evento asc";
         try {
             stmt = connection.prepareStatement(sql);
 
@@ -55,6 +55,7 @@ public class CalendarioDao {
             throw e;
         } finally {
             try {
+                connection.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
