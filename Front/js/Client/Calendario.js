@@ -52,36 +52,18 @@ function listarEventosCalendario(idMes, mesClick) {
             var nomeEvento = dados[i].nomeEvento;
             var origem = dados[i].nome_origem;
             var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&A";
-            var dt_eventoTratada = formatarData(dataEvento);
-
-            var descMin = descricao.slice(0, 129);
-            var descMax = descricao;
-            var descExibida;
-            var descCompleta = false
-            if (descricao.length >= 130) {
-                descExibida = descMin;
-            } else {
-                descCompleta = true;
-                descExibida = descMax;
-            }
-
             var mes = dataEvento.slice(5, 7);
             var dia = dataEvento.slice(8, 10);
 
             if (mes == idMes) {
-                $("#mesAcontecimento").append("<div class=\"list card manual-card-fullwidth \" style='padding-top: 0px;box-shadow: 0 0 0; border-width: 1px 0px 1px 0px; border-style: groove;'>\n" +
-                        "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
-                        "                <i class=\"icon ion-android-calendar \"></i>\n" +
+                $("#mesAcontecimento").append("<div class=\"list card manual-card-fullwidth\" style='display: inline-block; width: 48%; box-shadow: 0px 0px 20px 0px #565555;'>\n" +
+                        "            <ul class=\"item item-icon-right positive\">\n" +
                         "                <p style=\"text-align: left; padding-left: 10px; font-weight: bold; font-size: large; color: #3f83f5;\">" + titulo + "</p>\n" +
                         "                <a href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "' class=\"icon ion-android-share\" style='text-decoration: none'></a>\n" +
                         "            </ul>\n" +
                         "            <div class=\" item item-image \" style='border: none;'>\n" +
                         "                <img id='" + id + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\"" + urlImagem + "\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location assertive\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
-                        "            </div>\n" +
-                        "            <div id='" + id + "' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
-                        "                <p class='desc" + id + "' style=\"margin-top:0px;color:#000000; display: block\" >" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> mais</span></span></p>\n" +
-                        "                <p class='desc" + id + "' style=\"margin-top:0px;color:#000000; display: none\" >" + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> menos</span></span></p>\n" +
+                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location assertive\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dia  + " </span> </div>\n" +
                         "            </div>\n" +
                         "        </div>");
             };

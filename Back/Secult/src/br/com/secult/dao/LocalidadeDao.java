@@ -18,13 +18,13 @@ public class LocalidadeDao {
 
     private Connection con;
 
-    public List<Localidade> listarLocalidade() throws SQLException, Exception {
+    public List<Localidade> listarLocalidade(int id) throws SQLException, Exception {
         List<Localidade> objs = new Vector<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT * FROM localidade";
+        String sql = "SELECT * FROM localidade WHERE id = "+id+"";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -51,13 +51,13 @@ public class LocalidadeDao {
         return objs;
     }
 
-    public List<Localidade> listarLocalidadeComEvento() throws SQLException, Exception {
+    public List<Localidade> listarLocalidadeComEvento(int id) throws SQLException, Exception {
         List<Localidade> objs = new Vector<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN acontecimento as e ON(l.id = e.id_localidade)";
+        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN acontecimento as e ON(l.id = e.id_localidade) WHERE l.id = "+id+"";
 
         try {
             stmt = con.prepareStatement(sql);
