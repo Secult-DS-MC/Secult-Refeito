@@ -106,7 +106,7 @@ function listarEventoEvento() {
                     "                <div class=\"tabs-icon-top icon positive\"><div class=\"tab-item\" style='position: relative; top: 25px; height: 20px;'>" + horaEvento + "</div><i style='position: absolute; right: 0px!important;' class=\"icon ion-android-time\"></i></div>\n" +
                     "            </li>\n" +
                     "        </a>\n" +
-                    "        <li class=\"item\" style=\"color: gray; padding: 0; margin: 0; zoom: 0.80; border: none; border-bottom: 0.01rem solid #b4b2b2;\">\n" +
+                    "        <li class=\"item\" style=\"color: gray; padding: 0; margin: 0; zoom: 0.80; border: none;\">\n" +
                     "            <div style=\"display: flex;\">\n" +
                     "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
                     "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-android-calendar\"></i><span class=\"tab-title\">" + dt_eventoTratada + "</span></a>\n" +

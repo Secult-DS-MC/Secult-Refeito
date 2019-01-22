@@ -73,7 +73,7 @@ function atualizarImagem(id_coluna, sigla) {
     if (ImageURL == null) {
         ImageURL = localStorage.getItem("semfoto");
     }
-    
+
     if(sigla == "A"){
         window.location.href = "#/page18";
 

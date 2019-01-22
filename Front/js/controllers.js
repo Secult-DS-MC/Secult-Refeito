@@ -38,7 +38,14 @@ angular.module('app.controllers', [])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarPublicidade();
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $("#listaEventoNoticas").empty();
+                    listarEventoNoticias();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            //listarPublicidade();
             listarEventoNoticias();
             verificarAdministrador();
         }])
