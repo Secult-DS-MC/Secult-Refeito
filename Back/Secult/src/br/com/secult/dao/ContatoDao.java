@@ -44,6 +44,30 @@ public class ContatoDao {
         }
         return erro;
     }
+    
+    public boolean updateContato(Contato contato) throws SQLException {
+        this.connection = new ConnectionFactory().getConnection();
+        boolean erro = true;
+        PreparedStatement stmt = null;
+        String sql = "INSERT INTO contato (id_usuario, email, telefone, facebook, youtube, instagram)values (?,?,?,?,?,?)";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, contato.getId());
+            stmt.setString(2, contato.getEmail());
+            stmt.setString(3, contato.getTelefone());
+            stmt.setString(4, contato.getFacebook());
+            stmt.setString(5, contato.getYoutube());
+            stmt.setString(6, contato.getInstagram());
+
+            stmt.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return erro = false;
+        } finally {
+            stmt.close();
+        }
+        return erro;
+    }
 
     public List<Contato> listarContatos(int id) throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();

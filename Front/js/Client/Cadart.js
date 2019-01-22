@@ -298,7 +298,7 @@ function InputEmailValido() {
                     $("#validoEmail").empty();
                 }, 4000)
             } else {
-                autenticar(emailImp, senha);
+                autenticarUsuario(emailImp, senha);
             }
         } else {
 
@@ -438,23 +438,6 @@ function usuarioAtivo() {
     if (localStorage.getItem("usuarioAtivo") == "true") {
         $(".alt-estado").toggle();
     }
-}
-
-function usuarioLogado() {
-    setTimeout(function () {
-        $("#nomeUp").val(localStorage.getItem("nome"));
-        $("#dtNascimentoUp").val(localStorage.getItem("idade"));
-        $("#emailUp").val(localStorage.getItem("email"));
-        $("#telUp").val(localStorage.getItem("telefone"));
-        $("#descricaoUp").val(localStorage.getItem("descricao"));
-        $("#projetosUp").val(localStorage.getItem("projetoAtual"));
-        $("#nomeArtisticoUp").val(localStorage.getItem("nomeArtistico"));
-        $("#sexoUp").val(localStorage.getItem("sexo"));
-        $("#arteUp").val(localStorage.getItem("idArte"));
-        $("#tableBanner").attr('src', servidor + "/Secult/cadart/find/" + localStorage.getItem("cpf"));
-        $("#telUp").mask("00-00000-0000");
-
-    }, 100)
 }
 
 function carregarDadosUpdateCadart() {

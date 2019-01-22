@@ -44,9 +44,12 @@ public class UsuarioDao {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             id = rs.getInt(1);
+            sql = "INSERT INTO public.usu_tipo(id_usuario) VALUES ( ?);";
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
             rs.close();
             return id;
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -55,10 +58,38 @@ public class UsuarioDao {
                 stmt.close();
             } catch (Exception e) {
             }
-
         }
         return 0;
+    }
 
+    public boolean updateUsuario(Usuario usuario) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement stmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        boolean semErro = true;
+        try {
+            String sql = "UPDATE public.usuario SET  nome=?, idade=?, sexo=?, senha=? WHERE id=?";
+            stmt = connection.prepareStatement(sql);
+
+            String senha = convertToHash(usuario);
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getSexo());
+            stmt.setString(3, senha);
+            stmt.setInt(4, usuario.getIdade());
+            stmt.setInt(5, usuario.getId());
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            semErro = false;
+        } finally {
+            try {
+                connection.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return semErro;
     }
 
     private String convertToHash(Usuario usuario) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -78,7 +109,7 @@ public class UsuarioDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT u.id, u.nome, a.nome \"nomeArtistico\", u.sexo, a.descricao, u.idade FROM usuario as u JOIN artista as a on (u.id = a.id) where a.autenticado = 'S';";
+            String sql = "SELECT u.id, u.nome, a.nome \"nomeArtistico\", u.sexo, a.descricao, u.idade FROM usuario as u JOIN artista as a on (u.id = a.id) JOIN usu_tipo as ut on (ut.id_usuario = u.id) where a.autenticado = 'S' and ut.id_tipo = 0;";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -102,7 +133,7 @@ public class UsuarioDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT u.id, u.nome, a.nome \"nomeArtistico\", u.sexo, a.descricao, u.idade FROM usuario as u JOIN artista as a on (u.id = a.id) where a.autenticado = 'N';";
+            String sql = "SELECT u.id, u.nome, a.nome \"nomeArtistico\", u.sexo, a.descricao, u.idade FROM usuario as u JOIN artista as a on (u.id = a.id) JOIN usu_tipo as ut on (ut.id_usuario = u.id) where a.autenticado = 'N'  and ut.id_tipo = 0;";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();

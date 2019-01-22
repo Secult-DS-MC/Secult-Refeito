@@ -32,7 +32,7 @@ function cadastrarContato(id) {
         resultado = jsonRestultado.status;
 
         if (resultado == "ok") {
-            alert("contatos cadastrados")
+
         }
 
     };

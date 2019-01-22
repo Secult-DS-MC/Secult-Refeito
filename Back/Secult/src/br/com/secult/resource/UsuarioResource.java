@@ -53,8 +53,8 @@ public class UsuarioResource {
             artista.setNomeArtistico(nomeArtistico);
             artista.setDescricao(descricao);
             ArtistaDao artistaDao = new ArtistaDao();
-            if(artistaDao.insert(artista)){
-            
+            if (artistaDao.insert(artista)) {
+
             }
 
         }
@@ -68,10 +68,10 @@ public class UsuarioResource {
 
         UsuarioDao usuarioDao = new UsuarioDao();
         List<Artista> artistas = usuarioDao.listarAristasAutenticados();
-
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(artistas).getAsJsonArray();
+        System.out.println(ArrayUsarios);
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("artistas", ArrayUsarios);

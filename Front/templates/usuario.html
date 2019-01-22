@@ -1,26 +1,24 @@
 <ion-view title="Usuario" id="page7">
-    <ion-nav-buttons side="left" class="has-header">
-        <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style=""><i
-                class="icon ion-ios-arrow-back"></i> <span class="back-text"
-                                                           style="transform: translate3d(0px, 0px, 0px);"></span>
-        </button>
-    </ion-nav-buttons>
-    <ion-content padding="true" class="has-header animated fadeInDown faster">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content padding="true" class="has-header animated fadeInDown faster" >
         <div>
-            <label class="item item-input item-stacked-label" for="imputImg">
-                <img src="./img/semfoto.png" id="imgThumbnail" style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
-                <input type="file" id="inputImagem" style="display: none" >
+            <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none">
+                <img src="./img/user-foto.png" id="imgThumbnail"
+                     style="border: 1px solid #003a9c; border-radius: 20px;display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+                <input type="file" id="inputImagem" style="display: none" onchange="validacaoEtapa5()">
             </label>
-
+            <button style="display: none;border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
+                    class="button button-small button-outline" id="imputImg"
+                    onclick="abrirImpFile('inputImagem')" >Alterar Foto
+            </button>
         </div>
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div class="button-bar">
-            <input type="file" id="bannerImg" style="display: none;" class="btnFotoCadartUp">
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar Foto
-            </button>
-            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha
+                    class="button button-positive button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha
             </button>
         </div>
 
@@ -48,13 +46,6 @@
                 <button class="button button-dark button-block " onclick="autenticarUpSenha()">Alterar Senha</button>
             </div>
 
-
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Descrição:</span><textarea id="descricaoUp" maxlength="500"></textarea>
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Projetos Atuais:</span><textarea id="projetosUp" maxlength="500"></textarea>
-            </label>
             <label class="item item-input">
                 <span class="input-label">Nome:</span>
                 <input type="text" id="nomeUp">
@@ -63,37 +54,53 @@
                 <span class="input-label">Nome Artístico:</span>
                 <input type="text" id="nomeArtisticoUp">
             </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Descrição:</span><textarea id="descricaoUp" maxlength="500"></textarea>
+            </label>
+            <select class="item" style="margin-bottom: 3px ; width: 100%;  background: transparent; border: none; border-bottom: 1px solid white; "
+                    id="cdtArte" class="obrigatorio2" onchange="addArteLista('up'),contarArtes()">
+
+            </select>
+            <ul id="artesSelecLista" style="color: #262626!important;">
+
+            </ul>
+            <select class="item" style="margin-bottom: 3px ; width: 100%; background: transparent; border: none; border-bottom: 1px solid white;"
+                    id="sexoUp" class="obrigatorio2" onchange="">
+                <option value="0">Prefiro não informar</option>
+                <option value="F">Feminino</option>
+                <option value="M">Masculino</option>
+
+            </select>
+
             <label class="item item-input">
                 <span class="input-label ">Email:</span>
                 <input type="text" id="emailUp">
             </label>
-            <div style="display: inline-block; margin: 0px; width: 100%">
-                <label class="item item-input" style="margin: 0px; width: 49.3%; display: inline-block;">
-                    <span class="input-label ">Telefone</span>
-                    <input type="text" id="telUp">
-                </label>
-                <label class="item item-input" style="margin: 0px; width: 49%; display: inline-block;">
-                    <span class="input-label" for="dtNascimentoUp">Sua Idade</span>
-                    <input type="number" id="dtNascimentoUp">
-                </label>
-            </div>
-            <div class="divSelect">
-                <select id="sexoUp" class="item">
-                    <option value="">Seu Sexo</option>
-                    <option value="m">Masculino</option>
-                    <option value="f">Feminino</option>
-                </select>
+            <label class="item item-input">
+                <span class="input-label ">Telefone:</span>
+                <input type="text" id="telUp">
+            </label>
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-facebook-outline"></i>
+                <input type="text" id="redeSocial1" placeholder="Link do seu perfil no Facebook">
+            </label>
 
-                <select id="arteUp" class="item">
-                    <option value="">Sua Arte?</option>
-                    <option value="1">Ator/Atriz</option>
-                    <option value="2">Músico</option>
-                    <option value="3">Pintor</option>
-                    <option value="4">Dançarino</option>
-                    <option value="5">Escritor</option>
-                </select>
-            </div>
-            <button class="button button-dark button-block" onclick="updateCadart()">Alterar</button>
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-instagram-outline"></i>
+                <input type="text" id="redeSocial2" placeholder="Nome de usuário no Instagram">
+            </label>
+
+            <label class="item item-input redeSocial">
+                <i style="margin-right: 8px" class="icon ion-social-youtube-outline"></i>
+                <input type="text" id="redeSocial3" placeholder="Link do vídeo ou canal no YouTube">
+            </label>
+
         </form>
     </ion-content>
+    <ion-footer-bar style="padding: 0px; margin: 0px">
+        <div class="tabs positive-bg" style="background-color: #387ef5; color: white">
+            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive">Alterar
+            </button>
+        </div>
+    </ion-footer-bar>
 </ion-view>

@@ -63,6 +63,7 @@ angular.module('app.controllers', [])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            listarArtes();
             botaoFotoFakeCadart(1);
             usuarioLogado();
             setTimeout(function () {

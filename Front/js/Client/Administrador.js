@@ -49,7 +49,7 @@ function carregando(el) {
     if (el == 1) {
         setTimeout(function () {
             //$("ion-content").prepend("<div class='carregando'></div>");
-            $("ion-content").prepend("<ion-spinner class=\"carregando2\" icon=\"ripple\"></ion-spinner>");
+            $("ion-content").prepend("<ion-spinner class=\"carregando2\" icon=\"bubbles\"></ion-spinner>");
         }, 200)
     } else {
         setTimeout(function () {
