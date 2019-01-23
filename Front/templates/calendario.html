@@ -1,5 +1,7 @@
 <ion-view title="Calendário" id="page12">
     <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
+        </ion-refresher>
         <div>
             <a onclick="listarEventosCalendario(this.id, 'Janeiro')"
                class="button button-block button-outline button-positive button-small item-icon-right" id="01">

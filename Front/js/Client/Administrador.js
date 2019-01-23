@@ -24,15 +24,6 @@ function mostrarInput(tipo) {
     }, 300);
 }
 
-function atualizarPaginas() {
-    $("#listaEventoNoticas").empty();
-    listarEventoNoticias();
-    $("#listaEventoHoje").empty();
-    listarEventoEvento();
-    $("#listaCadart").empty();
-    listarCadart()
-}
-
 function mudarCorbotaoEntrar() {
 
     $("#senha, #email").keyup(function () {
@@ -48,12 +39,13 @@ function mudarCorbotaoEntrar() {
 function carregando(el) {
     if (el == 1) {
         setTimeout(function () {
+            $("ion-spinner").css("display", "block");
             //$("ion-content").prepend("<div class='carregando'></div>");
             $("ion-content").prepend("<ion-spinner class=\"carregando2\" icon=\"bubbles\"></ion-spinner>");
         }, 200)
     } else {
         setTimeout(function () {
-            $(".carregando2").remove();
+            $("ion-spinner").css("display", "none");
         }, 200);
     }
 

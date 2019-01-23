@@ -31,12 +31,10 @@
 
 function listarEventosCalendario(idMes, mesClick) {
     window.location.href = "#/page1/page21";
-
+    carregando(1);
     setTimeout(function () {
         $("#page21 .title").append(mesClick);
     }, 100);
-
-    carregando(1)
 
     var json = servidor + "/Secult/calendario/listarCalendario";
     var onSuccess = function (result) {
@@ -58,15 +56,15 @@ function listarEventosCalendario(idMes, mesClick) {
             if (mes == idMes && origem != "PUBLICIDADE") {
                 $("#mesAcontecimento").append("<div class=\"card manual-card-fullwidth\" style='display: inline-block; width: 48%; box-shadow: 0px 0px 6px 0px #565555; margin: 5px 1%;'>\n" +
                     "            <ul class=\"item item-icon-right positive\">\n" +
-                    "                <p style=\"text-align: left; padding-left: 10px; font-weight: bold; font-size: large; color: #3f83f5;\">" + titulo + "</p>\n" +
+                    "                <h2 style=\"text-align: left;\">" + titulo + "</h2>\n" +
                     "                <a href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "' class=\"icon ion-android-share\" style='text-decoration: none'></a>\n" +
                     "            </ul>\n" +
                     "            <div class=\" item item-image \" style='border: none;'>\n" +
                     "                <img id='" + id + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\"" + urlImagem + "\"' style=\"display: block; width: 100%; height: 190px; margin-left: auto; margin-right: auto;\">\n" +
-                    "                <div style=\"display: flex;\"> " +
-                    "                   <span style='opacity: 1!important; max-width: 35px;' class=\"tab-item\"><i class=\"icon ion-location assertive\"></i></span>" +
-                    "                   <p style='opacity: 1!important; padding-top: 10px;' class=\"tab-item\">" + nomeEvento + "</p>" +
-                    "                   <span style='opacity: 1!important; padding-top: 10px;' class=\"tab-item item-note\">Dia " + dia + " </span> </div>\n" +
+                    "                <div style=\"display: flex; zoom: 0.8;\"> " +
+                    "                   <span style='opacity: 1!important; max-width: 35px;' class=\"tab-item\"><i style='opacity: 0.7' class=\"icon ion-location\"></i></span>" +
+                    "                   <p style='opacity: 1!important; padding-top: 6px;' class=\"tab-item\">" + nomeEvento + "</p>" +
+                    "                   <span style='opacity: 1!important; padding-top: 6px;' class=\"tab-item item-note\">Dia " + dia + " </span> </div>\n" +
                     "            </div>\n" +
                     "        </div>");
             }
@@ -79,7 +77,7 @@ function listarEventosCalendario(idMes, mesClick) {
             $("#acontecimentoEmpty").css("display", "block");
         }
         ;
-        carregando(2)
+        carregando(2);
     };
     $.getJSON(json, onSuccess).fail(
     );

@@ -2,7 +2,10 @@
     <ion-nav-buttons side="right" class="has-header">
         <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
     </ion-nav-buttons>
+    <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
     <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
+        </ion-refresher>
 
         <form id="administrador-form" class="list">
             <label class="item item-select" style="border: none; border-bottom: 1px solid #387ef5;">

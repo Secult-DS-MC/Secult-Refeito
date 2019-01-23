@@ -236,7 +236,7 @@ function excluirAcontecimento(id) {
 }
 
 function listarEventoFiltro(filtro) {
-    $("#inicioListaEventoHoje").empty()
+    $("#inicioListaEventoHoje").empty();
     carregando(1)
     var json;
     console.log(filtro)

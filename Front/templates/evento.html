@@ -1,9 +1,9 @@
 <ion-view title="Eventos" id="page13" positive>
-    <ion-nav-buttons side="right" class="has-header">
-        <button class="button button-clear icon ion-android-refresh" onclick="atualizarPaginas()"></button>
-    </ion-nav-buttons>
-    <ion-content padding="true" class="has-header refresh">
+    <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
 
+    <ion-content padding="true" class="has-header refresh">
+        <ion-refresher on-refresh="doRefreshEvento()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
+        </ion-refresher>
         <div class="list " id="listaEventoEvento" style="border-bottom: 0.01rem solid #b4b2b2;"></div>
     </ion-content>
 </ion-view>

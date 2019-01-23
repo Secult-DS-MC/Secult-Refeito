@@ -52,7 +52,13 @@ angular.module('app.controllers', [])
 
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            $("#listaCadart").empty();
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $("#listaCadart").empty();
+                    listarCadart();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
             listarArtistas();
             usuarioAtivo();
             localStorage.setItem("Ativo", "Sim");
@@ -112,13 +118,23 @@ angular.module('app.controllers', [])
 
     .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
         }])
 
     .controller('eventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            $scope.doRefreshEvento = function () {
+                setTimeout(function () {
+                    $("#listaEventoHoje").empty();
+                    listarEventoEvento();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
             listarEventoEvento();
-
         }])
 
     .controller('eventosEmPovoadosCtrl', ['$scope', '$stateParams',
@@ -129,7 +145,14 @@ angular.module('app.controllers', [])
 
     .controller('acontecimentoAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarEventoFiltro('Todos')
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $("#inicioListaEventoHoje").empty();
+                    listarEventoFiltro('Todos');
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            listarEventoFiltro('Todos');
         }])
 
     .controller('cadastrarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
@@ -148,7 +171,14 @@ angular.module('app.controllers', [])
 
     .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarArtistasNaoAutenticados()
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $("#listaCadartAutentiar").empty();
+                    listarArtistasNaoAutenticados();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            listarArtistasNaoAutenticados();
         }])
 
     .controller('alterarAcontecimentoAdmCtrl', ['$scope', '$stateParams',
@@ -173,7 +203,14 @@ angular.module('app.controllers', [])
         }])
     .controller('autenticadosCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            listarArtistasAutenticados()
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    $("#listaCadartAdm").empty();
+                    listarArtistasAutenticados();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            listarArtistasAutenticados();
         }])
     .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {

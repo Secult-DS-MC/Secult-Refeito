@@ -63,7 +63,7 @@ servidor = localStorage.getItem("servidor");
 // }
 
 function listarEventoEvento() {
-    carregando(2);
+    carregando(1);
     $("#listaEventoEvento").empty();
     var json = servidor + "/Secult/evento/listarEvento";
 
@@ -118,12 +118,10 @@ function listarEventoEvento() {
 
             }
         }
+        carregando(2);
     };
     $.getJSON(json, onSuccess).done(
-        carregando(2)
-    ).fail(
-
-    );
+    ).fail();
 }
 
 function limparEListarEventoAdm() {

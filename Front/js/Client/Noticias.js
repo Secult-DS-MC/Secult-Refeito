@@ -36,10 +36,9 @@ function formatarData(dataEvento) {
 }
 
 function listarEventoNoticias() {
-    carregando(1)
-
     $("#listaEventoNoticias").empty();
 
+    carregando(1);
     var json = servidor + "/Secult/noticia/listarNoticia";
     var onSuccess = function (result) {
         dados = result.eventos;
@@ -76,7 +75,7 @@ function listarEventoNoticias() {
                 }
 
                 if (origem != "PUBLICIDADE") {
-                    $("#listaEventoNoticas").append("<div class=\"list card manual-card-fullwidth \" style='padding-top: 0px;box-shadow: 0 0 0; border-width: 1px 0px 1px 0px; border-style: groove;'>\n" +
+                    $("#listaEventoNoticas").append("<div class=\"list card manual-card-fullwidth \">\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: left; padding-left: 10px; font-weight: bold; font-size: large; color: #3f83f5;\">" + titulo + "</p>\n" +
@@ -84,11 +83,11 @@ function listarEventoNoticias() {
                         "            </ul>\n" +
                         "            <div class=\" item item-image \" style='border: none;'>\n" +
                         "                <img id='" + id + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\"" + urlImagem + "\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location assertive\"></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
+                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\" style='opacity: 0.7'></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
                         "            </div>\n" +
-                        "            <div id='" + id + "' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
-                        "                <p class='desc" + id + "' style=\"margin-top:0px;color:#000000; display: block\" >" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> mais</span></span></p>\n" +
-                        "                <p class='desc" + id + "' style=\"margin-top:0px;color:#000000; display: none\" >" + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> menos</span></span></p>\n" +
+                        "            <div id='" + id + "' style=\"text-align:left;    padding: 0px 20px;\" class=\"show-list-numbers-and-dots padding \">\n" +
+                        "                <p class='desc" + id + "' style=\"display: block\" ><span style='font-weight: 600; color: #262626;'>Descrição </span> " + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> mais</span></span></p>\n" +
+                        "                <p class='desc" + id + "' style=\"display: none\" ><span style='font-weight: 600; color: #262626;'>Descrição </span> " + descMax + "<span id='mostraDesc'><span id='descMax" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> menos</span></span></p>\n" +
                         "            </div>\n" +
                         "        </div>");
 
@@ -105,7 +104,7 @@ function listarEventoNoticias() {
                 // }
             }
         }
-        carregando(2)
+        carregando(2);
     };
     $.getJSON(json, onSuccess).fail(
     );
