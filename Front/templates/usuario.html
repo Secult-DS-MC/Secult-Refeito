@@ -3,13 +3,11 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
-    <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
-
     <ion-content padding="true" class="has-header animated fadeInDown faster" >
         <div>
             <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none">
                 <img src="./img/user-foto.png" id="imgThumbnail"
-                     style="border: 1px solid #003a9c; border-radius: 20px;display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+                     style="border: 1px solid #fbfbfb; border-radius: 14%; display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
                 <input type="file" id="inputImagem" style="display: none" onchange="validacaoEtapa5()">
             </label>
             <button style="display: none;border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
@@ -45,7 +43,7 @@
                 </label>
 
                 <p class="invalido" id="erroSenhaEmailUp" style="display: none">Senha ou email incorretos</p>
-                <button class="button button-dark button-block " onclick="autenticarUpSenha()">Alterar Senha</button>
+                <button class="button button-positive button-block " onclick="autenticarUpSenha()">Salvar Senha</button>
             </div>
 
             <label class="item item-input">
@@ -71,8 +69,12 @@
                 <option value="0">Prefiro não informar</option>
                 <option value="F">Feminino</option>
                 <option value="M">Masculino</option>
-
             </select>
+
+            <label class="item item-input">
+                <span class="input-label">Sua idade</span>
+                <input type="text" id="idadeUp">
+            </label>
 
             <label class="item item-input">
                 <span class="input-label ">Email:</span>
@@ -101,7 +103,7 @@
     </ion-content>
     <ion-footer-bar style="padding: 0px; margin: 0px">
         <div class="tabs positive-bg" style="background-color: #387ef5; color: white">
-            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive">Alterar
+            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive" onclick="alterarArtista()">salvar
             </button>
         </div>
     </ion-footer-bar>

@@ -45,6 +45,20 @@ public class ArteArtistaResource {
     }
     
     @GET
+    @Path("/deleteArteArtista/{idArtista}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteArteArtista(@PathParam("idArtista") int idArtista) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        ArteArtistaDao arteArtistaDao = new ArteArtistaDao();
+
+        if (arteArtistaDao.deleteArteArtista(idArtista)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+    
+    @GET
     @Path("/listarArtesArtista/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarAristasNaoAutenticados(@PathParam("id") int id) throws SQLException, Exception {

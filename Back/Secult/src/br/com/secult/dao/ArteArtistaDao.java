@@ -52,7 +52,7 @@ public class ArteArtistaDao {
         return semErro;
     }
 
-    public boolean updateArteArtista(int id_artista, int id_arte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public boolean deleteArteArtista(int id_artista) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
         boolean semErro = true;
@@ -60,8 +60,7 @@ public class ArteArtistaDao {
             String sql = "delete from  arte_artista WHERE id_artista =?";
             stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1, id_arte);
-            stmt.setInt(2, id_artista);
+            stmt.setInt(1, id_artista);
 
             stmt.execute();
 

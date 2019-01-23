@@ -56,6 +56,28 @@ public class ContatoResource {
     }
     
     @GET
+    @Path("/updateRede/{id}&{email}&{telefone}&{facebook}&{youtube}&{instagram}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateRede(@PathParam("id") int id, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("facebook") String facebook, @PathParam("youtube") String youtube, @PathParam("instagram") String instagram) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        Contato contato = new Contato();
+        contato.setId(id);
+        contato.setEmail(email);
+        contato.setTelefone(telefone);
+        contato.setFacebook(facebook);
+        contato.setYoutube(youtube);
+        contato.setInstagram(instagram);
+
+        ContatoDao contatoDao = new ContatoDao();
+
+        if (contatoDao.updateContato(contato)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+    
+    @GET
     @Path("/listarContatos/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarContatos(@PathParam("id") int id) throws SQLException, Exception {

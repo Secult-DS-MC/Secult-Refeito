@@ -1,3 +1,4 @@
+
 function inserirImagem(id_coluna, sigla) {
 
     var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;
@@ -18,7 +19,7 @@ function inserirImagem(id_coluna, sigla) {
        window.location.href = "#/page1/page3";
 
        setTimeout(function () {
-           listarEventoFiltro('Todos');
+
        }, 300);
    }
     if(sigla == "C"){
@@ -31,7 +32,7 @@ function inserirImagem(id_coluna, sigla) {
 
 
     var block = ImageURL.split(";");
-
+    localStorage.setItem("coisa", block);
     var contentType = block[0].split(":")[1];
 
     var realData = block[1].split(",")[1];

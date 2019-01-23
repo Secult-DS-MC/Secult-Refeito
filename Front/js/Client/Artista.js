@@ -52,8 +52,6 @@ function cadastrarArtista() {
     var descricaoArtista = $("#descricaoArtista").val();
     var idadeArtista = $("#idadeArtista").val();
     var generoArtista = $("#generoArtista").val();
-    var emailCadastro = $("#emailCadastro").val();
-    var telCadastro = $("#telCadastro").val();
     var senhaCadastro = $("#senhaCadastro").val();
     var json = servidor + "/Secult/usuario/insertUsuarioArtista/" + nomeCompleto + "&" + generoArtista + "&" + senhaCadastro + "&" + idadeArtista + "&" + nomeArtistico + "&" + descricaoArtista;
     var onSuccess = function (result) {
@@ -80,6 +78,34 @@ function cadastrarArtista() {
 }
 
 
+function alterarArtista() {
+    var nomeCompleto = $("#nomeUp").val();
+    var nomeArtisticoUp = $("#nomeArtisticoUp").val();
+    var descricaoUp = $("#descricaoUp").val();
+    var idadeUp = $("#idadeUp").val();
+    var sexoUp = $("#sexoUp").val();
+    var senhaCadastro = $("#senhaCadastro").val();
+    var json = servidor + "/Secult/usuario/alterarUsuarioArtista/" + nomeCompleto + "&" + sexoUp + "&" + idadeUp + "&" + nomeArtisticoUp + "&" + descricaoUp + "&" + localStorage.getItem("id");
+    var onSuccess = function (result) {
+        var id = result.id_usuario;
+        if (id != 0) {
+            atualizarImagem(id, "U");
+            updateContato(id)
+            deleteArteArtista(id)
+            for (var i = 0; i < 3; i++) {
+                var idArte = $("#artesSelecLista li")
+                if (idArte[i] != undefined) {
+                    inserirArteArtista(idArte[i].id, id)
+                } else {
+                    inserirArteArtista(0, id)
+                }
+            }
+        } else {
+            alert('Erro no cadastro, tente novamente ou contate o suporte!')
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
 
 
 function listarArtistas() {
@@ -103,7 +129,7 @@ function listarArtistas() {
                 $("#listaCadart").append("<a class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\" onclick='carregarInformacoesArtistas(\"" + id + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nome + "\")''>\n" +
                     "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
-                    "                <p> <span id='arte1"+id+"'>&nbsp</span> <span id='arte2"+id+"'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3"+id+"'></span></p>\n" +
+                    "                <p> <span id='arte1" + id + "'>&nbsp</span> <span id='arte2" + id + "'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3" + id + "'></span></p>\n" +
                     "                <i  class='icon ion-information-circled item-note' style='font-size: 1.3rem'></i>\n" +
                     "            </a>");
                 listarArtesArtista(id);
@@ -157,7 +183,6 @@ function listarArtistasAutenticados() {
                 var idade = dados[i].idade;
                 var urlImagem = servidor + "/Secult/imagem/findETC/" + idArtista + "&U";
                 var estado = "autenticado"
-
 
 
                 $("#listaCadartAdm").append("<a onclick='carregarInformacoesArtistasAutenticar(\"" + idArtista + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nomeCompleto + "\")'   class=\"item item-avatar item-icon-right\">\n" +
@@ -226,9 +251,9 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
             $("#iconSexoInfo").addClass("ion-help-circled")
         }
         $("#sexoInfo").text(sexo);
-        if(arte1 != "null")$("#arte1").text(arte1);
-        if(arte2 != "null")$("#arte2").text(arte2);
-        if(arte3 != "null")$("#arte3").text(arte3);
+        if (arte1 != "null") $("#arte1").text(arte1);
+        if (arte2 != "null") $("#arte2").text(arte2);
+        if (arte3 != "null") $("#arte3").text(arte3);
     }, 100);
 
     var json = servidor + "/Secult/contato/listarContatos/" + idArtista;
@@ -252,10 +277,6 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
                 $("#telInfo").text(telefone);
                 $("#linkWpp").attr('href', 'https://wa.me/55' + telefone.replace(/[^0-9]/g, ''));
 
-
-                // $("#nomeArteInfo").text(nomeArte);
-                // $("#btnInfo").css('display', 'none')
-                //listarRedeSociais(cpf);
 
             }
         }
@@ -381,6 +402,8 @@ function autenticarUsuario(email, senha) {
                 var youtube = usuario[0].youtube;
                 var instagram = usuario[0].instagram;
                 var tipo = usuario[0].tipo;
+                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
+
 
 
                 localStorage.setItem("id", id);
@@ -395,6 +418,7 @@ function autenticarUsuario(email, senha) {
                 localStorage.setItem("youtube", youtube);
                 localStorage.setItem("instagram", instagram);
                 localStorage.setItem("tipo", tipo);
+                localStorage.setItem("fotoUsuario", imagem);
                 localStorage.setItem("usuarioAtivo", "true")
 
 
@@ -431,7 +455,7 @@ function autenticarUsuario(email, senha) {
 function usuarioLogado() {
     setTimeout(function () {
         $("#nomeUp").val(localStorage.getItem("nome"));
-        $("#dtNascimentoUp").val(localStorage.getItem("idade"));
+        $("#idadeUp").val(localStorage.getItem("idade"));
         $("#emailUp").val(localStorage.getItem("email"));
         $("#telUp").val(localStorage.getItem("telefone"));
         $("#descricaoUp").val(localStorage.getItem("descricao"));
@@ -439,8 +463,7 @@ function usuarioLogado() {
         $("#sexoUp").val(localStorage.getItem("sexo"))
 
 
-
-        $("#tableBanner").attr('src', servidor + "/Secult/cadart/findETC/" + localStorage.getItem("id"));
+        $("#imgThumbnail").attr('src', localStorage.getItem("fotoUsuario"));
         $("#telUp").mask("00-00000-0000");
         $("#redeSocial1").val(localStorage.getItem("facebook"));
         $("#redeSocial2").val(localStorage.getItem("youtube"));

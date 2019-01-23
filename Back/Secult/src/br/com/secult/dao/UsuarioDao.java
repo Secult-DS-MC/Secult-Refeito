@@ -67,16 +67,14 @@ public class UsuarioDao {
         this.connection = new ConnectionFactory().getConnection();
         boolean semErro = true;
         try {
-            String sql = "UPDATE public.usuario SET  nome=?, idade=?, sexo=?, senha=? WHERE id=?";
+            String sql = "UPDATE public.usuario SET  nome=?, idade=?, sexo=? WHERE id=?";
             stmt = connection.prepareStatement(sql);
 
-            String senha = convertToHash(usuario);
 
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSexo());
-            stmt.setString(3, senha);
-            stmt.setInt(4, usuario.getIdade());
-            stmt.setInt(5, usuario.getId());
+            stmt.setInt(3, usuario.getIdade());
+            stmt.setInt(4, usuario.getId());
             stmt.executeUpdate();
             
         } catch (SQLException e) {

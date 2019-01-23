@@ -49,7 +49,7 @@ public class ContatoDao {
         this.connection = new ConnectionFactory().getConnection();
         boolean erro = true;
         PreparedStatement stmt = null;
-        String sql = "UPDATE public.contato SET id_usuario=?, email=?, telefone=?, facebook=?, instagram=?, youtube=? WHERE id = ?";
+        String sql = "UPDATE public.contato SET id_usuario=?, email=?, telefone=?, facebook=?, instagram=?, youtube=? WHERE id_usuario = ?";
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setLong(1, contato.getId());

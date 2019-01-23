@@ -33,16 +33,16 @@ function listarArtesArtista(id) {
         arte1 = artes[0].nome;
         arte2 = artes[1].nome;
         arte3 = artes[2].nome;
-        if(arte1 != "null")$("#arte1"+id).text(arte1);
-        if(arte2 != "null")$("#arte2"+id).text(arte2);
-        if(arte3 != "null")$("#arte3"+id).text(arte3);
+        if (arte1 != "null") $("#arte1" + id).text(arte1);
+        if (arte2 != "null") $("#arte2" + id).text(arte2);
+        if (arte3 != "null") $("#arte3" + id).text(arte3);
     })
 }
 
-function preencherArtesArtistaUpdate(id){
+function preencherArtesArtistaUpdate(id) {
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + id, function (result) {
         var artes = result.artes
-        for(var i in artes){
+        for (var i in artes) {
             var id = artes[i].id;
             var nome = artes[i].nome;
             $("#artesSelecLista").append("<li id='" + id + "' style='color: #262626!important;'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
@@ -61,8 +61,8 @@ function addArteLista(el) {
         }
     }
     if (existe == false) {
-       if(el == "cdt") $("#artesSelecLista").append("<li id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
-       if(el == "up") $("#artesSelecLista").append("<li style='color: #262626!important' id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
+        if (el == "cdt") $("#artesSelecLista").append("<li id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
+        if (el == "up") $("#artesSelecLista").append("<li style='color: #262626!important' id='" + id + "'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
 
     }
     $("#cdtArte").val(0);
@@ -78,9 +78,28 @@ function contarArtes() {
 
 
 function inserirArteArtista(idArte, idArtista) {
+    var resultado = false;
     var json = servidor + "/Secult/arteArtista/inserirArteArtista/" + idArte + "&" + idArtista;
     var onSuccess = function (result) {
         if (result.status == "ok") {
+            resultado = true;
+        }
+    };
+    $.getJSON(json, onSuccess).done(
+        carregando(2)
+    ).fail(
+
+    );
+    return resultado;
+}
+
+function deleteArteArtista(idArtista) {
+    var resultado = false;
+
+    var json = servidor + "/Secult/arteArtista/deleteArteArtista/" + idArtista;
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
+            resultado = true;
 
         }
     };
@@ -89,4 +108,6 @@ function inserirArteArtista(idArte, idArtista) {
     ).fail(
 
     );
+    return resultado;
+
 }

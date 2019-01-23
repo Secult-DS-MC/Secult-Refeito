@@ -60,6 +60,33 @@ public class UsuarioResource {
         }
         return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
+    
+    @GET
+    @Path("/alterarUsuarioArtista/{nome}&{sexo}&{idade}&{nomeArtistico}&{descricao}&{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response alterarUsuario(@PathParam("nome") String nome, @PathParam("sexo") String sexo, @PathParam("idade") int idade, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("descricao") String descricao, @PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setNome(nome);
+        usuario.setSexo(sexo);
+        usuario.setIdade(idade);
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+
+        if (usuarioDao.updateUsuario(usuario)) {
+            Artista artista = new Artista();
+            artista.setIdArtista(id);
+            artista.setNomeArtistico(nomeArtistico);
+            artista.setDescricao(descricao);
+            ArtistaDao artistaDao = new ArtistaDao();
+            if (artistaDao.updateArtista(artista)) {
+
+            }
+
+        }
+        return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+    }
 
     @GET
     @Path("/listarArtistasAutenticados")
