@@ -45,14 +45,13 @@ public class ImagemDao {
             stmt.setObject(1, tratarImagem(imagem.getImagem()));
             stmt.setLong(2, id_coluna);
             stmt.executeUpdate();
-            System.out.println(id_coluna+ "COLUNA");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             hasError = false;
         } finally {
             try {
                 stmt.close();
-
+connection.close();
             } catch (Exception e) {
             }
         }
@@ -88,7 +87,7 @@ public class ImagemDao {
         } finally {
             try {
                 stmt.close();
-
+connection.close();
             } catch (Exception e) {
             }
         }
@@ -113,6 +112,7 @@ public class ImagemDao {
             try {
                 stmt.close();
                 hasError = false;
+                connection.close();
             } catch (Exception e) {
             }
         }
@@ -134,9 +134,11 @@ public class ImagemDao {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             hasError = false;
+            
         } finally {
             try {
                 stmt.close();
+                connection.close();
             } catch (Exception e) {
             }
 

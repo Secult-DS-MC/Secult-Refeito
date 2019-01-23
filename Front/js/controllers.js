@@ -55,7 +55,7 @@ angular.module('app.controllers', [])
             $scope.doRefresh = function () {
                 setTimeout(function () {
                     $("#listaCadart").empty();
-                    listarCadart();
+                    listarArtistas();
                     $scope.$broadcast('scroll.refreshComplete');
                 }, 1000);
             };

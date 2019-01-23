@@ -70,13 +70,12 @@ public class UsuarioDao {
             String sql = "UPDATE public.usuario SET  nome=?, idade=?, sexo=? WHERE id=?";
             stmt = connection.prepareStatement(sql);
 
-
             stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getSexo());
-            stmt.setInt(3, usuario.getIdade());
+            stmt.setInt(2, usuario.getIdade());
+            stmt.setString(3, usuario.getSexo());
             stmt.setInt(4, usuario.getId());
             stmt.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             semErro = false;

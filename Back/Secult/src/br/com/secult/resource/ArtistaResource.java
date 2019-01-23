@@ -73,4 +73,23 @@ public class ArtistaResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+    
+     @GET
+    @Path("/autenticarUsuarioById/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response autenticarUsuarioById(@PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        ArtistaDao artistaDao = new ArtistaDao();
+
+        List<Autenticar> artistas = artistaDao.autenticarUsuarioById(id);
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsarios = gson.toJsonTree(artistas).getAsJsonArray();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("artista", ArrayUsarios);
+        System.out.println(jsonObject);
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
 }

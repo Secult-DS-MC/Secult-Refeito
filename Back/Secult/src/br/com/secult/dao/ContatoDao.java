@@ -44,20 +44,21 @@ public class ContatoDao {
         }
         return erro;
     }
-    
+
     public boolean updateContato(Contato contato) throws SQLException {
         this.connection = new ConnectionFactory().getConnection();
         boolean erro = true;
         PreparedStatement stmt = null;
-        String sql = "UPDATE public.contato SET id_usuario=?, email=?, telefone=?, facebook=?, instagram=?, youtube=? WHERE id_usuario = ?";
+        String sql = "UPDATE public.contato SET  email=?, telefone=?, facebook=?, youtube=?,  instagram=? WHERE id_usuario = ?";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, contato.getId());
-            stmt.setString(2, contato.getEmail());
-            stmt.setString(3, contato.getTelefone());
-            stmt.setString(4, contato.getFacebook());
-            stmt.setString(5, contato.getYoutube());
-            stmt.setString(6, contato.getInstagram());
+
+            stmt.setString(1, contato.getEmail());
+            stmt.setString(2, contato.getTelefone());
+            stmt.setString(3, contato.getFacebook());
+            stmt.setString(4, contato.getYoutube());
+            stmt.setString(5, contato.getInstagram());
+            stmt.setLong(6, contato.getId());
 
             stmt.execute();
         } catch (Exception e) {

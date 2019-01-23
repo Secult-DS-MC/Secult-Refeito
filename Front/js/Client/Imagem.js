@@ -66,6 +66,8 @@ function inserirImagem(id_coluna, sigla) {
 
 }
 
+
+
 function atualizarImagem(id_coluna, sigla) {
 
     var json = servidor + "/Secult/imagem/atualizarImagem/" + id_coluna + "&" + sigla;
@@ -86,7 +88,7 @@ function atualizarImagem(id_coluna, sigla) {
         window.location.href = "#/page1/page3";
 
         setTimeout(function () {
-            listarEventoFiltro('Todos');
+            listarArtistas();
         }, 300);
     }
     if(sigla == "C"){

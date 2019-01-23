@@ -71,8 +71,9 @@ function listarEventosCalendario(idMes, mesClick) {
             ;
 
             $("img#" + id).attr("src", urlImagem);
-            var vazio = $("#mesAcontecimento").children();
+
         }
+        var vazio = $("#mesAcontecimento").children();
         if (vazio.length == 1) {
             $("#acontecimentoEmpty").css("display", "block");
         }

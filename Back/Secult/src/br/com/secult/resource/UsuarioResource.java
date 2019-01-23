@@ -37,7 +37,7 @@ public class UsuarioResource {
     @Path("/insertUsuarioArtista/{nome}&{sexo}&{senha}&{idade}&{nomeArtistico}&{descricao}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertUsuario(@PathParam("nome") String nome, @PathParam("sexo") String sexo, @PathParam("senha") String senha, @PathParam("idade") int idade, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-
+        System.out.println(nomeArtistico);
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
         usuario.setSexo(sexo);
@@ -98,7 +98,6 @@ public class UsuarioResource {
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(artistas).getAsJsonArray();
-        System.out.println(ArrayUsarios);
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("artistas", ArrayUsarios);

@@ -202,7 +202,6 @@ public class ImagemResource {
 
             ImagemDao imagemDao = new ImagemDao();
             Imagem imagem = new Imagem();
-            System.out.println(id+sigla);
             imagem = imagemDao.buscarImagem(id, sigla);
             final byte[] foto = imagem.getImagem();
             if (foto == null) {

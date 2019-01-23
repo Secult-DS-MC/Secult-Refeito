@@ -79,16 +79,19 @@ function cadastrarArtista() {
 
 
 function alterarArtista() {
+    var id = localStorage.getItem('id')
     var nomeCompleto = $("#nomeUp").val();
     var nomeArtisticoUp = $("#nomeArtisticoUp").val();
     var descricaoUp = $("#descricaoUp").val();
     var idadeUp = $("#idadeUp").val();
     var sexoUp = $("#sexoUp").val();
     var senhaCadastro = $("#senhaCadastro").val();
-    var json = servidor + "/Secult/usuario/alterarUsuarioArtista/" + nomeCompleto + "&" + sexoUp + "&" + idadeUp + "&" + nomeArtisticoUp + "&" + descricaoUp + "&" + localStorage.getItem("id");
+    var json = servidor + "/Secult/usuario/alterarUsuarioArtista/" + nomeCompleto + "&" + sexoUp + "&" + idadeUp + "&" + nomeArtisticoUp + "&" + descricaoUp + "&" + id;
     var onSuccess = function (result) {
-        var id = result.id_usuario;
-        if (id != 0) {
+        var status = result.status;
+        if (status == "ok") {
+            autenticarUsuarioById(id)
+
             atualizarImagem(id, "U");
             updateContato(id)
             deleteArteArtista(id)
@@ -100,6 +103,7 @@ function alterarArtista() {
                     inserirArteArtista(0, id)
                 }
             }
+
         } else {
             alert('Erro no cadastro, tente novamente ou contate o suporte!')
         }
@@ -451,6 +455,60 @@ function autenticarUsuario(email, senha) {
     }).fail();
 }
 
+function autenticarUsuarioById(id) {
+    var json = servidor + "/Secult/artista/autenticarUsuarioById/"+id;
+    $.getJSON(json, function (result) {
+        var usuario = result.artista;
+        if (usuario[0]) {
+            if (usuario[0]) {
+                $.getJSON(servidor + "", function (result) {
+
+                }).fail()
+                var id = usuario[0].id;
+                var nome = usuario[0].nome;
+                var sexo = usuario[0].sexo;
+                var idade = usuario[0].idade;
+                var nomeArtistico = usuario[0].nomeArtistico;
+                var descricao = usuario[0].descricao;
+                var email = usuario[0].email;
+                var telefone = usuario[0].telefone;
+                var facebook = usuario[0].facebook;
+                var youtube = usuario[0].youtube;
+                var instagram = usuario[0].instagram;
+                var tipo = usuario[0].tipo;
+                var imagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
+
+
+
+                localStorage.setItem("id", id);
+                localStorage.setItem("nome", nome);
+                localStorage.setItem("sexo", sexo);
+                localStorage.setItem("idade", idade);
+                localStorage.setItem("nomeArtistico", nomeArtistico);
+                localStorage.setItem("descricao", descricao);
+                localStorage.setItem("email", email);
+                localStorage.setItem("telefone", telefone);
+                localStorage.setItem("facebook", facebook);
+                localStorage.setItem("youtube", youtube);
+                localStorage.setItem("instagram", instagram);
+                localStorage.setItem("tipo", tipo);
+                localStorage.setItem("fotoUsuario", imagem);
+                localStorage.setItem("usuarioAtivo", "true")
+
+
+                $("#email").val('');
+                $("#senha").val('');
+
+
+
+            } else {
+                $("#validoEmail").text('')
+                $("#validoEmail").text("Email e/ou senha inválidos");
+            }
+        }
+    }).fail();
+}
+
 
 function usuarioLogado() {
     setTimeout(function () {
@@ -463,7 +521,7 @@ function usuarioLogado() {
         $("#sexoUp").val(localStorage.getItem("sexo"))
 
 
-        $("#imgThumbnail").attr('src', localStorage.getItem("fotoUsuario"));
+        $("#imgThumbnail").attr('src', servidor + "/Secult/imagem/findETC/"+ localStorage.getItem("id")+"&U") ;
         $("#telUp").mask("00-00000-0000");
         $("#redeSocial1").val(localStorage.getItem("facebook"));
         $("#redeSocial2").val(localStorage.getItem("youtube"));

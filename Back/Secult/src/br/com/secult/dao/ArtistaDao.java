@@ -55,12 +55,13 @@ public class ArtistaDao {
 
         return semErro;
     }
+
     public boolean updateArtista(Artista artista) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
         boolean semErro = true;
         try {
-            String sql = "UPDATE public.artista SET  nome=?, descricao=?, autenticado=? WHERE id = ?";
+            String sql = "UPDATE public.artista SET  nome=?, descricao=?, autenticado='N' WHERE id = ?";
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, artista.getNomeArtistico());
             stmt.setString(2, artista.getDescricao());
@@ -184,8 +185,54 @@ public class ArtistaDao {
         List<Autenticar> dados = new ArrayList<Autenticar>();
 
         try {
-            String sql = "SELECT u.id, u.nome as nomeCompleto, u.idade, u.sexo, a.nome as nomeArtistico, a.descricao, c.email, c.telefone, c.facebook, c.youtube, c.instagram, ut.id_tipo FROM usuario as u JOIN contato as c on u.id = c.id_usuario JOIN artista as a on u.id = a.id JOIN usu_tipo as ut on ut.id_usuario = u.id WHERE senha = '96CAE35CE8A9B0244178BF28E4966C2CE1B8385723A96A6B838858CDD6CA0A1E' and email = 'lucasscorreia1@gmail.com'";
+            String sql = "SELECT u.id, u.nome as nomeCompleto, u.idade, u.sexo, a.nome as nomeArtistico, a.descricao, c.email, c.telefone, c.facebook, c.youtube, c.instagram, ut.id_tipo FROM usuario as u JOIN contato as c on u.id = c.id_usuario JOIN artista as a on u.id = a.id JOIN usu_tipo as ut on ut.id_usuario = u.id WHERE senha = ? and email = ?";
             stmt = connection.prepareStatement(sql);
+            senha = convertToHashSenha(senha);
+            stmt.setString(1, senha);
+            stmt.setString(2, email);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Autenticar dado = new Autenticar();
+                dado.setId(rs.getInt("id"));
+                dado.setNome(rs.getString("nomeCompleto"));
+                dado.setIdade(rs.getInt("idade"));
+                dado.setSexo(rs.getString("sexo"));
+                dado.setNomeArtistico(rs.getString("nomeArtistico"));
+                dado.setDescricao(rs.getString("descricao"));
+                dado.setEmail(rs.getString("email"));
+                dado.setTelefone(rs.getString("telefone"));
+                dado.setFacebook(rs.getString("facebook"));
+                dado.setYoutube(rs.getString("youtube"));
+                dado.setInstagram(rs.getString("instagram"));
+                dado.setTipo(rs.getInt("id_tipo"));
+                dados.add(dado);
+            }
+            return dados;
+        } catch (Exception e) {
+            System.out.println("Erro ");
+
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+                connection.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+    public List<Autenticar> autenticarUsuarioById(int id) throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+        List<Autenticar> dados = new ArrayList<Autenticar>();
+
+        try {
+            String sql = "SELECT u.id, u.nome as nomeCompleto, u.idade, u.sexo, a.nome as nomeArtistico, a.descricao, c.email, c.telefone, c.facebook, c.youtube, c.instagram, ut.id_tipo FROM usuario as u JOIN contato as c on u.id = c.id_usuario JOIN artista as a on u.id = a.id JOIN usu_tipo as ut on ut.id_usuario = u.id WHERE u.id = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
 
