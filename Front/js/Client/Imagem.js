@@ -1,4 +1,3 @@
-
 function inserirImagem(id_coluna, sigla) {
 
     var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;
@@ -70,7 +69,7 @@ function inserirImagem(id_coluna, sigla) {
 
 function atualizarImagem(id_coluna, sigla) {
 
-    var json = servidor + "/Secult/imagem/atualizarImagem/" + id_coluna + "&" + sigla;
+    var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;
 
     var ImageURL = localStorage.getItem("imagemSalva");
     if (ImageURL == null) {
