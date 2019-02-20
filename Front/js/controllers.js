@@ -139,7 +139,6 @@ angular.module('app.controllers', [])
 
     .controller('eventosEmPovoadosCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            preencherDadosLocalidade('1');
             selectLocalidade('idLocalidade');
         }])
 

@@ -1,3 +1,23 @@
+function descricaoCompleta(descricao) {
+    var descMin = descricao.slice(0, 129);
+    var descMax = descricao;
+    var descExibida;
+    retorno = new Array();
+
+    if (descricao.length >= 130) {
+        descExibida = descMin;
+
+        retorno[0] = descExibida;
+        retorno[1] = false;
+    } else {
+        descExibida = descMax;
+
+        retorno[0] = descExibida;
+        retorno[1] = true;
+        return retorno;
+    }
+}
+
 function preencherDadosLocalidade(id) {
     $("#nomeEvento").empty();
     $("#nomeLocalidade").empty();
@@ -8,7 +28,7 @@ function preencherDadosLocalidade(id) {
     var onSuccess = function (result) {
 
         dados = result.localidades;
-
+        var retorno;
         for (var i in dados) {
 
             var idLocal = dados[i].id;
@@ -19,27 +39,17 @@ function preencherDadosLocalidade(id) {
             $("#nomeLocalidade").empty();
             $("#descLocalidade").empty();
 
-            var descMin = descricao.slice(0, 129);
-            var descMax = descricao;
-            var descExibida;
-            var descCompleta = false
-
-            if (descricao.length >= 130) {
-                descExibida = descMin;
-            } else {
-                descCompleta = true;
-                descExibida = descMax;
-            }
+            retorno = descricaoCompleta(descricao);
 
             $("#nomeLocalidade").append(nome);
-            $("#descLocalidade").append("<p class='descLocal' style=\"text-align: center; display: block\">" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + idLocal + "' onclick='lerMaisLocalidade()'> mais</span></span></p>\n" +
-                "                <p class='descLocal' style=\"text-align: center; display: none\" >" + descMax + "<span id='mostraDesc'>...<span id='descMax" + idLocal + "' onclick='lerMaisLocalidade()'> menos</span></span></p>\n");
+            $("#descLocalidade").append("<p class='descLocal' style=\"text-align: center; display: block\">" + retorno[0] + "<span id='mostraDesc'>...<span id='descMin" + idLocal + "' onclick='lerMaisLocalidade()'> mais</span></span></p>\n" +
+                "                <p class='descLocal' style=\"text-align: center; display: none\" >" + retorno[0] + "<span id='mostraDesc'>...<span id='descMax" + idLocal + "' onclick='lerMaisLocalidade()'> menos</span></span></p>\n");
 
             $("#nomeEvento").append("<ion-item style='border: none' class=\"item-icon-right item assertive\">" + nomeEvento + "\n" +
                 "        <i class=\"icon ion-android-alert\"></i>\n" +
                 "      </ion-item>");
 
-            if (descCompleta) {
+            if (retorno[1]) {
                 $("#descMin" + idLocal).remove();
                 $("#descMax" + idLocal).remove();
             }
@@ -62,40 +72,27 @@ function carregarNomeEdescEvento(id) {
     var json = servidor + "/Secult/localidade/listarLocalidade/" + id + "";
 
     var onSuccess = function (result) {
-
+        var retorno;
         var dados = result.localidades;
 
         var idLocal = dados[0].id;
         var nome = dados[0].nome;
         var descricao = dados[0].descricao;
 
-        var descMin = descricao.slice(0, 129);
-        var descMax = descricao;
-        var descExibida;
-        var descCompleta = false
-
-        if (descricao.length >= 130) {
-            descExibida = descMin;
-        } else {
-            descCompleta = true;
-            descExibida = descMax;
-        }
+        retorno = descricaoCompleta(descricao);
 
         $("#nomeLocalidade").append(nome);
-        $("#descLocalidade").append("<p class='descLocal' style=\"text-align: center; display: block\">" + descExibida + "<span id='mostraDesc'>...<span id='descMin" + idLocal + "' onclick='lerMaisLocalidade()'> mais</span></span></p>\n" +
-            "<p class='descLocal' style=\"text-align: center; display: none\" >" + descMax + "<span id='mostraDesc'>...<span id='descMax" + idLocal + "' onclick='lerMaisLocalidade()'> menos</span></span></p>\n");
+        $("#descLocalidade").append("<p class='descLocal' style=\"text-align: center; display: block\">" + retorno[0] + "<span id='mostraDesc'>...<span id='descMin" + idLocal + "' onclick='lerMaisLocalidade()'> mais</span></span></p>\n" +
+            "<p class='descLocal' style=\"text-align: center; display: none\" >" + retorno[0] + "<span id='mostraDesc'>...<span id='descMax" + idLocal + "' onclick='lerMaisLocalidade()'> menos</span></span></p>\n");
     }
     $.getJSON(json, onSuccess).fail();
 }
 
 function selectLocalidade(input) {
-
     $("#" + input).empty();
     setTimeout(function () {
         var json = servidor + "/Secult/localidade/carregarLocalidade";
-
         var onSuccess = function (result) {
-
             dados = result.localidades;
 
             for (var i in dados) {
@@ -105,7 +102,11 @@ function selectLocalidade(input) {
 
                 $("#" + input).append("<option value=" + idLocal + ">" + local + "</option>")
             }
-            $("#" + input + " option[value=1]").prop("selected", true).change()
+            $("#" + input + " option[value=1]").prop("selected", true).change();
+
+            if (input == "idLocalidade"){
+                preencherDadosLocalidade(idLocal);
+            }
         }
         $.getJSON(json, onSuccess).fail();
     }, 1000)
