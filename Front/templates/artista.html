@@ -79,7 +79,7 @@
                     <h3 style="text-align: center">Fale mais sobre você!</h3>
 
                     <h4>Descreva o que faz! (obrigatório)<span id="numCaractDescricao" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/500</span></h4>
-                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3(), contarDescricao()" rows="5" maxlength="500"
+                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3(), contarDescricao()" rows="3" maxlength="500"
                               placeholder="Sou cantor e tenho uma banda chamada Arroz com Feijão"></textarea>
                     <h4>Qual sua idade? (obrigatório)</h4>
                     <input id="idadeArtista" onkeyup="validacaoEtapa3(), $(this).mask('99')" type="text" placeholder="25" >
@@ -108,8 +108,9 @@
                     <h3 style="text-align: center">Como podemos entrar em contato?</h3>
 
                     <h4>Qual o seu email? (obrigatório)</h4>
-                    <input id="emailCadastro" onkeyup="validacaoEtapa4()" type="email"
+                    <input  id="emailCadastro" onkeyup="validacaoEtapa4()" type="email"
                            placeholder="joaoroberto@e-mail.com">
+                    <p id="emailErro" style="display: none;font-size: 0.7rem; text-align: center; color:red;">Email já cadastrado!</p>
                     <h4>E o seu telefone? (obrigatório)</h4>
                     <input id="telCadastro" onkeyup="validacaoEtapa4()" type="text" placeholder="00-00000-0000"
                            onclick="$(this).mask('00-00000-0000')">

@@ -17,8 +17,7 @@ function validacaoEtapa2() {
 function validacaoEtapa3() {
     var descricaoArtista = $("#descricaoArtista").val();
     var idadeArtista = $("#idadeArtista").val();
-    var generoArtista = $("#generoArtista").val();
-    if (descricaoArtista != "" && idadeArtista != "" && generoArtista != "0") {
+    if (descricaoArtista != "" && idadeArtista != "") {
         $("#proximo3").attr('disabled', false)
     } else {
         $("#proximo3").attr('disabled', true)
@@ -28,7 +27,7 @@ function validacaoEtapa3() {
 function validacaoEtapa4() {
     var emailCadastro = $("#emailCadastro").val();
     var telCadastro = $("#telCadastro").val();
-    if (emailCadastro != "" && telCadastro != "") {
+    if (emailCadastro != "" && telCadastro != "" && verficarEmail(emailCadastro)) {
         $("#proximo4").attr('disabled', false)
     } else {
         $("#proximo4").attr('disabled', true)
@@ -116,9 +115,11 @@ function listarArtistas() {
     $("#listaCadart").empty();
     var json = servidor + "/Secult/usuario/listarArtistasAutenticados";
     $.getJSON(json, function (result) {
+
         $("#listaCadart").empty();
-        dados = result.artistas;
+        var dados = result.artistas;
         if (dados[0]) {
+            localStorage.setItem("usuariosCadart", JSON.stringify(dados))
 
             for (var i in dados) {
                 var nomeArtistico = dados[i].nomeArtistico;
@@ -369,12 +370,25 @@ function limparCampos() {
 }
 
 function cadastroClick() {
+    $("#descricaoArtista").val('')
+    $("#imgThumbnail").attr('src', './img/user-foto.png')
     $("#artesSelecLista li").remove()
     posicaoCadastro('estagio4')
-    $('#cdt-seguranca').hide()
+    $('#cdt-seguranca, #cdt-pessoal, #cdt-contato, #cdt-divulgacao, #cdt-descricao').hide()
+    $('#cdt-inicio').show()
+    posicaoCadastro("estagio1")
     $('.cadastrar').css('height', tamanhoTela())
     limparCampos()
     $("#artesSelecLista li").remove()
+    swal({
+        title: "Cadastrado!",
+        text: "Aguarde nosso pessoal validar seus dados!",
+        icon: "success",
+        button: false,
+    });
+    setTimeout(function () {
+        window.location.href = "#/page3";
+    }, 2000)
 }
 
 
@@ -407,7 +421,6 @@ function autenticarUsuario(email, senha) {
                 var instagram = usuario[0].instagram;
                 var tipo = usuario[0].tipo;
                 var imagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
-
 
 
                 localStorage.setItem("id", id);
@@ -456,7 +469,7 @@ function autenticarUsuario(email, senha) {
 }
 
 function autenticarUsuarioById(id) {
-    var json = servidor + "/Secult/artista/autenticarUsuarioById/"+id;
+    var json = servidor + "/Secult/artista/autenticarUsuarioById/" + id;
     $.getJSON(json, function (result) {
         var usuario = result.artista;
         if (usuario[0]) {
@@ -479,7 +492,6 @@ function autenticarUsuarioById(id) {
                 var imagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
 
 
-
                 localStorage.setItem("id", id);
                 localStorage.setItem("nome", nome);
                 localStorage.setItem("sexo", sexo);
@@ -498,7 +510,6 @@ function autenticarUsuarioById(id) {
 
                 $("#email").val('');
                 $("#senha").val('');
-
 
 
             } else {
@@ -521,7 +532,7 @@ function usuarioLogado() {
         $("#sexoUp").val(localStorage.getItem("sexo"))
 
 
-        $("#imgThumbnail").attr('src', servidor + "/Secult/imagem/findETC/"+ localStorage.getItem("id")+"&U") ;
+        $("#imgThumbnail").attr('src', servidor + "/Secult/imagem/findETC/" + localStorage.getItem("id") + "&U");
         $("#telUp").mask("00-00000-0000");
         $("#redeSocial1").val(localStorage.getItem("facebook"));
         $("#redeSocial2").val(localStorage.getItem("youtube"));
@@ -531,3 +542,74 @@ function usuarioLogado() {
         preencherArtesArtistaUpdate(localStorage.getItem("id"))
     }, 1000)
 }
+
+function verficarEmail(email) {
+    var res = null;
+    $.ajax({
+        url: servidor + '/Secult/usuario/verificarEmail/' + email,
+        async: false,
+        dataType: 'json',
+        success: function (result) {
+            if (result.status == "ok") {
+                res = false
+                $("#emailErro").show();
+                $("#proximo4").attr('disabled', true)
+
+            } else {
+                $("#emailErro").hide()
+                res = true
+            }
+        }
+    });
+
+    return res
+
+
+}
+
+function buscarCadart(nome) {
+    var dados = JSON.parse(localStorage.getItem('usuariosCadart'))
+    $("#listaCadart").empty()
+    if (nome != "") {
+
+        for (var i = 0; i < dados.length; i++) {
+            if (dados[i].nomeArtistico.toLowerCase().indexOf(nome.toLowerCase(),) > -1) {
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var id = dados[i].id;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
+                var estado = "disponivel"
+
+                $("#listaCadart").append("<a class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\" onclick='carregarInformacoesArtistas(\"" + id + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + dados[i].nome + "\")''>\n" +
+                    "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "                <p> <span id='arte1" + id + "'>&nbsp</span> <span id='arte2" + id + "'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3" + id + "'></span></p>\n" +
+                    "                <i  class='icon ion-information-circled item-note' style='font-size: 1.3rem'></i>\n" +
+                    "            </a>");
+            }
+        }
+    } else {
+        for (var i = 0; i < dados.length; i++) {
+            var nomeArtistico = dados[i].nomeArtistico;
+            var descricao = dados[i].descricao;
+            var id = dados[i].id;
+            var nome = dados[i].nome;
+            var sexo = dados[i].sexo;
+            var idade = dados[i].idade;
+            var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
+            var estado = "disponivel"
+
+            $("#listaCadart").append("<a class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\" onclick='carregarInformacoesArtistas(\"" + id + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nome + "\")''>\n" +
+                "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
+                "                <h2>" + nomeArtistico + "</h2>\n" +
+                "                <p> <span id='arte1" + id + "'>&nbsp</span> <span id='arte2" + id + "'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3" + id + "'></span></p>\n" +
+                "                <i  class='icon ion-information-circled item-note' style='font-size: 1.3rem'></i>\n" +
+                "            </a>");
+            listarArtesArtista(id);
+        }
+    }
+}
+
+

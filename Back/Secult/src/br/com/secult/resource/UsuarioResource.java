@@ -126,15 +126,16 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/verificarEmail/email")
+    @Path("/verificarEmail/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response verificarEmail(@PathParam("email") String email) throws SQLException, Exception {
         UsuarioDao usuarioDao = new UsuarioDao();
+        System.out.println(usuarioDao.verificarEmail(email));
         if (usuarioDao.verificarEmail(email) == false) {
-            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+            return Response.ok("{\"status\":\"valido\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
         }
-        return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        return Response.ok("{\"status\":\"invalido\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 }

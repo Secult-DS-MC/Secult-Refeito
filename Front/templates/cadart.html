@@ -1,4 +1,23 @@
 <ion-view title="Cadart" id="page3">
+    <ion-nav-title class="pesquisa">
+        <div class="bar bar-header item-input-inset" >
+            <label class="item-input-wrapper buscaCadart">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input id="buscaCadart" onkeyup=" buscarCadart(this.value)" ng-model="search_text" type="text" placeholder="Search..." focus-me my-enter="search_model(search_text)" autofocus>
+            </label>
+        </div>
+    </ion-nav-title>
+    </div>
+    </div>
+    <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
+        </ion-refresher>
+        <ion-list id="listaCadart"></ion-list>
+        <script>
+
+
+        </script>
+    </ion-content>
     <div class="fab">
         <span class="fab-action-button" id="fabBtn" onclick="aparecer(), $('.fab-buttons').toggle();">
             <i class="icon ion-android-add iconFab"></i>
@@ -31,10 +50,5 @@
             </li>
         </ul>
     </div>
-    <ion-content padding="true" class="has-header">
-        <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
-        </ion-refresher>
-        <ion-list id="listaCadart"></ion-list>
-
-    </ion-content>
 </ion-view>
+

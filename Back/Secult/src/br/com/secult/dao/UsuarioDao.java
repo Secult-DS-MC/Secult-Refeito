@@ -173,10 +173,11 @@ public class UsuarioDao {
         try {
             String sql = "SELECT email FROM contato where email = ?";
             stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
 
             rs = stmt.executeQuery();
             if (rs.next()) {
-                if (rs.getString(1) == email) {
+                if (rs.getString("email").equals(email)) {
                     return true;
                 } else {
                     return false;

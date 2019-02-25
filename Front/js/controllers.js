@@ -53,12 +53,15 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $scope.doRefresh = function () {
+                $('.pesquisa').parent().css('right','right: -22px!important;')
+
                 setTimeout(function () {
                     $("#listaCadart").empty();
                     listarArtistas();
                     $scope.$broadcast('scroll.refreshComplete');
                 }, 1000);
             };
+            $('.pesquisa').parent().css('right', '-22px!important')
             listarArtistas();
             usuarioAtivo();
             localStorage.setItem("Ativo", "Sim");
