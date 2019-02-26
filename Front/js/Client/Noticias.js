@@ -83,7 +83,7 @@ function listarEventoNoticias() {
                         "            </ul>\n" +
                         "            <div class=\" item item-image \" style='border: none;'>\n" +
                         "                <img id='" + id + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\"" + urlImagem + "\"' style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\" style='opacity: 0.7'></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
+                        "                <div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-ios-location\" style='opacity: 0.7'></i>" + nomeEvento + "<span class=\"item-note\"> " + dt_eventoTratada + " </span> </div>\n" +
                         "            </div>\n" +
                         "            <div id='" + id + "' style=\"text-align:left;    padding: 0px 20px;\" class=\"show-list-numbers-and-dots padding \">\n" +
                         "                <p class='desc" + id + "' style=\"display: block\" ><span style='font-weight: 600; color: #262626;'>Descrição </span> " + descExibida + "<span id='mostraDesc'>...<span id='descMin" + id + "' style='color: #787878;' onclick='lerMais(\"desc" + id + "\")'> mais</span></span></p>\n" +

@@ -108,7 +108,7 @@ function listarEventoEvento() {
                     "        </a>\n" +
                     "        <li class=\"item\" style=\"color: gray; padding: 0; margin: 0; zoom: 0.80; border: none;\">\n" +
                     "            <div style=\"display: flex;\">\n" +
-                    "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
+                    "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-ios-location\"></i><span class=\"tab-title\">" + nomeLocalidade + "</span></a>\n" +
                     "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-android-calendar\"></i><span class=\"tab-title\">" + dt_eventoTratada + "</span></a>\n" +
                     "                <a style='max-width: none;' class=\"tab-item\"><i class=\"icon ion-android-locate\"></i><span class=\"tab-title\">" + localCidade + "</span></a>\n" +
                     "                <a style='max-width: none;' class=\"tab-item\" href='https://api.whatsapp.com/send?text=Título: " + titulo + ", Descrição: " + descricao + "'><i class=\"icon ion-android-share\"></i><span class=\"tab-title\">Compartilhar</span></a>\n" +

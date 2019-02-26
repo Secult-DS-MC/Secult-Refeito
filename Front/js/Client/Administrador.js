@@ -39,7 +39,6 @@ function mudarCorbotaoEntrar() {
 function carregando(el) {
     if (el == 1) {
         setTimeout(function () {
-            console.log(el);
             $("ion-spinner.carregando2").css("display", "block");
             //$("ion-content").prepend("<div class='carregando'></div>");
             //$("ion-content").prepend("<ion-spinner class=\"carregando2\" icon=\"bubbles\"></ion-spinner>");

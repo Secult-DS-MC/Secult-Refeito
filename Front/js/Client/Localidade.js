@@ -1,20 +1,31 @@
 function addSearch(id1, id2) {
     var nomeIcon = $("#buttonIcon").attr('class').split(' ')[3];
+
     if (nomeIcon == 'ion-search') {
-        setTimeout(function () {
-            $('#buttonIcon').removeClass('ion-search');
-            $('#buttonIcon').addClass('ion-arrow-return-left');
-        }, 50);
+        $('#buttonIcon').removeClass('ion-search');
+        $('#buttonIcon').addClass('ion-arrow-return-left');
         id1.toggle(100);
         id2.toggle(100);
-    } else {
-        setTimeout(function () {
-            $('#buttonIcon').removeClass('ion-arrow-return-left');
-            $('#buttonIcon').addClass('ion-search');
-        }, 50)
+    } else if (nomeIcon == 'ion-arrow-return-left') {
+        $('#buttonIcon').removeClass('ion-arrow-return-left');
+        $('#buttonIcon').addClass('ion-search');
         id1.toggle(100);
         id2.toggle(100);
     }
+
+    $('ion-content').on('tap', function() {
+        $('#buttonIcon').removeClass('ion-arrow-return-left');
+        $('#buttonIcon').addClass('ion-search');
+        id1.show();
+        id2.hide();
+    });
+
+    $('ion-content').on('swipe', function () {
+        $('#buttonIcon').removeClass('ion-arrow-return-left');
+        $('#buttonIcon').addClass('ion-search');
+        id1.show();
+        id2.hide();
+    });
 }
 
 function descricaoCompleta(descricao) {
@@ -145,8 +156,14 @@ function listarLocalidades() {
                 var nome = dados[i].nome;
                 var descricao = dados[i].descricao;
 
-                $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
-                    "                <i class=\"icon ion-location\"></i>" + nome + "</a>")
+                $("#listaLocalidades").append("<div class='item item-icon-right'><a href='#page34' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                    "                           class=\"item-icon-left\">\n" +
+                    "                    <i class=\"icon ion-ios-location dark\"></i>" + nome + "</a>\n" +
+                    "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirLocalidade(" + id + ")'></a>\n" +
+                    "                    </div>");
+
+                // $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
+                //     "                <i class=\"icon ion-location\"></i>" + nome + "</a>")
 
             }
         }
@@ -228,7 +245,8 @@ function updateLocalidade(id, nome, descricao) {
 
             if (Administrador == "ok") {
                 window.location.href = "#page32";
-            };
+            }
+            ;
         };
         $.getJSON(json, onSuccess).fail();
     } else {
@@ -236,7 +254,7 @@ function updateLocalidade(id, nome, descricao) {
     }
 }
 
-function excluirAcontecimento(id) {
+function excluirLocalidade(id) {
     swal({
         title: "Deseja deletar essa localidade?",
         text: "Uma vez deletado não tem como recuperar!",
@@ -246,7 +264,7 @@ function excluirAcontecimento(id) {
     }).then(function (willDelete) {
         carregando(1)
         if (willDelete) {
-            var json = servidor + "/Secult/acontecimento/excluirLocalidade/" + id;
+            var json = servidor + "/Secult/localidade/excluirLocalidade/" + id;
             var onSuccess = function (result) {
                 if (result.status == "ok") {
                     $("#" + id).remove();

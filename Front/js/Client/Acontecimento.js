@@ -239,7 +239,6 @@ function listarEventoFiltro(filtro) {
     $("#inicioListaEventoHoje").empty();
     carregando(1)
     var json;
-    console.log(filtro)
     switch (filtro) {
         case "Todos":
             json = servidor + "/Secult/acontecimento/listarAcontecimento";
