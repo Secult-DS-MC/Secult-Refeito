@@ -1,11 +1,7 @@
 .header-noticia{
     top: 25px;
 }
-.btn-roda-pe{
 
-
-
-}
 .linkSemDecoracao {
     text-decoration: none;
     color: white;
@@ -145,15 +141,12 @@ ion-view {
 }
 
 .carregando2 {
-    width: 10%;
-    height: 75px;
-    margin: auto;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 10;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    z-index: 3;
 }
 
 .carregando{
@@ -570,4 +563,12 @@ h2#redesSociaisInfo a.button {
     background: transparent;
     border-bottom: 1px solid white;
     border-radius: 0;
+}
+
+.buscaCadart i{
+    color: white;
+}
+
+.buscaCadart input{
+    color: white;
 }

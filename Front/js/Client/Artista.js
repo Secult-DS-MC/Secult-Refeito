@@ -591,6 +591,7 @@ function buscarCadart(nome) {
             }
         }
     } else {
+        $("#buttonIcon").attr("onclick", 'addSearch($(\'#nomeArtista\'), $(\'#pesquisaArtista\'))');
         for (var i = 0; i < dados.length; i++) {
             var nomeArtistico = dados[i].nomeArtistico;
             var descricao = dados[i].descricao;

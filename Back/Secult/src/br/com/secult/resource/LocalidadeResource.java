@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/localidade")
 public class LocalidadeResource {
@@ -70,4 +71,55 @@ public class LocalidadeResource {
 
     }
 
+    @GET
+    @Path("/inserirLocalidade/{nome}&{descricao}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inserirArteArtista(@PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        LocalidadeDao localDao = new LocalidadeDao();
+
+        Localidade localidade = new Localidade();
+
+        localidade.setNome(nome);
+        localidade.setDescricao(descricao);
+
+        if (localDao.cadastrarLocalidade(localidade)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+
+    @GET
+    @Path("/alterarLocalidade/{id}&{nome}&{descricao}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response upadetEvento(@PathParam("id") int id, @PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        Localidade localidade = new Localidade();
+
+        localidade.setId(id);
+        localidade.setNome(nome);
+        localidade.setDescricao(descricao);
+
+        LocalidadeDao localidadeDao = new LocalidadeDao();
+
+        if (localidadeDao.alterarLocalidade(localidade)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+
+    @GET
+    @Path("/excluirLocalidade/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteArteArtista(@PathParam("id") int idLocalidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        LocalidadeDao localidadeDao = new LocalidadeDao();
+
+        if (localidadeDao.excluirLocalidade(idLocalidade)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
 }

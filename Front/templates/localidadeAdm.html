@@ -1,0 +1,36 @@
+<ion-view id="page32">
+    <ion-nav-buttons side="right" class="has-header">
+        <button id="buttonIcon" class="button icon button-clear ion-search" onclick="addSearch($('#nomeLocal'), $('#pesquisaLocal'))"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-title class="pesquisa" id="addSearch">
+        <span style="display: block" id="nomeLocal">Localidades</span>
+
+        <div style="display: none" id="pesquisaLocal" class="bar bar-header item-input-inset" >
+            <label class="item-input-wrapper buscaCadart">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input id="buscaCadart" onkeyup="buscarLocalidade(this.value);" onclick='$("#buttonIcon").removeAttr("onclick")' type="text" placeholder="Nome da localidade..." >
+            </label>
+        </div>
+    </ion-nav-title>
+
+    <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
+    <ion-content padding="true" class="has-header">
+        <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down">
+        </ion-refresher>
+
+        <div class="list" id="listaLocalidades">
+
+        </div>
+
+        <div class="spacer" style="width: 300px; height: 20.9896px;"></div>
+    </ion-content>
+
+    <ion-footer-bar style="padding: 0px; margin: 0px">
+        <div ui-sref="cadastrarLocalidade" class="tabs positive-bg" style="background-color: #387ef5; color: white">
+            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive">Cadastrar
+            </button>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>

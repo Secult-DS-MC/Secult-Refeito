@@ -33,7 +33,7 @@ function listarEventosCalendario(idMes, mesClick) {
     window.location.href = "#/page1/page21";
     carregando(1);
     setTimeout(function () {
-        $("#page21 .title").append(mesClick);
+        $("#page21 #titleMes").append(mesClick);
     }, 100);
 
     var json = servidor + "/Secult/calendario/listarCalendario";

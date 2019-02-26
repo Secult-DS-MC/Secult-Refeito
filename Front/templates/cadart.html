@@ -1,9 +1,15 @@
-<ion-view title="Cadart" id="page3">
+<ion-view id="page3">
+    <ion-nav-buttons side="right" class="has-header">
+        <button id="buttonIcon" class="button icon button-clear ion-search" onclick="addSearch($('#nomeArtista'), $('#pesquisaArtista'))"></button>
+    </ion-nav-buttons>
+
     <ion-nav-title class="pesquisa">
-        <div class="bar bar-header item-input-inset" >
+        <span style="display: block" id="nomeArtista">Cadart</span>
+
+        <div class="bar bar-header item-input-inset" style="display: none" id="pesquisaArtista">
             <label class="item-input-wrapper buscaCadart">
                 <i class="icon ion-ios-search placeholder-icon"></i>
-                <input id="buscaCadart" onkeyup=" buscarCadart(this.value)" type="text" placeholder="Nome do artista..." >
+                <input id="buscaCadart" onkeyup="buscarCadart(this.value)" onclick='$("#buttonIcon").removeAttr("onclick")' type="text" placeholder="Nome do artista..." >
             </label>
         </div>
     </ion-nav-title>
@@ -51,4 +57,3 @@
         </ul>
     </div>
 </ion-view>
-

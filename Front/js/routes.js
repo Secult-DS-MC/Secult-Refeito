@@ -195,6 +195,21 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/infoAutenticarDesautenticar.html',
                 controller: 'infoAutenticarDesautenticarCtrl'
             })
+            .state('localidadeAdm', {
+                url: '/page32',
+                templateUrl: 'templates/localidadeAdm.html',
+                controller: 'localidadeAdmCtrl'
+            })
+            .state('cadastrarLocalidade', {
+                url: '/page33',
+                templateUrl: 'templates/cadastrarLocalidade.html',
+                controller: 'cadastrarLocalidadeCtrl'
+            })
+            .state('alterarLocalidade', {
+                url: '/page34',
+                templateUrl: 'templates/alterarLocalidade.html',
+                controller: 'alterarLocalidadeCtrl'
+            })
 
         $urlRouterProvider.otherwise('/page1/page2')
     });

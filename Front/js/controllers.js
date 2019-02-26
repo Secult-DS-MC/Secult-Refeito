@@ -45,7 +45,6 @@ angular.module('app.controllers', [])
                     $scope.$broadcast('scroll.refreshComplete');
                 }, 1000);
             };
-            //listarPublicidade();
             listarEventoNoticias();
             verificarAdministrador();
         }])
@@ -53,7 +52,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $scope.doRefresh = function () {
-                $('.pesquisa').parent().css('right','right: -22px!important;')
+                $('.pesquisa').parent().css('right', 'right: -22px!important;')
 
                 setTimeout(function () {
                     $("#listaCadart").empty();
@@ -254,4 +253,23 @@ angular.module('app.controllers', [])
 
     .controller('infoAutenticarDesautenticarCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+        }])
+
+    .controller('cadastrarLocalidadeCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('alterarLocalidadeCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('localidadeAdmCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    listarLocalidades();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            listarLocalidades();
         }]);

@@ -24,7 +24,7 @@ public class LocalidadeDao {
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT * FROM localidade WHERE id = "+id+"";
+        String sql = "SELECT * FROM localidade WHERE id = " + id + "";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -43,6 +43,7 @@ public class LocalidadeDao {
             throw e;
         } finally {
             try {
+                con.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -57,7 +58,7 @@ public class LocalidadeDao {
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN acontecimento as e ON(l.id = e.id_localidade) WHERE l.id = "+id+"";
+        String sql = "SELECT l.id, e.titulo, l.nome, l.descricao FROM localidade as l JOIN acontecimento as e ON(l.id = e.id_localidade) WHERE l.id = " + id + "";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -78,6 +79,7 @@ public class LocalidadeDao {
             throw e;
         } finally {
             try {
+                con.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
@@ -92,7 +94,7 @@ public class LocalidadeDao {
         ResultSet rs = null;
 
         this.con = new ConnectionFactory().getConnection();
-        String sql = "SELECT id, nome FROM localidade";
+        String sql = "SELECT id, nome, descricao FROM localidade";
 
         try {
             stmt = con.prepareStatement(sql);
@@ -102,6 +104,7 @@ public class LocalidadeDao {
 
                 localidade.setId(rs.getInt("id"));
                 localidade.setNome(rs.getString("nome"));
+                localidade.setDescricao(rs.getString("descricao"));
 
                 objs.add(localidade);
             }
@@ -109,11 +112,93 @@ public class LocalidadeDao {
             throw e;
         } finally {
             try {
+                con.close();
                 rs.close();
                 stmt.close();
             } catch (Exception e) {
             }
         }
         return objs;
+    }
+    public boolean cadastrarLocalidade(Localidade localidade) {
+        PreparedStatement stmt = null;
+
+        boolean erro = true;
+        this.con = new ConnectionFactory().getConnection();
+        try {
+            String slq = "INSERT INTO public.localidade(nome, descricao) VALUES (?, ?)";
+            stmt = con.prepareStatement(slq);
+
+            stmt.setString(1, localidade.getNome());
+            stmt.setString(2, localidade.getDescricao());
+
+            stmt.execute();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            erro = false;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                erro = true;
+            } catch (Exception e) {
+            }
+        }
+        return erro;
+    }
+
+    public boolean alterarLocalidade(Localidade localidade) {
+        boolean erro = true;
+        PreparedStatement stmt = null;
+        this.con = new ConnectionFactory().getConnection();
+
+        try {
+            String sql = "UPDATE public.localidade SET nome=?, descricao=? WHERE id = ?";
+            stmt = this.con.prepareStatement(sql);
+
+            stmt.setString(1, localidade.getNome());
+            stmt.setString(2, localidade.getDescricao());
+            stmt.setInt(3, localidade.getId());
+
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            erro = false;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                erro = true;
+            } catch (Exception e) {
+            }
+        }
+        return erro;
+    }
+    
+    public boolean excluirLocalidade(int idLocalidade){
+        boolean erro = true;
+        PreparedStatement stmt = null;
+        this.con = new ConnectionFactory().getConnection();
+
+        try {
+            String sql = "DELETE FROM public.localidade WHERE id = ?";
+            stmt = this.con.prepareStatement(sql);
+
+            stmt.setInt(1, idLocalidade);
+
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            erro = false;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                erro = true;
+            } catch (Exception e) {
+            }
+        }
+        return erro;
     }
 }

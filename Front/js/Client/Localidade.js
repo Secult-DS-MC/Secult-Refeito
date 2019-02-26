@@ -1,3 +1,22 @@
+function addSearch(id1, id2) {
+    var nomeIcon = $("#buttonIcon").attr('class').split(' ')[3];
+    if (nomeIcon == 'ion-search') {
+        setTimeout(function () {
+            $('#buttonIcon').removeClass('ion-search');
+            $('#buttonIcon').addClass('ion-arrow-return-left');
+        }, 50);
+        id1.toggle(100);
+        id2.toggle(100);
+    } else {
+        setTimeout(function () {
+            $('#buttonIcon').removeClass('ion-arrow-return-left');
+            $('#buttonIcon').addClass('ion-search');
+        }, 50)
+        id1.toggle(100);
+        id2.toggle(100);
+    }
+}
+
 function descricaoCompleta(descricao) {
     var descMin = descricao.slice(0, 129);
     var descMax = descricao;
@@ -104,10 +123,151 @@ function selectLocalidade(input) {
             }
             $("#" + input + " option[value=1]").prop("selected", true).change();
 
-            if (input == "idLocalidade"){
+            if (input == "idLocalidade") {
                 preencherDadosLocalidade(idLocal);
             }
         }
         $.getJSON(json, onSuccess).fail();
     }, 1000)
+}
+
+function listarLocalidades() {
+    carregando(1);
+    $("#listaLocalidades").empty();
+    var json = servidor + "/Secult/localidade/carregarLocalidade";
+    var onSuccess = function (result) {
+
+        dados = result.localidades;
+        if (dados[0]) {
+            for (var i in dados) {
+                localStorage.setItem("localidades", JSON.stringify(dados));
+                var id = dados[i].id;
+                var nome = dados[i].nome;
+                var descricao = dados[i].descricao;
+
+                $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
+                    "                <i class=\"icon ion-location\"></i>" + nome + "</a>")
+
+            }
+        }
+    }
+    $.getJSON(json, onSuccess).done(carregando(2)).fail();
+}
+
+function buscarLocalidade(nome) {
+    var dados = JSON.parse(localStorage.getItem('localidades'));
+    $("#listaLocalidades").empty();
+    if (nome != "") {
+
+        for (var i = 0; i < dados.length; i++) {
+            if (dados[i].nome.toLowerCase().indexOf(nome.toLowerCase()) > -1) {
+                var id = dados[i].id;
+                var nome = dados[i].nome;
+                var descricao = dados[i].descricao;
+
+
+                $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
+                    "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
+            }
+        }
+    } else {
+        $("#buttonIcon").attr("onclick", 'addSearch()');
+        for (var i = 0; i < dados.length; i++) {
+            var id = dados[i].id;
+            var nome = dados[i].nome;
+            var descricao = dados[i].descricao;
+            $("#listaLocalidades").append("<a href='#page34' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
+                "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
+        }
+    }
+}
+
+function validarCadastroLocalidade() {
+    var nome = $("#nomeLocalidadeCdt").val();
+    var descricao = $("#descLocalidadeCdt").val();
+
+    if (validarVazio(nome) && validarVazio(descricao)) {
+        cadastroLocalidade(nome, descricao);
+    } else {
+        swal("Preencha todos os campos!")
+    }
+}
+
+function cadastroLocalidade(nome, descricao) {
+    var json = servidor + "/Secult/localidade/inserirLocalidade/" + nome + "&" + descricao;
+    var onSuccess = function (result) {
+        jsonAdministrador = result;
+        var status = jsonAdministrador.status;
+        if (status != "erro") {
+            window.location.href = "#page32";
+        } else {
+            swal("Não foi possivel cadastrar a localidade!");
+        }
+        ;
+    };
+    $.getJSON(json, onSuccess).fail();
+}
+
+function preencherLocalidadeAtualizar(idLocalidade, nome, descricao) {
+    id = $("#" + idLocalidade).attr('id');
+    setTimeout(function () {
+        $("#nomeLocalidadeUp").val(nome);
+        $("#descLocalidadeUp").val(descricao);
+        $("#updateLocalidadeBtn").attr('onclick', "updateLocalidade(" + idLocalidade + ", " + nome + ", " + descricao + ")");
+    }, 1000);
+}
+
+function updateLocalidade(id, nome, descricao) {
+    if (validarVazio(nome) && validarVazio(descricao)) {
+
+        var json = servidor + "/Secult/acontecimento/atualizarLocalidade/" + id + "&" + nome + "&" + descricao;
+        var onSuccess = function (result) {
+
+            jsonAdministrador = result;
+            Administrador = jsonAdministrador.status;
+
+            if (Administrador == "ok") {
+                window.location.href = "#page32";
+            };
+        };
+        $.getJSON(json, onSuccess).fail();
+    } else {
+        swal("Preencha todos os campos!");
+    }
+}
+
+function excluirAcontecimento(id) {
+    swal({
+        title: "Deseja deletar essa localidade?",
+        text: "Uma vez deletado não tem como recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function (willDelete) {
+        carregando(1)
+        if (willDelete) {
+            var json = servidor + "/Secult/acontecimento/excluirLocalidade/" + id;
+            var onSuccess = function (result) {
+                if (result.status == "ok") {
+                    $("#" + id).remove();
+                    swal("Evento deletado com sucesso!", {
+                        icon: "success",
+                        buttons: false,
+                    });
+                    window.location.href = "#/page32";
+                    $("#" + id).css("display", "none");
+                    carregando(2)
+                } else {
+                    swal({
+                        title: "Ocorreu um erro!",
+                        icon: "erro",
+                        button: false,
+                    });
+                }
+            }
+            $.getJSON(json, onSuccess).fail();
+        } else {
+            carregando(2)
+        }
+    });
 }

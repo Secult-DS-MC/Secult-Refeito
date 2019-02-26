@@ -97,11 +97,6 @@ function listarEventoNoticias() {
                         $("#descMax" + id).remove();
                     }
                 }
-                // } else if (origem == "PUBLICIDADE") {
-                //     $("#slidePublicidade").append("<ion-slide>" +
-                //         "<img style=\"width: calc(100% + 20px); height: 100px\" src='" + urlImagem + "' onError='this.onerror=null;this.src=\"" + urlImagem + "\"'>" +
-                //         "</ion-slide>\n");
-                // }
             }
         }
         carregando(2);

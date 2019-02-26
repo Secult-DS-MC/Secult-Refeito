@@ -1,10 +1,12 @@
-<ion-view title="Notícias" id="page2">
+<ion-view id="page2">
+    <ion-nav-title>
+        <span>Noticias</span>
+    </ion-nav-title>
     <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
     <ion-content padding="true" class="header-noticia refresh has-header">
         <ion-refresher on-refresh="doRefresh()" spinner="crescent" pulling-icon="ion-ios-arrow-down" style="margin-top: 6%;">
         </ion-refresher>
-        <!--<ion-slide-box style="width:calc(100% + 20px); margin-left:-10px; margin-top: 3%" show-pager="false" id="slidePublicidade">-->
-        <!--</ion-slide-box>-->
+
         <div id="listaEventoNoticas">
         </div>
     </ion-content>
