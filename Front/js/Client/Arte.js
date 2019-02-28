@@ -24,6 +24,29 @@ function listarArtes() {
     );
 }
 
+function preencherArtes() {
+    $("#idArtes").empty();
+    var json = servidor + "/Secult/arte/listarArte";
+
+    var onSuccess = function (result) {
+
+        dados = result.artes;
+        if (dados[0]) {
+
+            for (var i in dados) {
+                if (dados[i].nome != 'null') {
+
+                    var id = dados[i].id;
+                    var nome = dados[i].nome;
+                    $("#idArtes").append("<option value='" + id + "'>" + nome + "</option>");
+                }
+            }
+        }
+    };
+    $.getJSON(json, onSuccess).done()
+    listarArtistasPorArte(1)
+}
+
 function listarArtesArtista(id) {
     var arte1 = "";
     var arte2 = "";

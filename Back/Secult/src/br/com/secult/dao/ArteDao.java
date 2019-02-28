@@ -51,6 +51,7 @@ public class ArteDao {
             Arte arte = new Arte();
             arte.setId(rs.getInt("id"));
             arte.setNome(rs.getString("nome"));
+            arte.setDescricao(rs.getString("descricao"));
             
             objs.add(arte);
         }

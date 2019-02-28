@@ -99,6 +99,30 @@ public class UsuarioDao {
         String senha = hexString.toString();
         return senha;
     }
+    
+    public List<Artista> listarAristasPorArte(int idArte) throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "SELECT u.id, u.nome, a.nome \"nomeArtistico\", u.sexo, a.descricao, u.idade FROM usuario as u JOIN artista as a on (u.id = a.id) JOIN usu_tipo as ut on (ut.id_usuario = u.id) JOIn arte_artista on (arte_artista.id_artista = u.id) where a.autenticado = 'S' and ut.id_tipo = 0 and arte_artista.id_arte ="+idArte+";";
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+                connection.close();
+            } catch (Exception e) {
+            }
+        }
+    }
 
     public List<Artista> listarAristasAutenticados() throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();

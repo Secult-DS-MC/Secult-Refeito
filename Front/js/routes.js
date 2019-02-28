@@ -113,6 +113,12 @@ angular.module('app.routes', [])
                 controller: 'loginCtrl'
             })
 
+            .state('artes', {
+                url: '/page16',
+                templateUrl: 'templates/artes.html',
+                controller: 'artesCtrl'
+            })
+
 
 
             .state('eventosEmPovoados', {
@@ -195,21 +201,13 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/infoAutenticarDesautenticar.html',
                 controller: 'infoAutenticarDesautenticarCtrl'
             })
-            .state('localidadeAdm', {
-                url: '/page32',
-                templateUrl: 'templates/localidadeAdm.html',
-                controller: 'localidadeAdmCtrl'
-            })
-            .state('cadastrarLocalidade', {
-                url: '/page33',
-                templateUrl: 'templates/cadastrarLocalidade.html',
-                controller: 'cadastrarLocalidadeCtrl'
-            })
-            .state('alterarLocalidade', {
+
+            .state('infoArtistasPorArte', {
                 url: '/page34',
-                templateUrl: 'templates/alterarLocalidade.html',
-                controller: 'alterarLocalidadeCtrl'
+                templateUrl: 'templates/infoArtistasPorArte.html',
+                controller: 'infoArtistasPorArteCtrl'
             })
+
 
         $urlRouterProvider.otherwise('/page1/page2')
     });

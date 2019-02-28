@@ -105,6 +105,24 @@ public class UsuarioResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+    @GET
+    @Path("/listarAristasPorArte/{idArte}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarAristasPorArte(@PathParam("idArte") int idArte) throws SQLException, Exception {
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        List<Artista> artistas = usuarioDao.listarAristasPorArte(idArte);
+
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsarios = gson.toJsonTree(artistas).getAsJsonArray();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("artistas", ArrayUsarios);
+
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
 
     @GET
     @Path("/listarAristasNaoAutenticados")

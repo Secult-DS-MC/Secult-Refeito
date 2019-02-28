@@ -110,6 +110,37 @@ function alterarArtista() {
     $.getJSON(json, onSuccess).fail();
 }
 
+function listarArtistasPorArte(idArte) {
+    $("#artistasPorArte").empty();
+    var json = servidor + "/Secult/usuario/listarAristasPorArte/"+idArte;
+    $.getJSON(json, function (result) {
+        var dados = result.artistas;
+        if (dados[0]) {
+
+            for (var i in dados) {
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var id = dados[i].id;
+                var nome = dados[i].nome;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var urlImagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
+                var estado = "disponivel"
+
+                $("#artistasPorArte").append("<a  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\" onclick='carregarInformacoesArtistas(\"" + id + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nome + "\",\"indoArtistasPorArte\")''>\n" +
+                    "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "                <p> <span id='arte1" + id + "'>&nbsp</span> <span id='arte2" + id + "'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3" + id + "'></span></p>\n" +
+                    "                <i  class='icon ion-information-circled item-note' style='font-size: 1.3rem'></i>\n" +
+                    "            </a>");
+                listarArtesArtista(id);
+            }
+            $("#idArtes option[value=1]").attr('selected', true)
+
+        }
+    })
+
+}
 
 function listarArtistas() {
     $("#listaCadart").empty();
@@ -219,8 +250,13 @@ function AutenticarVisibilidade(id, acao) {
 }
 
 
-function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, idade, estado, urlImagem, nome) {
-    window.location.href = "#/page1/page35";
+function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, idade, estado, urlImagem, nome, origem) {
+   if(origem == 'indoArtistasPorArte'){
+       window.location.href = "#page34";
+       $("#page34 .title").append(nomeArtistico);
+   }else{
+       window.location.href = "#/page1/page35";
+   }
     var arte1 = "";
     var arte2 = "";
     var arte3 = "";
@@ -591,7 +627,6 @@ function buscarCadart(nome) {
             }
         }
     } else {
-        $("#buttonIcon").attr("onclick", 'addSearch($(\'#nomeArtista\'), $(\'#pesquisaArtista\'))');
         for (var i = 0; i < dados.length; i++) {
             var nomeArtistico = dados[i].nomeArtistico;
             var descricao = dados[i].descricao;

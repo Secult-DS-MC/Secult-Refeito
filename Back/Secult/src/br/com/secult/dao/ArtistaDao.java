@@ -114,6 +114,7 @@ public class ArtistaDao {
         }
         return artes;
     }
+    
 
     public boolean updateVisibilidadeS(int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement pstmt = null;

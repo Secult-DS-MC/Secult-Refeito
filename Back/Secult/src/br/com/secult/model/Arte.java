@@ -11,7 +11,9 @@ package br.com.secult.model;
  */
 public class Arte {
     private int id;
-    private String nome;
+    private String nome;  
+    private String descricao;
+
 
     public int getId() {
         return id;
@@ -27,5 +29,12 @@ public class Arte {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+     public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

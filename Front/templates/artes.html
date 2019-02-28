@@ -1,0 +1,29 @@
+<ion-view title="Artes" hide-back-button="true" id="page16">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear " ui-sref="tabsController.noticias" ></button>
+    </ion-nav-buttons>
+    <ion-spinner class="carregando2" icon="bubbles" style="display: none"></ion-spinner>
+    <ion-content padding="true" class="has-header">
+        <form  class="list">
+            <label class="item item-select" style="border: none; border-bottom: 1px solid #616161;" id="topo">
+                <span class="input-label">Selecione a arte:</span>
+                <select id="idArtes" >
+
+                </select>
+            </label>
+
+            <h1 style="text-align:center;" id="nomeArte"></h1>
+        </form>
+
+        <div class="show-list-numbers-and-dots pDesc" id="descLocalidade">
+
+        </div>
+        <div id="eventosEmPovoados-markdown11" class="show-list-numbers-and-dots">
+            <hr>
+        </div>
+        <h3 style="color:#000000;font-weight:600;text-align:center;">Artistas nessa arte</h3>
+        <ion-list id="artistasPorArte">
+
+        </ion-list>
+    </ion-content>
+</ion-view>
