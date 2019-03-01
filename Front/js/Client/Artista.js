@@ -262,9 +262,10 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
     var arte3 = "";
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + idArtista, function (result) {
         var artes = result.artes;
-        arte1 = artes[0].nome;
-        arte2 = artes[1].nome;
-        arte3 = artes[2].nome;
+        if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
+        if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
+        if (artes[2].nome != 'undefined') arte3 = artes[2].nome;
+     
 
     })
     setTimeout(function () {

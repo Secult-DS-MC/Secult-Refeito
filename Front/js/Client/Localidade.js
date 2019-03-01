@@ -156,7 +156,7 @@ function listarLocalidades() {
                 var nome = dados[i].nome;
                 var descricao = dados[i].descricao;
 
-                $("#listaLocalidades").append("<div class='item item-icon-right'><a href='#page34' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                $("#listaLocalidades").append("<div class='item item-icon-right'><a href='#page35' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                     "                           class=\"item-icon-left\">\n" +
                     "                    <i class=\"icon ion-ios-location dark\"></i>" + nome + "</a>\n" +
                     "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirLocalidade(" + id + ")'></a>\n" +
@@ -183,7 +183,7 @@ function buscarLocalidade(nome) {
                 var descricao = dados[i].descricao;
 
 
-                $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
+                $("#listaLocalidades").append("<a href='#page35' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
                     "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
             }
         }
@@ -193,7 +193,7 @@ function buscarLocalidade(nome) {
             var id = dados[i].id;
             var nome = dados[i].nome;
             var descricao = dados[i].descricao;
-            $("#listaLocalidades").append("<a href='#page34' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
+            $("#listaLocalidades").append("<a href='#page35' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
                 "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
         }
     }

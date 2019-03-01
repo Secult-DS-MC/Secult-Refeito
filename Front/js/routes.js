@@ -202,6 +202,24 @@ angular.module('app.routes', [])
                 controller: 'infoAutenticarDesautenticarCtrl'
             })
 
+            .state('localidadeAdm', {
+                url: '/page32',
+                templateUrl: 'templates/localidadeAdm.html',
+                controller: 'localidadeAdmCtrl'
+            })
+
+            .state('cadastrarLocalidade', {
+                url: '/page33',
+                templateUrl: 'templates/cadastrarLocalidade.html',
+                controller: 'cadastrarLocalidadeAdmCtrl'
+            })
+
+            .state('alterarLocalidade', {
+                url: '/page35',
+                templateUrl: 'templates/alterarLocalidade.html',
+                controller: 'alterarLocalidadeAdmCtrl'
+            })
+
             .state('infoArtistasPorArte', {
                 url: '/page34',
                 templateUrl: 'templates/infoArtistasPorArte.html',

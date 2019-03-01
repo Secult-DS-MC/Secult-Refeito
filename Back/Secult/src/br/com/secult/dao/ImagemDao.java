@@ -1,6 +1,5 @@
 package br.com.secult.dao;
 
-import br.com.secult.model.Cadart;
 import br.com.secult.model.Imagem;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
             // Show the action sheet
             var showActionSheet = $ionicActionSheet.show({
                 buttons: [
-                    {text: 'Clonar'}
+                    { text: 'Clonar' }
                 ],
 
                 destructiveText: 'Excluir',
@@ -53,7 +53,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $scope.doRefresh = function () {
-                $('.pesquisa').parent().css('right','right: -22px!important;')
+                $('.pesquisa').parent().css('right', 'right: -22px!important;')
 
                 setTimeout(function () {
                     $("#listaCadart").empty();
@@ -196,7 +196,7 @@ angular.module('app.controllers', [])
                 localStorage.setItem("visibilidadeAcon", $scope.emailNotification.checked);
             };
 
-            $scope.emailNotification = {checked: true};
+            $scope.emailNotification = { checked: true };
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',
@@ -224,8 +224,8 @@ angular.module('app.controllers', [])
             setTimeout(function () {
                 $('#nomeArte').text($("#idArtes option:Selected").text())
 
-            },100)
-            $('#idArtes').change(function(){
+            }, 100)
+            $('#idArtes').change(function () {
 
                 $('#nomeArte').text($("#idArtes option:Selected").text())
                 listarArtistasPorArte($("#idArtes").val())
@@ -248,11 +248,11 @@ angular.module('app.controllers', [])
 
     .controller('infoCadartCtrl', ['$scope', '$stateParams',
         function MyCtrl($scope, $ionicHistory) {
-            $scope.myGoBack = function() {
+            $scope.myGoBack = function () {
                 $ionicHistory.goBack();
             };
         }
-        ])
+    ])
 
     .controller('superAdministradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
@@ -269,6 +269,37 @@ angular.module('app.controllers', [])
         }])
 
     .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+        .controller('localidadeAdmCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    listarLocalidades();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            listarLocalidades();
+        }])
+
+        .controller('cadastrarLocalidadeAdmCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+        .controller('alterarLocalidadeAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
         }])
 

@@ -40,7 +40,7 @@ public class LocalidadeResource {
     @GET
     @Path("/carregarLocalidade")
     @Produces(MediaType.APPLICATION_JSON)
-    public String carregarLocalidade() throws SQLException, Exception {
+    public Response carregarLocalidade() throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
         List<Localidade> localidade = localidadeDao.carregarLocalidade();
@@ -50,14 +50,14 @@ public class LocalidadeResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("localidades", ArrayUsarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 
     @GET
     @Path("/listarLocalidadeComEvento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarLocalidadeComEvento(@PathParam("id") int id) throws SQLException, Exception {
+    public Response listarLocalidadeComEvento(@PathParam("id") int id) throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
         List<Localidade> localidade = localidadeDao.listarLocalidadeComEvento(id);
@@ -67,7 +67,7 @@ public class LocalidadeResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("localidades", ArrayUsarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 

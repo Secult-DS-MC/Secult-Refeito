@@ -7,7 +7,6 @@ package br.com.secult.resource;
 
 import br.com.secult.dao.AcontecimentoDao;
 import br.com.secult.dao.RedesSociasDao;
-import br.com.secult.model.Cadart;
 import br.com.secult.model.RedesSociais;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

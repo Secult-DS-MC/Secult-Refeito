@@ -53,9 +53,10 @@ function listarArtesArtista(id) {
     var arte3 = "";
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + id, function (result) {
         var artes = result.artes;
-        arte1 = artes[0].nome;
-        arte2 = artes[1].nome;
-        arte3 = artes[2].nome;
+
+        if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
+        if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
+        if (artes[2].nome != 'undefined') arte3= artes[2].nome;
         if (arte1 != "null") $("#arte1" + id).text(arte1);
         if (arte2 != "null") $("#arte2" + id).text(arte2);
         if (arte3 != "null") $("#arte3" + id).text(arte3);
