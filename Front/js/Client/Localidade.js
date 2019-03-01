@@ -199,13 +199,13 @@ function validarCadastroLocalidade() {
 }
 
 function cadastroLocalidade(nome, descricao) {
-    alert(nome.toString(), descricao.toString());
     var json = servidor + "/Secult/localidade/inserirLocalidade/" + nome.toString() + "&" + descricao.toString();
     var onSuccess = function (result) {
         jsonAdministrador = result;
         var status = jsonAdministrador.status;
         if (status != "erro") {
             window.location.href = "#page32";
+            listarLocalidades()
         } else {
             swal("Não foi possivel cadastrar a localidade!");
         }
@@ -218,14 +218,16 @@ function preencherLocalidadeAtualizar(idLocalidade, nome, descricao) {
     setTimeout(function () {
         $("#nomeLocalidadeUp").val(nome);
         $("#descLocalidadeUp").val(descricao);
-        $("#updateLocalidadeBtn").attr('onclick', "updateLocalidade(" + idLocalidade + ", " + nome + ", " + descricao + ")");
+        $("#updateLocalidadeBtn").attr('onclick', "updateLocalidade(" + idLocalidade + ")");
     }, 1000);
 }
 
-function updateLocalidade(id, nome, descricao) {
+function updateLocalidade(id) {
+    var nome = $("#nomeLocalidadeUp").val();
+    var descricao = $("#descLocalidadeUp").val();
     if (validarVazio(nome) && validarVazio(descricao)) {
 
-        var json = servidor + "/Secult/acontecimento/atualizarLocalidade/" + id + "&" + nome + "&" + descricao;
+        var json = servidor + "/Secult/localidade/alterarLocalidade/" + id + "&" + nome + "&" + descricao;
         var onSuccess = function (result) {
 
             jsonAdministrador = result;
@@ -233,6 +235,7 @@ function updateLocalidade(id, nome, descricao) {
 
             if (Administrador == "ok") {
                 window.location.href = "#page32";
+                listarLocalidades()
             }
             ;
         };
