@@ -39,7 +39,7 @@ public class LocalidadeDao {
 
                 objs.add(localidade);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             try {
@@ -75,7 +75,7 @@ public class LocalidadeDao {
                 objs.add(localidade);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             try {
@@ -108,7 +108,7 @@ public class LocalidadeDao {
 
                 objs.add(localidade);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             try {
@@ -134,7 +134,7 @@ public class LocalidadeDao {
 
             stmt.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             erro = false;
         } finally {
@@ -162,7 +162,7 @@ public class LocalidadeDao {
             stmt.setInt(3, localidade.getId());
 
             stmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             erro = false;
         } finally {
@@ -188,14 +188,13 @@ public class LocalidadeDao {
             stmt.setInt(1, idLocalidade);
 
             stmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             erro = false;
         } finally {
             try {
                 con.close();
                 stmt.close();
-                erro = true;
             } catch (Exception e) {
             }
         }
