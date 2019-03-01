@@ -7,7 +7,7 @@ public class ConnectionFactory {
     public Connection getConnection() {
         try {
             String DRIVER = "org.postgresql.Driver";
-            String url = "jdbc:postgresql://localhost:5432/secult";
+            String url = "jdbc:postgresql://localhost:5432/secultbi";
             String usuario = "postgres";
             String senha = "postgres";
             Class.forName(DRIVER);

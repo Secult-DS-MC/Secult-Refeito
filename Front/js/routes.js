@@ -214,11 +214,6 @@ angular.module('app.routes', [])
                 controller: 'cadastrarLocalidadeAdmCtrl'
             })
 
-            .state('alterarLocalidade', {
-                url: '/page35',
-                templateUrl: 'templates/alterarLocalidade.html',
-                controller: 'alterarLocalidadeAdmCtrl'
-            })
 
             .state('infoArtistasPorArte', {
                 url: '/page34',
@@ -226,6 +221,28 @@ angular.module('app.routes', [])
                 controller: 'infoArtistasPorArteCtrl'
             })
 
+            .state('alterarLocalidade', {
+                url: '/page35',
+                templateUrl: 'templates/alterarLocalidade.html',
+                controller: 'alterarLocalidadeAdmCtrl'
+            })
+
+            .state('arteCadastro', {
+                url: '/page36',
+                templateUrl: 'templates/arteCadastro.html',
+                controller: 'arteCadastroCtrl'
+            })
+
+            .state('arteAtualizar', {
+                url: '/page37',
+                templateUrl: 'templates/arteAtualizar.html',
+                controller: 'arteAtualizarCtrl'
+            })
+            .state('arteAdm', {
+                url: '/page38',
+                templateUrl: 'templates/arteAdm.html',
+                controller: 'arteAdmCtrl'
+            })
 
         $urlRouterProvider.otherwise('/page1/page2')
     });

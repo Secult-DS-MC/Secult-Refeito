@@ -4,7 +4,8 @@
 # Log file
 *.log
 private.xml 
-
+private.properties
+ant-deploy.xml
 # BlueJ files
 *.ctxt
 

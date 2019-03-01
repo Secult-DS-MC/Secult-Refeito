@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
             // Show the action sheet
             var showActionSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text: 'Clonar' }
+                    {text: 'Clonar'}
                 ],
 
                 destructiveText: 'Excluir',
@@ -196,7 +196,7 @@ angular.module('app.controllers', [])
                 localStorage.setItem("visibilidadeAcon", $scope.emailNotification.checked);
             };
 
-            $scope.emailNotification = { checked: true };
+            $scope.emailNotification = {checked: true};
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',
@@ -284,7 +284,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
         }])
 
-        .controller('localidadeAdmCtrl', ['$scope', '$stateParams',
+    .controller('localidadeAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             $scope.doRefresh = function () {
                 setTimeout(function () {
@@ -295,11 +295,21 @@ angular.module('app.controllers', [])
             listarLocalidades();
         }])
 
-        .controller('cadastrarLocalidadeAdmCtrl', ['$scope', '$stateParams',
+    .controller('cadastrarLocalidadeAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
         }])
 
-        .controller('alterarLocalidadeAdmCtrl', ['$scope', '$stateParams',
+    .controller('alterarLocalidadeAdmCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+
+    .controller('arteCadastroCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+    .controller('arteAtualizarCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+        }])
+    .controller('arteAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
         }])
 
