@@ -23,6 +23,118 @@ function listarArtes() {
 
     );
 }
+function validarCadastroArte() {
+    var nome = $("#nomeArteCdt").val();
+    var descricao = $("#descArteCdt").val();
+
+    if (validarVazio(nome) && validarVazio(descricao)) {
+        cadastroArte(nome, descricao);
+    } else {
+        swal("Preencha todos os campos!")
+    }
+}
+function cadastroArte(nome, descricao) {
+    var json = servidor + "/Secult/arte/inserirArte/" + nome + "&" + descricao;
+    var onSuccess = function (result) {
+        var status = result.status;
+        if (status == "ok") {
+            window.location.href = "#page38";
+            listarArtesAdm()
+        } else {
+            swal("Não foi possivel cadastrar a Arte!");
+        }
+        ;
+    };
+    $.getJSON(json, onSuccess).fail();
+}
+
+function listarArtesAdm() {
+    carregando(1);
+    $("#listarArtesAdm").empty();
+    var json = servidor + "/Secult/arte/listarArte";
+    var onSuccess = function (result) {
+
+        dados = result.artes;
+        localStorage.setItem("artes", JSON.stringify(dados));
+        if (dados[0]) {
+
+            for (var i in dados) {
+                if (nome = dados[i].nome != 'null') {
+
+
+                    localStorage.setItem("Artes", JSON.stringify(dados));
+                    var id = dados[i].id;
+                    var nome = dados[i].nome;
+                    var descricao = dados[i].descricao;
+
+                    $("#listarArtesAdm").append("<div class='item item-icon-right'><a href='#page37' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                        "                           class=\"item-icon-left\">\n" +
+                        "                    <i class=\"icon icon ion-android-create dark\"></i>" + nome + "</a>\n" +
+                        "                    </div>");
+                }
+            }
+        }
+    }
+    $.getJSON(json, onSuccess).done(carregando(2)).fail();
+}
+
+function buscarArtes(nome) {
+    var dados = JSON.parse(localStorage.getItem('artes'));
+    $("#listarArtesAdm").empty();
+    if (nome != "") {
+        for (var i = 0; i < dados.length; i++) {
+            if (dados[i].nome.toLowerCase().indexOf(nome.toLowerCase()) > -1) {
+                var id = dados[i].id;
+                var nome = dados[i].nome;
+                var descricao = dados[i].descricao;
+
+                $("#listarArtesAdm").append("<a href='#page37' id='" + id + "' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
+                    "<i class=\"icon ion-android-create dark\"></i>" + nome + "</a>");
+            }
+        }
+    } else {
+        $("#buttonIcon").attr("onclick", 'addSearch()');
+        for (var i = 0; i < dados.length; i++) {
+            var id = dados[i].id;
+            var nome = dados[i].nome;
+            var descricao = dados[i].descricao;
+            $("#listarArtesAdm").append("<a href='#page38' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
+                "                <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>");
+        }
+    }
+}
+
+function preencherArteAtualizar(idArte, nome, descricao) {
+    setTimeout(function () {
+        $("#nomeArteUp").val(nome);
+        $("#descArteUp").val(descricao);
+        $("#updateArteBtn").attr('onclick', "updateArte(" + idArte + ")");
+    }, 1000);
+}
+
+function updateArte(id) {
+   var nome =  $("#nomeArteUp").val();
+   var desc =  $("#descArteUp").val();
+    if (validarVazio(nome) && validarVazio(desc)) {
+        console.log(id,nome, desc)
+        var json = servidor + "/Secult/arte/alterarArte/" + id + "&" + nome + "&" + desc;
+        console.log(json)
+        var onSuccess = function (result) {
+            var status = result.status;
+
+            if (status == "ok") {
+                window.location.href = "#page38";
+                listarArtesAdm()
+            }
+            ;
+        };
+        $.getJSON(json, onSuccess).fail();
+    } else {
+        swal("Preencha todos os campos!");
+    }
+}
+
+
 
 function preencherArtes() {
     $("#idArtes").empty();
@@ -56,7 +168,7 @@ function listarArtesArtista(id) {
 
         if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
         if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
-        if (artes[2].nome != 'undefined') arte3= artes[2].nome;
+        if (artes[2].nome != 'undefined') arte3 = artes[2].nome;
         if (arte1 != "null") $("#arte1" + id).text(arte1);
         if (arte2 != "null") $("#arte2" + id).text(arte2);
         if (arte3 != "null") $("#arte3" + id).text(arte3);

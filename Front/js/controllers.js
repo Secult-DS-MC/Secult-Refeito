@@ -311,6 +311,7 @@ angular.module('app.controllers', [])
         }])
     .controller('arteAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            listarArtesAdm()
         }])
 
 
