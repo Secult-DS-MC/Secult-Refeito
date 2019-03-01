@@ -412,6 +412,7 @@ function autenticar(txtEmail, txtSenha) {
 
 
 function sairUsuario() {
+    $(".fAdm").show()
     $(".alt-estado").toggle();
     localStorage.removeItem("cpf");
     localStorage.removeItem("nome");

@@ -1,6 +1,5 @@
 function validacaoEtapa2() {
     setTimeout(function () {
-
         var nomeCompleto = $("#nomeCompleto").val();
         var nomeArtistico = $("#nomeArtistico").val();
         var numeroArte = $("#artesSelecLista li").length
@@ -8,10 +7,8 @@ function validacaoEtapa2() {
             $("#proximo2").attr('disabled', false)
         } else {
             $("#proximo2").attr('disabled', true)
-
         }
     }, 10)
-
 }
 
 function validacaoEtapa3() {
@@ -23,16 +20,35 @@ function validacaoEtapa3() {
         $("#proximo3").attr('disabled', true)
     }
 }
+function chamarEtapa4() {
+    var interval = 1000;
+    $('#telCadastro, #emailCadastro').keyup(function () {
+        // começa a contar o tempo
+        clearInterval(interval);
+        // 500ms após o usuário parar de digitar a função é chamada
+        interval = window.setTimeout(function () {
+            validacaoEtapa4
+        }, 500);
+    });
+}
 
 function validacaoEtapa4() {
+
     var emailCadastro = $("#emailCadastro").val();
     var telCadastro = $("#telCadastro").val();
-    if (emailCadastro != "" && telCadastro != "" && verficarEmail(emailCadastro)) {
+    if (verficarEmail(emailCadastro) && emailCadastro != "" && telCadastro != "" ) {
         $("#proximo4").attr('disabled', false)
     } else {
         $("#proximo4").attr('disabled', true)
     }
 }
+//
+// var intervalo = 0;
+// $("#emailCadastro").keyup(function(){
+//
+//     clearInterval( intervalo );//ou clearTimeout()
+//     intervalo = window.setTimeout( ajax, 1000 );
+// });
 
 function validacaoEtapa5() {
     var inputImagem = $("#inputImagem").val();
@@ -265,7 +281,7 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
         if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
         if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
         if (artes[2].nome != 'undefined') arte3 = artes[2].nome;
-     
+
 
     })
     setTimeout(function () {
@@ -442,9 +458,7 @@ function autenticarUsuario(email, senha) {
         var usuario = result.artista;
         if (usuario[0]) {
             if (usuario[0]) {
-                $.getJSON(servidor + "", function (result) {
 
-                }).fail()
                 var id = usuario[0].id;
                 var nome = usuario[0].nome;
                 var sexo = usuario[0].sexo;
@@ -482,12 +496,14 @@ function autenticarUsuario(email, senha) {
                 if (tipo == 1) {
                     setTimeout(function () {
                         $(".alt-estado").toggle()
+                        $(".fAdm").hide()
                         localStorage.setItem("admOn", 'true');
                         $(".funcoesAdministrativas").show();
                         window.location.href = "#/page22";
                     }, 100)
                 } else {
                     setTimeout(function () {
+                        $(".fAdm").show()
                         window.location.href = "#/page1/page3";
                         setTimeout(function () {
                             $(".alt-estado").toggle()
