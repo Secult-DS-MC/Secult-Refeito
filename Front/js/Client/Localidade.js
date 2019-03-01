@@ -1,6 +1,5 @@
 function addSearch(id1, id2) {
     var nomeIcon = $("#buttonIcon").attr('class').split(' ')[3];
-
     if (nomeIcon == 'ion-search') {
         $('#buttonIcon').removeClass('ion-search');
         $('#buttonIcon').addClass('ion-arrow-return-left');
@@ -12,20 +11,6 @@ function addSearch(id1, id2) {
         id1.toggle(100);
         id2.toggle(100);
     }
-
-    $('ion-content').on('tap', function() {
-        $('#buttonIcon').removeClass('ion-arrow-return-left');
-        $('#buttonIcon').addClass('ion-search');
-        id1.show();
-        id2.hide();
-    });
-
-    $('ion-content').on('swipe', function () {
-        $('#buttonIcon').removeClass('ion-arrow-return-left');
-        $('#buttonIcon').addClass('ion-search');
-        id1.show();
-        id2.hide();
-    });
 }
 
 function descricaoCompleta(descricao) {
@@ -156,15 +141,11 @@ function listarLocalidades() {
                 var nome = dados[i].nome;
                 var descricao = dados[i].descricao;
 
-                $("#listaLocalidades").append("<div class='item item-icon-right'><a href='#page35' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                $("#listaLocalidades").append("<div id='" + id + "' class='item item-icon-right'><a href='#page35' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                     "                           class=\"item-icon-left\">\n" +
                     "                    <i class=\"icon ion-ios-location dark\"></i>" + nome + "</a>\n" +
                     "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirLocalidade(" + id + ")'></a>\n" +
                     "                    </div>");
-
-                // $("#listaLocalidades").append("<a href='#page34' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
-                //     "                <i class=\"icon ion-location\"></i>" + nome + "</a>")
-
             }
         }
     }
@@ -183,18 +164,25 @@ function buscarLocalidade(nome) {
                 var descricao = dados[i].descricao;
 
 
-                $("#listaLocalidades").append("<a href='#page35' id='" + id + "' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
-                    "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
+                $("#listaLocalidades").append("<div id='" + id + "' class='item item-icon-right'><a href='#page35' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                    "                           class=\"item-icon-left\">\n" +
+                    "                    <i class=\"icon ion-ios-location dark\"></i>" + nome + "</a>\n" +
+                    "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirLocalidade(" + id + ")'></a>\n" +
+                    "                    </div>");
             }
         }
     } else {
-        $("#buttonIcon").attr("onclick", 'addSearch()');
+        $("#buttonIcon").attr("onclick", 'addSearch($(\'#nomeLocal\'), $(\'#pesquisaLocal\'))');
         for (var i = 0; i < dados.length; i++) {
             var id = dados[i].id;
             var nome = dados[i].nome;
             var descricao = dados[i].descricao;
-            $("#listaLocalidades").append("<a href='#page35' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
-                "                <i class=\"icon ion-location\"></i>" + nome + "</a>");
+
+            $("#listaLocalidades").append("<div id='" + id + "' class='item item-icon-right'><a href='#page35' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                "                           class=\"item-icon-left\">\n" +
+                "                    <i class=\"icon ion-ios-location dark\"></i>" + nome + "</a>\n" +
+                "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirLocalidade(" + id + ")'></a>\n" +
+                "                    </div>");
         }
     }
 }
@@ -211,7 +199,8 @@ function validarCadastroLocalidade() {
 }
 
 function cadastroLocalidade(nome, descricao) {
-    var json = servidor + "/Secult/localidade/inserirLocalidade/" + nome + "&" + descricao;
+    alert(nome.toString(), descricao.toString());
+    var json = servidor + "/Secult/localidade/inserirLocalidade/" + nome.toString() + "&" + descricao.toString();
     var onSuccess = function (result) {
         jsonAdministrador = result;
         var status = jsonAdministrador.status;
@@ -226,7 +215,6 @@ function cadastroLocalidade(nome, descricao) {
 }
 
 function preencherLocalidadeAtualizar(idLocalidade, nome, descricao) {
-    id = $("#" + idLocalidade).attr('id');
     setTimeout(function () {
         $("#nomeLocalidadeUp").val(nome);
         $("#descLocalidadeUp").val(descricao);
@@ -256,8 +244,8 @@ function updateLocalidade(id, nome, descricao) {
 
 function excluirLocalidade(id) {
     swal({
-        title: "Deseja deletar essa localidade?",
-        text: "Uma vez deletado não tem como recuperar!",
+        title: "Deseja excluir essa localidade?",
+        text: "Uma vez excluida não tem como recuperar!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -268,19 +256,20 @@ function excluirLocalidade(id) {
             var onSuccess = function (result) {
                 if (result.status == "ok") {
                     $("#" + id).remove();
-                    swal("Evento deletado com sucesso!", {
+                    swal("Localidade excluida com sucesso!", {
                         icon: "success",
                         buttons: false,
                     });
-                    window.location.href = "#/page32";
                     $("#" + id).css("display", "none");
                     carregando(2)
                 } else {
                     swal({
-                        title: "Ocorreu um erro!",
-                        icon: "erro",
+                        title: "Não foi possível excluir!",
+                        text: "Pode ser que algum acontecimento esteja ligado a essa localidade!",
+                        icon: "error",
                         button: false,
                     });
+                    carregando(2);
                 }
             }
             $.getJSON(json, onSuccess).fail();
