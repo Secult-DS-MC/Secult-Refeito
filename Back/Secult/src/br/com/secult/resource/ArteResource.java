@@ -84,4 +84,18 @@ public class ArteResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+    
+    @GET
+    @Path("/excluirArte/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response excluir(@PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        ArteDao arteDao = new ArteDao();
+
+        if (arteDao.excluirArte(id)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        }
+    }
 }

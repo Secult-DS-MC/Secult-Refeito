@@ -20,6 +20,7 @@ function validacaoEtapa3() {
         $("#proximo3").attr('disabled', true)
     }
 }
+
 function chamarEtapa4() {
     var interval = 1000;
     $('#telCadastro, #emailCadastro').keyup(function () {
@@ -32,16 +33,38 @@ function chamarEtapa4() {
     });
 }
 
+function verificarEmailCdt(el) {
+
+    if (verficarEmail(el)) {
+        validacaoEtapa4()
+    } else {
+        $("#emailErro").show();
+        setTimeout(function () {
+            $("#emailErro").hide();
+        }, 5000)
+    }
+}
+
+function verificarEmailCdt(el) {
+
+    if (el.length == 13) {
+        validacaoEtapa4()
+    } else {
+
+    }
+}
+
 function validacaoEtapa4() {
 
     var emailCadastro = $("#emailCadastro").val();
     var telCadastro = $("#telCadastro").val();
-    if (verficarEmail(emailCadastro) && emailCadastro != "" && telCadastro != "" ) {
+    if (verficarEmail(emailCadastro) && telCadastro.length == 13 && emailCadastro != "" && telCadastro != "") {
         $("#proximo4").attr('disabled', false)
     } else {
         $("#proximo4").attr('disabled', true)
     }
 }
+
 //
 // var intervalo = 0;
 // $("#emailCadastro").keyup(function(){
@@ -49,6 +72,8 @@ function validacaoEtapa4() {
 //     clearInterval( intervalo );//ou clearTimeout()
 //     intervalo = window.setTimeout( ajax, 1000 );
 // });
+
+
 
 function validacaoEtapa5() {
     var inputImagem = $("#inputImagem").val();
@@ -128,7 +153,7 @@ function alterarArtista() {
 
 function listarArtistasPorArte(idArte) {
     $("#artistasPorArte").empty();
-    var json = servidor + "/Secult/usuario/listarAristasPorArte/"+idArte;
+    var json = servidor + "/Secult/usuario/listarAristasPorArte/" + idArte;
     $.getJSON(json, function (result) {
         var dados = result.artistas;
         if (dados[0]) {
@@ -267,20 +292,26 @@ function AutenticarVisibilidade(id, acao) {
 
 
 function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, idade, estado, urlImagem, nome, origem) {
-   if(origem == 'indoArtistasPorArte'){
-       window.location.href = "#page34";
-       $("#page34 .title").append(nomeArtistico);
-   }else{
-       window.location.href = "#/page1/page35";
-   }
+    if (origem == 'indoArtistasPorArte') {
+        window.location.href = "#page34";
+        $("#page34 .title").append(nomeArtistico);
+    } else {
+        window.location.href = "#/page1/page35";
+    }
     var arte1 = "";
     var arte2 = "";
     var arte3 = "";
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + idArtista, function (result) {
         var artes = result.artes;
-        if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
-        if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
-        if (artes[2].nome != 'undefined') arte3 = artes[2].nome;
+        if (artes[0]) {
+            if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
+        }
+        if (artes[1]) {
+            if (artes[1].nome != 'undefined') arte1 = artes[1].nome;
+        }
+        if (artes[2]) {
+            if (artes[2].nome != 'undefined') arte1 = artes[2].nome;
+        }
 
 
     })
@@ -596,25 +627,54 @@ function usuarioLogado() {
     }, 1000)
 }
 
+function validarEmail(field) {
+    var usuario = field.substring(0, field.indexOf("@"));
+    var dominio = field.substring(field.indexOf("@") + 1, field.length);
+
+
+    if ((usuario.length >= 1) &&
+        (dominio.length >= 3) &&
+        (usuario.search("@") == -1) &&
+        (dominio.search("@") == -1) &&
+        (usuario.search(" ") == -1) &&
+        (dominio.search(" ") == -1) &&
+        (dominio.search(".") != -1) &&
+        (dominio.indexOf(".") >= 1) &&
+        (dominio.lastIndexOf(".") < dominio.length - 1)) {
+
+        return true
+    }
+    else {
+        $("#emailErro").show()
+        setTimeout(function(){
+            $("#emailErro").hide()
+        },5000)
+        return false
+    }
+}
+
 function verficarEmail(email) {
+
     var res = null;
-    $.ajax({
-        url: servidor + '/Secult/usuario/verificarEmail/' + email,
-        async: false,
-        dataType: 'json',
-        success: function (result) {
-            if (result.status == "ok") {
-                res = false
-                $("#emailErro").show();
-                $("#proximo4").attr('disabled', true)
+    if (validarEmail(email)) {
+        $.ajax({
+            url: servidor + '/Secult/usuario/verificarEmail/' + email,
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.status == "ok") {
+                    res = false
+                    $("#emailErro").show();
+                    $("#proximo4").attr('disabled', true)
 
-            } else {
-                $("#emailErro").hide()
-                res = true
+                } else {
+                    $("#emailErro").hide()
+                    res = true
+                }
             }
-        }
-    });
+        });
 
+    }
     return res
 
 
@@ -626,7 +686,7 @@ function buscarCadart(nome) {
     if (nome != "") {
 
         for (var i = 0; i < dados.length; i++) {
-            if (dados[i].nomeArtistico.toLowerCase().indexOf(nome.toLowerCase(),) > -1) {
+            if (dados[i].nomeArtistico.toLowerCase().indexOf(nome.toLowerCase()) > -1) {
                 var nomeArtistico = dados[i].nomeArtistico;
                 var descricao = dados[i].descricao;
                 var id = dados[i].id;

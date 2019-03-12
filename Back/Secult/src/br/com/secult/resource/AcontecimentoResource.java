@@ -203,16 +203,15 @@ public class AcontecimentoResource {
     }
 
     @GET
-    @Path("/updateAcontecimento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
+    @Path("/updateAcontecimento/{id}&{titulo}&{descricao}&{data_evento}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         Acontecimento acontecimento = new Acontecimento();
 
         acontecimento.setId(id);
         acontecimento.setTitulo(titulo);
         acontecimento.setDescricao(descricao);
         acontecimento.setData_evento(data_evento);
-        acontecimento.setVisibilidade(visibilidade);
         acontecimento.setTipo_evento(tipo_evento);
         acontecimento.setHora_evento(hora_evento);
         acontecimento.setIdLocalidade(id_povoado);
@@ -224,6 +223,23 @@ public class AcontecimentoResource {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+
+    @GET
+    @Path("/alterarVisibilidade/{id}&{visibilidade}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response alterarVisibilidade(@PathParam("id") long id, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        Acontecimento acontecimento = new Acontecimento();
+        acontecimento.setId(id);
+        acontecimento.setVisibilidade(visibilidade);
+
+        AcontecimentoDao acontecimentoDao = new AcontecimentoDao();
+
+        if (acontecimentoDao.alterarVisibilidade(acontecimento)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         }
     }
 }

@@ -23,7 +23,7 @@ public class LocalidadeResource {
     @GET
     @Path("/listarLocalidade/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarLocalidade(@PathParam("id") int id) throws SQLException, Exception {
+    public Response listarLocalidade(@PathParam("id") int id) throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
         List<Localidade> localidade = localidadeDao.listarLocalidade(id);
@@ -33,7 +33,7 @@ public class LocalidadeResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("localidades", ArrayUsarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 
@@ -74,7 +74,7 @@ public class LocalidadeResource {
     @GET
     @Path("/inserirLocalidade/{nome}&{descricao}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirArteArtista(@PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response inserir(@PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         LocalidadeDao localDao = new LocalidadeDao();
 
@@ -86,14 +86,14 @@ public class LocalidadeResource {
         if (localDao.cadastrarLocalidade(localidade)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return Response.ok("{\"status\":\"erro\"}").build();
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         }
     }
 
     @GET
     @Path("/alterarLocalidade/{id}&{nome}&{descricao}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response upadetEvento(@PathParam("id") int id, @PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+    public Response alterar(@PathParam("id") int id, @PathParam("nome") String nome, @PathParam("descricao") String descricao) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         Localidade localidade = new Localidade();
 
         localidade.setId(id);
@@ -105,21 +105,21 @@ public class LocalidadeResource {
         if (localidadeDao.alterarLocalidade(localidade)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return Response.ok("{\"status\":\"erro\"}").build();
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         }
     }
 
     @GET
     @Path("/excluirLocalidade/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteArteArtista(@PathParam("id") int idLocalidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response excluir(@PathParam("id") int idLocalidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
 
         if (localidadeDao.excluirLocalidade(idLocalidade)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return Response.ok("{\"status\":\"erro\"}").build();
+            return Response.ok("{\"status\":\"erro\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         }
     }
 }

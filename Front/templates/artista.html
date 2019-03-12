@@ -1,7 +1,7 @@
 <ion-view id="page28" hide-nav-bar="true" style="background: #387ef5">
 
     <ion-content>
-        <div class="cadastrar" >
+        <div class="cadastrar">
             <div class="cadastrar-tela">
                 <div class="button-bar">
                     <a class="button button-clear estagio estagio1"
@@ -55,9 +55,12 @@
                     <h4>Qual seu nome artístico? (obrigatório)</h4>
                     <input type="text" id="nomeArtistico" onkeyup="validacaoEtapa2()" class="obrigatorio2"
                            placeholder="Joãozinho">
-                    <h4>E Sua arte? (obrigatório) <span id="numArte" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/3</span></h4>
+                    <h4>E Sua arte? (obrigatório) <span id="numArte"
+                                                        style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/3</span>
+                    </h4>
                     <select style="margin-bottom: 3px ; width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;"
-                            id="cdtArte" class="obrigatorio2" onchange="validacaoEtapa2(), addArteLista('cdt'),contarArtes()">
+                            id="cdtArte" class="obrigatorio2"
+                            onchange="validacaoEtapa2(), addArteLista('cdt'),contarArtes()">
 
                     </select>
                     <ul id="artesSelecLista">
@@ -78,11 +81,15 @@
                 <div id="cdt-descricao" style="display: none;  margin-top: 5%;">
                     <h3 style="text-align: center">Fale mais sobre você!</h3>
 
-                    <h4>Descreva o que faz! (obrigatório)<span id="numCaractDescricao" style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/500</span></h4>
-                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3(), contarDescricao()" rows="3" maxlength="500"
+                    <h4>Descreva o que faz! (obrigatório)<span id="numCaractDescricao"
+                                                               style="float: right; width: 5px; margin-right: 9px; border: 1px solid white; border-radius: 15%; padding: 4px; display: table;">0/500</span>
+                    </h4>
+                    <textarea id="descricaoArtista" onkeyup="validacaoEtapa3(), contarDescricao()" rows="3"
+                              maxlength="500"
                               placeholder="Sou cantor e tenho uma banda chamada Arroz com Feijão"></textarea>
                     <h4>Qual sua idade? (obrigatório)</h4>
-                    <input id="idadeArtista" onkeyup="validacaoEtapa3(), $(this).mask('99')" type="text" placeholder="25" >
+                    <input id="idadeArtista" onkeyup="validacaoEtapa3(), $(this).mask('99')" type="text"
+                           placeholder="25">
                     <div>
                         <h4>Com qual gênero você se identifica? (obrigatório)</h4>
                         <select style="width: 100%; height: 35px; background: transparent; border: none; border-bottom: 1px solid white; color: white;"
@@ -108,11 +115,13 @@
                     <h3 style="text-align: center">Como podemos entrar em contato?</h3>
 
                     <h4>Qual o seu email? (obrigatório)</h4>
-                    <input  id="emailCadastro" onkeyup="validacaoEtapa4()" type="email"
+                    <input id="emailCadastro" onkeyup="verificarEmailCdt(this.value)" type="email"
                            placeholder="joaoroberto@e-mail.com">
-                    <p id="emailErro" style="display: none;font-size: 0.7rem; text-align: center; color:red;">Email já cadastrado!</p>
+                    <p id="emailErro" style="display: none;font-size: 0.7rem; text-align: center; color:red;">Email já
+                        cadastrado ou invalido!</p>
                     <h4>E o seu telefone? (obrigatório)</h4>
-                    <input id="telCadastro" onkeyup="validacaoEtapa4()" type="text" placeholder="00-00000-0000"
+                    <input id="telCadastro" onkeyup="verificarEmailCdt(this.value)" type="text"
+                           placeholder="00-00000-0000"
                            onclick="$(this).mask('00-00000-0000')">
                     <div class="button-bar" style="margin-top: 10%;">
 
@@ -159,11 +168,12 @@
                     </label>
                     <button style="display: none;border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
                             class="button button-small button-outline" id="imputImg"
-                            onclick="abrirImpFile('inputImagem')" >Alterar Foto
+                            onclick="abrirImpFile('inputImagem')">Alterar Foto
                     </button>
 
-                    <h4>Coloque uma senha segura! (obrigatório)</h4>
-                    <input minlength="6" id="senhaCadastro" onkeyup="validacaoEtapa5()" type="text" placeholder="25">
+                    <h4>Uma senha com o mínimo de 6 caracteres! (obrigatório)</h4>
+                    <input minlength="6" id="senhaCadastro" onkeyup="validacaoEtapa5()"
+                           type="password" placeholder="Senha">
 
                     <div class="button-bar" style="margin-top: 20%;">
                         <a onclick="posicaoCadastro('estagio2'),$('#cdt-divulgacao').show(), $('#cdt-seguranca').hide()"
@@ -178,4 +188,5 @@
             </div>
         </div>
     </ion-content>
+
 </ion-view>

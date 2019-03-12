@@ -1,34 +1,3 @@
-// function expandir(classe, mes) {
-//     var icone = $("#" + mes).children();
-//
-//     if (icone.hasClass("ion-plus")) {
-//         icone.removeClass('ion-plus').addClass('ion-minus');
-//         $('.' + classe).toggle(300);
-//         diminuirMes(classe, icone);
-//     } else {
-//         icone.removeClass('ion-minus').addClass('ion-plus');
-//         $('.' + classe).toggle(300);
-//     }
-// }
-
-// function diminuirMes(classe, icone) {
-//     var vazio = $("." + classe + " ion-item").children();
-//     var aut = $('.' + classe).css("display");
-//     if (vazio.length == "0") {
-//         $('.' + classe).children().css("opacity", "1");
-//         $("p#" + classe).css({"display": "block", "font-size": "13px"});
-//         if (aut == "inline-block") {
-//             setTimeout(function () {
-//                 icone.removeClass('ion-minus').addClass('ion-plus');
-//                 $('.' + classe).children().css({"opacity": "0", "transition": "visibility 0s, opacity 0.5s linear"});
-//                 setTimeout(function () {
-//                     $('.' + classe).css("display", "none");
-//                 }, 200);
-//             }, 3000);
-//         }
-//     }
-// }
-
 function listarEventosCalendario(idMes, mesClick) {
     window.location.href = "#/page1/page21";
     carregando(1);

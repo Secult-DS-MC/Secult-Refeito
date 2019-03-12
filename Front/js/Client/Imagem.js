@@ -65,8 +65,6 @@ function inserirImagem(id_coluna, sigla) {
 
 }
 
-
-
 function atualizarImagem(id_coluna, sigla) {
 
     var json = servidor + "/Secult/imagem/inserirImagem/" + id_coluna + "&" + sigla;

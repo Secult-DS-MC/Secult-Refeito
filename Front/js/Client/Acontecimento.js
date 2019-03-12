@@ -123,7 +123,7 @@ function cadastroAcontecimento() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem, localCidade) {
+function preencherEventoAtualizar(id, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem, localCidade) {
     localStorage.setItem("idAcontecimento", id);
     id = $("#" + id).attr('id');
     setTimeout(function () {
@@ -137,7 +137,6 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
             $("#localidadeUp").val(idLocalidade);
         }, 2000);
         $("#tipoUp").val(tipo);
-        $("#visibilidadeUp").val(visibilidade);
         $("#localUp").val(localCidade);
         $("#updateEventoBtn").attr('onclick', "updateEvento(" + id + ")");
     }, 1000);
@@ -150,15 +149,13 @@ function updateEvento(id) {
     var horaEvento = $("#horarioUp").val();
     var localidade = $("#localidadeUp").val();
     var tipo = $("#tipoUp").val();
-    var visibilidade = localStorage.getItem("visibilidadeAcon");
     var local = $("#localUp").val();
-
 
     if (validarVazio(titulo) && validarVazio(descricao) && validarVazio(dataEvento) && validarVazio(horaEvento) && validarVazio(localidade) && validarVazio(tipo)) {
         if (tipo == "E") {
             if (validarVazio(local)) {
 
-                var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
+                var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
 
                 var onSuccess = function (result) {
 
@@ -177,7 +174,7 @@ function updateEvento(id) {
             }
         } else {
             local = "nulo";
-            var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
+            var json = servidor + "/Secult/acontecimento/updateAcontecimento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
 
             var onSuccess = function (result) {
 
@@ -269,7 +266,6 @@ function listarEventoFiltro(filtro) {
             break;
     }
 
-
     var onSuccess = function (result) {
 
         var dados = result.acontecimentos;
@@ -294,14 +290,14 @@ function listarEventoFiltro(filtro) {
 
                 localStorage.setItem('dadosClone', JSON.stringify(dados));
 
-                $("#inicioListaEventoHoje").append("<a href='#page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
-                    "                <img  src='" + imagem + "' onError='this.onerror=null;this.src='" + imagem + "'>\n" +
-                    "                <h2 id='titulo" + id + "'  style=\"font-weight: bolder; font-size: larger\">" + titulo + "</h2>\n" +
-                    "                   <p style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block;\">" + nomeTipo + "</p>\n" +
+                $("#inicioListaEventoHoje").append("<div onclick='preencherEventoAtualizar(" + id + ",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\"" + tipo + "\")' id='" + id + "' style=\"border-width: 1px 0;\" class=\"item item-thumbnail-left balanced\">\n" +
+                    "                <img onclick='mudarPag()' src='" + imagem + "' onError='this.onerror=null;this.src='" + imagem + "'>\n" +
+                    "                <h2 onclick='mudarPag()' id='titulo" + id + "'  style=\"font-weight: bolder; font-size: larger\">" + titulo + "</h2>\n" +
+                    "                   <p onclick='mudarPag()' style=\"white-space:normal; margin-top: 5px; font-weight: normal; display: block;\">" + nomeTipo + "</p>\n" +
                     "                <div class=\"item-icon-right\">\n" +
-                    "                    <i id='checked" + id + "' class=\"icon ion-eye inline\"></i>\n" +
+                    "                    <a onclick='alterarVisibilidade(" + id + ",\"" + visibilidade + "\")'><i id='checked" + id + "' class=\"icon ion-eye inline\"></i></a>\n" +
                     "                </div>\n" +
-                    "            </a>\n");
+                    "            </div>\n");
 
                 if (visibilidade == "s") {
                     $("#checked" + id).css('color', 'green');
@@ -315,6 +311,30 @@ function listarEventoFiltro(filtro) {
     $.getJSON(json, onSuccess).fail(
 
     );
+}
+
+function mudarPag(){
+    window.location.href = '#page20';
+}
+
+function alterarVisibilidade(id, visibilidade){
+    if (visibilidade == "s") {
+        visibilidade = "n";
+        $("#checked" + id).removeClass("ion-eye").addClass("ion-eye-disabled").css('color', 'gray');
+    } else {
+        visibilidade = "s";
+        $("#checked" + id).removeClass("ion-eye-disabled").addClass("ion-eye").css('color', 'green');
+    }
+    var json = servidor + "/Secult/acontecimento/alterarVisibilidade/" + id + "&" + visibilidade;
+    var onSuccess = function (result) {
+        var status = result.status;
+        if (status == "erro") {
+            swal("Não foi possivel alterar a visibilidade!");
+        }else{
+            listarEventoFiltro('Todos');
+        };
+    };
+    $.getJSON(json, onSuccess).fail();
 }
 
 function preencherClonar(id) {

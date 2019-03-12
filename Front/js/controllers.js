@@ -311,6 +311,12 @@ angular.module('app.controllers', [])
         }])
     .controller('arteAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            $scope.doRefresh = function () {
+                setTimeout(function () {
+                    listarArtesAdm();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
             listarArtesAdm()
         }])
 

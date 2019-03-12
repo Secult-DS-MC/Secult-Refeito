@@ -112,4 +112,29 @@ public class ArteDao {
         }
         return objs;
     }
+    
+    public boolean excluirArte(int id){
+        boolean erro = true;
+        PreparedStatement stmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+
+        try {
+            String sql = "DELETE FROM public.arte WHERE id = ?";
+            stmt = this.connection.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            erro = false;
+        } finally {
+            try {
+                connection.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return erro;
+    }
 }

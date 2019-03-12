@@ -67,10 +67,13 @@ function listarArtesAdm() {
                     var nome = dados[i].nome;
                     var descricao = dados[i].descricao;
 
-                    $("#listarArtesAdm").append("<div class='item item-icon-right'><a href='#page37' id='" + id + "' style='text-decoration: none; color: #444!important;' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                    $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                         "                           class=\"item-icon-left\">\n" +
-                        "                    <i class=\"icon icon ion-android-create dark\"></i>" + nome + "</a>\n" +
+                        "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
+                        "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
                         "                    </div>");
+
+
                 }
             }
         }
@@ -88,8 +91,11 @@ function buscarArtes(nome) {
                 var nome = dados[i].nome;
                 var descricao = dados[i].descricao;
 
-                $("#listarArtesAdm").append("<a href='#page37' id='" + id + "' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' class=\"item item-icon-left\">\n" +
-                    "<i class=\"icon ion-android-create dark\"></i>" + nome + "</a>");
+                $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                    "                           class=\"item-icon-left\">\n" +
+                    "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
+                    "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
+                    "                    </div>");
             }
         }
     } else {
@@ -98,8 +104,12 @@ function buscarArtes(nome) {
             var id = dados[i].id;
             var nome = dados[i].nome;
             var descricao = dados[i].descricao;
-            $("#listarArtesAdm").append("<a href='#page38' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")' id='" + id + "' class=\"item item-icon-left\">\n" +
-                "                <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>");
+
+            $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                "                           class=\"item-icon-left\">\n" +
+                "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
+                "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
+                "                    </div>");
         }
     }
 }
@@ -113,10 +123,10 @@ function preencherArteAtualizar(idArte, nome, descricao) {
 }
 
 function updateArte(id) {
-   var nome =  $("#nomeArteUp").val();
-   var desc =  $("#descArteUp").val();
+    var nome = $("#nomeArteUp").val();
+    var desc = $("#descArteUp").val();
     if (validarVazio(nome) && validarVazio(desc)) {
-        console.log(id,nome, desc)
+        console.log(id, nome, desc)
         var json = servidor + "/Secult/arte/alterarArte/" + id + "&" + nome + "&" + desc;
         console.log(json)
         var onSuccess = function (result) {
@@ -165,13 +175,19 @@ function listarArtesArtista(id) {
     var arte3 = "";
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + id, function (result) {
         var artes = result.artes;
+        if (artes[0]) {
+            if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
+            if (arte1 != "null") $("#arte1" + id).text(arte1);
+        }
+        if (artes[1]) {
+            if (artes[1].nome != 'undefined') arte1 = artes[1].nome;
+            if (arte2 != "null") $("#arte2" + id).text(arte2);
+        }
+        if (artes[2]) {
+            if (artes[2].nome != 'undefined') arte1 = artes[2].nome;
+            if (arte3 != "null") $("#arte3" + id).text(arte3);
+        }
 
-        if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
-        if (artes[1].nome != 'undefined') arte2 = artes[1].nome;
-        if (artes[2].nome != 'undefined') arte3 = artes[2].nome;
-        if (arte1 != "null") $("#arte1" + id).text(arte1);
-        if (arte2 != "null") $("#arte2" + id).text(arte2);
-        if (arte3 != "null") $("#arte3" + id).text(arte3);
     })
 }
 
@@ -209,6 +225,11 @@ function contarArtes() {
         contarArtes()
         var quantidade = $("#artesSelecLista li").length;
         $("#numArte").text(quantidade + "/3");
+        if(quantidade == 3){
+            $("#cdtArte").css('visibility','hidden') 
+        }else{
+            $("#cdtArte").css('visibility','initial')
+        }
     }, 10)
 }
 
@@ -246,4 +267,41 @@ function deleteArteArtista(idArtista) {
     );
     return resultado;
 
+}
+
+function excluirArte(id) {
+    swal({
+        title: "Deseja excluir essa localidade?",
+        text: "Uma vez excluida não tem como recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function (willDelete) {
+        carregando(1)
+        if (willDelete) {
+            var json = servidor + "/Secult/arte/excluirArte/" + id;
+            var onSuccess = function (result) {
+                if (result.status == "ok") {
+                    $("#" + id).remove();
+                    swal("Localidade excluida com sucesso!", {
+                        icon: "success",
+                        buttons: false,
+                    });
+                    $("#" + id).css("display", "none");
+                    carregando(2)
+                } else {
+                    swal({
+                        title: "Não foi possível excluir!",
+                        text: "Pode ser que algum acontecimento esteja ligado a essa localidade!",
+                        icon: "error",
+                        button: false,
+                    });
+                    carregando(2);
+                }
+            }
+            $.getJSON(json, onSuccess).fail();
+        } else {
+            carregando(2)
+        }
+    });
 }

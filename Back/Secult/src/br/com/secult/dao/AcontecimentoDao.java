@@ -56,6 +56,33 @@ public class AcontecimentoDao {
         return id;
     }
 
+    public boolean alterarVisibilidade(Acontecimento acontecimento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        PreparedStatement stmt = null;
+
+        String visibilidade = acontecimento.getVisibilidade();
+        
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE acontecimento SET visibilidade=? WHERE id=?";
+        try {
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, visibilidade);
+            stmt.setLong(2, acontecimento.getId());
+
+            stmt.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+        return hasError;
+    }
+
     public List<Acontecimento> listarAcontecimentoTipo(String tipo) throws SQLException, Exception {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -94,7 +121,7 @@ public class AcontecimentoDao {
         String sql = "SELECT a.id, a.titulo, a.descricao, a.visibilidade, a.data_cadastro, a.data_evento, \n"
                 + "       a.tipo_evento, a.local_cidade, a.hora_evento, a.id_localidade, a.origem, o.nome AS nome_origem\n"
                 + "  FROM acontecimento as a JOIN origem as o\n"
-                + "  ON(a.origem = o.id_origem) order by visibilidade = 'n';";
+                + "  ON(a.origem = o.id_origem) ORDER BY id;";
         try {
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -287,7 +314,7 @@ public class AcontecimentoDao {
 
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
-        String sql = "UPDATE acontecimento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_localidade=?, local_cidade=? WHERE id=?";
+        String sql = "UPDATE acontecimento SET titulo=?, descricao=?, tipo_evento=?, data_evento=?, hora_evento=?, id_localidade=?, local_cidade=? WHERE id=?";
         try {
 
             //converte String para o tipo Date
@@ -296,12 +323,11 @@ public class AcontecimentoDao {
             stmt.setString(1, evento.getTitulo());
             stmt.setString(2, evento.getDescricao());
             stmt.setString(3, evento.getTipo_evento());
-            stmt.setString(4, evento.getVisibilidade());
-            stmt.setDate(5, date);
-            stmt.setString(6, evento.getHora_evento());
-            stmt.setInt(7, evento.getIdLocalidade());
-            stmt.setString(8, evento.getLocalCidade());
-            stmt.setLong(9, evento.getId());
+            stmt.setDate(4, date);
+            stmt.setString(5, evento.getHora_evento());
+            stmt.setInt(6, evento.getIdLocalidade());
+            stmt.setString(7, evento.getLocalCidade());
+            stmt.setLong(8, evento.getId());
 
             stmt.execute();
         } catch (SQLException e) {
