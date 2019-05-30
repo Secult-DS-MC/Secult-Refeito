@@ -280,45 +280,6 @@ function listarCadart() {
 
 }
 
-function InputEmailValido() {
-    var emailImp = $("#email").val();
-    var senha = $("#senha").val();
-
-
-    if (emailImp != "") {
-
-        if (emailImp.indexOf("@") != -1) {
-
-
-            if (emailImp.indexOf("@") == 0) {
-                $("#email").focus();
-                $("#validoEmail").empty();
-                $("#validoEmail").append("Email precisa ser valido");
-                setTimeout(function () {
-                    $("#validoEmail").empty();
-                }, 4000)
-            } else {
-                autenticarUsuario(emailImp, senha);
-            }
-        } else {
-
-            $("#email").focus();
-            $("#validoEmail").empty();
-            $("#validoEmail").append("Campo E-mail necessita de '@'");
-            setTimeout(function () {
-                $("#validoEmail").empty();
-            }, 4000)
-        }
-    } else {
-
-        $("#email").focus();
-        $("#validoEmail").empty();
-        $("#validoEmail").append("Campo E-mail vazio");
-        setTimeout(function () {
-            $("#validoEmail").empty();
-        }, 4000)
-    }
-}
 
 function validarEmail(id) {
     var emailImp = $("#" + id).val();
@@ -624,24 +585,23 @@ function autenticarUpSenha() {
     var senha = $('#senhaAtualUp').val();
     var novaSenha = $('#senhaNovaUp').val();
 
-    var json = servidor + "/Secult/cadart/autenticar/" + email + '&' + senha;
+    var json = servidor + "/Secult/usuario/verificarEmailSenha/" + email + '&' + senha;
 
     var onSucess = function (result) {
-        dados = result.usuario;
-
-        if (dados[0]) {
-            var cpf = dados[0].cpf;
-            updateSenhaCadart(cpf, novaSenha)
+        if (result.status == "valido"){
+            updateSenhaCadart(localStorage.id, novaSenha)
             $('#erroSenhaEmailUp').css('display', 'none')
-        } else {
+        }
+    else
+        {
             $('#erroSenhaEmailUp').css('display', 'block')
         }
     };
     $.getJSON(json, onSucess).fail();
 }
 
-function updateSenhaCadart(cpf, senhaNova) {
-    var json = servidor + "/Secult/cadart/updateSenha/" + cpf + '&' + senhaNova;
+function updateSenhaCadart(id, senhaNova) {
+    var json = servidor + "/Secult/usuario/updateSenha/" + id + '&' + senhaNova;
 
     var onSuccess = function (result) {
         if (result.status == "ok") {

@@ -17,6 +17,7 @@ public class Autenticar {
     private String sexo;
     private int idade;
     private String nomeArtistico;
+    private String autenticado;
     private String descricao;
     private String email;
     private String telefone;
@@ -25,7 +26,6 @@ public class Autenticar {
     private String instagram;
     private int tipo;
 
-
     public int getIdade() {
         return idade;
     }
@@ -33,6 +33,7 @@ public class Autenticar {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
     public int getId() {
         return id;
     }
@@ -127,6 +128,13 @@ public class Autenticar {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+    public String getAutenticado() {
+        return autenticado;
+    }
+
+    public void setAutenticado(String autenticado) {
+        this.autenticado = autenticado;
     }
 
 }

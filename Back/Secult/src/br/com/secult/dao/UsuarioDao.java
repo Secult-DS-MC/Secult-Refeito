@@ -220,4 +220,66 @@ public class UsuarioDao {
 
         return false;
     }
+    
+     public boolean verificarEmailSenha(String email,String senha) throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "SELECT email FROM contato as c join usuario as u on c.id_usuario = u.id where c.email = ? ";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("email").equals(email)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+                connection.close();
+            } catch (Exception e) {
+            }
+        }
+
+        return false;
+    }
+     
+     public boolean updateSenha(int id, String senha) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement pstmt = null;
+
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE usuario SET senha = ? where id=?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+            Usuario usuario = new Usuario();
+            usuario.setSenha(senha);
+            senha = convertToHash( usuario);
+            
+            pstmt.setString(1, senha);
+            pstmt.setLong(2, id);
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
+
 }

@@ -33,45 +33,20 @@ function chamarEtapa4() {
     });
 }
 
-function verificarEmailCdt(el) {
 
-    if (verficarEmail(el)) {
-        validacaoEtapa4()
-    } else {
-        $("#emailErro").show();
-        setTimeout(function () {
-            $("#emailErro").hide();
-        }, 5000)
-    }
-}
 
-function verificarEmailCdt(el) {
-
-    if (el.length == 13) {
-        validacaoEtapa4()
-    } else {
-
-    }
-}
 
 function validacaoEtapa4() {
 
     var emailCadastro = $("#emailCadastro").val();
     var telCadastro = $("#telCadastro").val();
-    if (verficarEmail(emailCadastro) && telCadastro.length == 13 && emailCadastro != "" && telCadastro != "") {
+    if (validarEmail(emailCadastro) && telCadastro.length == 13 && emailCadastro != "" && telCadastro != "") {
         $("#proximo4").attr('disabled', false)
     } else {
         $("#proximo4").attr('disabled', true)
     }
 }
 
-//
-// var intervalo = 0;
-// $("#emailCadastro").keyup(function(){
-//
-//     clearInterval( intervalo );//ou clearTimeout()
-//     intervalo = window.setTimeout( ajax, 1000 );
-// });
 
 
 
@@ -105,7 +80,7 @@ function cadastrarArtista() {
                 if (idArte[i] != undefined) {
                     inserirArteArtista(idArte[i].id, id)
                 } else {
-                    inserirArteArtista(0, id)
+                    //inserirArteArtista(0, id)
                 }
 
             }
@@ -130,8 +105,7 @@ function alterarArtista() {
     var onSuccess = function (result) {
         var status = result.status;
         if (status == "ok") {
-            autenticarUsuarioById(id)
-
+            // autenticarUsuarioById(id)
             atualizarImagem(id, "U");
             updateContato(id)
             deleteArteArtista(id)
@@ -140,7 +114,7 @@ function alterarArtista() {
                 if (idArte[i] != undefined) {
                     inserirArteArtista(idArte[i].id, id)
                 } else {
-                    inserirArteArtista(0, id)
+                    //inserirArteArtista(0, id)
                 }
             }
 
@@ -189,6 +163,7 @@ function listarArtistas() {
     $.getJSON(json, function (result) {
 
         $("#listaCadart").empty();
+       
         var dados = result.artistas;
         if (dados[0]) {
             localStorage.setItem("usuariosCadart", JSON.stringify(dados))
@@ -206,7 +181,7 @@ function listarArtistas() {
                 $("#listaCadart").append("<a class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\" onclick='carregarInformacoesArtistas(\"" + id + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nome + "\")''>\n" +
                     "                <img  src='" + urlImagem + "' onError='this.onerror=null;this.src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
-                    "                <p> <span id='arte1" + id + "'>&nbsp</span> <span id='arte2" + id + "'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3" + id + "'></span></p>\n" +
+                    "                <p> <span id='arte1'>&nbsp</span> <span id='arte2'>&nbsp&nbsp&nbsp&nbsp</span> <span id='arte3'></span></p>\n" +
                     "                <i  class='icon ion-information-circled item-note' style='font-size: 1.3rem'></i>\n" +
                     "            </a>");
                 listarArtesArtista(id);
@@ -234,9 +209,9 @@ function listarArtistasNaoAutenticados() {
                 var urlImagem = servidor + "/Secult/imagem/findETC/" + idArtista + "&U";
                 var estado = "nAutenticado"
 
-                $("#listaCadartAutentiar").append("<a  onclick='carregarInformacoesArtistasAutenticar(\"" + idArtista + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nomeCompleto + "\")'   class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadartAutentiar").append("<a  onclick='listarArtesArtista(" + idArtista + ");carregarInformacoesArtistasAutenticar(\"" + idArtista + "\",\"" + nomeArtistico + "\",\"" + descricao + "\",\"" + sexo + "\",\"" + idade + "\",\"" + estado + "\",\"" + urlImagem + "\",\"" + nomeCompleto + "\")'   class=\"item item-avatar item-icon-right\">\n" +
                     "<img id='" + idArtista + "' src='" + urlImagem + "' onError='this.onerror=null;this.src=\"./img/semfoto.png>\"' \n" +
-                    "<h2>" + nomeArtistico + "</h2>\n" +
+                    "<h2>" + nomeCompleto + "</h2>\n" +
                     "</a>")
             }
         }
@@ -277,15 +252,23 @@ function AutenticarVisibilidade(id, acao) {
     var json;
     if (acao == "A") {
         json = servidor + "/Secult/artista/updateVisibilidadeS/" + id;
-    } else {
+    } else if (acao == "N") {
         json = servidor + "/Secult/artista/updateVisibilidadeN/" + id;
+    } else if (acao == "D") {
+
+        json = servidor + "/Secult/artista/updateVisibilidadeD/" + id;
     }
 
     $.getJSON(json, function (result) {
-        if (result.status == 'ok') {
-            window.history.back();
-            listarArtistasAutenticados();
-            listarArtistasNaoAutenticados();
+        if (acao) {
+
+        }
+        {
+            if (result.status == 'ok') {
+                window.history.back();
+                listarArtistasAutenticados();
+                listarArtistasNaoAutenticados();
+            }
         }
     })
 }
@@ -304,19 +287,18 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + idArtista, function (result) {
         var artes = result.artes;
         if (artes[0]) {
-            if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
+            if (artes[0].nome != 'null') $("#arte1").text(artes[0].nome);
         }
         if (artes[1]) {
-            if (artes[1].nome != 'undefined') arte1 = artes[1].nome;
+            if (artes[1].nome != 'null') $("#arte2").text(artes[1].nome);
         }
         if (artes[2]) {
-            if (artes[2].nome != 'undefined') arte1 = artes[2].nome;
+            if (artes[2].nome != 'null') $("#arte3").text(artes[2].nome);
         }
 
 
     })
     setTimeout(function () {
-
         $("#page35 .title").append(nomeArtistico);
         $("#imgInfo").attr('src', urlImagem);
         $("#imgInfo").attr('onError', 'this.onerror=null;this.src=' + urlImagem + '');
@@ -340,9 +322,6 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
             $("#iconSexoInfo").addClass("ion-help-circled")
         }
         $("#sexoInfo").text(sexo);
-        if (arte1 != "null") $("#arte1").text(arte1);
-        if (arte2 != "null") $("#arte2").text(arte2);
-        if (arte3 != "null") $("#arte3").text(arte3);
     }, 100);
 
     var json = servidor + "/Secult/contato/listarContatos/" + idArtista;
@@ -356,12 +335,26 @@ function carregarInformacoesArtistas(idArtista, nomeArtistico, descricao, sexo, 
                 var facebook = dados[i].facebook;
                 var youtube = dados[i].youtube;
                 var instagram = dados[i].instagram;
-                facebook = facebook.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
-                youtube = youtube.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
-                instagram = instagram.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
+                console.log(youtube)
+                if (facebook == 'null') {
+                    $("#fbInfo").attr('disabled', true);
+                } else {
+                    facebook = facebook.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
+                }
+                if (youtube == 'null') {
+                    $("#ytInfo").attr('disabled', true);
+                } else {
+                    youtube = youtube.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
+                }
+                if (instagram == 'null') {
+                    $("#inInfo").attr('disabled', true);
+                } else {
+                    instagram = instagram.replace(/[*]/g, '/').replace(/[¨]/g, '?').replace(/[§]/g, '&')
+                }
                 $("#fbInfo").attr('href', facebook);
                 $("#ytInfo").attr('href', youtube);
                 $("#inInfo").attr('href', "https://www.instagram.com/" + instagram);
+
                 $("#emailInfo").text(email);
                 $("#telInfo").text(telefone);
                 $("#linkWpp").attr('href', 'https://wa.me/55' + telefone.replace(/[^0-9]/g, ''));
@@ -383,9 +376,10 @@ function carregarInformacoesArtistasAutenticar(idArtista, nomeArtistico, descric
     }
     if (estado == "autenticado") {
         $("#footerBarra").show()
-        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"D")').text('Desautenticar');
+        $("#footerBarra").attr('onclick', 'AutenticarVisibilidade(' + idArtista + ',"N")').text('Desautenticar');
     }
     setTimeout(function () {
+
         $("#page35 .title").append(nomeArtistico);
         $("#imgInfo").attr('src', urlImagem);
         $("#imgInfo").attr('onError', 'this.onerror=null;this.src=' + urlImagem + '');
@@ -484,10 +478,14 @@ function contarDescricao() {
 }
 
 function autenticarUsuario(email, senha) {
-    var json = servidor + "/Secult/artista/autenticarUsuario/" + email + "&" + senha;
-    $.getJSON(json, function (result) {
-        var usuario = result.artista;
-        if (usuario[0]) {
+
+    var link = servidor + "/Secult/artista/autenticarUsuario/" + email + "&" + senha;
+
+    $.ajax({
+        url: link,
+        success: function (result) {
+            var usuario = result.artista;
+
             if (usuario[0]) {
 
                 var id = usuario[0].id;
@@ -497,13 +495,16 @@ function autenticarUsuario(email, senha) {
                 var nomeArtistico = usuario[0].nomeArtistico;
                 var descricao = usuario[0].descricao;
                 var email = usuario[0].email;
+                var autenticado = usuario[0].autenticado;
                 var telefone = usuario[0].telefone;
                 var facebook = usuario[0].facebook;
                 var youtube = usuario[0].youtube;
                 var instagram = usuario[0].instagram;
                 var tipo = usuario[0].tipo;
                 var imagem = servidor + "/Secult/imagem/findETC/" + id + "&U";
-
+                if (facebook == 'null') facebook = ""
+                if (youtube == 'null') youtube = ""
+                if (instagram == 'null') instagram = ""
 
                 localStorage.setItem("id", id);
                 localStorage.setItem("nome", nome);
@@ -516,6 +517,7 @@ function autenticarUsuario(email, senha) {
                 localStorage.setItem("facebook", facebook);
                 localStorage.setItem("youtube", youtube);
                 localStorage.setItem("instagram", instagram);
+                localStorage.setItem("autenticado", autenticado);
                 localStorage.setItem("tipo", tipo);
                 localStorage.setItem("fotoUsuario", imagem);
                 localStorage.setItem("usuarioAtivo", "true")
@@ -523,7 +525,6 @@ function autenticarUsuario(email, senha) {
 
                 $("#email").val('');
                 $("#senha").val('');
-
                 if (tipo == 1) {
                     setTimeout(function () {
                         $(".alt-estado").toggle()
@@ -532,12 +533,16 @@ function autenticarUsuario(email, senha) {
                         $(".funcoesAdministrativas").show();
                         window.location.href = "#/page22";
                     }, 100)
-                } else {
+                } else if (tipo == 0) {
+                    if (autenticado == "D") {
+                        AutenticarVisibilidade(id, "N")
+                    }
                     setTimeout(function () {
-                        $(".fAdm").show()
+
                         window.location.href = "#/page1/page3";
                         setTimeout(function () {
                             $(".alt-estado").toggle()
+                            $(".fAdm").show()
                         }, 100)
 
                     }, 1000)
@@ -548,8 +553,16 @@ function autenticarUsuario(email, senha) {
                 $("#validoEmail").text('')
                 $("#validoEmail").text("Email e/ou senha inválidos");
             }
+        },
+        error: function (xhr) {
+            $("#email").focus();
+            $("#validoEmail").empty();
+            $("#validoEmail").text("Email e/ou senha inválidos");
+            setTimeout(function () {
+                $("#validoEmail").empty();
+            }, 4000)
         }
-    }).fail();
+    });
 }
 
 function autenticarUsuarioById(id) {
@@ -604,6 +617,24 @@ function autenticarUsuarioById(id) {
     }).fail();
 }
 
+function desabilitarConta(id) {
+    swal({
+        title: "Deseja desabilitar sua conta?",
+        text: "Poderá ativar sua conta ao logar novamente!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function (willDelete) {
+        carregando(1)
+        if (willDelete) {
+            AutenticarVisibilidade(id, 'D')
+        } else {
+            carregando(2)
+        }
+    });
+
+
+}
 
 function usuarioLogado() {
     setTimeout(function () {
@@ -614,7 +645,6 @@ function usuarioLogado() {
         $("#descricaoUp").val(localStorage.getItem("descricao"));
         $("#nomeArtisticoUp").val(localStorage.getItem("nomeArtistico"));
         $("#sexoUp").val(localStorage.getItem("sexo"))
-
 
         $("#imgThumbnail").attr('src', servidor + "/Secult/imagem/findETC/" + localStorage.getItem("id") + "&U");
         $("#telUp").mask("00-00000-0000");
@@ -646,42 +676,64 @@ function validarEmail(field) {
     }
     else {
         $("#emailErro").show()
-        setTimeout(function(){
+        setTimeout(function () {
             $("#emailErro").hide()
-        },5000)
+
+        }, 5000)
+        $("#proximo4").attr('disabled', true);
         return false
+
     }
 }
 
-function verficarEmail(email) {
-
-    var res = null;
-    if (validarEmail(email)) {
-        $.ajax({
-            url: servidor + '/Secult/usuario/verificarEmail/' + email,
-            async: false,
-            dataType: 'json',
-            success: function (result) {
-                if (result.status == "ok") {
-                    res = false
-                    $("#emailErro").show();
-                    $("#proximo4").attr('disabled', true)
-
-                } else {
-                    $("#emailErro").hide()
-                    res = true
-                }
-            }
-        });
-
+var tempo;
+function verficarEmail(email, key) {
+    if (key != 8) {
+    } else {
+        $("#proximo4").attr('disabled', true);
     }
-    return res
+
+    var res = false;
+    clearTimeout(tempo);
+    tempo = setTimeout(function () {
+        if (validarEmail(email)) {
+            var promise = new Promise(function (resolve, reject) {
+                $.ajax({
+                    url: servidor + '/Secult/usuario/verificarEmail/' + email,
+                    async: false,
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.status == "invalido") {
+                            res = false
+                            $("#emailErro").show();
+                            $("#proximo4").attr('disabled', true);
+                        } else {
+                            $("#emailErro").hide();
+                            res = true
+                        }
+                        resolve(result.status);
+                    }
+                });
+                return res;
+            }).then(e => {
+               var tel = $("#telCadastro").val().length
+                if (e = "valido" && tel == 13 ) { 
+                    $("#proximo4").attr('disabled', false)
+                    return true 
+                }
+                else {
+                    $("#proximo4").attr('disabled', true);
+                    return false
+                };
+            })
+        }
+    }, 1000)
 
 
 }
 
 function buscarCadart(nome) {
-    var dados = JSON.parse(localStorage.getItem('usuariosCadart'))
+    var dados = JSON.parse(localStorage.getItem('usuariosCadart'));
     $("#listaCadart").empty()
     if (nome != "") {
 
@@ -725,4 +777,35 @@ function buscarCadart(nome) {
     }
 }
 
-
+function InputEmailValido() {
+    var emailImp = $("#email").val();
+    var senha = $("#senha").val();
+    if (emailImp != "") {
+        if (emailImp.indexOf("@") != -1) {
+            if (emailImp.indexOf("@") == 0) {
+                $("#email").focus();
+                $("#validoEmail").empty();
+                $("#validoEmail").append("Email precisa ser valido");
+                setTimeout(function () {
+                    $("#validoEmail").empty();
+                }, 4000)
+            } else {
+                autenticarUsuario(emailImp, senha);
+            }
+        } else {
+            $("#email").focus();
+            $("#validoEmail").empty();
+            $("#validoEmail").append("Campo E-mail necessita de '@'");
+            setTimeout(function () {
+                $("#validoEmail").empty();
+            }, 4000)
+        }
+    } else {
+        $("#email").focus();
+        $("#validoEmail").empty();
+        $("#validoEmail").append("Campo E-mail vazio");
+        setTimeout(function () {
+            $("#validoEmail").empty();
+        }, 4000)
+    }
+}

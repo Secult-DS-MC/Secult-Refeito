@@ -9,10 +9,6 @@ function verificarAdministrador() {
     }
 }
 
-function deslogarAdministrador() {
-
-
-}
 
 function mostrarInput(tipo) {
     setTimeout(function () {
@@ -27,7 +23,7 @@ function mostrarInput(tipo) {
 function mudarCorbotaoEntrar() {
 
     $("#senha, #email").keyup(function () {
-        var senha = $("#senha").val();
+        var senha = $("#senha").val() > 6;
         var email = $("#email").val();
 
         if (senha.length > 5 && email.length > 10) {

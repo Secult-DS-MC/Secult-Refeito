@@ -1,6 +1,7 @@
 <ion-view id="page3">
     <ion-nav-buttons side="right" class="has-header">
-        <button id="buttonIcon" class="button icon button-clear ion-search" onclick="addSearch($('#nomeArtista'), $('#pesquisaArtista'))"></button>
+        <button id="buttonIcon" class="button icon button-clear ion-search"
+                onclick="addSearch($('#nomeArtista'), $('#pesquisaArtista'))"></button>
     </ion-nav-buttons>
 
     <ion-nav-title class="pesquisa">
@@ -9,7 +10,8 @@
         <div class="bar bar-header item-input-inset" style="display: none" id="pesquisaArtista">
             <label class="item-input-wrapper buscaCadart">
                 <i class="icon ion-ios-search placeholder-icon"></i>
-                <input id="buscaCadart" onkeyup="buscarCadart(this.value)" onclick='$("#buttonIcon").removeAttr("onclick")' type="text" placeholder="Nome do artista..." >
+                <input id="buscaCadart" onkeyup="buscarCadart(this.value)"
+                       onclick='$("#buttonIcon").removeAttr("onclick")' type="text" placeholder="Nome do artista...">
             </label>
         </div>
     </ion-nav-title>
@@ -39,7 +41,7 @@
                     <i class="icon ion-log-in iconCentro"><span class="dataAlgum">Entrar</span></i>
                 </a>
             </li>
-            <li class="fab-buttons__item alt-estado fAdm" style="display: none;" >
+            <li class="fab-buttons__item alt-estado fAdm" style="display: none;">
                 <a ui-sref="usuario()" class="fab-buttons__link">
                     <i class="icon ion-person-stalker iconCentro"><span class="dataAlgum">Meus dados</span></i>
                 </a>

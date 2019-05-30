@@ -114,7 +114,6 @@ public class ArtistaDao {
         }
         return artes;
     }
-    
 
     public boolean updateVisibilidadeS(int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement pstmt = null;
@@ -147,6 +146,31 @@ public class ArtistaDao {
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
         String sql = "UPDATE artista SET autenticado='N' WHERE id=?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setLong(1, id);
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                pstmt.close();
+                connection.close();
+
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
+    public boolean updateVisibilidadeD(int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE artista SET autenticado='D' WHERE id=?";
         try {
             pstmt = connection.prepareStatement(sql);
 
@@ -224,6 +248,7 @@ public class ArtistaDao {
             }
         }
     }
+
     public List<Autenticar> autenticarUsuarioById(int id) throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
@@ -231,7 +256,7 @@ public class ArtistaDao {
         List<Autenticar> dados = new ArrayList<Autenticar>();
 
         try {
-            String sql = "SELECT u.id, u.nome as nomeCompleto, u.idade, u.sexo, a.nome as nomeArtistico, a.descricao, c.email, c.telefone, c.facebook, c.youtube, c.instagram, ut.id_tipo FROM usuario as u JOIN contato as c on u.id = c.id_usuario JOIN artista as a on u.id = a.id JOIN usu_tipo as ut on ut.id_usuario = u.id WHERE u.id = ?";
+            String sql = "SELECT u.id, u.nome as nomeCompleto, u.idade, u.sexo, a.nome as nomeArtistico, a.descricao, c.email, c.telefone, c.facebook, c.youtube, c.instagram, ut.id_tipo, a.autenticado FROM usuario as u JOIN contato as c on u.id = c.id_usuario JOIN artista as a on u.id = a.id JOIN usu_tipo as ut on ut.id_usuario = u.id WHERE u.id = 1";
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
 
@@ -245,6 +270,7 @@ public class ArtistaDao {
                 dado.setSexo(rs.getString("sexo"));
                 dado.setNomeArtistico("nomeArtistico");
                 dado.setDescricao(rs.getString("descricao"));
+                dado.setAutenticado(rs.getString("autenticado"));
                 dado.setEmail(rs.getString("email"));
                 dado.setTelefone(rs.getString("telefone"));
                 dado.setFacebook(rs.getString("facebook"));

@@ -13,7 +13,10 @@ function listarArtes() {
 
                     var id = dados[i].id;
                     var nome = dados[i].nome;
+                    var descricao = dados[i].descricao;
+                    console.log(descricao)
                     $("#cdtArte").append("<option value='" + id + "'>" + nome + "</option>");
+                    $("#descArte").text(descricao);
                 }
             }
         }
@@ -67,7 +70,7 @@ function listarArtesAdm() {
                     var nome = dados[i].nome;
                     var descricao = dados[i].descricao;
 
-                    $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                    $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                         "                           class=\"item-icon-left\">\n" +
                         "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
                         "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
@@ -91,7 +94,7 @@ function buscarArtes(nome) {
                 var nome = dados[i].nome;
                 var descricao = dados[i].descricao;
 
-                $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+                $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                     "                           class=\"item-icon-left\">\n" +
                     "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
                     "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
@@ -105,7 +108,7 @@ function buscarArtes(nome) {
             var nome = dados[i].nome;
             var descricao = dados[i].descricao;
 
-            $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherLocalidadeAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
+            $("#listarArtesAdm").append("<div id='" + id + "' class='item item-icon-right'><a href='#page37' style='text-decoration: none; color: #444!important;' onclick='preencherArteAtualizar(" + id + ",\"" + nome + "\",\"" + descricao + "\")'" +
                 "                           class=\"item-icon-left\">\n" +
                 "                    <i class=\"icon ion-android-create dark\"></i>" + nome + "</a>\n" +
                 "                    <a class=\"assertive icon ion-ios-close-outline\" onclick='excluirArte(" + id + ")'></a>\n" +
@@ -154,15 +157,16 @@ function preencherArtes() {
 
         dados = result.artes;
         if (dados[0]) {
-
+            
             for (var i in dados) {
                 if (dados[i].nome != 'null') {
 
                     var id = dados[i].id;
                     var nome = dados[i].nome;
-                    $("#idArtes").append("<option value='" + id + "'>" + nome + "</option>");
+                    $("#idArtes").append("<option value='" + id + "'  >" + nome + "</option>");
                 }
             }
+            
         }
     };
     $.getJSON(json, onSuccess).done()
@@ -175,17 +179,16 @@ function listarArtesArtista(id) {
     var arte3 = "";
     $.getJSON(servidor + "/Secult/arteArtista/listarArtesArtista/" + id, function (result) {
         var artes = result.artes;
+       
         if (artes[0]) {
-            if (artes[0].nome != 'undefined') arte1 = artes[0].nome;
-            if (arte1 != "null") $("#arte1" + id).text(arte1);
+           console.log(artes[0].nome != "null")
+           if (artes[0].nome != "null")  $("#arte1").text( artes[0].nome);
         }
         if (artes[1]) {
-            if (artes[1].nome != 'undefined') arte1 = artes[1].nome;
-            if (arte2 != "null") $("#arte2" + id).text(arte2);
+            if (artes[0].nome != "null") $("#arte2").text( artes[0].nome);
         }
         if (artes[2]) {
-            if (artes[2].nome != 'undefined') arte1 = artes[2].nome;
-            if (arte3 != "null") $("#arte3" + id).text(arte3);
+            if (artes[2].nome != "null") $("#arte3").text( artes[2].nome);
         }
 
     })
@@ -199,6 +202,8 @@ function preencherArtesArtistaUpdate(id) {
             var nome = artes[i].nome;
             $("#artesSelecLista").append("<li id='" + id + "' style='color: #262626!important;'>" + nome + " <i style=\"float:right\" class=\"assertive icon ion-close\" onclick=\"$(this).parent().remove(), validacaoEtapa2(),contarArtes()\"></i></li>\n")
         }
+
+
     })
 }
 
@@ -225,10 +230,10 @@ function contarArtes() {
         contarArtes()
         var quantidade = $("#artesSelecLista li").length;
         $("#numArte").text(quantidade + "/3");
-        if(quantidade == 3){
-            $("#cdtArte").css('visibility','hidden') 
-        }else{
-            $("#cdtArte").css('visibility','initial')
+        if (quantidade == 3) {
+            $("#cdtArte").css('visibility', 'hidden')
+        } else {
+            $("#cdtArte").css('visibility', 'initial')
         }
     }, 10)
 }

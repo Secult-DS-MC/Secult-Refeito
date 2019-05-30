@@ -24,9 +24,14 @@ function listarRedeSociais(cpf) {
             for (var i in dados) {
                 var nome = dados[i].nomeRede;
                 var link = dados[i].nomeLink;
-                link = link.replace(/[*]/g, '/')
-                link = link.replace(/[¨]/g, '?')
-                link = link.replace(/[§]/g, '&')
+               
+                if(link != ""){
+                    link = link.replace(/[*]/g, '/')
+                    link = link.replace(/[¨]/g, '?')
+                    link = link.replace(/[§]/g, '&')
+                }else{
+                    link = ""
+                }
                 console.log(link+"  "+nome)
                     switch (nome) {
                         case "Facebook:":

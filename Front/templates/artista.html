@@ -115,12 +115,12 @@
                     <h3 style="text-align: center">Como podemos entrar em contato?</h3>
 
                     <h4>Qual o seu email? (obrigatório)</h4>
-                    <input id="emailCadastro" onkeyup="verificarEmailCdt(this.value)" type="email"
+                    <input id="emailCadastro"  type="email"
                            placeholder="joaoroberto@e-mail.com">
                     <p id="emailErro" style="display: none;font-size: 0.7rem; text-align: center; color:red;">Email já
                         cadastrado ou invalido!</p>
                     <h4>E o seu telefone? (obrigatório)</h4>
-                    <input id="telCadastro" onkeyup="verificarEmailCdt(this.value)" type="text"
+                    <input id="telCadastro" onkeyup="validacaoEtapa4()" type="text"
                            placeholder="00-00000-0000"
                            onclick="$(this).mask('00-00000-0000')">
                     <div class="button-bar" style="margin-top: 10%;">

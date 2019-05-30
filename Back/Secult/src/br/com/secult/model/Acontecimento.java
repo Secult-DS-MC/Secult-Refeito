@@ -30,6 +30,24 @@ public class Acontecimento {
     private int id_localidade;
     private int origem;
     private long id;
+    private int mes;
+    private int qtdEventos;
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getQtdEventos() {
+        return qtdEventos;
+    }
+
+    public void setQtdEventos(int qtdEventos) {
+        this.qtdEventos = qtdEventos;
+    }
     
      public String getNomeOrigem() {
         return nome_origem;

@@ -85,7 +85,15 @@ public class LocalidadeDao {
             } catch (Exception e) {
             }
         }
-        return objs;
+//        if (objs.isEmpty()) {
+//            
+//            List<Localidade> objsEmpty = new Vector<>();
+//            objsEmpty = listarLocalidade(id);
+//            
+//            return objsEmpty;
+//        } else {
+            return objs;
+//        }
     }
 
     public List<Localidade> carregarLocalidade() throws SQLException, Exception {
@@ -120,6 +128,7 @@ public class LocalidadeDao {
         }
         return objs;
     }
+
     public boolean cadastrarLocalidade(Localidade localidade) {
         PreparedStatement stmt = null;
 
@@ -175,8 +184,8 @@ public class LocalidadeDao {
         }
         return erro;
     }
-    
-    public boolean excluirLocalidade(int idLocalidade){
+
+    public boolean excluirLocalidade(int idLocalidade) {
         boolean erro = true;
         PreparedStatement stmt = null;
         this.con = new ConnectionFactory().getConnection();

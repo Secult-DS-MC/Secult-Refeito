@@ -1,24 +1,34 @@
 <ion-view title="Usuario" id="page7">
     <ion-nav-bar class="bar-positive">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
+        <div class="bar bar-header">
+            <ion-nav-back-button>
+
+            </ion-nav-back-button>
+            <button class="button button-icon icon ion-navicon"></button>
+            <div class="h1 title">Header Buttons</div>
+            <button class="button button-icon icon ion-transgender">Edit</button>
+        </div>
+
+        <!--<ion-nav-buttons side="right" class="has-header" >-->
+            <!--<button class="button icon ion-android-delete button-clear "  id="deletarConta" onclick="console.log(this)"></button>-->
+        <!--</ion-nav-buttons>-->
+
     </ion-nav-bar>
-    <ion-content padding="true" class="has-header animated fadeInDown faster" >
+    <ion-content padding="true" class="has-header animated fadeInDown faster">
         <div>
             <label class="item item-input item-stacked-label" for="imputImg" style="border-bottom: none">
-                <img src="./img/user-foto.png" id="imgThumbnail"
-                     style="border: 1px solid #fbfbfb; border-radius: 14%; display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+                <img src="./img/user-foto.png" id="imgThumbnail" style="border: 1px solid #fbfbfb; border-radius: 14%; display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
                 <input type="file" id="inputImagem" style="display: none" onchange="validacaoEtapa5()">
             </label>
             <button style="display: none;border:1px solid white;border-radius: 20px; font-size: 1rem; font-weight: bolder; color: white; width: 100%"
-                    class="button button-small button-outline" id="imputImg"
-                    onclick="abrirImpFile('inputImagem')" >Alterar Foto
+                class="button button-small button-outline" id="imputImg" onclick="abrirImpFile('inputImagem')">Alterar
+                Foto
             </button>
         </div>
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div class="button-bar">
-            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-positive button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;" class="button button-positive button-small button-block"
+                onclick="mostrarUpdateSenha()">Alterar Senha
             </button>
         </div>
 
@@ -31,15 +41,15 @@
                     <input type="text" id="emailAtualUp">
                 </label>
 
-                <label class="item item-input item-icon-right" >
+                <label class="item item-input item-icon-right">
                     <span class="input-label">Senha Atual</span>
-                    <input type="password"  id="senhaAtualUp">
+                    <input type="password" id="senhaAtualUp">
                     <i class="icon ion-eye" style="display: none" onclick="toggleTypeInput('senhaAtualUp')"></i>
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">Nova Senha</span>
-                    <input type="password" id="senhaNovaUp" >
+                    <input type="password" id="senhaNovaUp">
                 </label>
 
                 <p class="invalido" id="erroSenhaEmailUp" style="display: none">Senha ou email incorretos</p>
@@ -58,14 +68,14 @@
                 <span class="input-label">Descrição:</span><textarea id="descricaoUp" maxlength="500"></textarea>
             </label>
             <select class="item" style="margin-bottom: 3px ; width: 100%;  background: transparent; border: none; border-bottom: 1px solid white; "
-                    id="cdtArte" class="obrigatorio2" onchange="addArteLista('up'),contarArtes()">
+                id="cdtArte" class="obrigatorio2" onchange="addArteLista('up'),contarArtes()">
 
             </select>
             <ul id="artesSelecLista" style="color: #262626!important;">
 
             </ul>
             <select class="item" style="margin-bottom: 3px ; width: 100%; background: transparent; border: none; border-bottom: 1px solid white;"
-                    id="sexoUp" class="obrigatorio2" onchange="">
+                id="sexoUp" class="obrigatorio2" onchange="">
                 <option value="0">Prefiro não informar</option>
                 <option value="F">Feminino</option>
                 <option value="M">Masculino</option>
@@ -103,8 +113,11 @@
     </ion-content>
     <ion-footer-bar style="padding: 0px; margin: 0px">
         <div class="tabs positive-bg" style="background-color: #387ef5; color: white">
-            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive" onclick="alterarArtista()">salvar
+            <button style="background-color: #387ef5!important; border-color: transparent!important;" class="button icon-left ion-plus-round button-positive"
+                onclick="alterarArtista()">salvar
             </button>
         </div>
     </ion-footer-bar>
+    <!--$("#deletarConta").attr('onclick', desabilitarConta(localStorage.getItem("id")));-->
+
 </ion-view>

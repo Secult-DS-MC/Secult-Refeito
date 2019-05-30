@@ -14,8 +14,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletException;
-//import javax.servlet.ServletException;
+//import javax.seservlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -86,7 +85,7 @@ public class ImagemResource {
         
         imagem.setImagem(byteArray);
 
-         if (imagemDao.atualizarImagem(imagem, id_coluna, sigla)) {
+         if (imagemDao.alterarImagemPerfil(imagem, id_coluna, sigla)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
@@ -128,7 +127,7 @@ public class ImagemResource {
     @GET
     @Path("/listarImagens/{id_coluna}&{sigla}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response buscarImagem(@PathParam("id_coluna") long id_coluna, @PathParam("sigla") String sigla) throws ServletException, IOException, Exception {
+    public Response buscarImagem(@PathParam("id_coluna") long id_coluna, @PathParam("sigla") String sigla) throws  IOException, Exception {
         ImagemDao imagemDao = new ImagemDao();
         List<Imagem> imagens = new ArrayList<Imagem>();
 
@@ -148,7 +147,7 @@ public class ImagemResource {
     @GET
     @Path("/find/{id}")
     @Produces({"image/png", "image/jpg"})
-    public Response findImagem(@PathParam("id") int id) throws ServletException, IOException {
+    public Response findImagem(@PathParam("id") int id) throws  IOException {
         try {
 
             ImagemDao imagemDao = new ImagemDao();
@@ -173,7 +172,7 @@ public class ImagemResource {
     @GET
     @Path("/findEvento/{id}")
     @Produces({"image/png", "image/jpg"})
-    public Response findEventoImagem(@PathParam("id") int id) throws ServletException, IOException {
+    public Response findEventoImagem(@PathParam("id") int id) throws  IOException {
         try {
 
             ImagemDao imagemDao = new ImagemDao();
@@ -197,7 +196,7 @@ public class ImagemResource {
     @GET
     @Path("/findETC/{id}&{sigla}")
     @Produces({"image/png", "image/jpg"})
-    public Response findAconteimentoImagem(@PathParam("id") long id,@PathParam("sigla") String sigla) throws ServletException, IOException {
+    public Response findAconteimentoImagem(@PathParam("id") long id,@PathParam("sigla") String sigla) throws  IOException {
         try {
 
             ImagemDao imagemDao = new ImagemDao();

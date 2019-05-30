@@ -54,6 +54,18 @@ public class ArtistaResource {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
+    
+     @GET
+    @Path("/updateVisibilidadeD/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateVisibilidadeD(@PathParam("id") int id) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        ArtistaDao artistaDao = new ArtistaDao();
+        if (artistaDao.updateVisibilidadeD(id)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
 
     @GET
     @Path("/autenticarUsuario/{email}&{senha}")
@@ -69,7 +81,6 @@ public class ArtistaResource {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("artista", ArrayUsarios);
-        System.out.println(jsonObject);
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }

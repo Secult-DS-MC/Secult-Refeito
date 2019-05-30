@@ -6,24 +6,24 @@ function cadastrarContato(id) {
     var ytCadastro = $("#ytCadastro").val();
     var inCadastro = $("#inCadastro").val();
 
-    if (fbCadastro == "") {
-        fbCadastro = "null"
-    } else {
+    if (fbCadastro != "") {
         fbCadastro = fbCadastro.replace(/[/]/g, '*').replace(/[?]/g, '¨').replace(/[&]/g, '§').replace(/["]/g, '~')
+    }else{
+        fbCadastro = 'null'
     }
-    ;
-    if (ytCadastro == "") {
-        ytCadastro = "null"
-    } else {
+    
+    
+    if (ytCadastro != "") {
         ytCadastro = ytCadastro.replace(/[/]/g, '*').replace(/[?]/g, '¨').replace(/[&]/g, '§').replace(/["]/g, '~')
+    }else{
+        ytCadastro = null
     }
-    ;
-    if (inCadastro == "") {
-        inCadastro = "null"
-    } else {
+    
+    if (inCadastro != "") {
         inCadastro = inCadastro.replace(/[/]/g, '*').replace(/[?]/g, '¨').replace(/[&]/g, '§').replace(/["]/g, '~')
+    }else{
+        inCadastro = 'null'
     }
-    ;
 
     var json = servidor + "/Secult/contato/inserirContato/" + id + "&" + emailCadastro + "&" + telCadastro + "&" + fbCadastro + "&" + ytCadastro + "&" + inCadastro;
 

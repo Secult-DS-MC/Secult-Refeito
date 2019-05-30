@@ -30,7 +30,7 @@ public class ArteArtistaDao {
         this.connection = new ConnectionFactory().getConnection();
         boolean semErro = true;
         try {
-            String sql = "INSERT INTO arte_artista (id_arte, id_artista,) VALUES (?, ?)";
+            String sql = "INSERT INTO arte_artista (id_arte, id_artista) VALUES (?, ?)";
             stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, id_arte);
@@ -41,14 +41,7 @@ public class ArteArtistaDao {
         } catch (SQLException e) {
             semErro = false;
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                stmt.close();
-            } catch (Exception e) {
-            }
-
-        }
-
+        } 
         return semErro;
     }
 

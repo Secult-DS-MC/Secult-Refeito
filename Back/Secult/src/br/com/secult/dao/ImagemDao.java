@@ -31,7 +31,7 @@ public class ImagemDao {
                 sql = "INSERT INTO imagem (imagem, id_acontecimento) VALUES(?,?)";
                 break;
             case "U":
-                sql = "INSERT INTO imagem (imagem, id_usuario) VALUES(?,?)";
+                sql = "INSERT INTO imagem (imagem, id_usuario, tipo) VALUES(?,?, 'perfil')";
                 break;
             case "T":
                 sql = "INSERT INTO imagem (imagem, id_turismo) VALUES(?,?)";
@@ -50,7 +50,7 @@ public class ImagemDao {
         } finally {
             try {
                 stmt.close();
-connection.close();
+                connection.close();
             } catch (Exception e) {
             }
         }
@@ -86,7 +86,44 @@ connection.close();
         } finally {
             try {
                 stmt.close();
-connection.close();
+                connection.close();
+            } catch (Exception e) {
+            }
+        }
+        return hasError;
+    }
+
+    public boolean alterarImagemPerfil(Imagem imagem, long id_coluna, String sigla) throws Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = null;
+        switch (sigla) {
+            case "A":
+                sql = "UPDATE imagem SET imagem=? WHERE id_acontecimento = ?";
+                break;
+            case "U":
+                sql = "UPDATE imagem SET imagem=?, tipo='perfil' WHERE id_usuario = ? and tipo = 'perfil'";
+                break;
+            case "T":
+                sql = "UPDATE imagem SET imagem=? WHERE id_turismo = ?";
+                break;
+        }
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        try {
+
+            stmt.setObject(1, tratarImagem(imagem.getImagem()));
+            stmt.setLong(2, id_coluna);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            System.out.println("alterou perfil");
+            try {
+                stmt.close();
+                connection.close();
             } catch (Exception e) {
             }
         }
@@ -133,7 +170,7 @@ connection.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             hasError = false;
-            
+
         } finally {
             try {
                 stmt.close();

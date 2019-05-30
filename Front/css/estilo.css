@@ -572,3 +572,21 @@ h2#redesSociaisInfo a.button {
 .buscaCadart input{
     color: white;
 }
+
+
+.meu-badge {
+    display: inline-block;
+    float: right;
+    width: 22px;
+    height: 21px;
+    border-radius: 40%;
+    background-color: #387ef5;
+    color: white;
+    position: relative;
+    top: 2px;
+}
+
+.meu-badge div{
+    position: relative;
+    top: -3px;
+}

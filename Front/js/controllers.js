@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
             // Show the action sheet
             var showActionSheet = $ionicActionSheet.show({
                 buttons: [
-                    {text: 'Clonar'}
+                    { text: 'Clonar' }
                 ],
 
                 destructiveText: 'Excluir',
@@ -104,25 +104,13 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('agendaCulturalCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-
-        }])
-
-    .controller('editaisCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-
-        }])
-
-    .controller('turismoCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-
-        }])
 
     .controller('calendarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
+            carregarBadges();
             $scope.doRefresh = function () {
                 setTimeout(function () {
+                    carregarBadges();
                     $scope.$broadcast('scroll.refreshComplete');
                 }, 1000);
             };
@@ -196,7 +184,7 @@ angular.module('app.controllers', [])
                 localStorage.setItem("visibilidadeAcon", $scope.emailNotification.checked);
             };
 
-            $scope.emailNotification = {checked: true};
+            $scope.emailNotification = { checked: true };
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',
@@ -209,6 +197,7 @@ angular.module('app.controllers', [])
                 setTimeout(function () {
                     $("#listaCadartAdm").empty();
                     listarArtistasAutenticados();
+                    
                     $scope.$broadcast('scroll.refreshComplete');
                 }, 1000);
             };
@@ -223,18 +212,25 @@ angular.module('app.controllers', [])
             preencherArtes();
             setTimeout(function () {
                 $('#nomeArte').text($("#idArtes option:Selected").text())
-
+                $('#idArtes').change()
             }, 100)
             $('#idArtes').change(function () {
-
+                var dados = localStorage.getItem('artes')
+                dados = JSON.parse(dados)
                 $('#nomeArte').text($("#idArtes option:Selected").text())
                 listarArtistasPorArte($("#idArtes").val())
-            })
+                for (var i = 0; i < dados.length; i++) {
+                    if (dados[i].id == $("#idArtes option:Selected").val()) {
+                        $("#descArte").empty().text(dados[i].descricao)
+
+                    }
+                }
+            });
         }])
     .controller('infoArtistasPorArteCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
+    function ($scope, $stateParams) {
 
-        }])
+    }])
 
     .controller('artistaCtrl', ['$scope', '$stateParams',
 
@@ -244,6 +240,10 @@ angular.module('app.controllers', [])
             }, 1000)
             botaoFotoFakeCadart(2);
             listarArtes()
+
+            $("#emailCadastro"). keyup(function(e){
+                verficarEmail(this.value,e.keyCode )
+            })
         }])
 
     .controller('infoCadartCtrl', ['$scope', '$stateParams',
@@ -272,17 +272,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
         }])
 
-    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-        }])
-
-    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-        }])
-
-    .controller('infoCalendarioCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
-        }])
+    
 
     .controller('localidadeAdmCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {

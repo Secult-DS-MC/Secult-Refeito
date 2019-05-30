@@ -156,4 +156,32 @@ public class UsuarioResource {
         return Response.ok("{\"status\":\"invalido\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+     @GET
+    @Path("/verificarEmailSenha/{email}&{senha}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificarEmailSenha(@PathParam("email") String email,@PathParam("senha") String senha) throws SQLException, Exception {
+        UsuarioDao usuarioDao = new UsuarioDao();
+        System.out.println(usuarioDao.verificarEmailSenha(email,senha));
+        if (usuarioDao.verificarEmail(email) == false) {
+            return Response.ok("{\"status\":\"valido\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+        }
+        return Response.ok("{\"status\":\"invalido\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
+    }
+ @GET
+    @Path("/updateSenha/{id}&{senha}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSenha(@PathParam("id") int id, @PathParam("senha") String senha) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        Usuario cadart = new Usuario();
+        
+        UsuarioDao cadartDao = new UsuarioDao();
+
+        if (cadartDao.updateSenha(id,senha)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
+
 }

@@ -49,3 +49,19 @@ function listarEventosCalendario(idMes, mesClick) {
     $.getJSON(json, onSuccess).fail(
     );
 }
+
+function carregarBadges() {
+    $.getJSON(servidor + "/Secult/calendario/listarQtdEventosPorMes", function (data) {
+        if (data[0]) {
+            for (var i in data) {
+                var mes = data[i].mes;
+                var qtdEventos = data[i].qtdEventos;
+                if (qtdEventos != 0) {
+                    console.log(mes)
+                    var badge = $(".meu-badge div")[mes-1];
+                    badge.innerText = qtdEventos;
+                }
+            }
+        }
+    }).fail()
+}

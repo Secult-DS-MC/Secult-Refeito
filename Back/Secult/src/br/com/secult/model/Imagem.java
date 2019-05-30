@@ -10,7 +10,15 @@ public class Imagem {
     private long idUsuario;
     private long idEvento;
     private long idTurismo;
+    private String tipo;
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     public int getId() {
         return id;
     }
